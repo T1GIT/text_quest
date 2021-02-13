@@ -52,4 +52,14 @@ public class Psw extends AuditModel {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "Psw{" +
+                "id=" + id +
+                ", hash='" + hash + '\'' +
+                ", salt='" + salt + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }

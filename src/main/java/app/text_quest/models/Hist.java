@@ -44,4 +44,13 @@ public class Hist extends AuditModel {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "Hist{" +
+                "id=" + id +
+                ", msg=" + msg +
+                ", user=" + user +
+                '}';
+    }
 }

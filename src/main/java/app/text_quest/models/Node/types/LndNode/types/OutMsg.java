@@ -30,4 +30,11 @@ public class OutMsg extends LndNode {
         this.answers.remove(answer);
         answer.setOutMsg(null);
     }
+
+    @Override
+    public String toString() {
+        return "OutMsg{" +
+                "answers=" + answers +
+                '}';
+    }
 }

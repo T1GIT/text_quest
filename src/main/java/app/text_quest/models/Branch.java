@@ -63,4 +63,14 @@ public class Branch extends AuditModel {
         this.reqs.remove(req);
         req.setBranch(null);
     }
+
+    @Override
+    public String toString() {
+        return "Branch{" +
+                "id=" + id +
+                ", reqs=" + reqs +
+                ", fork=" + fork +
+                ", next=" + next +
+                '}';
+    }
 }

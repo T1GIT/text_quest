@@ -71,4 +71,16 @@ public class Req extends AuditModel {
     public void setBranch(Branch branch) {
         this.branch = branch;
     }
+
+    @Override
+    public String toString() {
+        return "Req{" +
+                "id=" + id +
+                ", min=" + min +
+                ", max=" + max +
+                ", equal=" + equal +
+                ", var=" + var +
+                ", branch=" + branch +
+                '}';
+    }
 }

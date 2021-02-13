@@ -57,4 +57,14 @@ public class State extends AuditModel {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "State{" +
+                "id=" + id +
+                ", val=" + val +
+                ", var=" + var +
+                ", user=" + user +
+                '}';
+    }
 }

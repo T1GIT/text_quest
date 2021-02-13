@@ -63,4 +63,14 @@ public class Answer extends AuditModel {
         this.changes.remove(change);
         change.setAnswer(null);
     }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "id=" + id +
+                ", changes=" + changes +
+                ", text=" + text +
+                ", outMsg=" + outMsg +
+                '}';
+    }
 }

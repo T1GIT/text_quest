@@ -1,9 +1,7 @@
 package app.text_quest.models.Node.types;
 
 import app.text_quest.models.Branch;
-import app.text_quest.models.Msg.Msg;
 import app.text_quest.models.Node.Node;
-import app.text_quest.models.Req;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,5 +26,12 @@ public class Fork extends Node {
     public void removeBranch(Branch branch) {
         this.branches.remove(branch);
         branch.setFork(null);
+    }
+
+    @Override
+    public String toString() {
+        return "Fork{" +
+                "branches=" + branches +
+                '}';
     }
 }

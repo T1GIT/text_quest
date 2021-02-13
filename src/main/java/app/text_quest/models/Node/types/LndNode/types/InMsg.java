@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "in_msg")
 public class InMsg extends LndNode {
-    @Column(nullable = false, columnDefinition = "integer default 0")
+    @Column(nullable = false)
     private int delay = 0;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,5 +34,13 @@ public class InMsg extends LndNode {
 
     public void setMsg(Msg msg) {
         this.msg = msg;
+    }
+
+    @Override
+    public String toString() {
+        return "InMsg{" +
+                "delay=" + delay +
+                ", msg=" + msg +
+                '}';
     }
 }

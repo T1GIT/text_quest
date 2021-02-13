@@ -17,4 +17,11 @@ public class Msg extends AuditModel {
     public int getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Msg{" +
+                "id=" + id +
+                '}';
+    }
 }
