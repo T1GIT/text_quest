@@ -1,16 +1,18 @@
-package app.text_quest.models.Node.types;
+package app.text_quest.model.Node.types;
 
-import app.text_quest.models.Branch;
-import app.text_quest.models.Node.Node;
+import app.text_quest.model.Branch;
+import app.text_quest.model.Node.Node;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "forks")
 public class Fork extends Node {
+
     @OneToMany(mappedBy = "fork", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Branch> branches;
+    private List<Branch> branches = new ArrayList<>();
 
     public Fork() { }
 

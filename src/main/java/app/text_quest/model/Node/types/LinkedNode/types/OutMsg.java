@@ -1,19 +1,21 @@
-package app.text_quest.models.Node.types.LinkedNode.types;
+package app.text_quest.model.Node.types.LinkedNode.types;
 
-import app.text_quest.models.Answer;
-import app.text_quest.models.Node.types.LinkedNode.LinkedNode;
+import app.text_quest.model.Answer;
+import app.text_quest.model.Node.types.LinkedNode.LinkedNode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "out_msg")
 public class OutMsg extends LinkedNode {
+
     @OneToMany(mappedBy = "outMsg", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Answer> answers;
+    private List<Answer> answers = new ArrayList<>();
 
     public OutMsg() { }
 

@@ -1,6 +1,6 @@
-package app.text_quest.models.Node.types.LinkedNode;
+package app.text_quest.model.Node.types.LinkedNode;
 
-import app.text_quest.models.Node.Node;
+import app.text_quest.model.Node.Node;
 
 import javax.persistence.*;
 
@@ -8,24 +8,25 @@ import javax.persistence.*;
 @Table(name = "lnd_nodes")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class LinkedNode extends Node {
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="nodes_id")
-    private Node node;
+    private Node nextNode;
 
     public LinkedNode() { }
 
-    public Node getNode() {
-        return node;
+    public Node getNextNode() {
+        return nextNode;
     }
 
-    public void setNode(Node next) {
-        this.node = next;
+    public void setNextNode(Node nextNode) {
+        this.nextNode = nextNode;
     }
 
     @Override
     public String toString() {
         return "LndNode{" +
-                "next=" + node +
+                "nextNode=" + nextNode +
                 '}';
     }
 }

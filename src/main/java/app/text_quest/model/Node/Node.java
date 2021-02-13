@@ -1,6 +1,6 @@
-package app.text_quest.models.Node;
+package app.text_quest.model.Node;
 
-import app.text_quest.utils.AuditModel;
+import app.text_quest.util.AuditModel;
 
 import javax.persistence.*;
 
@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Table(name = "nodes")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Node extends AuditModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
