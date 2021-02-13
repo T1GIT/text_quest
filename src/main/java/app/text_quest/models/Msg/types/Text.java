@@ -1,7 +1,6 @@
 package app.text_quest.models.Msg.types;
 
 import app.text_quest.models.Msg.Msg;
-import app.text_quest.utils.AuditModel;
 
 import javax.persistence.*;
 

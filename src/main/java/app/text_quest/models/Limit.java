@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "req")
-public class Req extends AuditModel {
+@Table(name = "limits")
+public class Limit extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -26,7 +26,7 @@ public class Req extends AuditModel {
     @JsonIgnore
     private Branch branch;
 
-    public Req() { }
+    public Limit() { }
 
     public int getId() {
         return id;

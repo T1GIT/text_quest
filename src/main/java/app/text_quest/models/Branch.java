@@ -16,7 +16,7 @@ public class Branch extends AuditModel {
     private int id;
 
     @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Req> reqs;
+    private List<Limit> limits;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "forks_id", nullable = false)
@@ -34,8 +34,8 @@ public class Branch extends AuditModel {
         return id;
     }
 
-    public List<Req> getReqs() {
-        return reqs;
+    public List<Limit> getReqs() {
+        return limits;
     }
 
     public Fork getFork() {
@@ -54,21 +54,21 @@ public class Branch extends AuditModel {
         this.next = next;
     }
 
-    public void addReq(Req req) {
-        this.reqs.add(req);
-        req.setBranch(this);
+    public void addReq(Limit limit) {
+        this.limits.add(limit);
+        limit.setBranch(this);
     }
 
-    public void removeReq(Req req) {
-        this.reqs.remove(req);
-        req.setBranch(null);
+    public void removeReq(Limit limit) {
+        this.limits.remove(limit);
+        limit.setBranch(null);
     }
 
     @Override
     public String toString() {
         return "Branch{" +
                 "id=" + id +
-                ", reqs=" + reqs +
+                ", reqs=" + limits +
                 ", fork=" + fork +
                 ", next=" + next +
                 '}';

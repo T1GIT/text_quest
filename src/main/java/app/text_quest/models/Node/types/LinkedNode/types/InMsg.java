@@ -1,15 +1,14 @@
-package app.text_quest.models.Node.types.LndNode.types;
+package app.text_quest.models.Node.types.LinkedNode.types;
 
 import app.text_quest.models.Msg.Msg;
-import app.text_quest.models.Msg.types.Text;
-import app.text_quest.models.Node.types.LndNode.LndNode;
+import app.text_quest.models.Node.types.LinkedNode.LinkedNode;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "in_msg")
-public class InMsg extends LndNode {
+public class InMsg extends LinkedNode {
     @Column(nullable = false)
     private int delay = 0;
 

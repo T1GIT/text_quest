@@ -1,7 +1,7 @@
 package app.text_quest.models;
 
 import app.text_quest.models.Msg.types.Text;
-import app.text_quest.models.Node.types.LndNode.types.OutMsg;
+import app.text_quest.models.Node.types.LinkedNode.types.OutMsg;
 import app.text_quest.utils.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

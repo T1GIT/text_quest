@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "psw")
+@Table(name = "psws")
 public class Psw extends AuditModel {
     @Id
     private int id;

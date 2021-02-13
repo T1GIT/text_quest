@@ -26,7 +26,7 @@ public class User extends AuditModel {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Hist> hists;
+    private List<History> histories;
 
     public User() { }
 
@@ -38,8 +38,8 @@ public class User extends AuditModel {
         return name;
     }
 
-    public List<Hist> getHists() {
-        return hists;
+    public List<History> getHists() {
+        return histories;
     }
 
     public void setName(String name) {
@@ -58,14 +58,14 @@ public class User extends AuditModel {
         this.psw = psw;
     }
 
-    public void addHist(Hist hist) {
-        this.hists.add(hist);
-        hist.setUser(this);
+    public void addHistory(History history) {
+        this.histories.add(history);
+        history.setUser(this);
     }
 
-    public void removeHist(Hist hist) {
-        this.hists.remove(hist);
-        hist.setUser(null);
+    public void removeHistory(History history) {
+        this.histories.remove(history);
+        history.setUser(null);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class User extends AuditModel {
                 ", name='" + name + '\'' +
                 ", psw=" + psw +
                 ", states=" + states +
-                ", hists=" + hists +
+                ", hists=" + histories +
                 '}';
     }
 }

@@ -1,7 +1,7 @@
-package app.text_quest.models.Node.types.LndNode.types;
+package app.text_quest.models.Node.types.LinkedNode.types;
 
 import app.text_quest.models.Answer;
-import app.text_quest.models.Node.types.LndNode.LndNode;
+import app.text_quest.models.Node.types.LinkedNode.LinkedNode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "out_msg")
-public class OutMsg extends LndNode {
+public class OutMsg extends LinkedNode {
     @OneToMany(mappedBy = "outMsg", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Answer> answers;
 

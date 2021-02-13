@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "states")
-public class Hist extends AuditModel {
+public class History extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -23,7 +23,7 @@ public class Hist extends AuditModel {
     @JsonIgnore
     private User user;
 
-    public Hist() { }
+    public History() { }
 
     public int getId() {
         return id;
