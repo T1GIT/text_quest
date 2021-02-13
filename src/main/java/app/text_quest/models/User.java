@@ -11,9 +11,12 @@ import java.util.List;
 public class User extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @Column(nullable = false, length = 50)
+    private String email;
+
+    @Column(length = 50)
     private String name;
 
     @JsonIgnore
@@ -30,20 +33,16 @@ public class User extends AuditModel {
 
     public User() { }
 
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getName() {
         return name;
-    }
-
-    public List<History> getHists() {
-        return histories;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Psw getPsw() {
@@ -52,6 +51,18 @@ public class User extends AuditModel {
 
     public List<State> getStates() {
         return states;
+    }
+
+    public List<History> getHists() {
+        return histories;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setPsw(Psw psw) {

@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "psws")
 public class Psw extends AuditModel {
     @Id
-    private int id;
+    private long id;
 
     @Column(nullable = false, length = 64)
     private String hash;
@@ -25,7 +25,7 @@ public class Psw extends AuditModel {
 
     public Psw() { }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Limit extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     private int min;
     private int max;
@@ -28,7 +28,7 @@ public class Limit extends AuditModel {
 
     public Limit() { }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

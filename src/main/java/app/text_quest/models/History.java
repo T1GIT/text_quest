@@ -3,6 +3,7 @@ package app.text_quest.models;
 import app.text_quest.models.Msg.Msg;
 import app.text_quest.utils.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -10,8 +11,9 @@ import javax.persistence.*;
 @Table(name = "states")
 public class History extends AuditModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name= "increment", strategy= "increment")
+    private long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "msg_id", nullable = false)
@@ -25,7 +27,7 @@ public class History extends AuditModel {
 
     public History() { }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

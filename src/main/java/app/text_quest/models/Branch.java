@@ -13,7 +13,7 @@ import java.util.List;
 public class Branch extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Limit> limits;
@@ -26,11 +26,11 @@ public class Branch extends AuditModel {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "nodes_id", nullable = false)
     @JsonIgnore
-    private Node next;
+    private Node node;
 
     public Branch() { }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -42,16 +42,16 @@ public class Branch extends AuditModel {
         return fork;
     }
 
-    public Node getNext() {
-        return next;
+    public Node getNode() {
+        return node;
     }
 
     public void setFork(Fork fork) {
         this.fork = fork;
     }
 
-    public void setNext(Node next) {
-        this.next = next;
+    public void setNode(Node next) {
+        this.node = next;
     }
 
     public void addReq(Limit limit) {
@@ -70,7 +70,7 @@ public class Branch extends AuditModel {
                 "id=" + id +
                 ", reqs=" + limits +
                 ", fork=" + fork +
-                ", next=" + next +
+                ", next=" + node +
                 '}';
     }
 }

@@ -10,11 +10,11 @@ import javax.persistence.*;
 public class Msg extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     public Msg() { }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

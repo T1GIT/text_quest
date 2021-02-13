@@ -10,14 +10,14 @@ import javax.validation.constraints.NotNull;
 public class Var extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
     
     @Column(nullable = false, length = 30, unique = true)
     private String name;
 
     public Var() { }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

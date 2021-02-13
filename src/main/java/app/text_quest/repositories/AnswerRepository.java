@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AnswerRepository extends JpaRepository<Answer, Integer> {
-    List<Answer> findByOutMsgId(int outMsgId);
+public interface AnswerRepository extends JpaRepository<Answer, Long> {
+    List<Answer> findByOutMsgId(long outMsgId);
 
-    List<Answer> findByTextId(int textId);
+    List<Answer> findByTextId(long textId);
 }

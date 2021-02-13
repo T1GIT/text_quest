@@ -10,22 +10,22 @@ import javax.persistence.*;
 public class LinkedNode extends Node {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="nodes_id")
-    private Node next;
+    private Node node;
 
     public LinkedNode() { }
 
-    public Node getNext() {
-        return next;
+    public Node getNode() {
+        return node;
     }
 
-    public void setNext(Node next) {
-        this.next = next;
+    public void setNode(Node next) {
+        this.node = next;
     }
 
     @Override
     public String toString() {
         return "LndNode{" +
-                "next=" + next +
+                "next=" + node +
                 '}';
     }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 public class Answer extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Change> changes;
@@ -30,7 +30,7 @@ public class Answer extends AuditModel {
 
     public Answer() { }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

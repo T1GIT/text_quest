@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Change extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
     
     @Column(nullable = false)
     private int val;
@@ -27,7 +27,7 @@ public class Change extends AuditModel {
 
     public Change() { }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
