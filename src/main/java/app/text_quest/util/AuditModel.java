@@ -1,4 +1,4 @@
-package app.text_quest.utils;
+package app.text_quest.util;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
