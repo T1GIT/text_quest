@@ -1,7 +1,7 @@
-package app.text_quest.model.Node.types.LinkedNode.types;
+package app.text_quest.model.node.types.LinkedNode.types;
 
-import app.text_quest.model.Msg.Msg;
-import app.text_quest.model.Node.types.LinkedNode.LinkedNode;
+import app.text_quest.model.msg.Msg;
+import app.text_quest.model.node.types.LinkedNode.LinkedNode;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

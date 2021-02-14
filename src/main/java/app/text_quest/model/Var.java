@@ -1,9 +1,10 @@
 package app.text_quest.model;
 
 import app.text_quest.util.AbstractEntity;
-import app.text_quest.util.AuditModel;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "vars")

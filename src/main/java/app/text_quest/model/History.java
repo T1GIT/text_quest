@@ -1,8 +1,7 @@
 package app.text_quest.model;
 
-import app.text_quest.model.Msg.Msg;
+import app.text_quest.model.msg.Msg;
 import app.text_quest.util.AbstractEntity;
-import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,7 +16,7 @@ public class History extends AbstractEntity {
     @GenericGenerator(name= "increment", strategy= "increment")
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "msg_id", nullable = false)
     @JsonIgnore
     private Msg msg;

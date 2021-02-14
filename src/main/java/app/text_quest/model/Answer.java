@@ -1,9 +1,8 @@
 package app.text_quest.model;
 
-import app.text_quest.model.Msg.types.Text;
-import app.text_quest.model.Node.types.LinkedNode.types.OutMsg;
+import app.text_quest.model.msg.types.Text;
+import app.text_quest.model.node.types.LinkedNode.types.OutMsg;
 import app.text_quest.util.AbstractEntity;
-import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

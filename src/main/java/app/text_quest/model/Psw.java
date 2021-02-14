@@ -1,7 +1,6 @@
 package app.text_quest.model;
 
 import app.text_quest.util.AbstractEntity;
-import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -9,7 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "psws")
 public class Psw extends AbstractEntity {
-
     @Column(nullable = false, length = 64)
     private String hash;
     

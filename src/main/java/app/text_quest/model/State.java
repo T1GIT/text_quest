@@ -1,7 +1,6 @@
 package app.text_quest.model;
 
 import app.text_quest.util.AbstractEntity;
-import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -13,13 +12,13 @@ public class State extends AbstractEntity {
     @Column
     private int val = 0;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "var_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "var_id", nullable = false, updatable = false)
     @JsonIgnore
     private Var var;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "users_id", nullable = false, updatable = false) // TODO: 14.02.2021 Add "updatable" to all props, that needs
     @JsonIgnore
     private User user;
 
@@ -54,7 +53,7 @@ public class State extends AbstractEntity {
         return "State{" +
                 "val=" + val +
                 ", var=" + var +
-                ", user=" + user +
+//                ", user=" + user + TODO: StackOverflow
                 '}';
     }
 }

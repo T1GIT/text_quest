@@ -1,7 +1,6 @@
 package app.text_quest.model;
 
 import app.text_quest.util.AbstractEntity;
-import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -19,15 +18,15 @@ public class User extends AbstractEntity {
     private String name;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
     private Psw psw;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<State> states = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<History> histories = new ArrayList<>();
 
     public User() { }
@@ -61,9 +60,7 @@ public class User extends AbstractEntity {
     }
 
     public void setPsw(Psw psw) {
-        if (psw == null) {
-            if (this.psw != null) this.psw.setUser(null);
-        } else psw.setUser(this);
+        psw.setUser(this);
         this.psw = psw;
     }
 

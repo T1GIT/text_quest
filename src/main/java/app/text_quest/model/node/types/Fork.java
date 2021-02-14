@@ -1,7 +1,7 @@
-package app.text_quest.model.Node.types;
+package app.text_quest.model.node.types;
 
 import app.text_quest.model.Branch;
-import app.text_quest.model.Node.Node;
+import app.text_quest.model.node.Node;
 
 import javax.persistence.*;
 import java.util.ArrayList;

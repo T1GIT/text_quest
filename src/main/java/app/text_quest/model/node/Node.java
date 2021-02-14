@@ -1,9 +1,11 @@
-package app.text_quest.model.Node;
+package app.text_quest.model.node;
 
 import app.text_quest.util.AbstractEntity;
-import app.text_quest.util.AuditModel;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "nodes")

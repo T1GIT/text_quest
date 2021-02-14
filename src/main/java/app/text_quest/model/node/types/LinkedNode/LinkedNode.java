@@ -1,6 +1,6 @@
-package app.text_quest.model.Node.types.LinkedNode;
+package app.text_quest.model.node.types.LinkedNode;
 
-import app.text_quest.model.Node.Node;
+import app.text_quest.model.node.Node;
 
 import javax.persistence.*;
 

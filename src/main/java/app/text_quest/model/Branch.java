@@ -1,9 +1,8 @@
 package app.text_quest.model;
 
-import app.text_quest.model.Node.Node;
-import app.text_quest.model.Node.types.Fork;
+import app.text_quest.model.node.Node;
+import app.text_quest.model.node.types.Fork;
 import app.text_quest.util.AbstractEntity;
-import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -17,12 +16,12 @@ public class Branch extends AbstractEntity {
     @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Limit> limits = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "forks_id", nullable = false)
     @JsonIgnore
     private Fork fork;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nodes_id", nullable = false)
     @JsonIgnore
     private Node nextNode;

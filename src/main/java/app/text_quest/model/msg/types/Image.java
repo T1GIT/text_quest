@@ -1,6 +1,6 @@
-package app.text_quest.model.Msg.types;
+package app.text_quest.model.msg.types;
 
-import app.text_quest.model.Msg.Msg;
+import app.text_quest.model.msg.Msg;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -12,22 +12,22 @@ public class Image extends Msg {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(nullable = false)
-    private byte[] image;
+    private byte[] file;
 
     public Image() { }
 
-    public byte[] getImage() {
-        return image;
+    public byte[] getFile() {
+        return file;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setFile(byte[] image) {
+        this.file = image;
     }
 
     @Override
     public String toString() {
         return "Image{" +
-                "image=" + Arrays.toString(image) +
+                "file=" + Arrays.toString(file) +
                 '}';
     }
 }
