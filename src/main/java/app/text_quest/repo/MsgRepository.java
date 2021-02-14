@@ -1,6 +1,6 @@
 package app.text_quest.repo;
 
-import app.text_quest.model.Msg.Msg;
+import app.text_quest.model.msg.Msg;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
