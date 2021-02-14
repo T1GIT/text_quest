@@ -3,7 +3,7 @@ package app.text_quest.controller;
 
 import app.text_quest.model.User;
 import app.text_quest.service.UserService;
-import app.text_quest.util.modelCreator.types.PswFactory;
+import app.text_quest.util.modelFactory.types.PswFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
