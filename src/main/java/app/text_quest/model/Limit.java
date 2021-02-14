@@ -1,6 +1,6 @@
-package app.text_quest.models;
+package app.text_quest.model;
 
-import app.text_quest.utils.AuditModel;
+import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "limits")
 public class Limit extends AuditModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

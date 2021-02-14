@@ -1,15 +1,15 @@
-package app.text_quest.model.Node;
+package app.text_quest.model.Msg;
 
 import app.text_quest.util.AuditModel;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "nodes")
+@Table(name = "msgs")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Node extends AuditModel {
+public class Msg extends AuditModel {
 
-    public Node() { }
+    public Msg() { }
 
     @Override
     public String toString() {

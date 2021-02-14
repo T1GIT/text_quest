@@ -1,22 +1,20 @@
-package app.text_quest.models;
+package app.text_quest.model;
 
-import app.text_quest.models.Msg.types.Text;
-import app.text_quest.models.Node.types.LinkedNode.types.OutMsg;
-import app.text_quest.utils.AuditModel;
+import app.text_quest.model.Msg.types.Text;
+import app.text_quest.model.Node.types.LinkedNode.types.OutMsg;
+import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "answers")
 public class Answer extends AuditModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Change> changes;
+    private List<Change> changes = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "texts_id", nullable = false)
@@ -29,10 +27,6 @@ public class Answer extends AuditModel {
     private OutMsg outMsg;
 
     public Answer() { }
-
-    public long getId() {
-        return id;
-    }
 
     public List<Change> getChanges() {
         return changes;
@@ -64,13 +58,5 @@ public class Answer extends AuditModel {
         change.setAnswer(null);
     }
 
-    @Override
-    public String toString() {
-        return "Answer{" +
-                "id=" + id +
-                ", changes=" + changes +
-                ", text=" + text +
-                ", outMsg=" + outMsg +
-                '}';
-    }
+
 }

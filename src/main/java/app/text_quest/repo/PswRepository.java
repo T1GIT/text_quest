@@ -1,9 +1,10 @@
-package app.text_quest.repositories;
+package app.text_quest.repo;
 
-import app.text_quest.models.Node.Node;
-import app.text_quest.models.Psw;
+import app.text_quest.model.Psw;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PswRepository extends JpaRepository<Psw, Long> {
     Psw findByUserId(long userId);
 }

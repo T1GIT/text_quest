@@ -1,18 +1,19 @@
-package app.text_quest.models;
+package app.text_quest.model;
 
-import app.text_quest.utils.AuditModel;
+import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "states")
-public class State extends AuditModel {
+@Table(name = "changes")
+public class Change extends AuditModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     
-    @Column
+    @Column(nullable = false)
     private int val;
     
     @ManyToOne(fetch = FetchType.LAZY)
@@ -21,11 +22,11 @@ public class State extends AuditModel {
     private Var var;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_id", nullable = false)
+    @JoinColumn(name = "answers_id", nullable = false)
     @JsonIgnore
-    private User user;
+    private Answer answer;
 
-    public State() { }
+    public Change() { }
 
     public long getId() {
         return id;
@@ -35,33 +36,33 @@ public class State extends AuditModel {
         return val;
     }
 
-    public void setVal(int val) {
-        this.val = val;
-    }
-
     public Var getVar() {
         return var;
     }
 
-    public User getUser() {
-        return user;
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setVal(int val) {
+        this.val = val;
     }
 
     public void setVar(Var var) {
         this.var = var;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
 
     @Override
     public String toString() {
-        return "State{" +
+        return "Change{" +
                 "id=" + id +
                 ", val=" + val +
                 ", var=" + var +
-                ", user=" + user +
+                ", answer=" + answer +
                 '}';
     }
 }

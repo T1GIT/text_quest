@@ -1,14 +1,14 @@
-package app.text_quest.models;
+package app.text_quest.model;
 
-import app.text_quest.utils.AuditModel;
+import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "psws")
 public class Psw extends AuditModel {
+
     @Id
     private long id;
 

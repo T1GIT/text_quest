@@ -1,12 +1,13 @@
-package app.text_quest.models.Msg.types;
+package app.text_quest.model.Msg.types;
 
-import app.text_quest.models.Msg.Msg;
+import app.text_quest.model.Msg.Msg;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "texts")
 public class Text extends Msg {
+
     @Column(columnDefinition = "TEXT", nullable = false)
     private String text;
 

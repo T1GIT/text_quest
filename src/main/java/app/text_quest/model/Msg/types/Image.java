@@ -1,6 +1,6 @@
-package app.text_quest.models.Msg.types;
+package app.text_quest.model.Msg.types;
 
-import app.text_quest.models.Msg.Msg;
+import app.text_quest.model.Msg.Msg;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -8,6 +8,7 @@ import java.util.Arrays;
 @Entity
 @Table(name = "images")
 public class Image extends Msg {
+
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(nullable = false)

@@ -1,15 +1,16 @@
-package app.text_quest.models;
+package app.text_quest.model;
 
-import app.text_quest.models.Msg.Msg;
-import app.text_quest.utils.AuditModel;
+import app.text_quest.model.Msg.Msg;
+import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "states")
+@Table(name = "histories")
 public class History extends AuditModel {
+
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")

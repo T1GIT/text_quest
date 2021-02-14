@@ -1,22 +1,24 @@
-package app.text_quest.models;
+package app.text_quest.model;
 
-import app.text_quest.models.Node.Node;
-import app.text_quest.models.Node.types.Fork;
-import app.text_quest.utils.AuditModel;
+import app.text_quest.model.Node.Node;
+import app.text_quest.model.Node.types.Fork;
+import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "branches")
 public class Branch extends AuditModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Limit> limits;
+    private List<Limit> limits = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "forks_id", nullable = false)
@@ -26,7 +28,7 @@ public class Branch extends AuditModel {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "nodes_id", nullable = false)
     @JsonIgnore
-    private Node node;
+    private Node nextNode;
 
     public Branch() { }
 
@@ -42,16 +44,16 @@ public class Branch extends AuditModel {
         return fork;
     }
 
-    public Node getNode() {
-        return node;
+    public Node getNextNode() {
+        return nextNode;
     }
 
     public void setFork(Fork fork) {
         this.fork = fork;
     }
 
-    public void setNode(Node next) {
-        this.node = next;
+    public void setNextNode(Node nextNode) {
+        this.nextNode = nextNode;
     }
 
     public void addReq(Limit limit) {
@@ -70,7 +72,7 @@ public class Branch extends AuditModel {
                 "id=" + id +
                 ", reqs=" + limits +
                 ", fork=" + fork +
-                ", next=" + node +
+                ", nextNode=" + nextNode +
                 '}';
     }
 }
