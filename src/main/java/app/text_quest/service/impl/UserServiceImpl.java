@@ -18,22 +18,16 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional
     @Override
     public User addUser(User user) {
-//        User savedUser = userRepository.saveAndFlush(user);
-//        return savedUser;
-        // TODO: 13.02.2021 May be mistake, then uncomment
         return userRepository.saveAndFlush(user);
     }
 
-    @Transactional
     @Override
     public void delete(User user) {
         userRepository.delete(user);
     }
 
-    @Transactional
     @Override
     public User editUser(User user) {
         return userRepository.saveAndFlush(user);

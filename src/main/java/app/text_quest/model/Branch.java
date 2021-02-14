@@ -2,6 +2,7 @@ package app.text_quest.model;
 
 import app.text_quest.model.Node.Node;
 import app.text_quest.model.Node.types.Fork;
+import app.text_quest.util.AbstractEntity;
 import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,11 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "branches")
-public class Branch extends AuditModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class Branch extends AbstractEntity {
 
     @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Limit> limits = new ArrayList<>();
@@ -31,10 +28,6 @@ public class Branch extends AuditModel {
     private Node nextNode;
 
     public Branch() { }
-
-    public long getId() {
-        return id;
-    }
 
     public List<Limit> getReqs() {
         return limits;
@@ -69,8 +62,7 @@ public class Branch extends AuditModel {
     @Override
     public String toString() {
         return "Branch{" +
-                "id=" + id +
-                ", reqs=" + limits +
+                "limits=" + limits +
                 ", fork=" + fork +
                 ", nextNode=" + nextNode +
                 '}';

@@ -1,5 +1,6 @@
 package app.text_quest.model;
 
+import app.text_quest.util.AbstractEntity;
 import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -7,11 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "changes")
-public class Change extends AuditModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class Change extends AbstractEntity {
     
     @Column(nullable = false)
     private int val;
@@ -27,10 +24,6 @@ public class Change extends AuditModel {
     private Answer answer;
 
     public Change() { }
-
-    public long getId() {
-        return id;
-    }
 
     public int getVal() {
         return val;
@@ -59,8 +52,7 @@ public class Change extends AuditModel {
     @Override
     public String toString() {
         return "Change{" +
-                "id=" + id +
-                ", val=" + val +
+                "val=" + val +
                 ", var=" + var +
                 ", answer=" + answer +
                 '}';

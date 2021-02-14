@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -18,7 +20,13 @@ public class UserController {
 
     @GetMapping("/users")
     public String getUsers(Model model) {
-        model.addAttribute("users", userService.getAll());
+        List<User> userList = userService.getAll();
+        model.addAttribute("names", new ArrayList<String>());
+        model.addAttribute("emails", new ArrayList<String>());
+        for (User user: userList) {
+            ((ArrayList<String>) model.getAttribute("names")).add(user.getName());
+            ((ArrayList<String>) model.getAttribute("emails")).add(user.getEmail());
+        }
         return model.toString();
     }
 

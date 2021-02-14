@@ -1,12 +1,13 @@
 package app.text_quest.model;
 
+import app.text_quest.util.AbstractEntity;
 import app.text_quest.util.AuditModel;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "vars")
-public class Var extends AuditModel {
+public class Var extends AbstractEntity {
     
     @Column(nullable = false, length = 30, unique = true)
     private String name;
@@ -21,5 +22,10 @@ public class Var extends AuditModel {
         this.name = name;
     }
 
-    to
+    @Override
+    public String toString() {
+        return "Var{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

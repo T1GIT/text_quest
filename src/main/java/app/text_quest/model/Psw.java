@@ -1,5 +1,6 @@
 package app.text_quest.model;
 
+import app.text_quest.util.AbstractEntity;
 import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -7,10 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "psws")
-public class Psw extends AuditModel {
-
-    @Id
-    private long id;
+public class Psw extends AbstractEntity {
 
     @Column(nullable = false, length = 64)
     private String hash;
@@ -24,10 +22,6 @@ public class Psw extends AuditModel {
     private User user;
 
     public Psw() { }
-
-    public long getId() {
-        return id;
-    }
 
     public String getHash() {
         return hash;
@@ -56,10 +50,8 @@ public class Psw extends AuditModel {
     @Override
     public String toString() {
         return "Psw{" +
-                "id=" + id +
-                ", hash='" + hash + '\'' +
+                "hash='" + hash + '\'' +
                 ", salt='" + salt + '\'' +
-                ", user=" + user +
                 '}';
     }
 }

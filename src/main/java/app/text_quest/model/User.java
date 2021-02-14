@@ -1,5 +1,6 @@
 package app.text_quest.model;
 
+import app.text_quest.util.AbstractEntity;
 import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -9,11 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User extends AuditModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class User extends AbstractEntity {
 
     @Column(nullable = false, length = 50)
     private String email;
@@ -35,10 +32,6 @@ public class User extends AuditModel {
 
     public User() { }
 
-    public long getId() {
-        return id;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -55,7 +48,7 @@ public class User extends AuditModel {
         return states;
     }
 
-    public List<History> getHists() {
+    public List<History> getHistories() {
         return histories;
     }
 
@@ -87,8 +80,7 @@ public class User extends AuditModel {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
+                "email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", psw=" + psw +
                 ", states=" + states +

@@ -1,5 +1,6 @@
 package app.text_quest.model;
 
+import app.text_quest.util.AbstractEntity;
 import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -7,11 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "limits")
-public class Limit extends AuditModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class Limit extends AbstractEntity {
 
     private int min;
     private int max;
@@ -28,10 +25,6 @@ public class Limit extends AuditModel {
     private Branch branch;
 
     public Limit() { }
-
-    public long getId() {
-        return id;
-    }
 
     public int getMin() {
         return min;
@@ -75,9 +68,8 @@ public class Limit extends AuditModel {
 
     @Override
     public String toString() {
-        return "Req{" +
-                "id=" + id +
-                ", min=" + min +
+        return "Limit{" +
+                "min=" + min +
                 ", max=" + max +
                 ", equal=" + equal +
                 ", var=" + var +

@@ -2,6 +2,7 @@ package app.text_quest.model;
 
 import app.text_quest.model.Msg.types.Text;
 import app.text_quest.model.Node.types.LinkedNode.types.OutMsg;
+import app.text_quest.util.AbstractEntity;
 import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "answers")
-public class Answer extends AuditModel {
+public class Answer extends AbstractEntity {
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Change> changes = new ArrayList<>();
@@ -58,5 +59,12 @@ public class Answer extends AuditModel {
         change.setAnswer(null);
     }
 
-
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "changes=" + changes +
+                ", text=" + text +
+                ", outMsg=" + outMsg +
+                '}';
+    }
 }

@@ -12,28 +12,19 @@ import java.util.Date;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-@EnableJpaAuditing
 @JsonIgnoreProperties(
         value = {"createdAt", "updatedAt"},
         allowGetters = true
 )
 public abstract class AuditModel implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected long id;
-
     @CreatedDate
     @Column(name = "createdAt", nullable = false, updatable = false)
-    protected Date createdAt;
+    private Date createdAt;
 
     @LastModifiedDate
     @Column(name = "updatedAt", nullable = false)
-    protected Date updatedAt;
-
-    public long getId() {
-        return id;
-    }
+    private Date updatedAt;
 
     public Date getCreatedAt() {
         return createdAt;
@@ -54,7 +45,6 @@ public abstract class AuditModel implements Serializable {
     @Override
     public String toString() {
         return "AuditModel{" +
-                "id=" + id +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

@@ -1,6 +1,7 @@
 package app.text_quest.model;
 
 import app.text_quest.model.Msg.Msg;
+import app.text_quest.util.AbstractEntity;
 import app.text_quest.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "histories")
-public class History extends AuditModel {
+public class History extends AbstractEntity {
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -50,9 +51,8 @@ public class History extends AuditModel {
 
     @Override
     public String toString() {
-        return "Hist{" +
-                "id=" + id +
-                ", msg=" + msg +
+        return "History{" +
+                "msg=" + msg +
                 ", user=" + user +
                 '}';
     }
