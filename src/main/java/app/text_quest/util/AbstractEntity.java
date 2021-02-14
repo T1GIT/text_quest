@@ -7,7 +7,6 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class AbstractEntity extends AuditModel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
