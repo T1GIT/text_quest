@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "lnd_nodes")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class LinkedNode extends Node {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

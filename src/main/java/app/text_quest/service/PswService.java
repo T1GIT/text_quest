@@ -5,6 +5,7 @@ import app.text_quest.model.User;
 
 import java.util.List;
 
+@Deprecated
 public interface PswService {
     Psw addPsw(Psw psw);
     void delete(Psw psw);

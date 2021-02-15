@@ -16,12 +16,12 @@ public class History extends AbstractEntity {
     @GenericGenerator(name= "increment", strategy= "increment")
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "msg_id", nullable = false)
     @JsonIgnore
     private Msg msg;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "users_id", nullable = false)
     @JsonIgnore
     private User user;

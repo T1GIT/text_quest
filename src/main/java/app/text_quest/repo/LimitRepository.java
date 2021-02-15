@@ -10,5 +10,5 @@ import java.util.List;
 public interface LimitRepository extends JpaRepository<Limit, Long> {
     List<Limit> findByBranchId(long branchId);
 
-    List<Limit> findByVarId(long varId);
+    Limit findByBranchIdAndVarId(long branchId, long varId);
 }

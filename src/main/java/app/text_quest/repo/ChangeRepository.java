@@ -10,5 +10,5 @@ import java.util.List;
 public interface ChangeRepository extends JpaRepository<Change, Long> {
     List<Change> findByAnswerId(long answerId);
 
-    List<Change> findByVarId(long varId);
+    Change findByAnswerIdAndVarId(long answerId, long varId);
 }

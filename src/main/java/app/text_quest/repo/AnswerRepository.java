@@ -9,6 +9,4 @@ import java.util.List;
 @Repository
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
     List<Answer> findByOutMsgId(long outMsgId);
-
-    List<Answer> findByTextId(long textId);
 }

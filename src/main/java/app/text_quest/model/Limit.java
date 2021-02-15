@@ -13,12 +13,12 @@ public class Limit extends AbstractEntity {
     private int max;
     private int equal;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "var_id", nullable = false)
     @JsonIgnore
     private Var var;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "branches_id", nullable = false)
     @JsonIgnore
     private Branch branch;
@@ -72,7 +72,6 @@ public class Limit extends AbstractEntity {
                 ", max=" + max +
                 ", equal=" + equal +
                 ", var=" + var +
-                ", branch=" + branch +
                 '}';
     }
 }

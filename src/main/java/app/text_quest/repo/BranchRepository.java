@@ -9,6 +9,4 @@ import java.util.List;
 @Repository
 public interface BranchRepository extends JpaRepository<Branch, Long> {
     List<Branch> findByForkId(long forkId);
-
-    List<Branch> findByNextNodeId(long forkId);
 }

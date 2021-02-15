@@ -1,5 +1,6 @@
 package app.text_quest.service;
 
+import app.text_quest.model.Limit;
 import app.text_quest.model.Var;
 import app.text_quest.util.modelFactory.types.VarFactory;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,12 @@ class VarServiceTest {
 
     @Test
     void addVar() {
-        varService.addVar(varFactory.create());
+        Var var = varFactory.create();
+        Var findVar = varService.getByName(var.getName());
+        if (findVar != null) {
+            varService.delete(findVar);
+        }
+        varService.addVar(var);
     }
 
     @Test

@@ -1,5 +1,6 @@
 package app.text_quest.service;
 
+import app.text_quest.model.Limit;
 import app.text_quest.model.Psw;
 import app.text_quest.model.User;
 import app.text_quest.util.modelFactory.types.UserFactory;
@@ -24,7 +25,12 @@ class UserServiceTest {
 
     @Test
     void addUser() {
-        userService.addUser(userFactory.create());
+        User user = userFactory.create();
+        User findUser = userService.getByEmail(user.getEmail());
+        if (findUser != null) {
+            userService.delete(findUser);
+        }
+        userService.addUser(user);
     }
 
     @Test

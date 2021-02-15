@@ -13,7 +13,7 @@ public class InMsg extends LinkedNode {
     @Column(nullable = false)
     private int delay = 0;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "msg_id", nullable = false)
     @JsonIgnore
     private Msg msg;
