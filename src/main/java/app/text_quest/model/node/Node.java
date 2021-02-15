@@ -9,9 +9,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "nodes")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Node extends AbstractModel {
-
     public Node() { }
 
     @Override

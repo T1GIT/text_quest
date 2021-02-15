@@ -13,9 +13,8 @@ import java.util.List;
 @Entity
 @Table(name = "out_msg")
 public class OutMsg extends LinkedNode {
-
     @OneToMany(mappedBy = "outMsg", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Answer> answers = new ArrayList<>();
+    private final List<Answer> answers = new ArrayList<>();
 
     public OutMsg() { }
 

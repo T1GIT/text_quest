@@ -2,6 +2,7 @@ package app.text_quest.service;
 
 import app.text_quest.model.node.Node;
 import app.text_quest.model.node.types.Fork;
+import app.text_quest.model.node.types.LinkedNode.LinkedNode;
 import app.text_quest.util.modelFactory.types.BranchFactory;
 import app.text_quest.util.modelFactory.types.node.NodeFactory;
 import app.text_quest.util.modelFactory.types.node.types.ForkFactory;
@@ -33,7 +34,6 @@ class NodeServiceTest {
     }
 
     @Test
-    @Transactional
     void delete() {
         Node node = nodeFactory.create();
         nodeService.addNode(node);
@@ -49,9 +49,19 @@ class NodeServiceTest {
         nodeService.editNode(fork);
     }
 
-    @Transactional
     @Test
     void getAll() {
         System.out.println(nodeService.getAll());
+    }
+
+    @Transactional
+    @Test
+    void checkTypeDefinition() {
+        LinkedNode linkedNode = new LinkedNode();
+        Node fork = new Fork();
+        linkedNode.setNextNode(fork);
+        nodeService.addNode(linkedNode);
+        Node node = linkedNode.getNextNode();
+        assert Fork.class == node.getClass();
     }
 }

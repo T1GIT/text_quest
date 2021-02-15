@@ -10,9 +10,8 @@ import java.util.List;
 @Entity
 @Table(name = "forks")
 public class Fork extends Node {
-
     @OneToMany(mappedBy = "fork", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Branch> branches = new ArrayList<>();
+    private final List<Branch> branches = new ArrayList<>();
 
     public Fork() { }
 

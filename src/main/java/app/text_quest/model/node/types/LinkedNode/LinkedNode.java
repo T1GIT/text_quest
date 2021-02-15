@@ -6,11 +6,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "lnd_nodes")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class LinkedNode extends Node {
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="nodes_id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "nodes_id")
     private Node nextNode;
 
     public LinkedNode() { }

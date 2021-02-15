@@ -9,8 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "texts")
 public class Text extends Msg {
-
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT")
     private String val;
 
     public Text() { }

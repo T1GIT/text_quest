@@ -8,10 +8,8 @@ import java.util.Arrays;
 @Entity
 @Table(name = "images")
 public class Image extends Msg {
-
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(nullable = false)
     private byte[] file;
 
     public Image() { }
