@@ -2,7 +2,7 @@ package app.text_quest.model;
 
 import app.text_quest.model.node.Node;
 import app.text_quest.model.node.types.Fork;
-import app.text_quest.util.AbstractEntity;
+import app.text_quest.util.AbstractModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "branches")
-public class Branch extends AbstractEntity {
+public class Branch extends AbstractModel {
 
     @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Limit> limits = new ArrayList<>();

@@ -1,6 +1,6 @@
 package app.text_quest.model;
 
-import app.text_quest.util.AbstractEntity;
+import app.text_quest.util.AbstractModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User extends AbstractEntity {
+public class User extends AbstractModel {
 
     @Column(nullable = false, length = 50)
     private String email;
@@ -20,6 +20,10 @@ public class User extends AbstractEntity {
     @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
     private Psw psw;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
+    private Setting setting;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -43,6 +47,10 @@ public class User extends AbstractEntity {
         return psw;
     }
 
+    public Setting getSetting() {
+        return setting;
+    }
+
     public List<State> getStates() {
         return states;
     }
@@ -62,6 +70,10 @@ public class User extends AbstractEntity {
     public void setPsw(Psw psw) {
         psw.setUser(this);
         this.psw = psw;
+    }
+
+    public void setSetting(Setting setting) {
+        this.setting = setting;
     }
 
     public void addHistory(History history) {

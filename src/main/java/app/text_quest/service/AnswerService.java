@@ -1,7 +1,6 @@
 package app.text_quest.service;
 
 import app.text_quest.model.Answer;
-import app.text_quest.model.node.types.Fork;
 import app.text_quest.model.node.types.LinkedNode.types.OutMsg;
 
 import java.util.List;

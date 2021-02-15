@@ -1,13 +1,13 @@
 package app.text_quest.model;
 
-import app.text_quest.util.AbstractEntity;
+import app.text_quest.util.AbstractModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "limits")
-public class Limit extends AbstractEntity {
+public class Limit extends AbstractModel {
 
     private int min;
     private int max;

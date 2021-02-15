@@ -2,7 +2,7 @@ package app.text_quest.model;
 
 import app.text_quest.model.msg.types.Text;
 import app.text_quest.model.node.types.LinkedNode.types.OutMsg;
-import app.text_quest.util.AbstractEntity;
+import app.text_quest.util.AbstractModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "answers")
-public class Answer extends AbstractEntity {
+public class Answer extends AbstractModel {
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Change> changes = new ArrayList<>();

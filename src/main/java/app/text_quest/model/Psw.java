@@ -1,13 +1,13 @@
 package app.text_quest.model;
 
-import app.text_quest.util.AbstractEntity;
+import app.text_quest.util.AbstractModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "psws")
-public class Psw extends AbstractEntity {
+public class Psw extends AbstractModel {
     @Column(nullable = false, length = 64)
     private String hash;
     

@@ -1,13 +1,13 @@
 package app.text_quest.model;
 
-import app.text_quest.util.AbstractEntity;
+import app.text_quest.util.AbstractModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "changes")
-public class Change extends AbstractEntity {
+public class Change extends AbstractModel {
     
     @Column(nullable = false)
     private int val;

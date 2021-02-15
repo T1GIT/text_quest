@@ -1,7 +1,7 @@
 package app.text_quest.model;
 
 import app.text_quest.model.msg.Msg;
-import app.text_quest.util.AbstractEntity;
+import app.text_quest.util.AbstractModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "histories")
-public class History extends AbstractEntity {
+public class History extends AbstractModel {
 
     @Id
     @GeneratedValue(generator = "increment")

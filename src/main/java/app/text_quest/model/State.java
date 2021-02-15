@@ -1,15 +1,15 @@
 package app.text_quest.model;
 
-import app.text_quest.util.AbstractEntity;
+import app.text_quest.util.AbstractModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "states")
-public class State extends AbstractEntity {
+public class State extends AbstractModel {
     
-    @Column
+    @Column(nullable = false)
     private int val = 0;
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
