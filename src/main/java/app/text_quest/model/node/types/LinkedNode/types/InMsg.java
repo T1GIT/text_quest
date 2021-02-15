@@ -5,10 +5,12 @@ import app.text_quest.model.node.types.LinkedNode.LinkedNode;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "in_msg")
 public class InMsg extends LinkedNode {
+    @NotNull
     private int delay = 0;
 
     @ManyToOne(fetch = FetchType.EAGER)
