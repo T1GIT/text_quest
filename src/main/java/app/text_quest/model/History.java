@@ -16,12 +16,12 @@ public class History extends AbstractModel {
     @GenericGenerator(name= "increment", strategy= "increment")
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "msg_id", nullable = false)
     @JsonIgnore
     private Msg msg;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "users_id", nullable = false)
     @JsonIgnore
     private User user;
@@ -52,7 +52,6 @@ public class History extends AbstractModel {
     public String toString() {
         return "History{" +
                 "msg=" + msg +
-                ", user=" + user +
                 '}';
     }
 }

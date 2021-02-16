@@ -25,7 +25,7 @@ public class Setting extends AbstractModel {
     @Column(nullable = false)
     private int size;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     @MapsId
     private User user;

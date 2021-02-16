@@ -1,14 +1,17 @@
 package app.text_quest.util.modelFactory.types;
 
 import app.text_quest.model.Psw;
+import app.text_quest.model.Setting;
 import app.text_quest.model.User;
 import app.text_quest.util.modelFactory.AbstractModelFactory;
 
 public class UserFactory extends AbstractModelFactory<User> {
     private final static PswFactory pswFactory = new PswFactory();
+    private final static SettingFactory settingFactory = new SettingFactory();
     private final String email = "test_email@mail.ru";
     private final String name = "user_name";
     private final Psw psw = pswFactory.create();
+    private final Setting setting = settingFactory.create();
 
     @Override
     public User create() {
@@ -16,6 +19,7 @@ public class UserFactory extends AbstractModelFactory<User> {
         user.setEmail(this.email);
         user.setName(this.name);
         user.setPsw(pswFactory.create());
+        user.setSetting(settingFactory.create());
         return user;
     }
 
@@ -29,5 +33,9 @@ public class UserFactory extends AbstractModelFactory<User> {
 
     public Psw getPsw() {
         return psw;
+    }
+
+    public Setting getSetting() {
+        return setting;
     }
 }

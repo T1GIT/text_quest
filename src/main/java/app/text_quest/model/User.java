@@ -27,11 +27,11 @@ public class User extends AbstractModel {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<State> states = new ArrayList<>();
+    private final List<State> states = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<History> histories = new ArrayList<>();
+    private final List<History> histories = new ArrayList<>();
 
     public User() { }
 
@@ -73,6 +73,7 @@ public class User extends AbstractModel {
     }
 
     public void setSetting(Setting setting) {
+        setting.setUser(this);
         this.setting = setting;
     }
 
@@ -92,6 +93,7 @@ public class User extends AbstractModel {
                 "email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", psw=" + psw +
+                ", setting=" + setting +
                 ", states=" + states +
                 ", histories=" + histories +
                 '}';
