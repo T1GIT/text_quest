@@ -16,11 +16,10 @@ import javax.annotation.Resource;
 @EnableAutoConfiguration
 @Configuration
 class HistoryServiceTest {
-
-    private final static HistoryFactory historyFactory = new HistoryFactory();
     @Resource
     @Autowired
     private HistoryService historyService;
+    private final static HistoryFactory historyFactory = new HistoryFactory();
 
     @Test
     void addHistory() {

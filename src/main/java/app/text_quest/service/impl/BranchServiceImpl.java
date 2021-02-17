@@ -1,8 +1,6 @@
 package app.text_quest.service.impl;
 
 import app.text_quest.model.Branch;
-import app.text_quest.model.User;
-import app.text_quest.model.Var;
 import app.text_quest.model.node.types.Fork;
 import app.text_quest.repo.BranchRepository;
 import app.text_quest.service.BranchService;
@@ -12,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 
+@Deprecated
 @Service
 @Transactional
 public class BranchServiceImpl implements BranchService {

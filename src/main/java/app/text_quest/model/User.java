@@ -17,6 +17,8 @@ public class User extends AbstractModel {
     @Column(length = 50)
     private String name;
 
+    private boolean google;
+
     @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
     private Psw psw;
@@ -59,6 +61,10 @@ public class User extends AbstractModel {
         return histories;
     }
 
+    public boolean isGoogle() {
+        return google;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -75,6 +81,10 @@ public class User extends AbstractModel {
     public void setSetting(Setting setting) {
         setting.setUser(this);
         this.setting = setting;
+    }
+
+    public void setGoogle(boolean google) {
+        this.google = google;
     }
 
     public void addHistory(History history) {

@@ -1,7 +1,6 @@
 package app.text_quest.service;
 
 import app.text_quest.model.Limit;
-import app.text_quest.model.State;
 import app.text_quest.util.modelFactory.types.LimitFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import javax.annotation.Resource;
 @EnableAutoConfiguration
 @Configuration
 class LimitServiceTest {
-
     @Resource
     @Autowired
     private LimitService limitService;
