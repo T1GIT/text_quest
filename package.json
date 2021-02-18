@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "SET NODE_ENV='development' && del-cli .\\src\\main\\resources\\static\\build && webpack",
-    "build_watch": "SET NODE_ENV='development' && del-cli .\\src\\main\\resources\\static\\build  && webpack --watch",
-    "build_prod": "SET NODE_ENV='production' && del-cli .\\src\\main\\resources\\static\\build  && webpack",
+    "build": "SET NODE_ENV=development&& del-cli .\\src\\main\\resources\\static\\build && webpack",
+    "build_watch": "SET NODE_ENV=development&& del-cli .\\src\\main\\resources\\static\\build && webpack --watch",
+    "build_prod": "SET NODE_ENV=production&& del-cli .\\src\\main\\resources\\static\\build && webpack",
     "dev_server": "webpack-dev-server"
   },
   "babel": {
