@@ -1,4 +1,6 @@
-const path = require('path'), htmlWebpackPlugin = require('html-webpack-plugin'),
+const
+    path = require('path'), htmlWebpackPlugin = require('html-webpack-plugin'),
+    miniCssExtractPlugin = require('mini-css-extract-plugin'),
 
     // Constants
     resources = path.resolve("./src/main/resources"),
@@ -10,38 +12,50 @@ const path = require('path'), htmlWebpackPlugin = require('html-webpack-plugin')
 
 
 module.exports = {
-    entry: {
-        main: path.resolve(src, "index.jsx")
-    },
+    entry: path.resolve(src, "index.jsx"),
     output: {
-        path: path.resolve(__dirname, build),
+        path: build,
         filename: 'index.min.js'
     },
     mode: mode,
+    plugins: [
+        new miniCssExtractPlugin({
+            filename: "index.min.css"
+        }),
+        new htmlWebpackPlugin({
+            hash: false,
+            cache: mode === "production",
+            template: path.resolve(src, "index.html"),
+            filename: path.resolve(build, "index.min.html"),
+            favicon: path.resolve(src, "media", "favicon.ico"),
+            publicPath: "build",
+            minify: mode === "production",
+            csrf: '${_csrf.token}',
+        }),
+    ],
     module: {
         rules: [
             { // JavaScript
                 test: /\.(js|jsx)$/,
-                include: path.resolve(),
+                include: path.resolve(src),
                 exclude: /node_modules/,
                 use: "babel-loader"
             },
             { // Stylesheets
                 test: /\.sass$/,
                 use: ['style-loader',
+                    miniCssExtractPlugin.loader,
                     {
                         loader: "css-loader",
                         options: {
                             modules: true,
-                            sourceMap: mode !== "production"
+                            sourceMap: mode !== "production",
                         },
                     },
                     {
                         loader: "sass-loader",
                         options: {
-                            sassOptions: {
-                                outputStyle: "compressed"
-                            },
+                            sassOptions: {outputStyle: "compressed"},
                             sourceMap: mode !== "production"
                         }
                     }
@@ -55,17 +69,6 @@ module.exports = {
             },
         ]
     },
-    plugins: [
-        new htmlWebpackPlugin({
-            template: path.resolve(src, "index.html"),
-            filename: path.resolve(build, "index.min.html"),
-            // favicon: "src/media/favicon.ico", TODO: Add favicon
-            inject: "body",
-            publicPath: "build",
-            minify: mode === "production",
-            csrf: '${_csrf.token}',
-        }),
-    ],
     devServer: {
         contentBase: build,
         compress: true,

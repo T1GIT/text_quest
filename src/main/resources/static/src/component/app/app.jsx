@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import s from "./app.sass";
+import styles from "./app.sass";
 
 class MyComponent extends Component {
     render() {
-        return <div className={s.intro}>Hello World</div>;
+        return <div className={styles.intro}>Hello World</div>;
     }
 }
 
