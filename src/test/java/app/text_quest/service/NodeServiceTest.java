@@ -54,7 +54,6 @@ class NodeServiceTest {
         System.out.println(nodeService.getAll());
     }
 
-    @Transactional
     @Test
     void checkTypeDefinition() {
         LinkedNode linkedNode = new LinkedNode();

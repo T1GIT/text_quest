@@ -1,96 +1,76 @@
-const
-    // Modules
-    path = require('path'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
-    webpack = require('webpack'),
-    compressionPlugin = require("compression-webpack-plugin"),
+const path = require('path'), htmlWebpackPlugin = require('html-webpack-plugin'),
 
     // Constants
-    root = "./src/main/resources/static",
-    src = `${root}/src`,
-    dest = `${root}/build`
+    resources = path.resolve("./src/main/resources"),
+    stat = path.resolve(resources, "static"),
+    src = path.resolve(stat, "src"),
+    build = path.resolve(stat, "build"),
+
+    mode = process.env.NODE_ENV === 'production' ? 'production' : 'development'
 
 
-console.log(__dirname)
 module.exports = {
-    entry: path.resolve(__dirname, `${src}/react/index.js`),
-    module: {
-        rules: [
-            {test: new RegExp(`${src}/\\.svg$`, 'g'), use: 'svg-inline-loader'},
-            {test: new RegExp(`${src}/\\.css$`, 'g'), use: ['style-loader', 'css-loader']},
-            {test: new RegExp(`${src}/\\.js$|\\.jsx$`, 'g'), use: 'babel-loader'}
-        ]
+    entry: {
+        main: path.resolve(src, "index.jsx")
     },
     output: {
-        path: path.resolve(__dirname, dest),
-        filename: 'index_bundle.js'
+        path: path.resolve(__dirname, build),
+        filename: 'index.min.js'
+    },
+    mode: mode,
+    module: {
+        rules: [
+            { // JavaScript
+                test: /\.(js|jsx)$/,
+                include: path.resolve(),
+                exclude: /node_modules/,
+                use: "babel-loader"
+            },
+            { // Stylesheets
+                test: /\.sass$/,
+                use: ['style-loader',
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: true,
+                            sourceMap: mode !== "production"
+                        },
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            sassOptions: {
+                                outputStyle: "compressed"
+                            },
+                            sourceMap: mode !== "production"
+                        }
+                    }
+                ]
+            },
+            { // Images
+                test: /.(png|svg|jpg|gif)$/,
+                include: path.resolve(src, "media"),
+                exclude: /node_modules/,
+                use: ["file-loader"]
+            },
+        ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, `${root}/templates`), // шаблон
-            filename: 'index.html', // название выходного файла
+        new htmlWebpackPlugin({
+            template: path.resolve(src, "index.html"),
+            filename: path.resolve(build, "index.min.html"),
+            // favicon: "src/media/favicon.ico", TODO: Add favicon
+            inject: "body",
+            publicPath: "build",
+            minify: mode === "production",
+            csrf: '${_csrf.token}',
         }),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     beautify: false,
-        //     comments: false,
-        //     compress: {
-        //         sequences     : true,
-        //         booleans      : true,
-        //         loops         : true,
-        //         unused      : true,
-        //         warnings    : false,
-        //         drop_console: true,
-        //         unsafe      : true
-        //     }
-        // }),
-        // new compressionPlugin({
-        //     asset: "[path].gz[query]",
-        //     algorithm: "gzip",
-        //     test: new RegExp(`${dest}/\\.js$|\\.html$`, 'g'),
-        //     threshold: 10240,
-        //     minRatio: 0.8
-        // })
     ],
-    mode: process.env.NODE_ENV === 'production' ? 'production' : 'development'
+    devServer: {
+        contentBase: build,
+        compress: true,
+        port: 8080,
+        watchContentBase: true,
+        progress: true
+    },
 }
-
-
-// var packageJSON = require('./package.json');
-// var path = require('path');
-// var webpack = require('webpack');
-// module.exports = {
-//     devtool: 'source-map',
-//     entry: './index.js',
-//     output: {
-//         path: path.join(__dirname, 'generated'),
-//         filename: 'app-bundle.js'},
-//     resolve: {extensions: ['.js', '.jsx']},
-//     plugins: [
-//         new webpack.LoaderOptionsPlugin({
-//             debug: true}),
-//         new webpack.DefinePlugin({
-//             "process.env": {
-//                 NODE_ENV: JSON.stringify("development")
-//             }
-//         })
-//     ],
-//     module: {
-//         rules: [
-//             {
-//                 test: /\.jsx?$/,
-//                 loader: 'babel-loader',
-//                 exclude: /node_modules/
-//             }
-//         ]
-//     },
-//     devServer: {
-//         overlay: true,
-//         open: true,
-//         noInfo: false,
-//         quiet: false,
-//         lazy: false,
-//         watchOptions: {
-//             poll: true
-//         }
-//     }
-// }

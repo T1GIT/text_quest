@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 
+@Deprecated
 @SpringBootTest
 @EnableAutoConfiguration
 @Configuration
