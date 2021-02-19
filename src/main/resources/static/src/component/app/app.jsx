@@ -8,8 +8,10 @@ class MyComponent extends Component {
 
     render() {
         return <div
-            className={styles.intro}>Hello World
+            className={styles.intro}
             onClick={this.onClick}
+        >
+            Hello World
         </div>;
     }
 }

@@ -1,11 +1,11 @@
 # IDE
-/.idea
-/.mvn
-/text_quest.iml
+/.idea/
+/.mvn/
+.text_quest.iml
 
 # npm
-/node_modules
+/node_modules/
 
 # production
-/frontend/build
-/target
+/src/main/resources/static/build/
+/target/
