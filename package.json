@@ -6,16 +6,8 @@
     "build": "SET NODE_ENV=development&& webpack",
     "build_watch": "SET NODE_ENV=development&& webpack --watch",
     "build_prod": "SET NODE_ENV=production&& webpack",
-    "dev_server": "webpack-dev-server"
-  },
-  "babel": {
-    "presets": [
-      "@babel/env",
-      "@babel/react"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties"
-    ]
+    "dev_server": "webpack-dev-server",
+    "clean_log": "del-cli ./.log/**"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",

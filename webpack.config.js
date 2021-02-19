@@ -18,7 +18,6 @@ name = "index"
 // Mode
 const modes = {prod: "production", dev: "development"}
 const mode = process.env.NODE_ENV === modes.prod ? modes.prod : modes.dev
-// TODO: Try clean-webpack
 
 module.exports = {
     entry: Path.resolve(dir.src, "index.jsx"),
@@ -35,7 +34,7 @@ module.exports = {
             filename: name + ".min.css"
         }),
         new htmlWebpackPlugin({
-            hash: false,
+            hash: true,
             cache: mode === modes.prod,
             template: Path.resolve(dir.src, "index.html"),
             filename: Path.resolve(dir.build, name + ".min.html"),

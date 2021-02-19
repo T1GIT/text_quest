@@ -9,3 +9,4 @@
 # production
 /src/main/resources/static/build/
 /target/
+/.log/
