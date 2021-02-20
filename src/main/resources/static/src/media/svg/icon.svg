@@ -5,20 +5,18 @@
 <style type="text/css">
 	.st0{fill:#FFFFFF;}
 </style>
-	<symbol id="icon0">
-		<g>
+	<g>
 	<rect x="159.5" y="240.5" class="st0" width="197" height="179"/>
-			<path d="M356,241v178H160V241H356 M357,240H159v180h198V240L357,240z"/>
+		<path d="M356,241v178H160V241H356 M357,240H159v180h198V240L357,240z"/>
 </g>
-		<g>
+	<g>
 	<g>
 		<rect x="313.5" y="399.5" class="st0" width="319" height="194"/>
 		<path d="M632,400v193H314V400H632 M633,399H313v195h320V399L633,399z"/>
 	</g>
-			<g>
+		<g>
 		<rect x="559.5" y="539.5" class="st0" width="263" height="173"/>
-				<path d="M822,540v172H560V540H822 M823,539H559v174h264V539L823,539z"/>
+			<path d="M822,540v172H560V540H822 M823,539H559v174h264V539L823,539z"/>
 	</g>
 </g>
-	</symbol>
 </svg>
