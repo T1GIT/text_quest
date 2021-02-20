@@ -11,9 +11,6 @@
     <groupId>app</groupId>
     <artifactId>text_quest</artifactId>
     <version>0.0.3-DEPLOY</version>
-    <configuration>
-        <addResources>false</addResources>
-    </configuration>
     <name>text_quest</name>
     <description>Game text quest</description>
     <properties>
@@ -91,6 +88,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <addResources>false</addResources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
