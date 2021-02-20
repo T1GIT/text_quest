@@ -125,10 +125,7 @@ module.exports = {
                             spriteFilename: "sprites.svg"
                         }
                     },
-                    {
-                        loader: "svgo-loader",
-                        options: {}
-                    }
+                    "svgo-loader"
                 ]
             }
         ]
