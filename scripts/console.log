@@ -1,100 +1,100 @@
-2021-02-20T11:29:21.164873+00:00 app[worker.1]: 2021-02-20 11:29:21.164  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'springBootRepositoryRestConfigurer' of type [org.springframework.boot.autoconfigure.data.rest.SpringBootRepositoryRestConfigurer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-20T11:29:21.166239+00:00 app[worker.1]: 2021-02-20 11:29:21.166  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'configurerDelegate' of type [org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerDelegate] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-20T11:29:21.173785+00:00 app[worker.1]: 2021-02-20 11:29:21.173  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration$StringHttpMessageConverterConfiguration' of type [org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration$StringHttpMessageConverterConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-20T11:29:21.180383+00:00 app[worker.1]: 2021-02-20 11:29:21.180  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'stringHttpMessageConverter' of type [org.springframework.http.converter.StringHttpMessageConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-20T11:29:21.181871+00:00 app[worker.1]: 2021-02-20 11:29:21.181  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.http.JacksonHttpMessageConvertersConfiguration$MappingJackson2HttpMessageConverterConfiguration' of type [org.springframework.boot.autoconfigure.http.JacksonHttpMessageConvertersConfiguration$MappingJackson2HttpMessageConverterConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-20T11:29:21.182932+00:00 app[worker.1]: 2021-02-20 11:29:21.182  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-20T11:29:21.187531+00:00 app[worker.1]: 2021-02-20 11:29:21.187  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'jacksonObjectMapperBuilder' of type [org.springframework.http.converter.json.Jackson2ObjectMapperBuilder] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-20T11:29:21.204587+00:00 app[worker.1]: 2021-02-20 11:29:21.204  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'jacksonObjectMapper' of type [com.fasterxml.jackson.databind.ObjectMapper] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-20T11:29:21.211794+00:00 app[worker.1]: 2021-02-20 11:29:21.211  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'mappingJackson2HttpMessageConverter' of type [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-20T11:29:21.213094+00:00 app[worker.1]: 2021-02-20 11:29:21.212  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration' of type [org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-20T11:29:21.605376+00:00 app[worker.1]: 2021-02-20 11:29:21.605  INFO 4 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 23528 (http)
-2021-02-20T11:29:21.620403+00:00 app[worker.1]: 2021-02-20 11:29:21.620  INFO 4 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-02-20T11:29:21.620623+00:00 app[worker.1]: 2021-02-20 11:29:21.620  INFO 4 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2021-02-20T11:29:21.709097+00:00 app[worker.1]: 2021-02-20 11:29:21.708  INFO 4 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-02-20T11:29:21.709303+00:00 app[worker.1]: 2021-02-20 11:29:21.709  INFO 4 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2773 ms
-2021-02-20T11:29:21.771748+00:00 app[worker.1]: 2021-02-20 11:29:21.771 DEBUG 4 --- [           main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
-2021-02-20T11:29:21.771884+00:00 app[worker.1]: 2021-02-20 11:29:21.771 DEBUG 4 --- [           main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
-2021-02-20T11:29:22.114778+00:00 app[worker.1]: 2021-02-20 11:29:22.113  INFO 4 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2021-02-20T11:29:22.353078+00:00 app[worker.1]: 2021-02-20 11:29:22.352  INFO 4 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.27.Final
-2021-02-20T11:29:22.549072+00:00 app[worker.1]: 2021-02-20 11:29:22.548  INFO 4 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2021-02-20T11:29:22.699116+00:00 app[worker.1]: 2021-02-20 11:29:22.698  INFO 4 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2021-02-20T11:29:23.099764+00:00 app[worker.1]: 2021-02-20 11:29:23.099  INFO 4 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2021-02-20T11:29:23.130797+00:00 app[worker.1]: 2021-02-20 11:29:23.130  INFO 4 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
-2021-02-20T11:29:23.436512+00:00 app[worker.1]: 2021-02-20 11:29:23.436  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.msg.types.Text
-2021-02-20T11:29:23.441011+00:00 app[worker.1]: 2021-02-20 11:29:23.440  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.msg.types.Image
-2021-02-20T11:29:23.457360+00:00 app[worker.1]: 2021-02-20 11:29:23.457  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.node.types.LinkedNode.LinkedNode
-2021-02-20T11:29:23.459703+00:00 app[worker.1]: 2021-02-20 11:29:23.459  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.node.types.LinkedNode.types.OutMsg
-2021-02-20T11:29:23.478427+00:00 app[worker.1]: 2021-02-20 11:29:23.478  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.node.types.LinkedNode.types.InMsg
-2021-02-20T11:29:23.479569+00:00 app[worker.1]: 2021-02-20 11:29:23.479  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.node.types.Fork
-2021-02-20T11:29:24.443385+00:00 app[worker.1]: Hibernate: alter table answers drop constraint FK3kiisomqa7bjb01r8pd33gg06
-2021-02-20T11:29:24.449229+00:00 app[worker.1]: Hibernate: alter table answers drop constraint FKlo4b5q6umhrieb9jgada4si8x
-2021-02-20T11:29:24.452561+00:00 app[worker.1]: Hibernate: alter table branches drop constraint FKm9t93c9ibbi2pmd8ofx99vo1m
-2021-02-20T11:29:24.455410+00:00 app[worker.1]: Hibernate: alter table branches drop constraint FKgwxe8rhxea8vqr6ryju4eu1lh
-2021-02-20T11:29:24.458997+00:00 app[worker.1]: Hibernate: alter table changes drop constraint FKfbrshejqx6hx3bah3xkvjlmua
-2021-02-20T11:29:24.462700+00:00 app[worker.1]: Hibernate: alter table changes drop constraint FK5grd5pj0davxmr71wv9qm6jea
-2021-02-20T11:29:24.465534+00:00 app[worker.1]: Hibernate: alter table histories drop constraint FKgwmk7fbp8tveqf1jl8tuk9vvm
-2021-02-20T11:29:24.468454+00:00 app[worker.1]: Hibernate: alter table histories drop constraint FKnvwva3f62er4u4c237awaicti
-2021-02-20T11:29:24.471460+00:00 app[worker.1]: Hibernate: alter table limits drop constraint FKb3kupoosy8sqpnlu1x9aewh7y
-2021-02-20T11:29:24.473941+00:00 app[worker.1]: Hibernate: alter table limits drop constraint FKlaw5o4fch0qqkobe1mux33a6h
-2021-02-20T11:29:24.476244+00:00 app[worker.1]: Hibernate: alter table nodes drop constraint FK6f7eo5au9ktwhpl9olna3ki73
-2021-02-20T11:29:24.478701+00:00 app[worker.1]: Hibernate: alter table nodes drop constraint FK1lioneqe9orxjoqekvcdlddsl
-2021-02-20T11:29:24.481463+00:00 app[worker.1]: Hibernate: alter table psws drop constraint FKct5ixqt5mam73br4qbx48m8n3
-2021-02-20T11:29:24.484552+00:00 app[worker.1]: Hibernate: alter table settings drop constraint FKf585xxww5h8b9up0ninp57tjs
-2021-02-20T11:29:24.487389+00:00 app[worker.1]: Hibernate: alter table states drop constraint FKm796qhl0hfwbqtovuvivc1k8n
-2021-02-20T11:29:24.489826+00:00 app[worker.1]: Hibernate: alter table states drop constraint FKmkd1o1c0eyvbhpu9iujmvregt
-2021-02-20T11:29:24.492467+00:00 app[worker.1]: Hibernate: drop table if exists answers cascade
-2021-02-20T11:29:24.498959+00:00 app[worker.1]: Hibernate: drop table if exists branches cascade
-2021-02-20T11:29:24.503617+00:00 app[worker.1]: Hibernate: drop table if exists changes cascade
-2021-02-20T11:29:24.508194+00:00 app[worker.1]: Hibernate: drop table if exists histories cascade
-2021-02-20T11:29:24.512650+00:00 app[worker.1]: Hibernate: drop table if exists limits cascade
-2021-02-20T11:29:24.518504+00:00 app[worker.1]: Hibernate: drop table if exists msgs cascade
-2021-02-20T11:29:24.524034+00:00 app[worker.1]: Hibernate: drop table if exists nodes cascade
-2021-02-20T11:29:24.528711+00:00 app[worker.1]: Hibernate: drop table if exists psws cascade
-2021-02-20T11:29:24.532678+00:00 app[worker.1]: Hibernate: drop table if exists settings cascade
-2021-02-20T11:29:24.537111+00:00 app[worker.1]: Hibernate: drop table if exists states cascade
-2021-02-20T11:29:24.541834+00:00 app[worker.1]: Hibernate: drop table if exists users cascade
-2021-02-20T11:29:24.546189+00:00 app[worker.1]: Hibernate: drop table if exists vars cascade
-2021-02-20T11:29:24.550946+00:00 app[worker.1]: Hibernate: drop sequence if exists hibernate_sequence
-2021-02-20T11:29:24.559528+00:00 app[worker.1]: Hibernate: create sequence hibernate_sequence start 1 increment 1
-2021-02-20T11:29:24.563098+00:00 app[worker.1]: Hibernate: create table answers (id int8 not null, created_at timestamp not null, updated_at timestamp not null, out_msg_id int8 not null, texts_id int8 not null, primary key (id))
-2021-02-20T11:29:24.573148+00:00 app[worker.1]: Hibernate: create table branches (id int8 not null, created_at timestamp not null, updated_at timestamp not null, forks_id int8 not null, nodes_id int8 not null, primary key (id))
-2021-02-20T11:29:24.578081+00:00 app[worker.1]: Hibernate: create table changes (id int8 not null, created_at timestamp not null, updated_at timestamp not null, val int4 not null, answers_id int8 not null, var_id int8 not null, primary key (id))
-2021-02-20T11:29:24.584105+00:00 app[worker.1]: Hibernate: create table histories (id int8 not null, created_at timestamp not null, updated_at timestamp not null, msg_id int8 not null, users_id int8 not null, primary key (id))
-2021-02-20T11:29:24.590903+00:00 app[worker.1]: Hibernate: create table limits (id int8 not null, created_at timestamp not null, updated_at timestamp not null, equal int4 not null, max int4 not null, min int4 not null, branches_id int8 not null, var_id int8 not null, primary key (id))
-2021-02-20T11:29:24.597287+00:00 app[worker.1]: Hibernate: create table msgs (dtype varchar(31) not null, id int8 not null, created_at timestamp not null, updated_at timestamp not null, val TEXT, file oid, primary key (id))
-2021-02-20T11:29:24.606876+00:00 app[worker.1]: Hibernate: create table nodes (dtype varchar(31) not null, id int8 not null, created_at timestamp not null, updated_at timestamp not null, delay int4, nodes_id int8, msg_id int8, primary key (id))
-2021-02-20T11:29:24.612036+00:00 app[worker.1]: Hibernate: create table psws (created_at timestamp not null, updated_at timestamp not null, hash varchar(64) not null, salt varchar(64) not null, user_id int8 not null, primary key (user_id))
-2021-02-20T11:29:24.619590+00:00 app[worker.1]: Hibernate: create table settings (created_at timestamp not null, updated_at timestamp not null, color int4 not null, font int4 not null, msg_type int4 not null, size int4 not null, user_id int8 not null, primary key (user_id))
-2021-02-20T11:29:24.629361+00:00 app[worker.1]: Hibernate: create table states (id int8 not null, created_at timestamp not null, updated_at timestamp not null, val int4 not null, users_id int8 not null, var_id int8 not null, primary key (id))
-2021-02-20T11:29:24.635105+00:00 app[worker.1]: Hibernate: create table users (id int8 not null, created_at timestamp not null, updated_at timestamp not null, email varchar(50) not null, google boolean not null, name varchar(50), primary key (id))
-2021-02-20T11:29:24.640965+00:00 app[worker.1]: Hibernate: create table vars (id int8 not null, created_at timestamp not null, updated_at timestamp not null, name varchar(30) not null, primary key (id))
-2021-02-20T11:29:24.646748+00:00 app[worker.1]: Hibernate: alter table vars add constraint UK_dno0t3dsyui7csapcw84py6r unique (name)
-2021-02-20T11:29:24.652623+00:00 app[worker.1]: Hibernate: alter table answers add constraint FK3kiisomqa7bjb01r8pd33gg06 foreign key (out_msg_id) references nodes
-2021-02-20T11:29:24.656283+00:00 app[worker.1]: Hibernate: alter table answers add constraint FKlo4b5q6umhrieb9jgada4si8x foreign key (texts_id) references msgs
-2021-02-20T11:29:24.661749+00:00 app[worker.1]: Hibernate: alter table branches add constraint FKm9t93c9ibbi2pmd8ofx99vo1m foreign key (forks_id) references nodes
-2021-02-20T11:29:24.666061+00:00 app[worker.1]: Hibernate: alter table branches add constraint FKgwxe8rhxea8vqr6ryju4eu1lh foreign key (nodes_id) references nodes
-2021-02-20T11:29:24.669062+00:00 app[worker.1]: Hibernate: alter table changes add constraint FKfbrshejqx6hx3bah3xkvjlmua foreign key (answers_id) references answers
-2021-02-20T11:29:24.671779+00:00 app[worker.1]: Hibernate: alter table changes add constraint FK5grd5pj0davxmr71wv9qm6jea foreign key (var_id) references vars
-2021-02-20T11:29:24.674749+00:00 app[worker.1]: Hibernate: alter table histories add constraint FKgwmk7fbp8tveqf1jl8tuk9vvm foreign key (msg_id) references msgs
-2021-02-20T11:29:24.677561+00:00 app[worker.1]: Hibernate: alter table histories add constraint FKnvwva3f62er4u4c237awaicti foreign key (users_id) references users
-2021-02-20T11:29:24.680221+00:00 app[worker.1]: Hibernate: alter table limits add constraint FKb3kupoosy8sqpnlu1x9aewh7y foreign key (branches_id) references branches
-2021-02-20T11:29:24.683684+00:00 app[worker.1]: Hibernate: alter table limits add constraint FKlaw5o4fch0qqkobe1mux33a6h foreign key (var_id) references vars
-2021-02-20T11:29:24.686367+00:00 app[worker.1]: Hibernate: alter table nodes add constraint FK6f7eo5au9ktwhpl9olna3ki73 foreign key (nodes_id) references nodes
-2021-02-20T11:29:24.689268+00:00 app[worker.1]: Hibernate: alter table nodes add constraint FK1lioneqe9orxjoqekvcdlddsl foreign key (msg_id) references msgs
-2021-02-20T11:29:24.692211+00:00 app[worker.1]: Hibernate: alter table psws add constraint FKct5ixqt5mam73br4qbx48m8n3 foreign key (user_id) references users
-2021-02-20T11:29:24.695845+00:00 app[worker.1]: Hibernate: alter table settings add constraint FKf585xxww5h8b9up0ninp57tjs foreign key (user_id) references users
-2021-02-20T11:29:24.699032+00:00 app[worker.1]: Hibernate: alter table states add constraint FKm796qhl0hfwbqtovuvivc1k8n foreign key (users_id) references users
-2021-02-20T11:29:24.701593+00:00 app[worker.1]: Hibernate: alter table states add constraint FKmkd1o1c0eyvbhpu9iujmvregt foreign key (var_id) references vars
-2021-02-20T11:29:24.707122+00:00 app[worker.1]: 2021-02-20 11:29:24.706  INFO 4 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2021-02-20T11:29:24.719031+00:00 app[worker.1]: 2021-02-20 11:29:24.718  INFO 4 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2021-02-20T11:29:26.278681+00:00 app[worker.1]: 2021-02-20 11:29:26.278  WARN 4 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2021-02-20T11:29:26.703489+00:00 app[worker.1]: 2021-02-20 11:29:26.703  INFO 4 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-02-20T11:29:26.738299+00:00 app[worker.1]: 2021-02-20 11:29:26.737 DEBUG 4 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2021-02-20T11:29:26.948732+00:00 app[worker.1]: 2021-02-20 11:29:26.948 DEBUG 4 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
-2021-02-20T11:29:27.031527+00:00 app[worker.1]: 2021-02-20 11:29:27.031 DEBUG 4 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2021-02-20T11:29:27.050994+00:00 app[worker.1]: 2021-02-20 11:29:27.050 DEBUG 4 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
-2021-02-20T11:29:27.570063+00:00 app[worker.1]: 2021-02-20 11:29:27.569  INFO 4 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 23528 (http) with context path ''
-2021-02-20T11:29:27.581715+00:00 app[worker.1]: 2021-02-20 11:29:27.581  INFO 4 --- [           main] app.text_quest.TextQuestApplication      : Started TextQuestApplication in 9.369 seconds (JVM running for 10.276)
-2021-02-20T11:30:14.142119+00:00 heroku[router]: at=error code=H14 desc="No web processes running" method=GET path="/" host=t1magic.herokuapp.com request_id=8a862457-fa83-4ac7-88b0-3ede7a6ff56f fwd="178.176.77.147" dyno= connect= service= status=503 bytes= protocol=https
-2021-02-20T11:30:14.484625+00:00 heroku[router]: at=error code=H14 desc="No web processes running" method=GET path="/favicon.ico" host=t1magic.herokuapp.com request_id=3b20fc2a-5dab-466a-b585-5cbaa6dabf64 fwd="178.176.77.147" dyno= connect= service= status=503 bytes= protocol=https
+2021-02-20T11:49:11.244329+00:00 app[web.1]: Hibernate: alter table answers drop constraint FKlo4b5q6umhrieb9jgada4si8x
+2021-02-20T11:49:11.249125+00:00 app[web.1]: Hibernate: alter table branches drop constraint FKm9t93c9ibbi2pmd8ofx99vo1m
+2021-02-20T11:49:11.251818+00:00 app[web.1]: Hibernate: alter table branches drop constraint FKgwxe8rhxea8vqr6ryju4eu1lh
+2021-02-20T11:49:11.255092+00:00 app[web.1]: Hibernate: alter table changes drop constraint FKfbrshejqx6hx3bah3xkvjlmua
+2021-02-20T11:49:11.262312+00:00 app[web.1]: Hibernate: alter table changes drop constraint FK5grd5pj0davxmr71wv9qm6jea
+2021-02-20T11:49:11.265605+00:00 app[web.1]: Hibernate: alter table histories drop constraint FKgwmk7fbp8tveqf1jl8tuk9vvm
+2021-02-20T11:49:11.269612+00:00 app[web.1]: Hibernate: alter table histories drop constraint FKnvwva3f62er4u4c237awaicti
+2021-02-20T11:49:11.273331+00:00 app[web.1]: Hibernate: alter table limits drop constraint FKb3kupoosy8sqpnlu1x9aewh7y
+2021-02-20T11:49:11.276010+00:00 app[web.1]: Hibernate: alter table limits drop constraint FKlaw5o4fch0qqkobe1mux33a6h
+2021-02-20T11:49:11.278906+00:00 app[web.1]: Hibernate: alter table nodes drop constraint FK6f7eo5au9ktwhpl9olna3ki73
+2021-02-20T11:49:11.287032+00:00 app[web.1]: Hibernate: alter table nodes drop constraint FK1lioneqe9orxjoqekvcdlddsl
+2021-02-20T11:49:11.290006+00:00 app[web.1]: Hibernate: alter table psws drop constraint FKct5ixqt5mam73br4qbx48m8n3
+2021-02-20T11:49:11.294656+00:00 app[web.1]: Hibernate: alter table settings drop constraint FKf585xxww5h8b9up0ninp57tjs
+2021-02-20T11:49:11.297306+00:00 app[web.1]: Hibernate: alter table states drop constraint FKm796qhl0hfwbqtovuvivc1k8n
+2021-02-20T11:49:11.299759+00:00 app[web.1]: Hibernate: alter table states drop constraint FKmkd1o1c0eyvbhpu9iujmvregt
+2021-02-20T11:49:11.303303+00:00 app[web.1]: Hibernate: drop table if exists answers cascade
+2021-02-20T11:49:11.310389+00:00 app[web.1]: Hibernate: drop table if exists branches cascade
+2021-02-20T11:49:11.316036+00:00 app[web.1]: Hibernate: drop table if exists changes cascade
+2021-02-20T11:49:11.321170+00:00 app[web.1]: Hibernate: drop table if exists histories cascade
+2021-02-20T11:49:11.327008+00:00 app[web.1]: Hibernate: drop table if exists limits cascade
+2021-02-20T11:49:11.332546+00:00 app[web.1]: Hibernate: drop table if exists msgs cascade
+2021-02-20T11:49:11.338437+00:00 app[web.1]: Hibernate: drop table if exists nodes cascade
+2021-02-20T11:49:11.344975+00:00 app[web.1]: Hibernate: drop table if exists psws cascade
+2021-02-20T11:49:11.350839+00:00 app[web.1]: Hibernate: drop table if exists settings cascade
+2021-02-20T11:49:11.357478+00:00 app[web.1]: Hibernate: drop table if exists states cascade
+2021-02-20T11:49:11.362307+00:00 app[web.1]: Hibernate: drop table if exists users cascade
+2021-02-20T11:49:11.367983+00:00 app[web.1]: Hibernate: drop table if exists vars cascade
+2021-02-20T11:49:11.374548+00:00 app[web.1]: Hibernate: drop sequence if exists hibernate_sequence
+2021-02-20T11:49:11.383483+00:00 app[web.1]: Hibernate: create sequence hibernate_sequence start 1 increment 1
+2021-02-20T11:49:11.389591+00:00 app[web.1]: Hibernate: create table answers (id int8 not null, created_at timestamp not null, updated_at timestamp not null, out_msg_id int8 not null, texts_id int8 not null, primary key (id))
+2021-02-20T11:49:11.401138+00:00 app[web.1]: Hibernate: create table branches (id int8 not null, created_at timestamp not null, updated_at timestamp not null, forks_id int8 not null, nodes_id int8 not null, primary key (id))
+2021-02-20T11:49:11.408450+00:00 app[web.1]: Hibernate: create table changes (id int8 not null, created_at timestamp not null, updated_at timestamp not null, val int4 not null, answers_id int8 not null, var_id int8 not null, primary key (id))
+2021-02-20T11:49:11.416578+00:00 app[web.1]: Hibernate: create table histories (id int8 not null, created_at timestamp not null, updated_at timestamp not null, msg_id int8 not null, users_id int8 not null, primary key (id))
+2021-02-20T11:49:11.423127+00:00 app[web.1]: Hibernate: create table limits (id int8 not null, created_at timestamp not null, updated_at timestamp not null, equal int4 not null, max int4 not null, min int4 not null, branches_id int8 not null, var_id int8 not null, primary key (id))
+2021-02-20T11:49:11.428325+00:00 app[web.1]: Hibernate: create table msgs (dtype varchar(31) not null, id int8 not null, created_at timestamp not null, updated_at timestamp not null, file oid, val TEXT, primary key (id))
+2021-02-20T11:49:11.436988+00:00 app[web.1]: Hibernate: create table nodes (dtype varchar(31) not null, id int8 not null, created_at timestamp not null, updated_at timestamp not null, delay int4, nodes_id int8, msg_id int8, primary key (id))
+2021-02-20T11:49:11.444739+00:00 app[web.1]: Hibernate: create table psws (created_at timestamp not null, updated_at timestamp not null, hash varchar(64) not null, salt varchar(64) not null, user_id int8 not null, primary key (user_id))
+2021-02-20T11:49:11.451449+00:00 app[web.1]: Hibernate: create table settings (created_at timestamp not null, updated_at timestamp not null, color int4 not null, font int4 not null, msg_type int4 not null, size int4 not null, user_id int8 not null, primary key (user_id))
+2021-02-20T11:49:11.457970+00:00 app[web.1]: Hibernate: create table states (id int8 not null, created_at timestamp not null, updated_at timestamp not null, val int4 not null, users_id int8 not null, var_id int8 not null, primary key (id))
+2021-02-20T11:49:11.463610+00:00 app[web.1]: Hibernate: create table users (id int8 not null, created_at timestamp not null, updated_at timestamp not null, email varchar(50) not null, google boolean not null, name varchar(50), primary key (id))
+2021-02-20T11:49:11.469593+00:00 app[web.1]: Hibernate: create table vars (id int8 not null, created_at timestamp not null, updated_at timestamp not null, name varchar(30) not null, primary key (id))
+2021-02-20T11:49:11.475819+00:00 app[web.1]: Hibernate: alter table vars add constraint UK_dno0t3dsyui7csapcw84py6r unique (name)
+2021-02-20T11:49:11.480932+00:00 app[web.1]: Hibernate: alter table answers add constraint FK3kiisomqa7bjb01r8pd33gg06 foreign key (out_msg_id) references nodes
+2021-02-20T11:49:11.484304+00:00 app[web.1]: Hibernate: alter table answers add constraint FKlo4b5q6umhrieb9jgada4si8x foreign key (texts_id) references msgs
+2021-02-20T11:49:11.489009+00:00 app[web.1]: Hibernate: alter table branches add constraint FKm9t93c9ibbi2pmd8ofx99vo1m foreign key (forks_id) references nodes
+2021-02-20T11:49:11.492264+00:00 app[web.1]: Hibernate: alter table branches add constraint FKgwxe8rhxea8vqr6ryju4eu1lh foreign key (nodes_id) references nodes
+2021-02-20T11:49:11.495409+00:00 app[web.1]: Hibernate: alter table changes add constraint FKfbrshejqx6hx3bah3xkvjlmua foreign key (answers_id) references answers
+2021-02-20T11:49:11.498544+00:00 app[web.1]: Hibernate: alter table changes add constraint FK5grd5pj0davxmr71wv9qm6jea foreign key (var_id) references vars
+2021-02-20T11:49:11.502376+00:00 app[web.1]: Hibernate: alter table histories add constraint FKgwmk7fbp8tveqf1jl8tuk9vvm foreign key (msg_id) references msgs
+2021-02-20T11:49:11.505313+00:00 app[web.1]: Hibernate: alter table histories add constraint FKnvwva3f62er4u4c237awaicti foreign key (users_id) references users
+2021-02-20T11:49:11.508199+00:00 app[web.1]: Hibernate: alter table limits add constraint FKb3kupoosy8sqpnlu1x9aewh7y foreign key (branches_id) references branches
+2021-02-20T11:49:11.512348+00:00 app[web.1]: Hibernate: alter table limits add constraint FKlaw5o4fch0qqkobe1mux33a6h foreign key (var_id) references vars
+2021-02-20T11:49:11.516582+00:00 app[web.1]: Hibernate: alter table nodes add constraint FK6f7eo5au9ktwhpl9olna3ki73 foreign key (nodes_id) references nodes
+2021-02-20T11:49:11.520473+00:00 app[web.1]: Hibernate: alter table nodes add constraint FK1lioneqe9orxjoqekvcdlddsl foreign key (msg_id) references msgs
+2021-02-20T11:49:11.524211+00:00 app[web.1]: Hibernate: alter table psws add constraint FKct5ixqt5mam73br4qbx48m8n3 foreign key (user_id) references users
+2021-02-20T11:49:11.529822+00:00 app[web.1]: Hibernate: alter table settings add constraint FKf585xxww5h8b9up0ninp57tjs foreign key (user_id) references users
+2021-02-20T11:49:11.532662+00:00 app[web.1]: Hibernate: alter table states add constraint FKm796qhl0hfwbqtovuvivc1k8n foreign key (users_id) references users
+2021-02-20T11:49:11.535733+00:00 app[web.1]: Hibernate: alter table states add constraint FKmkd1o1c0eyvbhpu9iujmvregt foreign key (var_id) references vars
+2021-02-20T11:49:11.546243+00:00 app[web.1]: 2021-02-20 11:49:11.545  INFO 4 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-02-20T11:49:11.570148+00:00 app[web.1]: 2021-02-20 11:49:11.569  INFO 4 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-02-20T11:49:13.877343+00:00 app[web.1]: 2021-02-20 11:49:13.877  WARN 4 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-02-20T11:49:14.412499+00:00 app[web.1]: 2021-02-20 11:49:14.412  INFO 4 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-02-20T11:49:14.454102+00:00 app[web.1]: 2021-02-20 11:49:14.453 DEBUG 4 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-02-20T11:49:14.728930+00:00 app[web.1]: 2021-02-20 11:49:14.728 DEBUG 4 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2021-02-20T11:49:14.858109+00:00 app[web.1]: 2021-02-20 11:49:14.857 DEBUG 4 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-02-20T11:49:14.895299+00:00 app[web.1]: 2021-02-20 11:49:14.895 DEBUG 4 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-02-20T11:49:15.581620+00:00 app[web.1]: 2021-02-20 11:49:15.581  INFO 4 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 45376 (http) with context path ''
+2021-02-20T11:49:15.595337+00:00 app[web.1]: 2021-02-20 11:49:15.595  INFO 4 --- [           main] app.text_quest.TextQuestApplication      : Started TextQuestApplication in 12.555 seconds (JVM running for 13.689)
+2021-02-20T11:49:16.084296+00:00 heroku[web.1]: State changed from starting to up
+2021-02-20T11:50:08.710363+00:00 app[web.1]: 2021-02-20 11:50:08.710  INFO 4 --- [io-45376-exec-4] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-02-20T11:50:08.710481+00:00 app[web.1]: 2021-02-20 11:50:08.710  INFO 4 --- [io-45376-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-02-20T11:50:08.710949+00:00 app[web.1]: 2021-02-20 11:50:08.710 DEBUG 4 --- [io-45376-exec-4] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2021-02-20T11:50:08.711083+00:00 app[web.1]: 2021-02-20 11:50:08.710 DEBUG 4 --- [io-45376-exec-4] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2021-02-20T11:50:08.711266+00:00 app[web.1]: 2021-02-20 11:50:08.711 DEBUG 4 --- [io-45376-exec-4] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2021-02-20T11:50:08.713221+00:00 app[web.1]: 2021-02-20 11:50:08.713 DEBUG 4 --- [io-45376-exec-4] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@1efdcd5
+2021-02-20T11:50:08.713590+00:00 app[web.1]: 2021-02-20 11:50:08.713 DEBUG 4 --- [io-45376-exec-4] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@4beddc56
+2021-02-20T11:50:08.713702+00:00 app[web.1]: 2021-02-20 11:50:08.713 DEBUG 4 --- [io-45376-exec-4] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-02-20T11:50:08.713780+00:00 app[web.1]: 2021-02-20 11:50:08.713  INFO 4 --- [io-45376-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2021-02-20T11:50:08.740782+00:00 app[web.1]: 2021-02-20 11:50:08.740 DEBUG 4 --- [io-45376-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/", parameters={}
+2021-02-20T11:50:08.746827+00:00 app[web.1]: 2021-02-20 11:50:08.746 DEBUG 4 --- [io-45376-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to app.text_quest.controller.RootController#root()
+2021-02-20T11:50:08.800940+00:00 app[web.1]: 2021-02-20 11:50:08.800 DEBUG 4 --- [io-45376-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Using 'text/html', given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, application/signed-exchange;v=b3;q=0.9, */*;q=0.8] and supported [text/plain, */*, text/plain, */*, application/json, application/*+json, application/json, application/*+json]
+2021-02-20T11:50:08.801801+00:00 app[web.1]: 2021-02-20 11:50:08.801 DEBUG 4 --- [io-45376-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Writing ["index.min"]
+2021-02-20T11:50:08.808937+00:00 heroku[router]: at=info method=GET path="/" host=t1magic.herokuapp.com request_id=52fd2526-1ff2-4b2c-932e-b98e1a41aef5 fwd="178.176.77.147" dyno=web.1 connect=0ms service=164ms status=200 bytes=140 protocol=https
+2021-02-20T11:50:08.815315+00:00 app[web.1]: 2021-02-20 11:50:08.815 DEBUG 4 --- [io-45376-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-02-20T11:50:09.001040+00:00 app[web.1]: 2021-02-20 11:50:09.000 DEBUG 4 --- [io-45376-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/favicon.ico", parameters={}
+2021-02-20T11:50:09.013256+00:00 app[web.1]: 2021-02-20 11:50:09.012 DEBUG 4 --- [io-45376-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [class path resource [META-INF/resources/], class path resource [resources/], class path resource [static/], class path resource [public/], ServletContext resource [/]]
+2021-02-20T11:50:09.017378+00:00 app[web.1]: 2021-02-20 11:50:09.017 DEBUG 4 --- [io-45376-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2021-02-20T11:50:09.017735+00:00 app[web.1]: 2021-02-20 11:50:09.017 DEBUG 4 --- [io-45376-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2021-02-20T11:50:09.022876+00:00 app[web.1]: 2021-02-20 11:50:09.022 DEBUG 4 --- [io-45376-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2021-02-20T11:50:09.026058+00:00 app[web.1]: 2021-02-20 11:50:09.025 DEBUG 4 --- [io-45376-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-02-20T11:50:09.073194+00:00 app[web.1]: 2021-02-20 11:50:09.072 DEBUG 4 --- [io-45376-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json;q=0.8', given [image/avif, image/webp, image/apng, image/*, */*;q=0.8] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-02-20T11:50:09.074153+00:00 app[web.1]: 2021-02-20 11:50:09.074 DEBUG 4 --- [io-45376-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sat Feb 20 11:50:09 UTC 2021, status=404, error=Not Found, message=, path=/favicon.ico}]
+2021-02-20T11:50:09.168071+00:00 heroku[router]: at=info method=GET path="/favicon.ico" host=t1magic.herokuapp.com request_id=1920dfb0-6c38-4998-ab2e-9b6296b01ac1 fwd="178.176.77.147" dyno=web.1 connect=0ms service=174ms status=404 bytes=397 protocol=https
+2021-02-20T11:50:09.170978+00:00 app[web.1]: 2021-02-20 11:50:09.170 DEBUG 4 --- [io-45376-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2021-02-20T11:51:17.359213+00:00 app[web.1]: 2021-02-20 11:51:17.358 DEBUG 4 --- [io-45376-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/", parameters={}
+2021-02-20T11:51:17.359986+00:00 app[web.1]: 2021-02-20 11:51:17.359 DEBUG 4 --- [io-45376-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to app.text_quest.controller.RootController#root()
+2021-02-20T11:51:17.360902+00:00 heroku[router]: at=info method=GET path="/" host=t1magic.herokuapp.com request_id=b7d9e04c-79e8-4240-a8c3-c1e124aa0025 fwd="178.176.77.147" dyno=web.1 connect=0ms service=9ms status=200 bytes=140 protocol=https
+2021-02-20T11:51:17.364001+00:00 app[web.1]: 2021-02-20 11:51:17.363 DEBUG 4 --- [io-45376-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Using 'text/html', given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, application/signed-exchange;v=b3;q=0.9, */*;q=0.8] and supported [text/plain, */*, text/plain, */*, application/json, application/*+json, application/json, application/*+json]
+2021-02-20T11:51:17.364202+00:00 app[web.1]: 2021-02-20 11:51:17.364 DEBUG 4 --- [io-45376-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Writing ["index.min"]
+2021-02-20T11:51:17.365941+00:00 app[web.1]: 2021-02-20 11:51:17.365 DEBUG 4 --- [io-45376-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
