@@ -19,6 +19,6 @@ public class RootController {
         } catch (Exception e) {
             logger.error(FileLogger.getExceptionLog(e));
         }
-        return null; // TODO: 19.02.2021 Do smth with errors
+        return null; // TODO: add error page
     }
 }

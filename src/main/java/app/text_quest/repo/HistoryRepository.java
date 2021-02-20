@@ -11,5 +11,5 @@ import java.util.List;
 public interface HistoryRepository extends JpaRepository<History, Long> {
     List<History> findByUserId(long userId);
 
-//    List<History> findAllTop10(); TODO: Isn't ready
+//    List<History> findAllTop10(); TODO:
 }

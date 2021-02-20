@@ -18,7 +18,7 @@ public class State extends AbstractModel {
     private Var var;
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "users_id", nullable = false, updatable = false) // TODO: 14.02.2021 Add "updatable" to all props, that needs
+    @JoinColumn(name = "users_id", nullable = false, updatable = false)
     @JsonIgnore
     private User user;
 
@@ -53,7 +53,6 @@ public class State extends AbstractModel {
         return "State{" +
                 "val=" + val +
                 ", var=" + var +
-//                ", user=" + user + TODO: StackOverflow
                 '}';
     }
 }
