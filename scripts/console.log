@@ -1,0 +1,100 @@
+2021-02-20T10:48:33.812786+00:00 heroku[worker.1]: Process exited with status 1
+2021-02-20T10:48:33.881125+00:00 heroku[worker.1]: State changed from up to crashed
+2021-02-20T10:48:33.887020+00:00 heroku[worker.1]: State changed from crashed to starting
+2021-02-20T10:48:37.285139+00:00 heroku[worker.1]: Starting process with command `sh mvnw`
+2021-02-20T10:48:37.894585+00:00 heroku[worker.1]: State changed from starting to up
+2021-02-20T10:48:39.194517+00:00 app[worker.1]: mvnw: 219: cannot open /app/.mvn/wrapper/maven-wrapper.properties: No such file
+2021-02-20T10:48:39.209495+00:00 app[worker.1]: /app/.mvn/wrapper/maven-wrapper.jar: No such file or directory
+2021-02-20T10:48:39.213347+00:00 app[worker.1]: Picked up JAVA_TOOL_OPTIONS: -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8
+2021-02-20T10:48:39.285208+00:00 app[worker.1]: Error: Could not find or load main class org.apache.maven.wrapper.MavenWrapperMain
+2021-02-20T10:48:39.337667+00:00 heroku[worker.1]: Process exited with status 1
+2021-02-20T10:48:39.436503+00:00 heroku[worker.1]: State changed from up to crashed
+2021-02-20T10:48:46.469724+00:00 app[api]: Release v14 created by user derbindima1@gmail.com
+2021-02-20T10:48:46.469724+00:00 app[api]: Deploy d5aed681 by user derbindima1@gmail.com
+2021-02-20T10:48:47.979160+00:00 heroku[worker.1]: State changed from crashed to starting
+2021-02-20T10:48:51.474025+00:00 heroku[worker.1]: Starting process with command `sh mvnw`
+2021-02-20T10:48:52.121455+00:00 heroku[worker.1]: State changed from starting to up
+2021-02-20T10:48:53.389167+00:00 app[worker.1]: Picked up JAVA_TOOL_OPTIONS: -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8
+2021-02-20T10:48:54.000000+00:00 app[api]: Build succeeded
+2021-02-20T10:48:56.104667+00:00 app[worker.1]: [INFO] Scanning for projects...
+2021-02-20T10:48:56.434180+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.4.2/spring-boot-starter-parent-2.4.2.pom
+2021-02-20T10:48:56.543709+00:00 app[worker.1]: Progress (1): 2.7/8.6 kB
+2021-02-20T10:48:56.560523+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-dependencies/2.4.2/spring-boot-dependencies-2.4.2.pom
+2021-02-20T10:48:56.604068+00:00 app[worker.1]: Progress (1): 2.7/108 kB
+2021-02-20T10:48:56.678098+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/com/datastax/oss/java-driver-bom/4.9.0/java-driver-bom-4.9.0.pom
+2021-02-20T10:48:56.686615+00:00 app[worker.1]: Progress (1): 2.7/4.1 kB
+2021-02-20T10:48:56.694823+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-bom/4.1.17/metrics-bom-4.1.17.pom
+2021-02-20T10:48:56.707464+00:00 app[worker.1]: Progress (1): 2.7/5.3 kB
+2021-02-20T10:48:56.712142+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-parent/4.1.17/metrics-parent-4.1.17.pom
+2021-02-20T10:48:56.726022+00:00 app[worker.1]: Progress (1): 2.7/17 kB
+2021-02-20T10:48:56.735135+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/groovy/groovy-bom/2.5.14/groovy-bom-2.5.14.pom
+2021-02-20T10:48:56.753028+00:00 app[worker.1]: Progress (1): 2.7/26 kB
+2021-02-20T10:48:56.762273+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/infinispan/infinispan-bom/11.0.8.Final/infinispan-bom-11.0.8.Final.pom
+2021-02-20T10:48:56.775199+00:00 app[worker.1]: Progress (1): 2.7/19 kB
+2021-02-20T10:48:56.780256+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/infinispan/infinispan-build-configuration-parent/11.0.8.Final/infinispan-build-configuration-parent-11.0.8.Final.pom
+2021-02-20T10:48:56.800771+00:00 app[worker.1]: Progress (1): 2.7/13 kB
+2021-02-20T10:48:56.810151+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/jboss/jboss-parent/36/jboss-parent-36.pom
+2021-02-20T10:48:56.835613+00:00 app[worker.1]: Progress (1): 4.1/66 kB
+2021-02-20T10:48:56.856326+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-bom/2.11.4/jackson-bom-2.11.4.pom
+2021-02-20T10:48:56.867563+00:00 app[worker.1]: Progress (1): 4.1/15 kB
+2021-02-20T10:48:56.871567+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.11/jackson-parent-2.11.pom
+2021-02-20T10:48:56.884429+00:00 app[worker.1]: Progress (1): 4.1/7.8 kB
+2021-02-20T10:48:56.889644+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/38/oss-parent-38.pom
+2021-02-20T10:48:56.910680+00:00 app[worker.1]: Progress (1): 4.1/23 kB
+2021-02-20T10:48:56.926498+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/jersey-bom/2.32/jersey-bom-2.32.pom
+2021-02-20T10:48:56.941344+00:00 app[worker.1]: Progress (1): 4.1/19 kB
+2021-02-20T10:48:56.947942+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/eclipse/ee4j/project/1.0.6/project-1.0.6.pom
+2021-02-20T10:48:56.960681+00:00 app[worker.1]: Progress (1): 4.1/13 kB
+2021-02-20T10:48:56.968730+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-bom/9.4.35.v20201120/jetty-bom-9.4.35.v20201120.pom
+2021-02-20T10:48:56.981151+00:00 app[worker.1]: Progress (1): 4.1/18 kB
+2021-02-20T10:48:56.991641+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.7.0/junit-bom-5.7.0.pom
+2021-02-20T10:48:57.006884+00:00 app[worker.1]: Progress (1): 4.1/5.1 kB
+2021-02-20T10:48:57.013903+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-bom/1.4.21/kotlin-bom-1.4.21.pom
+2021-02-20T10:48:57.032178+00:00 app[worker.1]: Progress (1): 4.1/9.3 kB
+2021-02-20T10:48:57.037386+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-bom/1.4.2/kotlinx-coroutines-bom-1.4.2.pom
+2021-02-20T10:48:57.047351+00:00 app[worker.1]: Progress (1): 4.1/4.1 kB
+2021-02-20T10:48:57.053056+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-bom/2.13.3/log4j-bom-2.13.3.pom
+2021-02-20T10:48:57.073372+00:00 app[worker.1]: Progress (1): 4.1/7.6 kB
+2021-02-20T10:48:57.078353+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/apache/logging/logging-parent/1/logging-parent-1.pom
+2021-02-20T10:48:57.087217+00:00 app[worker.1]: Progress (1): 3.2 kB
+2021-02-20T10:48:57.090949+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/18/apache-18.pom
+2021-02-20T10:48:57.100702+00:00 app[worker.1]: Progress (1): 4.1/16 kB
+2021-02-20T10:48:57.106433+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-bom/1.6.3/micrometer-bom-1.6.3.pom
+2021-02-20T10:48:57.114669+00:00 app[worker.1]: Progress (1): 4.1/6.8 kB
+2021-02-20T10:48:57.118443+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-bom/4.1.58.Final/netty-bom-4.1.58.Final.pom
+2021-02-20T10:48:57.131093+00:00 app[worker.1]: Progress (1): 4.1/8.8 kB
+2021-02-20T10:48:57.134957+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom
+2021-02-20T10:48:57.147892+00:00 app[worker.1]: Progress (1): 4.1/4.8 kB
+2021-02-20T10:48:57.154430+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/com/oracle/database/jdbc/ojdbc-bom/19.8.0.0/ojdbc-bom-19.8.0.0.pom
+2021-02-20T10:48:57.165616+00:00 app[worker.1]: Progress (1): 4.1/12 kB
+2021-02-20T10:48:57.168901+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/r2dbc/r2dbc-bom/Arabba-SR8/r2dbc-bom-Arabba-SR8.pom
+2021-02-20T10:48:57.178170+00:00 app[worker.1]: Progress (1): 4.1 kB
+2021-02-20T10:48:57.181715+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/projectreactor/reactor-bom/2020.0.3/reactor-bom-2020.0.3.pom
+2021-02-20T10:48:57.201459+00:00 app[worker.1]: Progress (1): 4.1/4.5 kB
+2021-02-20T10:48:57.205031+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/rsocket/rsocket-bom/1.1.0/rsocket-bom-1.1.0.pom
+2021-02-20T10:48:57.221687+00:00 app[worker.1]: Progress (1): 2.6 kB
+2021-02-20T10:48:57.225806+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/data/spring-data-bom/2020.0.3/spring-data-bom-2020.0.3.pom
+2021-02-20T10:48:57.236634+00:00 app[worker.1]: Progress (1): 4.1/5.9 kB
+2021-02-20T10:48:57.241905+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/spring-framework-bom/5.3.3/spring-framework-bom-5.3.3.pom
+2021-02-20T10:48:57.253637+00:00 app[worker.1]: Progress (1): 4.1/5.6 kB
+2021-02-20T10:48:57.258487+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/integration/spring-integration-bom/5.4.3/spring-integration-bom-5.4.3.pom
+2021-02-20T10:48:57.267512+00:00 app[worker.1]: Progress (1): 4.1/9.5 kB
+2021-02-20T10:48:57.271268+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-bom/5.4.2/spring-security-bom-5.4.2.pom
+2021-02-20T10:48:57.280385+00:00 app[worker.1]: Progress (1): 4.1/5.3 kB
+2021-02-20T10:48:57.285332+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/session/spring-session-bom/2020.0.1/spring-session-bom-2020.0.1.pom
+2021-02-20T10:48:57.293357+00:00 app[worker.1]: Progress (1): 2.7 kB
+2021-02-20T10:48:57.325108+00:00 app[worker.1]: [INFO] ------------------------------------------------------------------------
+2021-02-20T10:48:57.325351+00:00 app[worker.1]: [INFO] BUILD FAILURE
+2021-02-20T10:48:57.325915+00:00 app[worker.1]: [INFO] ------------------------------------------------------------------------
+2021-02-20T10:48:57.327970+00:00 app[worker.1]: [INFO] Total time:  1.250 s
+2021-02-20T10:48:57.328484+00:00 app[worker.1]: [INFO] Finished at: 2021-02-20T10:48:57Z
+2021-02-20T10:48:57.329013+00:00 app[worker.1]: [INFO] ------------------------------------------------------------------------
+2021-02-20T10:48:57.333856+00:00 app[worker.1]: [ERROR] No goals have been specified for this build. You must specify a valid lifecycle phase or a goal in the format <plugin-prefix>:<goal> or <plugin-group-id>:<plugin-artifact-id>[:<plugin-version>]:<goal>. Available lifecycle phases are: validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy, pre-clean, clean, post-clean, pre-site, site, post-site, site-deploy. -> [Help 1]
+2021-02-20T10:48:57.333971+00:00 app[worker.1]: [ERROR]
+2021-02-20T10:48:57.334504+00:00 app[worker.1]: [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+2021-02-20T10:48:57.334938+00:00 app[worker.1]: [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+2021-02-20T10:48:57.335038+00:00 app[worker.1]: [ERROR]
+2021-02-20T10:48:57.335716+00:00 app[worker.1]: [ERROR] For more information about the errors and possible solutions, please read the following articles:
+2021-02-20T10:48:57.336404+00:00 app[worker.1]: [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/NoGoalSpecifiedException
+2021-02-20T10:48:57.419755+00:00 heroku[worker.1]: Process exited with status 1
+2021-02-20T10:48:57.487125+00:00 heroku[worker.1]: State changed from up to crashed
