@@ -1,100 +1,100 @@
-2021-02-20T10:53:45.404984+00:00 app[worker.1]: [INFO] BUILD FAILURE
-2021-02-20T10:53:45.404985+00:00 app[worker.1]: [INFO] ------------------------------------------------------------------------
-2021-02-20T10:53:45.407050+00:00 app[worker.1]: [INFO] Total time:  4.369 s
-2021-02-20T10:53:45.407607+00:00 app[worker.1]: [INFO] Finished at: 2021-02-20T10:53:45Z
-2021-02-20T10:53:45.408878+00:00 app[worker.1]: [INFO] ------------------------------------------------------------------------
-2021-02-20T10:53:45.414342+00:00 app[worker.1]: [ERROR] No goals have been specified for this build. You must specify a valid lifecycle phase or a goal in the format <plugin-prefix>:<goal> or <plugin-group-id>:<plugin-artifact-id>[:<plugin-version>]:<goal>. Available lifecycle phases are: validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy, pre-clean, clean, post-clean, pre-site, site, post-site, site-deploy. -> [Help 1]
-2021-02-20T10:53:45.414493+00:00 app[worker.1]: [ERROR]
-2021-02-20T10:53:45.415140+00:00 app[worker.1]: [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-2021-02-20T10:53:45.415701+00:00 app[worker.1]: [ERROR] Re-run Maven using the -X switch to enable full debug logging.
-2021-02-20T10:53:45.415829+00:00 app[worker.1]: [ERROR]
-2021-02-20T10:53:45.416525+00:00 app[worker.1]: [ERROR] For more information about the errors and possible solutions, please read the following articles:
-2021-02-20T10:53:45.417289+00:00 app[worker.1]: [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/NoGoalSpecifiedException
-2021-02-20T10:53:45.557197+00:00 heroku[worker.1]: Process exited with status 1
-2021-02-20T10:53:45.647526+00:00 heroku[worker.1]: State changed from up to crashed
-2021-02-20T10:53:45.652239+00:00 heroku[worker.1]: State changed from crashed to starting
-2021-02-20T10:53:49.016662+00:00 heroku[worker.1]: Starting process with command `sh mvnw`
-2021-02-20T10:53:49.646056+00:00 heroku[worker.1]: State changed from starting to up
-2021-02-20T10:53:51.496625+00:00 app[worker.1]: Picked up JAVA_TOOL_OPTIONS: -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8
-2021-02-20T10:53:54.623312+00:00 app[worker.1]: [INFO] Scanning for projects...
-2021-02-20T10:53:54.935946+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.4.2/spring-boot-starter-parent-2.4.2.pom
-2021-02-20T10:53:55.196617+00:00 app[worker.1]: Progress (1): 2.7/8.6 kB
-2021-02-20T10:53:55.224062+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-dependencies/2.4.2/spring-boot-dependencies-2.4.2.pom
-2021-02-20T10:53:55.311723+00:00 app[worker.1]: Progress (1): 2.7/108 kB
-2021-02-20T10:53:55.415288+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/com/datastax/oss/java-driver-bom/4.9.0/java-driver-bom-4.9.0.pom
-2021-02-20T10:53:55.433729+00:00 app[worker.1]: Progress (1): 2.7/4.1 kB
-2021-02-20T10:53:55.441791+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-bom/4.1.17/metrics-bom-4.1.17.pom
-2021-02-20T10:53:55.456452+00:00 app[worker.1]: Progress (1): 2.7/5.3 kB
-2021-02-20T10:53:55.463812+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-parent/4.1.17/metrics-parent-4.1.17.pom
-2021-02-20T10:53:55.485391+00:00 app[worker.1]: Progress (1): 2.7/17 kB
-2021-02-20T10:53:55.501404+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/groovy/groovy-bom/2.5.14/groovy-bom-2.5.14.pom
-2021-02-20T10:53:55.527452+00:00 app[worker.1]: Progress (1): 2.7/26 kB
-2021-02-20T10:53:55.542444+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/infinispan/infinispan-bom/11.0.8.Final/infinispan-bom-11.0.8.Final.pom
-2021-02-20T10:53:55.564488+00:00 app[worker.1]: Progress (1): 2.7/19 kB
-2021-02-20T10:53:55.577731+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/infinispan/infinispan-build-configuration-parent/11.0.8.Final/infinispan-build-configuration-parent-11.0.8.Final.pom
-2021-02-20T10:53:55.604243+00:00 app[worker.1]: Progress (1): 2.7/13 kB
-2021-02-20T10:53:55.615618+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/jboss/jboss-parent/36/jboss-parent-36.pom
-2021-02-20T10:53:55.647656+00:00 app[worker.1]: Progress (1): 4.1/66 kB
-2021-02-20T10:53:55.683514+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-bom/2.11.4/jackson-bom-2.11.4.pom
-2021-02-20T10:53:55.697949+00:00 app[worker.1]: Progress (1): 4.1/15 kB
-2021-02-20T10:53:55.701903+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.11/jackson-parent-2.11.pom
-2021-02-20T10:53:55.715419+00:00 app[worker.1]: Progress (1): 4.1/7.8 kB
-2021-02-20T10:53:55.720505+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/38/oss-parent-38.pom
-2021-02-20T10:53:55.743867+00:00 app[worker.1]: Progress (1): 4.1/23 kB
-2021-02-20T10:53:55.758092+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/jersey-bom/2.32/jersey-bom-2.32.pom
-2021-02-20T10:53:55.785200+00:00 app[worker.1]: Progress (1): 4.1/19 kB
-2021-02-20T10:53:55.798355+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/eclipse/ee4j/project/1.0.6/project-1.0.6.pom
-2021-02-20T10:53:55.811843+00:00 app[worker.1]: Progress (1): 4.1/13 kB
-2021-02-20T10:53:55.819505+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-bom/9.4.35.v20201120/jetty-bom-9.4.35.v20201120.pom
-2021-02-20T10:53:55.841507+00:00 app[worker.1]: Progress (1): 4.1/18 kB
-2021-02-20T10:53:55.850405+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.7.0/junit-bom-5.7.0.pom
-2021-02-20T10:53:55.862898+00:00 app[worker.1]: Progress (1): 4.1/5.1 kB
-2021-02-20T10:53:55.868423+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-bom/1.4.21/kotlin-bom-1.4.21.pom
-2021-02-20T10:53:55.883274+00:00 app[worker.1]: Progress (1): 4.1/9.3 kB
-2021-02-20T10:53:55.895658+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-bom/1.4.2/kotlinx-coroutines-bom-1.4.2.pom
-2021-02-20T10:53:55.912380+00:00 app[worker.1]: Progress (1): 4.1/4.1 kB
-2021-02-20T10:53:55.917620+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-bom/2.13.3/log4j-bom-2.13.3.pom
-2021-02-20T10:53:55.930851+00:00 app[worker.1]: Progress (1): 4.1/7.6 kB
-2021-02-20T10:53:55.936464+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/apache/logging/logging-parent/1/logging-parent-1.pom
-2021-02-20T10:53:55.947227+00:00 app[worker.1]: Progress (1): 3.2 kB
-2021-02-20T10:53:55.952961+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/18/apache-18.pom
-2021-02-20T10:53:55.971053+00:00 app[worker.1]: Progress (1): 4.1/16 kB
-2021-02-20T10:53:55.978988+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-bom/1.6.3/micrometer-bom-1.6.3.pom
-2021-02-20T10:53:55.988915+00:00 app[worker.1]: Progress (1): 4.1/6.8 kB
-2021-02-20T10:53:55.992539+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-bom/4.1.58.Final/netty-bom-4.1.58.Final.pom
-2021-02-20T10:53:56.005857+00:00 app[worker.1]: Progress (1): 4.1/8.8 kB
-2021-02-20T10:53:56.009797+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom
-2021-02-20T10:53:56.021402+00:00 app[worker.1]: Progress (1): 4.1/4.8 kB
-2021-02-20T10:53:56.027426+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/com/oracle/database/jdbc/ojdbc-bom/19.8.0.0/ojdbc-bom-19.8.0.0.pom
-2021-02-20T10:53:56.041964+00:00 app[worker.1]: Progress (1): 4.1/12 kB
-2021-02-20T10:53:56.047804+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/r2dbc/r2dbc-bom/Arabba-SR8/r2dbc-bom-Arabba-SR8.pom
-2021-02-20T10:53:56.058224+00:00 app[worker.1]: Progress (1): 2.6/4.1 kB
-2021-02-20T10:53:56.071122+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/projectreactor/reactor-bom/2020.0.3/reactor-bom-2020.0.3.pom
-2021-02-20T10:53:56.082367+00:00 app[worker.1]: Progress (1): 4.1/4.5 kB
-2021-02-20T10:53:56.087868+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/io/rsocket/rsocket-bom/1.1.0/rsocket-bom-1.1.0.pom
-2021-02-20T10:53:56.099866+00:00 app[worker.1]: Progress (1): 2.6 kB
-2021-02-20T10:53:56.104821+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/data/spring-data-bom/2020.0.3/spring-data-bom-2020.0.3.pom
-2021-02-20T10:53:56.116576+00:00 app[worker.1]: Progress (1): 4.1/5.9 kB
-2021-02-20T10:53:56.122321+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/spring-framework-bom/5.3.3/spring-framework-bom-5.3.3.pom
-2021-02-20T10:53:56.132551+00:00 app[worker.1]: Progress (1): 4.1/5.6 kB
-2021-02-20T10:53:56.139562+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/integration/spring-integration-bom/5.4.3/spring-integration-bom-5.4.3.pom
-2021-02-20T10:53:56.149772+00:00 app[worker.1]: Progress (1): 4.1/9.5 kB
-2021-02-20T10:53:56.153843+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-bom/5.4.2/spring-security-bom-5.4.2.pom
-2021-02-20T10:53:56.164496+00:00 app[worker.1]: Progress (1): 4.1/5.3 kB
-2021-02-20T10:53:56.172845+00:00 app[worker.1]: Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/session/spring-session-bom/2020.0.1/spring-session-bom-2020.0.1.pom
-2021-02-20T10:53:56.184470+00:00 app[worker.1]: Progress (1): 2.7 kB
-2021-02-20T10:53:56.223122+00:00 app[worker.1]: [INFO] ------------------------------------------------------------------------
-2021-02-20T10:53:56.223420+00:00 app[worker.1]: [INFO] BUILD FAILURE
-2021-02-20T10:53:56.223944+00:00 app[worker.1]: [INFO] ------------------------------------------------------------------------
-2021-02-20T10:53:56.226206+00:00 app[worker.1]: [INFO] Total time:  1.628 s
-2021-02-20T10:53:56.226844+00:00 app[worker.1]: [INFO] Finished at: 2021-02-20T10:53:56Z
-2021-02-20T10:53:56.227210+00:00 app[worker.1]: [INFO] ------------------------------------------------------------------------
-2021-02-20T10:53:56.231942+00:00 app[worker.1]: [ERROR] No goals have been specified for this build. You must specify a valid lifecycle phase or a goal in the format <plugin-prefix>:<goal> or <plugin-group-id>:<plugin-artifact-id>[:<plugin-version>]:<goal>. Available lifecycle phases are: validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy, pre-clean, clean, post-clean, pre-site, site, post-site, site-deploy. -> [Help 1]
-2021-02-20T10:53:56.232267+00:00 app[worker.1]: [ERROR]
-2021-02-20T10:53:56.232958+00:00 app[worker.1]: [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-2021-02-20T10:53:56.232959+00:00 app[worker.1]: [ERROR] Re-run Maven using the -X switch to enable full debug logging.
-2021-02-20T10:53:56.232964+00:00 app[worker.1]: [ERROR]
-2021-02-20T10:53:56.233551+00:00 app[worker.1]: [ERROR] For more information about the errors and possible solutions, please read the following articles:
-2021-02-20T10:53:56.234192+00:00 app[worker.1]: [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/NoGoalSpecifiedException
-2021-02-20T10:53:56.315079+00:00 heroku[worker.1]: Process exited with status 1
-2021-02-20T10:53:56.382906+00:00 heroku[worker.1]: State changed from up to crashed
+2021-02-20T11:12:02.978054+00:00 app[worker.1]: 2021-02-20 11:12:02.977  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'springBootRepositoryRestConfigurer' of type [org.springframework.boot.autoconfigure.data.rest.SpringBootRepositoryRestConfigurer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-02-20T11:12:02.980227+00:00 app[worker.1]: 2021-02-20 11:12:02.980  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'configurerDelegate' of type [org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerDelegate] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-02-20T11:12:02.993058+00:00 app[worker.1]: 2021-02-20 11:12:02.992  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration$StringHttpMessageConverterConfiguration' of type [org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration$StringHttpMessageConverterConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-02-20T11:12:03.005050+00:00 app[worker.1]: 2021-02-20 11:12:03.004  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'stringHttpMessageConverter' of type [org.springframework.http.converter.StringHttpMessageConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-02-20T11:12:03.007725+00:00 app[worker.1]: 2021-02-20 11:12:03.007  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.http.JacksonHttpMessageConvertersConfiguration$MappingJackson2HttpMessageConverterConfiguration' of type [org.springframework.boot.autoconfigure.http.JacksonHttpMessageConvertersConfiguration$MappingJackson2HttpMessageConverterConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-02-20T11:12:03.010214+00:00 app[worker.1]: 2021-02-20 11:12:03.010  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-02-20T11:12:03.020371+00:00 app[worker.1]: 2021-02-20 11:12:03.019  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'jacksonObjectMapperBuilder' of type [org.springframework.http.converter.json.Jackson2ObjectMapperBuilder] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-02-20T11:12:03.056789+00:00 app[worker.1]: 2021-02-20 11:12:03.056  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'jacksonObjectMapper' of type [com.fasterxml.jackson.databind.ObjectMapper] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-02-20T11:12:03.097627+00:00 app[worker.1]: 2021-02-20 11:12:03.096  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'mappingJackson2HttpMessageConverter' of type [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-02-20T11:12:03.100849+00:00 app[worker.1]: 2021-02-20 11:12:03.100  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration' of type [org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-02-20T11:12:04.499021+00:00 app[worker.1]: 2021-02-20 11:12:04.498  INFO 4 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 4711 (http)
+2021-02-20T11:12:04.569998+00:00 app[worker.1]: 2021-02-20 11:12:04.561  INFO 4 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-02-20T11:12:04.570605+00:00 app[worker.1]: 2021-02-20 11:12:04.570  INFO 4 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-02-20T11:12:04.908349+00:00 app[worker.1]: 2021-02-20 11:12:04.908  INFO 4 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-02-20T11:12:04.913351+00:00 app[worker.1]: 2021-02-20 11:12:04.913  INFO 4 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7775 ms
+2021-02-20T11:12:05.100366+00:00 app[worker.1]: 2021-02-20 11:12:05.099 DEBUG 4 --- [           main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2021-02-20T11:12:05.101106+00:00 app[worker.1]: 2021-02-20 11:12:05.100 DEBUG 4 --- [           main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2021-02-20T11:12:05.965070+00:00 app[worker.1]: 2021-02-20 11:12:05.962  INFO 4 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-02-20T11:12:06.871759+00:00 app[worker.1]: 2021-02-20 11:12:06.871  INFO 4 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.27.Final
+2021-02-20T11:12:07.233839+00:00 app[worker.1]: 2021-02-20 11:12:07.233  INFO 4 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-02-20T11:12:07.627569+00:00 app[worker.1]: 2021-02-20 11:12:07.627  INFO 4 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-02-20T11:12:08.548839+00:00 app[worker.1]: 2021-02-20 11:12:08.548  INFO 4 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-02-20T11:12:08.620831+00:00 app[worker.1]: 2021-02-20 11:12:08.620  INFO 4 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2021-02-20T11:12:09.607233+00:00 app[worker.1]: 2021-02-20 11:12:09.606  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.msg.types.Text
+2021-02-20T11:12:09.615442+00:00 app[worker.1]: 2021-02-20 11:12:09.615  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.msg.types.Image
+2021-02-20T11:12:09.658766+00:00 app[worker.1]: 2021-02-20 11:12:09.658  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.node.types.Fork
+2021-02-20T11:12:09.660346+00:00 app[worker.1]: 2021-02-20 11:12:09.660  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.node.types.LinkedNode.LinkedNode
+2021-02-20T11:12:09.662168+00:00 app[worker.1]: 2021-02-20 11:12:09.662  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.node.types.LinkedNode.types.OutMsg
+2021-02-20T11:12:09.663518+00:00 app[worker.1]: 2021-02-20 11:12:09.663  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.node.types.LinkedNode.types.InMsg
+2021-02-20T11:12:11.893320+00:00 app[worker.1]: Hibernate: alter table answers drop constraint FK3kiisomqa7bjb01r8pd33gg06
+2021-02-20T11:12:11.906903+00:00 app[worker.1]: Hibernate: alter table answers drop constraint FKlo4b5q6umhrieb9jgada4si8x
+2021-02-20T11:12:11.917001+00:00 app[worker.1]: Hibernate: alter table branches drop constraint FKm9t93c9ibbi2pmd8ofx99vo1m
+2021-02-20T11:12:11.926098+00:00 app[worker.1]: Hibernate: alter table branches drop constraint FKgwxe8rhxea8vqr6ryju4eu1lh
+2021-02-20T11:12:11.933144+00:00 app[worker.1]: Hibernate: alter table changes drop constraint FKfbrshejqx6hx3bah3xkvjlmua
+2021-02-20T11:12:11.937729+00:00 app[worker.1]: Hibernate: alter table changes drop constraint FK5grd5pj0davxmr71wv9qm6jea
+2021-02-20T11:12:11.943478+00:00 app[worker.1]: Hibernate: alter table histories drop constraint FKgwmk7fbp8tveqf1jl8tuk9vvm
+2021-02-20T11:12:11.948229+00:00 app[worker.1]: Hibernate: alter table histories drop constraint FKnvwva3f62er4u4c237awaicti
+2021-02-20T11:12:11.953462+00:00 app[worker.1]: Hibernate: alter table limits drop constraint FKb3kupoosy8sqpnlu1x9aewh7y
+2021-02-20T11:12:12.005673+00:00 app[worker.1]: Hibernate: alter table limits drop constraint FKlaw5o4fch0qqkobe1mux33a6h
+2021-02-20T11:12:12.022956+00:00 app[worker.1]: Hibernate: alter table nodes drop constraint FK6f7eo5au9ktwhpl9olna3ki73
+2021-02-20T11:12:12.037513+00:00 app[worker.1]: Hibernate: alter table nodes drop constraint FK1lioneqe9orxjoqekvcdlddsl
+2021-02-20T11:12:12.041868+00:00 app[worker.1]: Hibernate: alter table psws drop constraint FKct5ixqt5mam73br4qbx48m8n3
+2021-02-20T11:12:12.049463+00:00 app[worker.1]: Hibernate: alter table settings drop constraint FKf585xxww5h8b9up0ninp57tjs
+2021-02-20T11:12:12.053682+00:00 app[worker.1]: Hibernate: alter table states drop constraint FKm796qhl0hfwbqtovuvivc1k8n
+2021-02-20T11:12:12.061482+00:00 app[worker.1]: Hibernate: alter table states drop constraint FKmkd1o1c0eyvbhpu9iujmvregt
+2021-02-20T11:12:12.075124+00:00 app[worker.1]: Hibernate: drop table if exists answers cascade
+2021-02-20T11:12:12.093503+00:00 app[worker.1]: Hibernate: drop table if exists branches cascade
+2021-02-20T11:12:12.105842+00:00 app[worker.1]: Hibernate: drop table if exists changes cascade
+2021-02-20T11:12:12.113711+00:00 app[worker.1]: Hibernate: drop table if exists histories cascade
+2021-02-20T11:12:12.121684+00:00 app[worker.1]: Hibernate: drop table if exists limits cascade
+2021-02-20T11:12:12.129710+00:00 app[worker.1]: Hibernate: drop table if exists msgs cascade
+2021-02-20T11:12:12.137692+00:00 app[worker.1]: Hibernate: drop table if exists nodes cascade
+2021-02-20T11:12:12.163122+00:00 app[worker.1]: Hibernate: drop table if exists psws cascade
+2021-02-20T11:12:12.173464+00:00 app[worker.1]: Hibernate: drop table if exists settings cascade
+2021-02-20T11:12:12.179260+00:00 app[worker.1]: Hibernate: drop table if exists states cascade
+2021-02-20T11:12:12.186070+00:00 app[worker.1]: Hibernate: drop table if exists users cascade
+2021-02-20T11:12:12.201829+00:00 app[worker.1]: Hibernate: drop table if exists vars cascade
+2021-02-20T11:12:12.217897+00:00 app[worker.1]: Hibernate: drop sequence if exists hibernate_sequence
+2021-02-20T11:12:12.230098+00:00 app[worker.1]: Hibernate: create sequence hibernate_sequence start 1 increment 1
+2021-02-20T11:12:12.241512+00:00 app[worker.1]: Hibernate: create table answers (id int8 not null, created_at timestamp not null, updated_at timestamp not null, out_msg_id int8 not null, texts_id int8 not null, primary key (id))
+2021-02-20T11:12:12.253844+00:00 app[worker.1]: Hibernate: create table branches (id int8 not null, created_at timestamp not null, updated_at timestamp not null, forks_id int8 not null, nodes_id int8 not null, primary key (id))
+2021-02-20T11:12:12.261779+00:00 app[worker.1]: Hibernate: create table changes (id int8 not null, created_at timestamp not null, updated_at timestamp not null, val int4 not null, answers_id int8 not null, var_id int8 not null, primary key (id))
+2021-02-20T11:12:12.270271+00:00 app[worker.1]: Hibernate: create table histories (id int8 not null, created_at timestamp not null, updated_at timestamp not null, msg_id int8 not null, users_id int8 not null, primary key (id))
+2021-02-20T11:12:12.277828+00:00 app[worker.1]: Hibernate: create table limits (id int8 not null, created_at timestamp not null, updated_at timestamp not null, equal int4 not null, max int4 not null, min int4 not null, branches_id int8 not null, var_id int8 not null, primary key (id))
+2021-02-20T11:12:12.283286+00:00 app[worker.1]: Hibernate: create table msgs (dtype varchar(31) not null, id int8 not null, created_at timestamp not null, updated_at timestamp not null, val TEXT, file oid, primary key (id))
+2021-02-20T11:12:12.294238+00:00 app[worker.1]: Hibernate: create table nodes (dtype varchar(31) not null, id int8 not null, created_at timestamp not null, updated_at timestamp not null, delay int4, nodes_id int8, msg_id int8, primary key (id))
+2021-02-20T11:12:12.323587+00:00 app[worker.1]: Hibernate: create table psws (created_at timestamp not null, updated_at timestamp not null, hash varchar(64) not null, salt varchar(64) not null, user_id int8 not null, primary key (user_id))
+2021-02-20T11:12:12.374437+00:00 app[worker.1]: Hibernate: create table settings (created_at timestamp not null, updated_at timestamp not null, color int4 not null, font int4 not null, msg_type int4 not null, size int4 not null, user_id int8 not null, primary key (user_id))
+2021-02-20T11:12:12.380895+00:00 app[worker.1]: Hibernate: create table states (id int8 not null, created_at timestamp not null, updated_at timestamp not null, val int4 not null, users_id int8 not null, var_id int8 not null, primary key (id))
+2021-02-20T11:12:12.424577+00:00 app[worker.1]: Hibernate: create table users (id int8 not null, created_at timestamp not null, updated_at timestamp not null, email varchar(50) not null, google boolean not null, name varchar(50), primary key (id))
+2021-02-20T11:12:12.431533+00:00 app[worker.1]: Hibernate: create table vars (id int8 not null, created_at timestamp not null, updated_at timestamp not null, name varchar(30) not null, primary key (id))
+2021-02-20T11:12:12.439499+00:00 app[worker.1]: Hibernate: alter table vars add constraint UK_dno0t3dsyui7csapcw84py6r unique (name)
+2021-02-20T11:12:12.445668+00:00 app[worker.1]: Hibernate: alter table answers add constraint FK3kiisomqa7bjb01r8pd33gg06 foreign key (out_msg_id) references nodes
+2021-02-20T11:12:12.449631+00:00 app[worker.1]: Hibernate: alter table answers add constraint FKlo4b5q6umhrieb9jgada4si8x foreign key (texts_id) references msgs
+2021-02-20T11:12:12.456351+00:00 app[worker.1]: Hibernate: alter table branches add constraint FKm9t93c9ibbi2pmd8ofx99vo1m foreign key (forks_id) references nodes
+2021-02-20T11:12:12.460987+00:00 app[worker.1]: Hibernate: alter table branches add constraint FKgwxe8rhxea8vqr6ryju4eu1lh foreign key (nodes_id) references nodes
+2021-02-20T11:12:12.464112+00:00 app[worker.1]: Hibernate: alter table changes add constraint FKfbrshejqx6hx3bah3xkvjlmua foreign key (answers_id) references answers
+2021-02-20T11:12:12.467528+00:00 app[worker.1]: Hibernate: alter table changes add constraint FK5grd5pj0davxmr71wv9qm6jea foreign key (var_id) references vars
+2021-02-20T11:12:12.472674+00:00 app[worker.1]: Hibernate: alter table histories add constraint FKgwmk7fbp8tveqf1jl8tuk9vvm foreign key (msg_id) references msgs
+2021-02-20T11:12:12.478164+00:00 app[worker.1]: Hibernate: alter table histories add constraint FKnvwva3f62er4u4c237awaicti foreign key (users_id) references users
+2021-02-20T11:12:12.481731+00:00 app[worker.1]: Hibernate: alter table limits add constraint FKb3kupoosy8sqpnlu1x9aewh7y foreign key (branches_id) references branches
+2021-02-20T11:12:12.489261+00:00 app[worker.1]: Hibernate: alter table limits add constraint FKlaw5o4fch0qqkobe1mux33a6h foreign key (var_id) references vars
+2021-02-20T11:12:12.493819+00:00 app[worker.1]: Hibernate: alter table nodes add constraint FK6f7eo5au9ktwhpl9olna3ki73 foreign key (nodes_id) references nodes
+2021-02-20T11:12:12.497446+00:00 app[worker.1]: Hibernate: alter table nodes add constraint FK1lioneqe9orxjoqekvcdlddsl foreign key (msg_id) references msgs
+2021-02-20T11:12:12.500711+00:00 app[worker.1]: Hibernate: alter table psws add constraint FKct5ixqt5mam73br4qbx48m8n3 foreign key (user_id) references users
+2021-02-20T11:12:12.506054+00:00 app[worker.1]: Hibernate: alter table settings add constraint FKf585xxww5h8b9up0ninp57tjs foreign key (user_id) references users
+2021-02-20T11:12:12.509721+00:00 app[worker.1]: Hibernate: alter table states add constraint FKm796qhl0hfwbqtovuvivc1k8n foreign key (users_id) references users
+2021-02-20T11:12:12.512985+00:00 app[worker.1]: Hibernate: alter table states add constraint FKmkd1o1c0eyvbhpu9iujmvregt foreign key (var_id) references vars
+2021-02-20T11:12:12.519903+00:00 app[worker.1]: 2021-02-20 11:12:12.519  INFO 4 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-02-20T11:12:12.539213+00:00 app[worker.1]: 2021-02-20 11:12:12.538  INFO 4 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-02-20T11:12:16.534530+00:00 app[worker.1]: 2021-02-20 11:12:16.530  WARN 4 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-02-20T11:12:17.684965+00:00 app[worker.1]: 2021-02-20 11:12:17.683  INFO 4 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-02-20T11:12:17.768338+00:00 app[worker.1]: 2021-02-20 11:12:17.767 DEBUG 4 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-02-20T11:12:18.246189+00:00 app[worker.1]: 2021-02-20 11:12:18.244 DEBUG 4 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2021-02-20T11:12:18.603478+00:00 app[worker.1]: 2021-02-20 11:12:18.603 DEBUG 4 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-02-20T11:12:18.735199+00:00 app[worker.1]: 2021-02-20 11:12:18.734 DEBUG 4 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-02-20T11:12:19.736370+00:00 app[worker.1]: 2021-02-20 11:12:19.736  INFO 4 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 4711 (http) with context path ''
+2021-02-20T11:12:19.779313+00:00 app[worker.1]: 2021-02-20 11:12:19.779  INFO 4 --- [           main] app.text_quest.TextQuestApplication      : Started TextQuestApplication in 25.026 seconds (JVM running for 27.517)
+2021-02-20T11:13:25.975682+00:00 heroku[router]: at=error code=H14 desc="No web processes running" method=GET path="/" host=t1magic.herokuapp.com request_id=15bac487-32ff-414b-9d8e-6f41cce17c1b fwd="178.176.77.147" dyno= connect= service= status=503 bytes= protocol=https
+2021-02-20T11:13:26.444071+00:00 heroku[router]: at=error code=H14 desc="No web processes running" method=GET path="/favicon.ico" host=t1magic.herokuapp.com request_id=f182381e-d4e5-4b4b-a8e4-be2e85b73698 fwd="178.176.77.147" dyno= connect= service= status=503 bytes= protocol=https
