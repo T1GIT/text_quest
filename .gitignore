@@ -1,6 +1,4 @@
 # IDE
-/.idea/
-/.mvn/
 .text_quest.iml
 
 # npm
