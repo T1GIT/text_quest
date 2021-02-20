@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaAuditing
 public class TextQuestApplication {
 
-    private static final Logger logger = Logger.getLogger("rootLog");
+    private static final Logger logger = Logger.getRootLogger();
 
     public static void main(String[] args) {
         try {
