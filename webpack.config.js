@@ -6,7 +6,7 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const CssnanoPlugin = require("cssnano-webpack-plugin")
 const CleanWebpackPlugin = require("clean-webpack-plugin").CleanWebpackPlugin
 const Webpack = require("webpack")
-const SvgSpritePlugin = require("svg-sprite-loader/plugin")
+const SpriteLoaderPlugin = require("svg-sprite-loader/plugin")
 
 // Paths
 const dir = {}
@@ -26,11 +26,15 @@ module.exports = {
         filename: "index.min.js"
     },
     mode: mode,
+    watchOptions: {
+        ignored: /node_modules/,
+        aggregateTimeout: 500,
+    },
     plugins: [
-        new SvgSpritePlugin(),
         new Webpack.ProgressPlugin(),
         new CleanWebpackPlugin(),
         new CompressionPlugin(),
+        new SpriteLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: "style.min.css"
         }),
@@ -42,7 +46,6 @@ module.exports = {
             favicon: Path.resolve(dir.src, "media", "favicon.ico"),
             publicPath: "build",
             minify: mode === modes.prod,
-            csrf: '${_csrf.token}',
         }),
     ],
     module: {
@@ -113,13 +116,17 @@ module.exports = {
             },
             { // Svg
                 test: /\.svg$/,
+                include: Path.resolve(dir.src, "media"),
                 use: [
                     {
                         loader: 'svg-sprite-loader',
-                        options: {}
+                        options: {
+                            extract: true,
+                            spriteFilename: "sprites.svg"
+                        }
                     },
                     {
-                        loader: 'svgo-loader',
+                        loader: "svgo-loader",
                         options: {}
                     }
                 ]
@@ -141,13 +148,5 @@ module.exports = {
         ],
         moduleIds: mode === modes.prod ? "size" : "named",
         mergeDuplicateChunks: true,
-
-    },
-    devServer: {
-        contentBase: dir.build,
-        compress: true,
-        port: 8080,
-        watchContentBase: true,
-        progress: true
-    },
+    }
 }

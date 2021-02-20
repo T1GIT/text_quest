@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "SET NODE_ENV=development&& webpack",
-    "build_watch": "SET NODE_ENV=development&& webpack --watch",
-    "build_prod": "SET NODE_ENV=production&& webpack",
-    "dev_server": "webpack-dev-server",
-    "clean_log": "del-cli ./.log/**",
-    "deploy_build": "NODE_ENV='production' webpack"
+    "build": "SET NODE_ENV=development&& webpack --mode development",
+    "watch": "SET NODE_ENV=development&& webpack --watch --mode development",
+    "prod": "SET NODE_ENV=production&& webpack --mode production",
+    "clean_log": "del-cli ./.log/**"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
@@ -83,6 +81,7 @@
     "webpack": "^5.23.0",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2",
+    "webpack-livereload-plugin": "^2.3.0",
     "webpack-notifier": "^1.13.0"
   },
   "author": "T1MON",

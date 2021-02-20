@@ -25,7 +25,7 @@ class StateServiceTest {
 
     @Transactional
     @Test
-    void addState() {// TODO: 15.02.2021 Requires other services
+    void addState() {
         State state = stateFactory.create();
         State findState = stateService.getByUserAndVar(state.getUser(), state.getVar());
         if (findState != null) {

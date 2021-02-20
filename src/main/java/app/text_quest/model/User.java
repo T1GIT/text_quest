@@ -11,12 +11,13 @@ import java.util.List;
 @Table(name = "users")
 public class User extends AbstractModel {
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, updatable = false)
     private String email;
 
     @Column(length = 50)
     private String name;
 
+    @Column(updatable = false)
     private boolean google;
 
     @JsonIgnore
