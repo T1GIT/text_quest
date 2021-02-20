@@ -7,8 +7,7 @@
     "build_watch": "SET NODE_ENV=development&& webpack --watch",
     "build_prod": "SET NODE_ENV=production&& webpack",
     "dev_server": "webpack-dev-server",
-    "clean_log": "del-cli ./.log/**",
-    "deploy_build": "NODE_ENV='production' webpack"
+    "clean_log": "del-cli ./.log/**"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",

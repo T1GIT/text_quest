@@ -7,6 +7,5 @@
 /node_modules/
 
 # production
-/src/main/resources/static/build/
 /target/
 /.log/
