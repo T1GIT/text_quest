@@ -13,9 +13,7 @@ class MyComponent extends Component {
             className={styles.intro}
             onClick={this.onClick}
         >
-            <svg>
-                <use xlinkHref={`${Icon}#icon0`}/>
-            </svg>
+            <Icon/>
             Hello World
         </div>;
     }
