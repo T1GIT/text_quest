@@ -94,7 +94,7 @@ module.exports = {
                 ]
             },
             { // Images
-                test: /.(png|jpg|gif|ico|svg)$/,
+                test: /.(png|jpg|gif|ico)$/,
                 include: Path.resolve(dir.src, "media"),
                 exclude: /node_modules/,
                 use: [
@@ -106,8 +106,7 @@ module.exports = {
                             optipng: {enabled: false},
                             pngquant: {quality: [0.65, 0.90], speed: 4},
                             gifsicle: {interlaced: false},
-                            webp: {quality: 75},
-                            svgo: {enabled: true}
+                            webp: {quality: 75}
                         }
                     }
                 ]
@@ -116,12 +115,14 @@ module.exports = {
                 test: /\.svg$/,
                 use: [
                     {
-                        loader: '@svgr/webpack',
-                        options: {
-                            svgo: true,
-                        }
+                        loader: 'svg-sprite-loader',
+                        options: {}
+                    },
+                    {
+                        loader: 'svgo-loader',
+                        options: {}
                     }
-                ],
+                ]
             }
         ]
     },
