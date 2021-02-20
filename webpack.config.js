@@ -6,6 +6,7 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const CssnanoPlugin = require("cssnano-webpack-plugin")
 const CleanWebpackPlugin = require("clean-webpack-plugin").CleanWebpackPlugin
 const Webpack = require("webpack")
+const SvgSpritePlugin = require("svg-sprite-loader/plugin")
 
 // Paths
 const dir = {}
@@ -13,7 +14,6 @@ dir.res = Path.resolve("./src/main/resources");
 dir.stat = Path.resolve(dir.res, "static");
 dir.src = Path.resolve(dir.stat, "src");
 dir.build = Path.resolve(dir.stat, "build");
-name = "index"
 
 // Mode
 const modes = {prod: "production", dev: "development"}
@@ -23,21 +23,22 @@ module.exports = {
     entry: Path.resolve(dir.src, "index.jsx"),
     output: {
         path: dir.build,
-        filename: name + ".min.js"
+        filename: "index.min.js"
     },
     mode: mode,
     plugins: [
+        new SvgSpritePlugin(),
         new Webpack.ProgressPlugin(),
         new CleanWebpackPlugin(),
         new CompressionPlugin(),
         new MiniCssExtractPlugin({
-            filename: name + ".min.css"
+            filename: "style.min.css"
         }),
         new htmlWebpackPlugin({
-            hash: true,
+            hash: mode === modes.prod,
             cache: mode === modes.prod,
             template: Path.resolve(dir.src, "index.html"),
-            filename: Path.resolve(dir.build, name + ".min.html"),
+            filename: Path.resolve(dir.build, "index.min.html"),
             favicon: Path.resolve(dir.src, "media", "favicon.ico"),
             publicPath: "build",
             minify: mode === modes.prod,
@@ -78,7 +79,7 @@ module.exports = {
                                     require('cssnano')(),
                                     require('css-mqpacker')(),
                                     require('autoprefixer')({
-                                        'overrideBrowserslist': ['> 1%', 'last 2 versions']
+                                        'overrideBrowserslist': ['last 15 versions', '> 1%', 'ie 8', 'ie 7']
                                     }),
                                 ],
                             }
@@ -93,11 +94,34 @@ module.exports = {
                 ]
             },
             { // Images
-                test: /.(png|svg|jpg|gif)$/,
+                test: /.(png|jpg|gif|ico)$/,
                 include: Path.resolve(dir.src, "media"),
                 exclude: /node_modules/,
-                use: ["file-loader"]
+                use: [
+                    "file-loader",
+                    {
+                        loader: "image-webpack-loader",
+                        options: {
+                            mozjpeg: {progressive: true},
+                            optipng: {enabled: false},
+                            pngquant: {quality: [0.65, 0.90], speed: 4},
+                            gifsicle: {interlaced: false},
+                            webp: {quality: 75},
+                        }
+                    }
+                ]
             },
+            { // Svg
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: '@svgr/webpack',
+                        options: {
+                            svgo: true,
+                        }
+                    }
+                ],
+            }
         ]
     },
     optimization: {
