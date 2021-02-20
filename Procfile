@@ -1,1 +1,1 @@
-worker: sh target/bin/TextQuestApplication
+worker: sh mvnw
