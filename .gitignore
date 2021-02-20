@@ -1,9 +1,12 @@
 # IDE
 .text_quest.iml
+.idea
+.mvn
 
-# npm
-/node_modules/
+# NPM
+node_modules/
 
-# production
-/target/
-/.log/
+# GENERATED
+target
+.log
+src/main/resources/static/build
