@@ -94,7 +94,7 @@ module.exports = {
                 ]
             },
             { // Images
-                test: /.(png|jpg|gif|ico)$/,
+                test: /.(png|jpg|gif|ico|svg)$/,
                 include: Path.resolve(dir.src, "media"),
                 exclude: /node_modules/,
                 use: [
@@ -107,6 +107,7 @@ module.exports = {
                             pngquant: {quality: [0.65, 0.90], speed: 4},
                             gifsicle: {interlaced: false},
                             webp: {quality: 75},
+                            svgo: {enabled: true}
                         }
                     }
                 ]

@@ -12,7 +12,7 @@ public class RootController {
 
     private final Logger logger = Logger.getLogger("controllerLog");
 
-    @GetMapping("")
+    @GetMapping("/")
     public String root() {
         try {
             return "index.min";
