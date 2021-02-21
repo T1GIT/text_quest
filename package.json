@@ -2,13 +2,14 @@
   "name": "text_quest",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "build": "SET NODE_ENV=development&& webpack --mode development",
-    "watch": "SET NODE_ENV=development&& webpack --watch --mode development",
-    "prod": "SET NODE_ENV=production&& webpack --mode production",
-    "clean_log": "del-cli ./.log/**",
-    "deploy": "NODE_ENV='production'; webpack --mode production;"
+  "engines": {
+    "node": "14.x",
+    "npm": "7.x"
   },
+  "scripts": {
+    "build": "NODE_ENV='production'; webpack --mode production;"
+  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/preset-env": "^7.12.16",
