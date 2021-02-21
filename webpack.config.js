@@ -36,7 +36,7 @@ module.exports = {
         new CompressionPlugin(),
         new SpriteLoaderPlugin(),
         new MiniCssExtractPlugin({
-            filename: "style.min.css"
+            filename: "index.min.css"
         }),
         new htmlWebpackPlugin({
             hash: mode === modes.prod,
@@ -108,8 +108,7 @@ module.exports = {
             },
             { // Images
                 test: /.(png|jpg|gif|ico)$/,
-                include: Path.resolve(dir.src, "media"),
-                exclude: /node_modules/,
+                include: dir.src,
                 use: [
                     "file-loader",
                     {

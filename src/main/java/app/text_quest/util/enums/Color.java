@@ -1,4 +1,4 @@
-package app.text_quest.util.settings;
+package app.text_quest.util.enums;
 
 public enum Color {
     RED (""),
@@ -7,7 +7,7 @@ public enum Color {
     YELLOW (""),
     PURPLE ("");
 
-    private String value;
+    private final String value;
 
     Color (String value) {
         this.value = value;

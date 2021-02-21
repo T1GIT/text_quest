@@ -1,7 +1,7 @@
 package app.text_quest.controller;
 
 
-import app.text_quest.util.FileLogger;
+import app.text_quest.util.ExceptionLogger;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class RootController {
         try {
             return "index.min";
         } catch (Exception e) {
-            logger.error(FileLogger.getExceptionLog(e));
+            logger.error(ExceptionLogger.getExceptionLog(e));
         }
         return null; // TODO: add error page
     }
