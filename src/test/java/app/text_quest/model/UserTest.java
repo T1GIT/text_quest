@@ -24,5 +24,6 @@ class UserTest {
         User user = new UserFactory().create();
         userService.addUser(user);
         System.out.println(user.getPsw());
+        userService.delete(user);
     }
 }

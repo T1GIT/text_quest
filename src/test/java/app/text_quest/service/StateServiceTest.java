@@ -27,11 +27,15 @@ class StateServiceTest {
     @Test
     void addState() {
         State state = stateFactory.create();
-        State findState = stateService.getByUserAndVar(state.getUser(), state.getVar());
-        if (findState != null) {
-            stateService.delete(findState);
+        try {
+            State findState = stateService.getByUserAndVar(state.getUser(), state.getVar());
+            if (findState != null) {
+                stateService.delete(findState);
+            }
+            stateService.addState(state);
+        } finally {
+            stateService.delete(state);
         }
-        stateService.addState(state);
     }
 
     @Test
@@ -56,12 +60,18 @@ class StateServiceTest {
     @Test
     void editState() {
         State state = stateFactory.create();
-        if (stateService.getByUserAndVar(state.getUser(), state.getVar()) == null) {
+        try {
+            State findState = stateService.getByUserAndVar(state.getUser(), state.getVar());
+            if (findState != null) {
+                stateService.delete(findState);
+            }
             stateService.addState(state);
+            state = stateService.getByUserAndVar(state.getUser(), state.getVar());
+            state.setVal(1001);
+            stateService.editState(state);
+        } finally {
+            stateService.delete(state);
         }
-        state = stateService.getByUserAndVar(state.getUser(), state.getVar());
-        state.setVal(1001);
-        stateService.editState(state);
     }
 
     @Transactional
