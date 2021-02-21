@@ -1,27 +1,19 @@
 import React, {Component} from "react";
 import styles from "./app.sass";
-import Icon from "../../media/svg/icon.svg";
-import Icon2 from "../../media/svg/icon2.svg";
 
 class MyComponent extends Component {
-    onClick = (event) => {
-        console.log(500)
+    listeners = {
+        onClick: (event) => {
+            console.log(500)
+            console.log({styles}, styles, styles.intro)
+        }
     }
 
     render() {
         return <div
-            className={styles.intro}
-            onClick={this.onClick}
+            className="intro"
+            onClick={this.listeners.onClick}
         >
-            <svg>
-                <use xlinkHref={Icon}/>
-            </svg>
-            <svg>
-                <use xlinkHref={Icon2}/>
-            </svg>
-            <svg>
-                <use xlinkHref={Icon2}/>
-            </svg>
             Hello World
         </div>;
     }

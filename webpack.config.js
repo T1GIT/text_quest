@@ -43,7 +43,7 @@ module.exports = {
             cache: mode === modes.prod,
             template: Path.resolve(dir.src, "index.html"),
             filename: Path.resolve(dir.build, "index.min.html"),
-            favicon: Path.resolve(dir.src, "media", "favicon.ico"),
+            favicon: Path.resolve(dir.src, "resources", "favicon.ico"),
             publicPath: "build",
             minify: mode === modes.prod,
         }),
@@ -64,13 +64,15 @@ module.exports = {
             },
             { // Stylesheets
                 test: /\.sass$/,
-                include: Path.resolve(dir.src, "component"),
+                include: dir.src,
                 use: ['style-loader',
                     MiniCssExtractPlugin.loader,
                     {
                         loader: "css-loader",
                         options: {
-                            modules: true,
+                            modules: {
+                                localIdentName: "[name]__[local]___[hash:base64:5]"
+                            },
                             sourceMap: mode !== modes.prod,
                         },
                     },
@@ -78,11 +80,18 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             postcssOptions: {
+                                ident: 'postcss',
                                 plugins: [
                                     require('cssnano')(),
                                     require('css-mqpacker')(),
+                                    require('postcss-flexbugs-fixes'),
                                     require('autoprefixer')({
-                                        'overrideBrowserslist': ['last 15 versions', '> 1%', 'ie 8', 'ie 7']
+                                        'overrideBrowserslist': [
+                                            'last 15 versions',
+                                            '> 1%',
+                                            'not ie < 9'
+                                        ],
+                                        flexbox: 'no-2009',
                                     }),
                                 ],
                             }
@@ -116,7 +125,7 @@ module.exports = {
             },
             { // Svg
                 test: /\.svg$/,
-                include: Path.resolve(dir.src, "media"),
+                include: dir.src,
                 use: [
                     {
                         loader: 'svg-sprite-loader',
