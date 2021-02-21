@@ -36,14 +36,14 @@ module.exports = {
         new CompressionPlugin(),
         new SpriteLoaderPlugin(),
         new MiniCssExtractPlugin({
-            filename: "style.min.css"
+            filename: "index.min.css"
         }),
         new htmlWebpackPlugin({
             hash: mode === modes.prod,
             cache: mode === modes.prod,
             template: Path.resolve(dir.src, "index.html"),
             filename: Path.resolve(dir.build, "index.min.html"),
-            favicon: Path.resolve(dir.src, "media", "favicon.ico"),
+            favicon: Path.resolve(dir.src, "resources", "favicon.ico"),
             publicPath: "build",
             minify: mode === modes.prod,
         }),
@@ -52,7 +52,7 @@ module.exports = {
         rules: [
             { // JavaScript
                 test: /\.(js|jsx)$/,
-                include: Path.resolve(dir.src),
+                include: dir.src,
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
@@ -63,14 +63,17 @@ module.exports = {
                 }
             },
             { // Stylesheets
-                test: /\.sass$/,
-                include: Path.resolve(dir.src, "component"),
-                use: ['style-loader',
+                test: /\.(sass|css)$/,
+                include: dir.src,
+                use: [
                     MiniCssExtractPlugin.loader,
                     {
                         loader: "css-loader",
                         options: {
-                            modules: true,
+                            modules: {
+                                localIdentName: "[name]__[local]___[hash:base64:5]"
+                            },
+                            importLoaders: 1,
                             sourceMap: mode !== modes.prod,
                         },
                     },
@@ -78,11 +81,18 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             postcssOptions: {
+                                ident: 'postcss',
                                 plugins: [
                                     require('cssnano')(),
                                     require('css-mqpacker')(),
+                                    require('postcss-flexbugs-fixes'),
                                     require('autoprefixer')({
-                                        'overrideBrowserslist': ['last 15 versions', '> 1%', 'ie 8', 'ie 7']
+                                        'overrideBrowserslist': [
+                                            'last 15 versions',
+                                            '> 1%',
+                                            'not ie < 9'
+                                        ],
+                                        flexbox: 'no-2009',
                                     }),
                                 ],
                             }
@@ -98,8 +108,7 @@ module.exports = {
             },
             { // Images
                 test: /.(png|jpg|gif|ico)$/,
-                include: Path.resolve(dir.src, "media"),
-                exclude: /node_modules/,
+                include: dir.src,
                 use: [
                     "file-loader",
                     {
@@ -116,7 +125,7 @@ module.exports = {
             },
             { // Svg
                 test: /\.svg$/,
-                include: Path.resolve(dir.src, "media"),
+                include: dir.src,
                 use: [
                     {
                         loader: 'svg-sprite-loader',
@@ -125,10 +134,7 @@ module.exports = {
                             spriteFilename: "sprites.svg"
                         }
                     },
-                    {
-                        loader: "svgo-loader",
-                        options: {}
-                    }
+                    "svgo-loader"
                 ]
             }
         ]
