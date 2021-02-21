@@ -116,7 +116,7 @@ module.exports = {
             },
             { // Svg
                 test: /\.svg$/,
-                include: Path.resolve(dir.src, "media"),
+                include: dir.src,
                 use: [
                     {
                         loader: 'svg-sprite-loader',
@@ -125,7 +125,7 @@ module.exports = {
                             spriteFilename: "sprites.svg"
                         }
                     },
-                    "svgo-loader"  // TODO: Change places
+                    "svgo-loader"
                 ]
             }
         ]
