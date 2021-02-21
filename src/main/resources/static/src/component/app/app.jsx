@@ -5,13 +5,12 @@ class MyComponent extends Component {
     listeners = {
         onClick: (event) => {
             console.log(500)
-            console.log({styles}, styles, styles.intro)
         }
     }
 
     render() {
         return <div
-            className="intro"
+            className={styles.intro}
             onClick={this.listeners.onClick}
         >
             Hello World

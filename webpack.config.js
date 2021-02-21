@@ -52,7 +52,7 @@ module.exports = {
         rules: [
             { // JavaScript
                 test: /\.(js|jsx)$/,
-                include: Path.resolve(dir.src),
+                include: dir.src,
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
@@ -63,9 +63,9 @@ module.exports = {
                 }
             },
             { // Stylesheets
-                test: /\.sass$/,
+                test: /\.(sass|css)$/,
                 include: dir.src,
-                use: ['style-loader',
+                use: [
                     MiniCssExtractPlugin.loader,
                     {
                         loader: "css-loader",
@@ -73,6 +73,7 @@ module.exports = {
                             modules: {
                                 localIdentName: "[name]__[local]___[hash:base64:5]"
                             },
+                            importLoaders: 1,
                             sourceMap: mode !== modes.prod,
                         },
                     },
