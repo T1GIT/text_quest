@@ -10,7 +10,7 @@ const SpriteLoaderPlugin = require("svg-sprite-loader/plugin")
 
 // Paths
 const dir = {}
-dir.res = Path.resolve("app/src/main/resources");
+dir.res = Path.resolve("./src/main/resources");
 dir.stat = Path.resolve(dir.res, "static");
 dir.src = Path.resolve(dir.stat, "src");
 dir.build = Path.resolve(dir.stat, "build");
