@@ -30,7 +30,12 @@ class NodeServiceTest {
 
     @Test
     void addNode() {
-        nodeService.addNode(nodeFactory.create());
+        Node node = nodeFactory.create();
+        try {
+            nodeService.addNode(node);
+        } finally {
+            nodeService.delete(node);
+        }
     }
 
     @Test
@@ -44,9 +49,13 @@ class NodeServiceTest {
     @Test
     void editNode() {
         Fork fork = forkFactory.create();
-        nodeService.addNode(fork);
-        fork.addBranch(branchFactory.create());
-        nodeService.editNode(fork);
+        try {
+            nodeService.addNode(fork);
+            fork.addBranch(branchFactory.create());
+            nodeService.editNode(fork);
+        } finally {
+            nodeService.delete(fork);
+        }
     }
 
     @Test
@@ -57,10 +66,14 @@ class NodeServiceTest {
     @Test
     void checkTypeDefinition() {
         LinkedNode linkedNode = new LinkedNode();
-        Node fork = new Fork();
-        linkedNode.setNextNode(fork);
-        nodeService.addNode(linkedNode);
-        Node node = linkedNode.getNextNode();
-        assert Fork.class == node.getClass();
+        try {
+            Node fork = new Fork();
+            linkedNode.setNextNode(fork);
+            nodeService.addNode(linkedNode);
+            Node node = linkedNode.getNextNode();
+            assert Fork.class == node.getClass();
+        } finally {
+            nodeService.delete(linkedNode);
+        }
     }
 }

@@ -13,7 +13,8 @@ class TextQuestApplicationTests {
 
 
     @Test
-    void contextLoads() { // TODO: 13.02.2021
+    void main() {
+        TextQuestApplication.main(null);
     }
 
 }

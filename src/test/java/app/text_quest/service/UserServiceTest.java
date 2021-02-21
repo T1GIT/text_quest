@@ -26,11 +26,15 @@ class UserServiceTest {
     @Test
     void addUser() {
         User user = userFactory.create();
-        User findUser = userService.getByEmail(user.getEmail());
-        if (findUser != null) {
-            userService.delete(findUser);
+        try {
+            User findUser = userService.getByEmail(user.getEmail());
+            if (findUser != null) {
+                userService.delete(findUser);
+            }
+            userService.addUser(user);
+        } finally {
+            userService.delete(user);
         }
-        userService.addUser(user);
     }
 
     @Test
@@ -52,14 +56,21 @@ class UserServiceTest {
     @Test
     @Transactional
     void editUser() {
-        if (userService.getByEmail(userFactory.getEmail()) == null) {
-            userService.addUser(userFactory.create());
+
+        User user = userFactory.create();
+        try {
+            User findUser = userService.getByEmail(user.getEmail());
+            if (findUser != null) {
+                userService.delete(findUser);
+            }
+            userService.addUser(user);
+            user.setName("name");
+            Psw psw = user.getPsw();
+            psw.setSalt("newPswSalt");
+            userService.editUser(user);
+        } finally {
+            userService.delete(user);
         }
-        User user = userService.getByEmail(userFactory.getEmail());
-        user.setName("name");
-        Psw psw = user.getPsw();
-        psw.setSalt("newPswSalt");
-        userService.editUser(user);
     }
 
     @Test

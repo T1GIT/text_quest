@@ -25,11 +25,15 @@ class VarServiceTest {
     @Test
     void addVar() {
         Var var = varFactory.create();
-        Var findVar = varService.getByName(var.getName());
-        if (findVar != null) {
-            varService.delete(findVar);
+        try {
+            Var findVar = varService.getByName(var.getName());
+            if (findVar != null) {
+                varService.delete(findVar);
+            }
+            varService.addVar(var);
+        } finally {
+            varService.delete(var);
         }
-        varService.addVar(var);
     }
 
     @Test
@@ -51,9 +55,17 @@ class VarServiceTest {
     @Test
     void editVar() {
         Var var = varFactory.create();
-        varService.addVar(var);
-        var.setName("name");
-        varService.editVar(var);
+        try {
+            Var findVar = varService.getByName(var.getName());
+            if (findVar != null) {
+                varService.delete(findVar);
+            }
+            varService.addVar(var);
+            var.setName("name");
+            varService.editVar(var);
+        } finally {
+            varService.delete(var);
+        }
 
     }
 

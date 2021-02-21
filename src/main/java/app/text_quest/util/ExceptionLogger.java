@@ -3,7 +3,7 @@ package app.text_quest.util;
 import java.util.Arrays;
 
 
-public class FileLogger {
+public class ExceptionLogger {
 
     private static final int MAX_LENGTH = 100;
 

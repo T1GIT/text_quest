@@ -25,7 +25,12 @@ class HistoryServiceTest {
 
     @Test
     void addHistory() {
-        historyService.addHistory(historyFactory.create());
+        History history = historyFactory.create();
+        try {
+            historyService.addHistory(history);
+        } finally {
+            historyService.delete(history);
+        }
     }
 
     @Test
@@ -46,9 +51,13 @@ class HistoryServiceTest {
     @Test
     void editHistory() {
         History history = historyFactory.create();
-        historyService.addHistory(history);
-        history.setMsg(historyFactory.getMsg());
-        historyService.editHistory(history);
+        try {
+            historyService.addHistory(history);
+            history.setMsg(historyFactory.getMsg());
+            historyService.editHistory(history);
+        } finally {
+            historyService.delete(history);
+        }
 
     }
 

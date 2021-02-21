@@ -26,11 +26,15 @@ class LimitServiceTest {
     @Test
     void addLimit() {
         Limit limit = limitFactory.create();
-        Limit findLimit = limitService.getByBranchAndVar(limit.getBranch(), limit.getVar());
-        if (findLimit != null) {
-            limitService.delete(findLimit);
+        try {
+            Limit findLimit = limitService.getByBranchAndVar(limit.getBranch(), limit.getVar());
+            if (findLimit != null) {
+                limitService.delete(findLimit);
+            }
+            limitService.addLimit(limit);
+        } finally {
+            limitService.delete(limit);
         }
-        limitService.addLimit(limit);
     }
 
     @Test
@@ -59,9 +63,17 @@ class LimitServiceTest {
     @Test
     void editLimit() {
         Limit limit = limitFactory.create();
-        limitService.addLimit(limit);
-        limit.setMin(-20);
-        limitService.editLimit(limit);
+        try {
+            Limit findLimit = limitService.getByBranchAndVar(limit.getBranch(), limit.getVar());
+            if (findLimit != null) {
+                limitService.delete(findLimit);
+            }
+            limitService.addLimit(limit);
+            limit.setMin(-20);
+            limitService.editLimit(limit);
+        } finally {
+            limitService.delete(limit);
+        }
 
     }
 

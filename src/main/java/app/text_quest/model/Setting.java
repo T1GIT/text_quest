@@ -1,9 +1,9 @@
 package app.text_quest.model;
 
 import app.text_quest.util.AbstractModel;
-import app.text_quest.util.settings.Color;
-import app.text_quest.util.settings.Font;
-import app.text_quest.util.settings.MsgType;
+import app.text_quest.util.enums.Color;
+import app.text_quest.util.enums.Font;
+import app.text_quest.util.enums.MsgType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
