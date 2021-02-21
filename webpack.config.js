@@ -125,7 +125,7 @@ module.exports = {
                             spriteFilename: "sprites.svg"
                         }
                     },
-                    "svgo-loader"
+                    "svgo-loader"  // TODO: Change places
                 ]
             }
         ]
