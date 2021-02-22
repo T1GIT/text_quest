@@ -35,6 +35,7 @@ public class RootController {
                     }
                 }
             }
+            return res.toString();
         } catch (Exception e) {
             logger.error(ExceptionLogger.getExceptionLog(e));
         }
