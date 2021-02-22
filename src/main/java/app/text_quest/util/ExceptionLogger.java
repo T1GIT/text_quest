@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class ExceptionLogger {
 
-    private static final int MAX_LENGTH = 100;
+    private static final int MAX_LENGTH = 300;
 
     public static String getExceptionLog(Exception e) {
         String trace = Arrays.toString(e.getStackTrace()).substring(1);
