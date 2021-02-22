@@ -18,7 +18,9 @@ public class TextQuestApplication {
     public static void main(String[] args) {
         try {
             SpringApplication.run(TextQuestApplication.class, args);
+            throw new RuntimeException();
         } catch (Exception e) {
+            e.printStackTrace();
             logger.fatal(ExceptionLogger.getExceptionLog(e));
         }
     }
