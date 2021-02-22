@@ -10,9 +10,10 @@ public class ConfigurationOAuth2 extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers("/build/**", "/error").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
-                .defaultSuccessUrl("/notes");
+                .loginPage("index.min");
     }
 }
