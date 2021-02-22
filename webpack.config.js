@@ -13,6 +13,8 @@ const dir = {}
 dir.res = Path.resolve("./src/main/resources");
 dir.stat = Path.resolve(dir.res, "static");
 dir.src = Path.resolve(dir.stat, "src");
+dir.game = Path.resolve(dir.src, "game");
+dir.auth = Path.resolve(dir.src, "auth");
 dir.build = Path.resolve(dir.stat, "build");
 
 // Mode
@@ -20,10 +22,14 @@ const modes = {prod: "production", dev: "development"}
 const mode = process.env.NODE_ENV === modes.prod ? modes.prod : modes.dev
 
 module.exports = {
-    entry: Path.resolve(dir.src, "index.jsx"),
+    entry: {
+        game: Path.resolve(dir.game, "game.jsx"),
+        auth: Path.resolve(dir.auth, "auth.jsx")
+    },
     output: {
         path: dir.build,
-        filename: "index.min.js"
+        filename: `js/[name].js`,
+        publicPath: "/"
     },
     mode: mode,
     watchOptions: {
@@ -41,8 +47,17 @@ module.exports = {
         new htmlWebpackPlugin({
             hash: mode === modes.prod,
             cache: mode === modes.prod,
-            template: Path.resolve(dir.src, "index.html"),
-            filename: Path.resolve(dir.build, "index.min.html"),
+            template: Path.resolve(dir.game, "game.html"),
+            filename: Path.resolve(dir.build, "game.min.html"),
+            favicon: Path.resolve(dir.src, "resources", "favicon.ico"),
+            publicPath: "build",
+            minify: mode === modes.prod,
+        }),
+        new htmlWebpackPlugin({
+            hash: mode === modes.prod,
+            cache: mode === modes.prod,
+            template: Path.resolve(dir.auth, "auth.html"),
+            filename: Path.resolve(dir.build, "auth.min.html"),
             favicon: Path.resolve(dir.src, "resources", "favicon.ico"),
             publicPath: "build",
             minify: mode === modes.prod,

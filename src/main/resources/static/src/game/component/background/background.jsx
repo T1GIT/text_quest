@@ -1,10 +1,10 @@
 import React, {Component} from "react";
-import Style from "./sass/root.sass";
+import Style from "./sass/background.sass";
 
-class Root extends Component {
+class Background extends Component {
     render() {
         return <div className={Style.background}></div>;
     }
 }
 
-export default Root;
+export default Background;

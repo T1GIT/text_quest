@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 
 @Entity
-@Table(name = "tokens")
+@Table(name = "tokens") // TODO: 22.02.2021
 public class Token extends AbstractModel {
 
     @Column(nullable = false, length = 512)
