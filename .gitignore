@@ -9,4 +9,3 @@ node_modules/
 # GENERATED
 target
 .log
-src/main/resources/static/build
