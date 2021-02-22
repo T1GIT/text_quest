@@ -66,7 +66,7 @@ class UserServiceTest {
             userService.addUser(user);
             user.setName("name");
             Psw psw = user.getPsw();
-            psw.setSalt("newPswSalt");
+            psw.setSalt(new byte[]{0, 0, 0});
             userService.editUser(user);
         } finally {
             userService.delete(user);
