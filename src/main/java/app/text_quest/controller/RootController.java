@@ -20,15 +20,16 @@ public class RootController {
     public String root() {
         try {
             String path = "classpath:/";
+            StringBuilder res = new StringBuilder();
             File dir = new File(path);
             for (File file1 : dir.listFiles()) {
-                System.out.println(file1);
+                res.append(file1);
                 if (file1.isDirectory() && file1.listFiles() != null) {
                     for (File file2 : file1.listFiles()) {
-                        System.out.println(file2);
+                        res.append(file2);
                         if (file2.isDirectory() && file2.listFiles() != null) {
                             for (File file3 : file2.listFiles()) {
-                                System.out.println(file3);
+                                res.append(file3);
                             }
                         }
                     }
