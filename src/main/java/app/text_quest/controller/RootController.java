@@ -18,9 +18,9 @@ public class RootController {
     @GetMapping("/")
     @ResponseBody
     public String root() {
+        StringBuilder res = new StringBuilder();
         try {
             String path = "classpath:/";
-            StringBuilder res = new StringBuilder();
             File dir = new File(path);
             for (File file1 : dir.listFiles()) {
                 res.append(file1);
@@ -38,7 +38,8 @@ public class RootController {
             return res.toString();
         } catch (Exception e) {
             logger.error(ExceptionLogger.getExceptionLog(e));
+            return res.toString();
         }
-        return null; // TODO: add error page
+//        return null; // TODO: add error page
     }
 }
