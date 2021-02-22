@@ -18,6 +18,7 @@ dir.build = Path.resolve(dir.stat, "build");
 // Mode
 const modes = {prod: "production", dev: "development"}
 const mode = process.env.NODE_ENV === modes.prod ? modes.prod : modes.dev
+console.log(mode)
 
 module.exports = {
     entry: Path.resolve(dir.src, "index.jsx"),
