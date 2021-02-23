@@ -8,12 +8,11 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/build/**", "/error").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
-                .loginPage("index.min");
+                .loginPage("/oauth_login");
     }
 }

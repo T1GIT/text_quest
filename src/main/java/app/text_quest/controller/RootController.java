@@ -15,7 +15,7 @@ public class RootController {
     @GetMapping("/")
     public String root() {
         try {
-            return "game.min";
+            return "index.min";
         } catch (Exception e) {
             logger.error(ExceptionLogger.getExceptionLog(e));
         }
