@@ -1,4 +1,4 @@
-package app.text_quest.util;
+package app.text_quest.security;
 
 import org.apache.log4j.Logger;
 
@@ -25,7 +25,7 @@ public class PasswordCrypt {
             SecretKey key = secretKeyFactory.generateSecret(spec);
             return key.getEncoded();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            logger.error(ExceptionLogger.getExceptionLog(e));
+            logger.error("PasswordCrypt", e);
         }
         return null;
     }

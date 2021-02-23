@@ -1,6 +1,5 @@
 package app.text_quest;
 
-import app.text_quest.util.ExceptionLogger;
 import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,7 +18,7 @@ public class TextQuestApplication {
         try {
             SpringApplication.run(TextQuestApplication.class, args);
         } catch (Exception e) {
-            logger.fatal(ExceptionLogger.getExceptionLog(e));
+            logger.error("TextQuestApplication", e);
         }
     }
 }
