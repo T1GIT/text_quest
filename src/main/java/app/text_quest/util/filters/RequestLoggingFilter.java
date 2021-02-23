@@ -1,5 +1,7 @@
 package app.text_quest.util.filters;
 
+import app.text_quest.util.LoggerFactory;
+import app.text_quest.util.enums.LogType;
 import org.apache.log4j.Logger;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -16,7 +18,7 @@ import java.util.Date;
 public class RequestLoggingFilter implements Filter {
 
 
-    private static final Logger logger = Logger.getLogger(RequestLoggingFilter.class);
+    private static final Logger requestLogger = LoggerFactory.getLogger(LogType.REQUEST);
 
     @Override
     public void doFilter(
@@ -31,7 +33,7 @@ public class RequestLoggingFilter implements Filter {
 
         chain.doFilter(request, response);
 
-        logger.info(String.format("%3d %-6s %-30s [%d ms] %s",
+        requestLogger.info(String.format("%3d %-6s %-30s %4d ms   %s",
                 res.getStatus(),
                 req.getMethod(),
                 req.getRequestURI(),
