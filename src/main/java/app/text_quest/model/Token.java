@@ -8,8 +8,8 @@ import java.util.Arrays;
 
 
 @Entity
-@Table(name = "psws")
-public class Psw extends AbstractModel {
+@Table(name = "tokens") // TODO: 22.02.2021
+public class Token extends AbstractModel {
 
     @Column(nullable = false, length = 512)
     private byte[] hash;
@@ -22,7 +22,7 @@ public class Psw extends AbstractModel {
     @MapsId
     private User user;
 
-    public Psw() {
+    public Token() {
     }
 
     public byte[] getHash() {
@@ -37,16 +37,16 @@ public class Psw extends AbstractModel {
         return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public byte[] getSalt() {
         return salt;
     }
 
     public void setSalt(byte[] salt) {
         this.salt = salt;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     @Override
