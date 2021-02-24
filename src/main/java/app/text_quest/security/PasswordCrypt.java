@@ -8,6 +8,7 @@ import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -41,6 +42,6 @@ public class PasswordCrypt {
     }
 
     public static boolean checkPassword(String password, byte[] salt, byte[] hash) {
-        return hash == getHashOf(password, salt);
+        return Arrays.equals(getHashOf(password, salt), hash);
     }
 }
