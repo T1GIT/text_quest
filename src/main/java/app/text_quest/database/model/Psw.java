@@ -1,6 +1,6 @@
 package app.text_quest.database.model;
 
-import app.text_quest.database.util.AbstractModel;
+import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 @Entity
 @Table(name = "psws")
-public class Psw extends AbstractModel {
+public class Psw extends AuditModel {
 
     @Column(nullable = false, length = 512)
     private byte[] hash;

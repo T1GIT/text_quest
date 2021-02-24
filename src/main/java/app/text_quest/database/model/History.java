@@ -1,19 +1,20 @@
 package app.text_quest.database.model;
 
 import app.text_quest.database.model.msg.Msg;
-import app.text_quest.database.util.AbstractModel;
+import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "histories")
-public class History extends AbstractModel {
+public class History extends AuditModel {
 
     @Id
     @GeneratedValue(generator = "increment")
-    @GenericGenerator(name= "increment", strategy= "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

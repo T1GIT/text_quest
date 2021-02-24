@@ -1,13 +1,14 @@
 package app.text_quest.database.model;
 
-import app.text_quest.database.util.AbstractModel;
+import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "limits")
-public class Limit extends AbstractModel {
+public class Limit extends AuditModel {
 
     private int min;
     private int max;

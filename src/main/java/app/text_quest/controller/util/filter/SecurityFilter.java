@@ -15,7 +15,7 @@ import java.util.Date;
 
 @Component
 @Order(2)
-public class RequestLoggingFilter implements Filter {
+public class SecurityFilter implements Filter {
 
     private static final Logger requestLogger = LoggerFactory.getLogger(LogType.REQUEST);
 

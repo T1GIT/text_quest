@@ -2,16 +2,17 @@ package app.text_quest.database.model;
 
 import app.text_quest.database.model.msg.types.Text;
 import app.text_quest.database.model.node.types.LinkedNode.types.OutMsg;
-import app.text_quest.database.util.AbstractModel;
+import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Table(name = "answers")
-public class Answer extends AbstractModel {
+public class Answer extends AuditModel {
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Change> changes = new ArrayList<>();

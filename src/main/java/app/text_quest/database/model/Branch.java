@@ -2,16 +2,17 @@ package app.text_quest.database.model;
 
 import app.text_quest.database.model.node.Node;
 import app.text_quest.database.model.node.types.Fork;
-import app.text_quest.database.util.AbstractModel;
+import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Table(name = "branches")
-public class Branch extends AbstractModel {
+public class Branch extends AuditModel {
 
     @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Limit> limits = new ArrayList<>();

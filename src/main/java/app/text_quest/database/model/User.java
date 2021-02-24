@@ -1,15 +1,16 @@
 package app.text_quest.database.model;
 
-import app.text_quest.database.util.AbstractModel;
+import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Table(name = "users")
-public class User extends AbstractModel {
+public class User extends AuditModel {
 
     @Column(nullable = false, length = 50, updatable = false)
     private String email;
@@ -23,6 +24,10 @@ public class User extends AbstractModel {
     @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
     private Psw psw;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
+    private Token token;
 
     @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
@@ -48,6 +53,10 @@ public class User extends AbstractModel {
 
     public Psw getPsw() {
         return psw;
+    }
+
+    public Token getToken() {
+        return token;
     }
 
     public Setting getSetting() {
@@ -77,6 +86,11 @@ public class User extends AbstractModel {
     public void setPsw(Psw psw) {
         psw.setUser(this);
         this.psw = psw;
+    }
+
+    public void setToken(Token token) {
+        token.setUser(this);
+        this.token = token;
     }
 
     public void setSetting(Setting setting) {

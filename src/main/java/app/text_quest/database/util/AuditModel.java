@@ -8,8 +8,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
-import java.io.Serializable;
 import java.util.Date;
+
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -17,7 +17,8 @@ import java.util.Date;
         value = {"createdAt", "updatedAt"},
         allowGetters = true
 )
-public abstract class AuditModel implements Serializable {
+public abstract class AuditModel extends AbstractModel {
+
     @CreatedDate
     @Column(name = "createdAt", nullable = false, updatable = false)
     private Date createdAt;

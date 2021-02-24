@@ -1,15 +1,18 @@
 package app.text_quest.database.model;
 
-import app.text_quest.database.util.AbstractModel;
+import app.text_quest.database.util.AuditModel;
 import app.text_quest.util.enums.Color;
 import app.text_quest.util.enums.Font;
 import app.text_quest.util.enums.MsgType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+
+
 @Entity
 @Table(name = "settings")
-public class Setting extends AbstractModel {
+public class Setting extends AuditModel {
+
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private MsgType msgType;

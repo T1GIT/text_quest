@@ -1,22 +1,23 @@
 package app.text_quest.database.model;
 
-import app.text_quest.database.util.AbstractModel;
+import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "states")
-public class State extends AbstractModel {
-    
+public class State extends AuditModel {
+
     @Column(nullable = false)
     private int val = 0;
-    
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "var_id", nullable = false, updatable = false)
     @JsonIgnore
     private Var var;
-    
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "users_id", nullable = false, updatable = false)
     @JsonIgnore

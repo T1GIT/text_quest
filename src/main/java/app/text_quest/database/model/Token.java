@@ -1,21 +1,25 @@
 package app.text_quest.database.model;
 
-import app.text_quest.database.util.AbstractModel;
+import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.util.Arrays;
+import java.util.Date;
 
 
+@Deprecated
 @Entity
-@Table(name = "tokens") // TODO: 22.02.2021
-public class Token extends AbstractModel {
+@Table(name = "tokens")
+public class Token extends AuditModel {
 
-    @Column(nullable = false, length = 512)
-    private byte[] hash;
+    @Column(nullable = false)
+    private String token;
 
-    @Column(nullable = false, length = 16)
-    private byte[] salt;
+    @CreatedDate
+    @Column(name = "creation_date", updatable = false, nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JsonIgnore
@@ -25,35 +29,34 @@ public class Token extends AbstractModel {
     public Token() {
     }
 
-    public byte[] getHash() {
-        return hash;
-    }
-
-    public void setHash(byte[] hash) {
-        this.hash = hash;
+    public String getToken() {
+        return token;
     }
 
     public User getUser() {
         return user;
     }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
 
-    public byte[] getSalt() {
-        return salt;
-    }
-
-    public void setSalt(byte[] salt) {
-        this.salt = salt;
-    }
-
     @Override
     public String toString() {
-        return "Psw{" +
-                "hash='" + Arrays.toString(hash) + '\'' +
-                ", salt='" + Arrays.toString(salt) + '\'' +
+        return "Token{" +
+                "token='" + token +
                 '}';
     }
 }

@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 
-public class PasswordCrypt {
+public class PswCrypt {
 
     private static final Logger logger = Logger.getLogger("errorLogger");
     private static final Random RANDOM = new SecureRandom();
