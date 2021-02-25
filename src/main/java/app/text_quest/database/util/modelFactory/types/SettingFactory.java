@@ -1,10 +1,10 @@
 package app.text_quest.database.util.modelFactory.types;
 
 import app.text_quest.database.model.Setting;
+import app.text_quest.database.util.enums.Color;
+import app.text_quest.database.util.enums.Font;
+import app.text_quest.database.util.enums.MsgType;
 import app.text_quest.database.util.modelFactory.AbstractModelFactory;
-import app.text_quest.util.enums.Color;
-import app.text_quest.util.enums.Font;
-import app.text_quest.util.enums.MsgType;
 
 public class SettingFactory extends AbstractModelFactory<Setting> {
     private final Color color = Color.BLUE;

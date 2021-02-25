@@ -45,10 +45,6 @@ public class Token extends AuditModel {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public void setUser(User user) {
         this.user = user;
     }

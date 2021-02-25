@@ -1,9 +1,13 @@
 package app.text_quest.util.enums;
 
-public enum LogType {
+import app.text_quest.util.EnumNameGettable;
+
+
+public enum LogType implements EnumNameGettable {
     ERROR, REQUEST, ROOT;
 
+    @Override
     public String getName() {
-        return LogType.values()[this.ordinal()].toString();
+        return LogType.values()[this.ordinal()].toString().toLowerCase();
     }
 }

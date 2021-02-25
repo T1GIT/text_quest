@@ -30,6 +30,7 @@ public class RequestLoggingFilter implements Filter {
 
         long startTime = new Date().getTime();
 
+
         chain.doFilter(request, response);
 
         requestLogger.info(String.format("%3d %-6s %-30s %4d ms   %s",

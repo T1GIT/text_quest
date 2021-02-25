@@ -1,9 +1,9 @@
 package app.text_quest.database.model;
 
 import app.text_quest.database.util.AuditModel;
-import app.text_quest.util.enums.Color;
-import app.text_quest.util.enums.Font;
-import app.text_quest.util.enums.MsgType;
+import app.text_quest.database.util.enums.Color;
+import app.text_quest.database.util.enums.Font;
+import app.text_quest.database.util.enums.MsgType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

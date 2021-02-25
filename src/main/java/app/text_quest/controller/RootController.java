@@ -7,6 +7,8 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @Controller
 public class RootController {
@@ -14,7 +16,7 @@ public class RootController {
     private final Logger logger = LoggerFactory.getLogger(LogType.ERROR);
 
     @GetMapping("/")
-    public String root() {
+    public String root(HttpServletRequest request) {
         try {
             return "index.min";
         } catch (Exception e) {
