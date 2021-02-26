@@ -41,7 +41,7 @@ module.exports = {
         new htmlWebpackPlugin({
             hash: mode === modes.prod,
             cache: mode === modes.prod,
-            template: Path.resolve(dir.src, "index.html"),
+            template: Path.resolve(dir.src, "index.jsp"),
             filename: Path.resolve(dir.build, "index.min.html"),
             favicon: Path.resolve(dir.src, "resources", "favicon.ico"),
             publicPath: "build",

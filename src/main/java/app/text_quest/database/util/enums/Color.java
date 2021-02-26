@@ -1,10 +1,6 @@
 package app.text_quest.database.util.enums;
 
-import app.text_quest.controller.util.oauth.enums.OauthProvider;
-import app.text_quest.util.EnumNameGettable;
-
-
-public enum Color implements EnumNameGettable {
+public enum Color {
     RED(""),
     BLUE(""),
     GREEN(""),
@@ -19,11 +15,6 @@ public enum Color implements EnumNameGettable {
 
     public String getValue() {
         return value;
-    }
-
-    @Override
-    public String getName() {
-        return OauthProvider.values()[this.ordinal()].toString().toLowerCase();
     }
 
     @Override

@@ -10,8 +10,10 @@
     <title>TextQuest</title>
 </head>
 <body>
-<script>
-    var1 = 50
+<script id="initialScript">
+    const href = [(${hrefMap})]
+    node = document.querySelector("#initialScript")
+    node.parentNode.removeChild(node)
 </script>
 <noscript>Для работы сайта включите JavaScript</noscript>
 <div id="root"></div>

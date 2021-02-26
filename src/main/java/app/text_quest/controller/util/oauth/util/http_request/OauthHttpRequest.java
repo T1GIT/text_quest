@@ -1,7 +1,10 @@
 package app.text_quest.controller.util.oauth.util.http_request;
 
 import app.text_quest.controller.util.oauth.enums.OauthReqParam;
-import app.text_quest.controller.util.oauth.exception.OauthApiError;
+import app.text_quest.controller.util.oauth.util.exception.OauthApiError;
+import app.text_quest.util.LoggerFactory;
+import app.text_quest.util.enums.LogType;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.URLEncoder;
@@ -10,6 +13,7 @@ import java.util.HashMap;
 
 public abstract class OauthHttpRequest {
 
+    protected final Logger logger = LoggerFactory.getLogger(LogType.ERROR);
     protected final String protocol = "https";
     protected final HashMap<OauthReqParam, String> params = new HashMap<>();
     protected final String url;
@@ -34,21 +38,23 @@ public abstract class OauthHttpRequest {
         return this;
     }
 
-    public String parseUrl(boolean injectParams) {
-        StringBuilder res = new StringBuilder(protocol + "://" + url + "?");
+    protected String parseUrl(boolean injectParams) {
+        StringBuilder res = new StringBuilder(String.format("%s://%s", protocol, url));
         if (injectParams) {
             params.forEach((name, value) -> {
                 try {
-                    res.append(URLEncoder.encode(name.getName(), "UTF-8"));
-                    res.append('=');
-                    res.append(URLEncoder.encode(value, "UTF-8"));
-                    res.append('&');
+                    res.append(String.format("%s=%s&",
+                            URLEncoder.encode(name.name().toLowerCase(), "UTF-8"),
+                            URLEncoder.encode(value, "UTF-8"))
+                    );
                 } catch (UnsupportedEncodingException ignored) {
                 }
             });
         }
         return res.toString();
     }
+
+    public abstract String parseUrl();
 
     public abstract String flush() throws OauthApiError;
 }

@@ -16,7 +16,7 @@ public class LoggerFactory {
 
 
     public static Logger getLogger(LogType logType) {
-        return getLogger(logType.getName());
+        return getLogger(logType.name().toLowerCase());
     }
 
     public static Logger getLogger(String name) {

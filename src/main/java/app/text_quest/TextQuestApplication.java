@@ -15,9 +15,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class TextQuestApplication {
 
     private static final Logger errorLogger = LoggerFactory.getLogger(LogType.ERROR);
+    private static final String rootUrl = "http://localhost:8080"; // PROD: Change
+
+
+    public static String getRootUrl() {
+        return rootUrl;
+    }
 
     public static void main(String[] args) {
-        System.out.println("https://oauth.yandex.ru/authorize?client_id=fe4effc1e75340d8a1a93f5acfb09827&redirect_uri=localhost:8080/oauth/yandex/code&response_type=token&display=popup".length());
         try {
             SpringApplication.run(TextQuestApplication.class, args);
         } catch (Exception e) {
