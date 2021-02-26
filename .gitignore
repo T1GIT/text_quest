@@ -10,3 +10,6 @@ node_modules/
 target
 .log
 src/main/resources/static/build
+
+# OTHER
+scripts

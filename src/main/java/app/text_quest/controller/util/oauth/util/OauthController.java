@@ -4,7 +4,6 @@ import app.text_quest.TextQuestApplication;
 import app.text_quest.controller.util.oauth.enums.OauthPropName;
 import app.text_quest.controller.util.oauth.enums.OauthProvider;
 import app.text_quest.controller.util.oauth.enums.OauthReqParam;
-import app.text_quest.controller.util.oauth.util.http_request.types.GetOauthRequest;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.enums.LogType;
 import org.apache.log4j.Logger;
@@ -24,15 +23,14 @@ public abstract class OauthController {
 
     public static String getBtnUrl(OauthProvider provider) {
         OauthProps props = propsFactory.getFor(provider);
-        GetOauthRequest request = new GetOauthRequest(props.get(OauthPropName.BTN_ROOT_URL));
-        request
-                .addParam(OauthReqParam.CLIENT_ID, props.get(OauthPropName.CLIENT_ID))
-                .addParam(OauthReqParam.REDIRECT_URI, String.format("%s/oauth/%s/code",
-                        TextQuestApplication.getRootUrl(),
-                        provider.name().toLowerCase()))
-                .addParam(OauthReqParam.RESPONSE_TYPE, "code");
-//                .addParam(OauthReqParam.DISPLAY, "popup");
-        return request.parseUrl();
+        UrlBuilder urlBuilder = new UrlBuilder(props.get(OauthPropName.OAUTH_DOMAIN));
+        urlBuilder.addParam(OauthReqParam.CLIENT_ID, props.get(OauthPropName.CLIENT_ID));
+        urlBuilder.addParam(OauthReqParam.REDIRECT_URI, String.format("%s/oauth/%s/code",
+                TextQuestApplication.getRootUrl(),
+                provider.name().toLowerCase()));
+        urlBuilder.addParam(OauthReqParam.RESPONSE_TYPE, "code");
+//        urlBuilder.addParam(OauthReqParam.DISPLAY, "popup");
+        return urlBuilder.build();
     }
 
     // TODO: 25.02.2021 Random links for users

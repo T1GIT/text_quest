@@ -13,8 +13,9 @@ public abstract class ObjectParser {
         else if (object instanceof List) return parse((List) object);
         else if (object instanceof Object[]) return parse((Object[]) object);
         else if (object instanceof Set) return parse((Set) object);
-        else if (object instanceof String) return String.format("\"%s\"", object);
-        else return parse(object.toString());
+        else if (object instanceof String) return String.format("\"%s\"",
+                ((String) object).replaceAll("\"", "\\\""));
+        else return parse(String.valueOf(object));
     }
 
     private static <K, V> String parse(Map<K, V> map) {

@@ -23,11 +23,11 @@ public class RootController {
     @GetMapping("/")
     public String root(Model model, HttpServletRequest request) {
         try {
-            HashMap<String, String> hrefMap = new HashMap<>();
+            HashMap<String, String> btnHref = new HashMap<>();
             for (OauthProvider provider : OauthProvider.values()) {
-                hrefMap.put(provider.name().toLowerCase(), OauthController.getBtnUrl(provider));
+                btnHref.put(provider.name().toLowerCase(), OauthController.getBtnUrl(provider));
             }
-            model.addAttribute("hrefMap", ObjectParser.parse(hrefMap));
+            model.addAttribute("btnHref", ObjectParser.parse(btnHref));
             return "index.min";
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

@@ -5,6 +5,7 @@ import app.text_quest.controller.util.oauth.enums.OauthPropName;
 import app.text_quest.controller.util.oauth.enums.OauthProvider;
 import app.text_quest.controller.util.oauth.enums.OauthReqParam;
 import app.text_quest.controller.util.oauth.util.OauthController;
+import app.text_quest.controller.util.oauth.util.UrlBuilder;
 import app.text_quest.controller.util.oauth.util.exception.OauthApiError;
 import app.text_quest.controller.util.oauth.util.http_request.types.GetOauthRequest;
 import org.springframework.stereotype.Controller;
@@ -30,11 +31,12 @@ public class OauthYandexController extends OauthController {
         if (request.getParameter(OauthReqParam.ERROR.name().toLowerCase()) == null) {
             String code = request.getParameter(OauthReqParam.CODE.name().toLowerCase());
             System.out.println(code);
-            GetOauthRequest oauthReq = new GetOauthRequest("oauth.vk.com/access_token"); // TODO: props: to .pr-s file
-            oauthReq.addParam(OauthReqParam.CLIENT_ID, props.get(OauthPropName.CLIENT_ID));
-            oauthReq.addParam(OauthReqParam.CLIENT_SECRET, props.get(OauthPropName.CLIENT_SECRET));
-            oauthReq.addParam(OauthReqParam.CODE, code);
-            oauthReq.addParam(OauthReqParam.REDIRECT_URI, "localhost:8080/oauth/vk/code");
+            UrlBuilder urlBuilder = new UrlBuilder("oauth.vk.com/access_token");
+            urlBuilder.addParam(OauthReqParam.CLIENT_ID, props.get(OauthPropName.CLIENT_ID));
+            urlBuilder.addParam(OauthReqParam.CLIENT_SECRET, props.get(OauthPropName.CLIENT_SECRET));
+            urlBuilder.addParam(OauthReqParam.CODE, code);
+            urlBuilder.addParam(OauthReqParam.REDIRECT_URI, "localhost:8080/oauth/vk/code");
+            GetOauthRequest oauthReq = new GetOauthRequest(urlBuilder.build()); // TODO: props: to .pr-s file
             try {
                 System.out.println(oauthReq.flush());
             } catch (OauthApiError oauthApiError) {

@@ -27,8 +27,11 @@ module.exports = {
     },
     mode: mode,
     watchOptions: {
-        ignored: /node_modules/,
+        ignored: /(node_modules|build)/,
         aggregateTimeout: 500,
+    },
+    resolve: {
+        extensions: [".jsx", ".js"],
     },
     plugins: [
         new Webpack.ProgressPlugin(),
@@ -51,7 +54,7 @@ module.exports = {
     module: {
         rules: [
             { // JavaScript
-                test: /\.(js|jsx)$/,
+                test: /\.(jsx|js)$/,
                 include: dir.src,
                 exclude: /node_modules/,
                 use: {

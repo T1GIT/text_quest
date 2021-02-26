@@ -15,15 +15,9 @@ public class GetOauthRequest extends OauthHttpRequest {
     }
 
     @Override
-    public String parseUrl() {
-        return parseUrl(true);
-    }
-
-    @Override
     public String flush() throws OauthApiError {
         try {
-            System.out.println(parseUrl(true));
-            HttpURLConnection con = (HttpURLConnection) new URL(parseUrl()).openConnection();
+            HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             if (con.getResponseCode() != 200) {
