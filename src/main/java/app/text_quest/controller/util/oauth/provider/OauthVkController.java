@@ -2,9 +2,9 @@ package app.text_quest.controller.util.oauth.provider;
 
 
 import app.text_quest.TextQuestApplication;
-import app.text_quest.controller.util.oauth.enums.OauthPropName;
-import app.text_quest.controller.util.oauth.enums.OauthProvider;
-import app.text_quest.controller.util.oauth.enums.OauthReqParam;
+import app.text_quest.controller.util.oauth.enums.PropName;
+import app.text_quest.controller.util.oauth.enums.Provider;
+import app.text_quest.controller.util.oauth.enums.ReqParam;
 import app.text_quest.controller.util.oauth.util.OauthController;
 import app.text_quest.controller.util.oauth.util.exception.OauthApiError;
 import app.text_quest.controller.util.oauth.util.http_request.UrlBuilder;
@@ -21,20 +21,20 @@ import javax.servlet.http.HttpServletRequest;
 public class OauthVkController extends OauthController {
 
     public OauthVkController() {
-        super(OauthProvider.VK);
+        super(Provider.VK);
     }
 
     @GetMapping("code")
     @Override
     public String receiveCode(HttpServletRequest request) {
-        if (request.getParameter(OauthReqParam.ERROR.name().toLowerCase()) == null) {
-            String code = request.getParameter(OauthReqParam.CODE.name().toLowerCase()); // TODO: 26.02.2021 Override name() .toLowerCase()
+        if (request.getParameter(ReqParam.ERROR.name().toLowerCase()) == null) {
+            String code = request.getParameter(ReqParam.CODE.name().toLowerCase()); // TODO: 26.02.2021 Override name() .toLowerCase()
             UrlBuilder urlBuilder = new UrlBuilder("oauth.vk.com/access_token"); // TODO: props: to .pr-s file
-            urlBuilder.addParam(OauthReqParam.CLIENT_ID, props.get(OauthPropName.CLIENT_ID));
-            urlBuilder.addParam(OauthReqParam.CLIENT_SECRET, props.get(OauthPropName.CLIENT_SECRET));
-            urlBuilder.addParam(OauthReqParam.TOKEN, code);
-            urlBuilder.addParam(OauthReqParam.REDIRECT_URI, String.format("%s/auth/%s/code",
-                    TextQuestApplication.getRootUrl(), OauthProvider.VK.name().toLowerCase()));
+            urlBuilder.addParam(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID));
+            urlBuilder.addParam(ReqParam.CLIENT_SECRET, props.get(PropName.CLIENT_SECRET));
+            urlBuilder.addParam(ReqParam.TOKEN, code);
+            urlBuilder.addParam(ReqParam.REDIRECT_URI, String.format("%s/auth/%s/code",
+                    TextQuestApplication.getRootUrl(), Provider.VK.name().toLowerCase()));
             GetRequest oauthReq = new GetRequest(urlBuilder.build());
             try {
                 System.out.println(oauthReq.send()); // TODO: 26.02.2021

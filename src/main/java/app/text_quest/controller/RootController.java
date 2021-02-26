@@ -1,7 +1,7 @@
 package app.text_quest.controller;
 
 
-import app.text_quest.controller.util.oauth.enums.OauthProvider;
+import app.text_quest.controller.util.oauth.enums.Provider;
 import app.text_quest.controller.util.oauth.util.ObjectParser;
 import app.text_quest.controller.util.oauth.util.http_request.BtnUrlParser;
 import app.text_quest.util.LoggerFactory;
@@ -33,7 +33,7 @@ public class RootController {
 
     private HashMap<String, String> getBtnUrl() {
         HashMap<String, String> urlMap = new HashMap<>();
-        for (OauthProvider provider : OauthProvider.values()) {
+        for (Provider provider : Provider.values()) {
             urlMap.put(provider.name().toLowerCase(), BtnUrlParser.getUrl(provider));
         }
         return urlMap;

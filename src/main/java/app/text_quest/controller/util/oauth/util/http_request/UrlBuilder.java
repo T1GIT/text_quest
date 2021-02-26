@@ -1,15 +1,15 @@
 package app.text_quest.controller.util.oauth.util.http_request;
 
-import app.text_quest.controller.util.oauth.enums.OauthReqParam;
+import app.text_quest.controller.util.oauth.enums.ReqParam;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 
-public class UrlBuilder {
+public class UrlBuilder implements ReqParamInclude<UrlBuilder> {
 
     private static final String defautlProtocol = "https";
     private final HashMap<String, String> params;
@@ -26,12 +26,28 @@ public class UrlBuilder {
         this(defautlProtocol, domain);
     }
 
+    public static String parseParams(HashMap<String, String> params) {
+        if (params.size() == 0) return "";
+        List<String> paramsList = new ArrayList<>(params.size());
+        params.forEach((name, value) -> {
+            try {
+                paramsList.add(String.format("%s=%s&",
+                        URLEncoder.encode(name, "UTF-8"),
+                        URLEncoder.encode(value, "UTF-8")));
+            } catch (UnsupportedEncodingException ignored) {
+            }
+        });
+        return String.join("&", paramsList);
+    }
+
+    @Override
     public UrlBuilder addParam(String param, String value) {
         this.params.put(param, value);
         return this;
     }
 
-    public UrlBuilder addParam(OauthReqParam oauthParam, String value) {
+    @Override
+    public UrlBuilder addParam(ReqParam oauthParam, String value) {
         return addParam(oauthParam.name().toLowerCase(), value);
     }
 
@@ -39,17 +55,7 @@ public class UrlBuilder {
         StringBuilder res = new StringBuilder();
         res.append(String.format("%s://%s", protocol, domain));
         if (params.size() > 0) {
-            res.append("?");
-            List<String> paramList = new LinkedList<>();
-            params.forEach((name, value) -> {
-                try {
-                    paramList.add(String.format("%s=%s&",
-                            URLEncoder.encode(name, "UTF-8"),
-                            URLEncoder.encode(value, "UTF-8")));
-                } catch (UnsupportedEncodingException ignored) {
-                }
-            });
-            res.append(String.join("&", paramList));
+            res.append("?").append(parseParams(params));
         }
         return res.toString();
     }

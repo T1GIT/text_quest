@@ -1,35 +1,31 @@
 package app.text_quest.controller.util.oauth.provider;
 
 
-import app.text_quest.controller.util.oauth.enums.OauthPropName;
-import app.text_quest.controller.util.oauth.enums.OauthProvider;
-import app.text_quest.controller.util.oauth.enums.OauthReqParam;
+import app.text_quest.controller.util.oauth.enums.PropName;
+import app.text_quest.controller.util.oauth.enums.Provider;
+import app.text_quest.controller.util.oauth.enums.ReqParam;
 import app.text_quest.controller.util.oauth.util.OauthController;
 import app.text_quest.controller.util.oauth.util.exception.OauthApiError;
-import app.text_quest.controller.util.oauth.util.http_request.UrlBuilder;
 import app.text_quest.controller.util.oauth.util.http_request.types.GetRequest;
 import app.text_quest.controller.util.oauth.util.http_request.types.PostRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 
 
 @Controller
-@RequestMapping("oauth/yandex")
 public class OauthYandexController extends OauthController {
 
     public OauthYandexController() {
-        super(OauthProvider.YANDEX);
+        super(Provider.YANDEX);
     }
 
-    @GetMapping("code")
+    @GetMapping("oauth/yandex")
     @Override
     public String receiveCode(HttpServletRequest request) {
-        if (request.getParameter(OauthReqParam.ERROR.name().toLowerCase()) == null) {
-            String code = request.getParameter(OauthReqParam.CODE.name().toLowerCase());
+        if (request.getParameter(ReqParam.ERROR.name().toLowerCase()) == null) {
+            String code = request.getParameter(ReqParam.CODE.name().toLowerCase());
             String token = receiveToken(code);
             System.out.println(receiveId(token));
         }
@@ -38,33 +34,30 @@ public class OauthYandexController extends OauthController {
 
     @Override
     public String receiveToken(String code) {
-        UrlBuilder urlBuilder = new UrlBuilder(props.get(OauthPropName.DOMAIN_TOKEN));
-        PostRequest request = new PostRequest(urlBuilder.build());
-        HashMap<OauthReqParam, String> paramMap = new HashMap<>();
-        paramMap.put(OauthReqParam.CLIENT_ID, props.get(OauthPropName.CLIENT_ID));
-        paramMap.put(OauthReqParam.CLIENT_SECRET, props.get(OauthPropName.CLIENT_SECRET));
-        paramMap.put(OauthReqParam.CODE, code);
-        paramMap.put(OauthReqParam.GRANT_TYPE, "authorization_code");
-        request.setData(paramMap);
+        PostRequest request = new PostRequest(props.get(PropName.DOMAIN_TOKEN));
+        request
+                .addParam(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID))
+                .addParam(ReqParam.CLIENT_SECRET, props.get(PropName.CLIENT_SECRET))
+                .addParam(ReqParam.CODE, code)
+                .addParam(ReqParam.GRANT_TYPE, "authorization_code");
         try {
             String response = request.send();
-            return getFromJson(OauthReqParam.ACCESS_TOKEN, response);
+            return getFromJson(ReqParam.ACCESS_TOKEN, response);
         } catch (OauthApiError oauthApiError) {
             logger.error(oauthApiError.getMessage(), oauthApiError);
             return null;
         }
     }
 
-    @GetMapping("id")
     @Override
     public String receiveId(String token) {
-        UrlBuilder urlBuilder = new UrlBuilder(props.get(OauthPropName.DOMAIN_ID))
-                .addParam(OauthReqParam.FORMAT, "json")
-                .addParam(OauthReqParam.OAUTH_TOKEN, token);
-        GetRequest request = new GetRequest(urlBuilder.build());
+        GetRequest request = new GetRequest(props.get(PropName.DOMAIN_ID));
+        request
+                .addParam(ReqParam.FORMAT, "json")
+                .addParam(ReqParam.OAUTH_TOKEN, token);
         try {
             String response = request.send();
-            return getFromJson(OauthReqParam.ID, response);
+            return getFromJson(ReqParam.ID, response);
         } catch (OauthApiError oauthApiError) {
             oauthApiError.printStackTrace();
             return null;

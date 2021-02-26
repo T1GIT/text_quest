@@ -1,7 +1,7 @@
 package app.text_quest.controller.util.oauth.util;
 
-import app.text_quest.controller.util.oauth.enums.OauthProvider;
-import app.text_quest.controller.util.oauth.enums.OauthReqParam;
+import app.text_quest.controller.util.oauth.enums.Provider;
+import app.text_quest.controller.util.oauth.enums.ReqParam;
 import app.text_quest.controller.util.oauth.util.props.OauthProps;
 import app.text_quest.controller.util.oauth.util.props.OauthPropsFactory;
 import app.text_quest.util.LoggerFactory;
@@ -20,7 +20,7 @@ public abstract class OauthController {
     protected static final Logger logger = LoggerFactory.getLogger(LogType.ERROR);
     protected final OauthProps props;
 
-    public OauthController(OauthProvider provider) {
+    public OauthController(Provider provider) {
         this.props = propsFactory.getFor(provider);
     }
 
@@ -32,9 +32,8 @@ public abstract class OauthController {
     public abstract String receiveId(String token);
 
     protected String getFromJson(String key, String jsonString) {
-        JSONObject obj = null;
         try {
-            obj = (JSONObject) new JSONParser().parse(jsonString);
+            JSONObject obj = (JSONObject) new JSONParser().parse(jsonString);
             return (String) obj.get(key);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -42,7 +41,7 @@ public abstract class OauthController {
         }
     }
 
-    protected String getFromJson(OauthReqParam reqParam, String jsonString) {
+    protected String getFromJson(ReqParam reqParam, String jsonString) {
         return getFromJson(reqParam.name().toLowerCase(), jsonString);
     }
 
