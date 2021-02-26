@@ -2,8 +2,8 @@ package app.text_quest.controller;
 
 
 import app.text_quest.controller.util.oauth.enums.OauthProvider;
-import app.text_quest.controller.util.oauth.util.OauthController;
 import app.text_quest.controller.util.oauth.util.ObjectParser;
+import app.text_quest.controller.util.oauth.util.http_request.BtnUrlParser;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.enums.LogType;
 import org.apache.log4j.Logger;
@@ -18,20 +18,24 @@ import java.util.HashMap;
 @Controller
 public class RootController {
 
-    private final Logger logger = LoggerFactory.getLogger(LogType.ERROR);
+    private static final Logger logger = LoggerFactory.getLogger(LogType.ERROR);
 
     @GetMapping("/")
     public String root(Model model, HttpServletRequest request) {
         try {
-            HashMap<String, String> btnHref = new HashMap<>();
-            for (OauthProvider provider : OauthProvider.values()) {
-                btnHref.put(provider.name().toLowerCase(), OauthController.getBtnUrl(provider));
-            }
-            model.addAttribute("btnHref", ObjectParser.parse(btnHref));
+            model.addAttribute("btnHref", ObjectParser.parse(getBtnUrl()));
             return "index.min";
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
         return null; // TODO: add error page
+    }
+
+    private HashMap<String, String> getBtnUrl() {
+        HashMap<String, String> urlMap = new HashMap<>();
+        for (OauthProvider provider : OauthProvider.values()) {
+            urlMap.put(provider.name().toLowerCase(), BtnUrlParser.getUrl(provider));
+        }
+        return urlMap;
     }
 }

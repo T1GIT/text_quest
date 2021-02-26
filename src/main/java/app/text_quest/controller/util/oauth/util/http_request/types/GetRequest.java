@@ -1,31 +1,30 @@
 package app.text_quest.controller.util.oauth.util.http_request.types;
 
 import app.text_quest.controller.util.oauth.util.exception.OauthApiError;
-import app.text_quest.controller.util.oauth.util.http_request.OauthHttpRequest;
+import app.text_quest.controller.util.oauth.util.http_request.HttpRequest;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-public class GetOauthRequest extends OauthHttpRequest {
+public class GetRequest extends HttpRequest {
 
-    public GetOauthRequest(String url) {
+    public GetRequest(String url) {
         super(url);
     }
 
     @Override
-    public String flush() throws OauthApiError {
+    public String send() throws OauthApiError {
         try {
             HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
             con.setRequestMethod("GET");
-            con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            if (con.getResponseCode() != 200) {
-                con.disconnect();
-                throw new OauthApiError(readInputStream(con.getInputStream()));
-            }
             con.disconnect();
-            return readInputStream(con.getInputStream());
+            if (con.getResponseCode() == 200) {
+                return readInputStream(con.getInputStream());
+            } else {
+                throw new OauthApiError(readInputStream(con.getErrorStream()));
+            }
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
             return null;

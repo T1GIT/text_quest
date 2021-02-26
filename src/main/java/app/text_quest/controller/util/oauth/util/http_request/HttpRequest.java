@@ -11,25 +11,25 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
-public abstract class OauthHttpRequest {
+public abstract class HttpRequest {
 
     protected final Logger logger = LoggerFactory.getLogger(LogType.ERROR);
     protected final String url;
 
-    public OauthHttpRequest(String url) {
+    public HttpRequest(String url) {
         this.url = url;
     }
 
     protected static String readInputStream(InputStream inputStream) throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
-        String inputLine;
         StringBuilder builder = new StringBuilder();
-        while ((inputLine = in.readLine()) != null) {
-            builder.append(inputLine);
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(inputStream))) {
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                builder.append(inputLine);
+            }
         }
-        in.close();
         return builder.toString();
     }
 
-    public abstract String flush() throws OauthApiError;
+    public abstract String send() throws OauthApiError;
 }

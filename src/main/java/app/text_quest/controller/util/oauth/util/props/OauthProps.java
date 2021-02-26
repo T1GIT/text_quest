@@ -1,4 +1,4 @@
-package app.text_quest.controller.util.oauth.util;
+package app.text_quest.controller.util.oauth.util.props;
 
 import app.text_quest.controller.util.oauth.enums.OauthPropName;
 import app.text_quest.controller.util.oauth.enums.OauthProvider;

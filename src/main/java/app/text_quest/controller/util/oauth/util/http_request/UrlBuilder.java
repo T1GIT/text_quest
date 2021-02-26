@@ -1,10 +1,12 @@
-package app.text_quest.controller.util.oauth.util;
+package app.text_quest.controller.util.oauth.util.http_request;
 
 import app.text_quest.controller.util.oauth.enums.OauthReqParam;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class UrlBuilder {
@@ -35,16 +37,20 @@ public class UrlBuilder {
 
     public String build() {
         StringBuilder res = new StringBuilder();
-        res.append(String.format("%s://%s?", protocol, domain));
-        params.forEach((name, value) -> {
-            try {
-                res.append(String.format("%s=%s&",
-                        URLEncoder.encode(name, "UTF-8"),
-                        URLEncoder.encode(value, "UTF-8"))
-                );
-            } catch (UnsupportedEncodingException ignored) {
-            }
-        });
+        res.append(String.format("%s://%s", protocol, domain));
+        if (params.size() > 0) {
+            res.append("?");
+            List<String> paramList = new LinkedList<>();
+            params.forEach((name, value) -> {
+                try {
+                    paramList.add(String.format("%s=%s&",
+                            URLEncoder.encode(name, "UTF-8"),
+                            URLEncoder.encode(value, "UTF-8")));
+                } catch (UnsupportedEncodingException ignored) {
+                }
+            });
+            res.append(String.join("&", paramList));
+        }
         return res.toString();
     }
 }
