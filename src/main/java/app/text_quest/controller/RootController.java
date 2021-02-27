@@ -4,6 +4,7 @@ package app.text_quest.controller;
 import app.text_quest.controller.util.oauth.enums.Provider;
 import app.text_quest.controller.util.oauth.util.ObjectParser;
 import app.text_quest.controller.util.oauth.util.request.BtnUrlParser;
+import app.text_quest.security.Authorisation;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.enums.LogType;
 import org.apache.log4j.Logger;
@@ -19,9 +20,20 @@ import java.util.HashMap;
 public class RootController {
 
     private static final Logger logger = LoggerFactory.getLogger(LogType.ERROR);
+    private final Authorisation authorisation;
+
+    public RootController(Authorisation authorisation) {
+        this.authorisation = authorisation;
+    }
+
 
     @GetMapping("/")
-    public String root(Model model, HttpServletRequest request) {
+    public String root() {
+        return "redirect:/start";
+    }
+
+    @GetMapping("/start")
+    public String start(Model model, HttpServletRequest request) {
         try {
             model.addAttribute("btnHref", ObjectParser.parse(getBtnUrl()));
             return "index.min";

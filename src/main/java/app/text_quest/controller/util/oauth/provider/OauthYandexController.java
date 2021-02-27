@@ -34,7 +34,7 @@ public class OauthYandexController extends OauthController {
             String token = receiveToken(code);
             System.out.println(receiveId(token));
         }
-        return "redirect:/";
+        return "redirect:/start";
     }
 
     @Override
