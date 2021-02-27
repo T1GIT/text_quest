@@ -35,7 +35,7 @@ public class UrlBuilder {
         List<String> paramsList = new ArrayList<>(params.size());
         params.forEach((name, value) -> {
             try {
-                paramsList.add(String.format("%s=%s&",
+                paramsList.add(String.format("%s=%s",
                         URLEncoder.encode(name, "UTF-8"),
                         URLEncoder.encode(value, "UTF-8")));
             } catch (UnsupportedEncodingException e) {

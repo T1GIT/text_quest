@@ -29,7 +29,8 @@ public class BtnUrlParser { // TODO: 26.02.2021 May be transferred as a static m
                         TextQuestApplication.getRootUrl(), provider.name().toLowerCase()))
                 .addParam(ReqParam.RESPONSE_TYPE, ReqParam.CODE.name().toLowerCase())
                 .addParam(ReqParam.DISPLAY, "popup")
-                .addParam(ReqParam.STATE, state);
+                .addParam(ReqParam.STATE, state)
+                .addParam(ReqParam.SCOPE, props.get(PropName.SCOPE));
         return urlBuilder.build();
     }
 }

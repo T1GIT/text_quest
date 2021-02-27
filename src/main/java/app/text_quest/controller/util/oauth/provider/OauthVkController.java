@@ -8,7 +8,7 @@ import app.text_quest.controller.util.oauth.enums.ReqParam;
 import app.text_quest.controller.util.oauth.util.OauthController;
 import app.text_quest.controller.util.oauth.util.exception.OauthApiException;
 import app.text_quest.controller.util.oauth.util.json.JsonToken;
-import app.text_quest.controller.util.oauth.util.json.vk.VkInfo;
+import app.text_quest.controller.util.oauth.util.json.vk.JsonVk;
 import app.text_quest.controller.util.oauth.util.request.UrlBuilder;
 import app.text_quest.controller.util.oauth.util.request.types.GetRequest;
 import com.google.gson.Gson;
@@ -29,8 +29,8 @@ public class OauthVkController extends OauthController {
 
     @GetMapping("oauth/vk")
     @Override
-    public String receiveCode(@CookieValue(value = "state") Cookie cookieState, HttpServletRequest request) {
-        return super.receiveCode(cookieState, request);
+    public String oauthEndpoint(@CookieValue(value = "state") Cookie cookieState, HttpServletRequest request) {
+        return super.oauthEndpoint(cookieState, request);
     }
 
     @Override
@@ -40,12 +40,12 @@ public class OauthVkController extends OauthController {
                 .addParam(ReqParam.CLIENT_SECRET, props.get(PropName.CLIENT_SECRET))
                 .addParam(ReqParam.CODE, code)
                 .addParam(ReqParam.REDIRECT_URI, String.format("%s/oauth/%s",
-                        TextQuestApplication.getRootUrl(), Provider.VK.name().toLowerCase()));
+                        TextQuestApplication.getRootUrl(), provider.name().toLowerCase()));
         GetRequest request = new GetRequest(urlBuilder.build());
         try {
             String response = request.send();
-            JsonToken jsonJsonToken = new Gson().fromJson(response, JsonToken.class);
-            return jsonJsonToken.getAccessToken();
+            JsonToken jsonToken = new Gson().fromJson(response, JsonToken.class);
+            return jsonToken.getAccessToken();
         } catch (OauthApiException oauthApiException) {
             logger.error(oauthApiException.getMessage(), oauthApiException);
             return null;
@@ -61,8 +61,8 @@ public class OauthVkController extends OauthController {
         GetRequest request = new GetRequest(urlBuilder.build());
         try {
             String response = request.send();
-            VkInfo vkInfo = new Gson().fromJson(response, VkInfo.class);
-            return vkInfo.getResponse()[0].getId();
+            JsonVk jsonVk = new Gson().fromJson(response, JsonVk.class);
+            return jsonVk.getResponse()[0].getId();
         } catch (OauthApiException e) {
             logger.error(e.getMessage(), e);
             return null;

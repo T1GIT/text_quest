@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Style from "./sass/root.sass";
+import Style from "./root.sass";
 import Background from "./component/background/background";
 import OauthPanel from "./component/oauth_panel/oauth-panel";
 

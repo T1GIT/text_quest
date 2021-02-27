@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
-public class OauthYandexController extends OauthController {
+public class OauthGoogleController extends OauthController {
 
-    public OauthYandexController() {
-        super(Provider.YANDEX);
+    public OauthGoogleController() {
+        super(Provider.GOOGLE);
     }
 
-    @GetMapping("oauth/yandex")
+    @GetMapping("oauth/google")
     @Override
     public String oauthEndpoint(@CookieValue(value = "state") Cookie cookieState, HttpServletRequest request) {
         return super.oauthEndpoint(cookieState, request);

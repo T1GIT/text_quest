@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import Style from "./sass/oauth-panel.sass";
+import Style from "./oauth-panel.sass";
+import OauthButton from "./component/oauth-button";
 
 class OauthPanel extends Component {
 
@@ -10,12 +11,9 @@ class OauthPanel extends Component {
 
     render() {
         return <div className={Style.oauthPanel}>
-            <button className={Style.vk} onClick={this.onBtnClick(btnHref.vk)}>
-                VK
-            </button>
-            <button className={Style.yandex} onClick={this.onBtnClick(btnHref.yandex)}>
-                YANDEX
-            </button>
+            <OauthButton hrefName={"vk"} text={"ВКонтакте"} className={Style.vk}/>
+            <OauthButton hrefName={"yandex"} text={"Яндекс"} className={Style.yandex}/>
+            <OauthButton hrefName={"google"} text={"Google"} className={Style.google}/>
         </div>;
     }
 }
