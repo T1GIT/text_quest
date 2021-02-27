@@ -19,7 +19,7 @@ public class PswCrypt {
 
     public static String crypt(String password) {
         char[] chars = password.toCharArray();
-        byte[] salt = getSalt();
+        byte[] salt = generateSalt();
         byte[] hash = null;
         try {
             PBEKeySpec spec = new PBEKeySpec(chars, salt, ITERATIONS, KEY_LENGTH);
@@ -55,7 +55,7 @@ public class PswCrypt {
         }
     }
 
-    private static byte[] getSalt() {
+    private static byte[] generateSalt() {
         byte[] salt = new byte[16];
         try {
             SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");

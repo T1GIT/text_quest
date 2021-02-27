@@ -13,8 +13,10 @@ import app.text_quest.controller.util.oauth.util.request.UrlBuilder;
 import app.text_quest.controller.util.oauth.util.request.types.GetRequest;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -27,13 +29,8 @@ public class OauthVkController extends OauthController {
 
     @GetMapping("oauth/vk")
     @Override
-    public String receiveCode(HttpServletRequest request) {
-        if (request.getParameter(ReqParam.ERROR.name().toLowerCase()) == null) {
-            String code = request.getParameter(ReqParam.CODE.name().toLowerCase());
-            String token = receiveToken(code);
-            System.out.println(receiveId(token));
-        }
-        return "redirect:/start";
+    public String receiveCode(@CookieValue(value = "state") Cookie cookieState, HttpServletRequest request) {
+        return super.receiveCode(cookieState, request);
     }
 
     @Override
@@ -66,8 +63,8 @@ public class OauthVkController extends OauthController {
             String response = request.send();
             VkInfo vkInfo = new Gson().fromJson(response, VkInfo.class);
             return vkInfo.getResponse()[0].getId();
-        } catch (OauthApiException oauthApiException) {
-            logger.error(oauthApiException.getMessage(), oauthApiException);
+        } catch (OauthApiException e) {
+            logger.error(e.getMessage(), e);
             return null;
         }
     }

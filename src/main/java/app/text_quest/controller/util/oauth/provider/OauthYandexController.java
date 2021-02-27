@@ -13,8 +13,10 @@ import app.text_quest.controller.util.oauth.util.request.types.GetRequest;
 import app.text_quest.controller.util.oauth.util.request.types.PostRequest;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
@@ -28,13 +30,8 @@ public class OauthYandexController extends OauthController {
 
     @GetMapping("oauth/yandex")
     @Override
-    public String receiveCode(HttpServletRequest request) {
-        if (request.getParameter(ReqParam.ERROR.name().toLowerCase()) == null) {
-            String code = request.getParameter(ReqParam.CODE.name().toLowerCase());
-            String token = receiveToken(code);
-            System.out.println(receiveId(token));
-        }
-        return "redirect:/start";
+    public String receiveCode(@CookieValue(value = "state") Cookie cookieState, HttpServletRequest request) {
+        return super.receiveCode(cookieState, request);
     }
 
     @Override

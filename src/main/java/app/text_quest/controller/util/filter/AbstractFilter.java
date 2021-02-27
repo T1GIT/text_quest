@@ -1,6 +1,6 @@
 package app.text_quest.controller.util.filter;
 
-import app.text_quest.security.Authorisation;
+import app.text_quest.security.Authentication;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -11,15 +11,15 @@ import java.util.regex.Pattern;
 
 public abstract class AbstractFilter implements Filter {
 
-    protected final Authorisation authorisation;
+    protected final Authentication authentication;
     private final Pattern pattern;
     private FilterChain chain;
     private ServletRequest request;
     private ServletResponse response;
 
-    protected AbstractFilter(Authorisation authorisation, String regExp) {
+    protected AbstractFilter(Authentication authentication, String regExp) {
         this.pattern = Pattern.compile(regExp);
-        this.authorisation = authorisation;
+        this.authentication = authentication;
     }
 
     public final void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

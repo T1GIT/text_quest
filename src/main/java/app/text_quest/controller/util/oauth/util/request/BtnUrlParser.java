@@ -8,19 +8,28 @@ import app.text_quest.controller.util.oauth.util.props.OauthProps;
 import app.text_quest.controller.util.oauth.util.props.OauthPropsFactory;
 
 
-public abstract class BtnUrlParser { // TODO: 26.02.2021 May be transferred as a static method
+public class BtnUrlParser { // TODO: 26.02.2021 May be transferred as a static method
 
     private static final OauthPropsFactory propsFactory = new OauthPropsFactory();
+    private final String state;
 
-    public static String getUrl(Provider provider) {
-        OauthProps props = propsFactory.getFor(provider);
-        UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_AUTH));
-        urlBuilder.addParam(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID));
-        urlBuilder.addParam(ReqParam.REDIRECT_URI, String.format("%s/oauth/%s",
-                TextQuestApplication.getRootUrl(), provider.name().toLowerCase()));
-        urlBuilder.addParam(ReqParam.RESPONSE_TYPE, ReqParam.CODE.name().toLowerCase());
-        urlBuilder.addParam(ReqParam.DISPLAY, "popup");
-        return urlBuilder.build();
+    public BtnUrlParser(String state) {
+        this.state = state;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public String generateUrl(Provider provider) {
+        OauthProps props = propsFactory.getFor(provider);
+        UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_AUTH))
+                .addParam(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID))
+                .addParam(ReqParam.REDIRECT_URI, String.format("%s/oauth/%s",
+                        TextQuestApplication.getRootUrl(), provider.name().toLowerCase()))
+                .addParam(ReqParam.RESPONSE_TYPE, ReqParam.CODE.name().toLowerCase())
+                .addParam(ReqParam.DISPLAY, "popup")
+                .addParam(ReqParam.STATE, state);
+        return urlBuilder.build();
+    }
 }

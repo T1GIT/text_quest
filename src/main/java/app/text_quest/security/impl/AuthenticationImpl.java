@@ -1,12 +1,12 @@
 package app.text_quest.security.impl;
 
 import app.text_quest.database.model.User;
-import app.text_quest.security.Authorisation;
+import app.text_quest.security.Authentication;
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class AuthorisationImpl implements Authorisation {
+public class AuthenticationImpl implements Authentication {
 
     private static final ThreadLocal<User> threadLocalUser = new ThreadLocal<User>();
 
@@ -19,6 +19,6 @@ public class AuthorisationImpl implements Authorisation {
     }
 
     public void setUser(User user) {
-        AuthorisationImpl.threadLocalUser.set(user);
+        AuthenticationImpl.threadLocalUser.set(user);
     }
 }

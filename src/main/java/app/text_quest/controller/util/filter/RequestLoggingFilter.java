@@ -1,6 +1,6 @@
 package app.text_quest.controller.util.filter;
 
-import app.text_quest.security.Authorisation;
+import app.text_quest.security.Authentication;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.enums.LogType;
 import org.apache.log4j.Logger;
@@ -15,13 +15,13 @@ import java.util.Date;
 
 
 @Component
-@Order(2)
+@Order(1)
 public class RequestLoggingFilter extends AbstractFilter {
 
     private static final Logger requestLogger = LoggerFactory.getLogger(LogType.REQUEST);
 
-    protected RequestLoggingFilter(Authorisation authorisation) {
-        super(authorisation, ".*");
+    protected RequestLoggingFilter(Authentication authentication) {
+        super(authentication, ".*");
     }
 
     @Override

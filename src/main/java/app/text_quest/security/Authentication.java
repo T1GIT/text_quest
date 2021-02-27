@@ -3,7 +3,7 @@ package app.text_quest.security;
 import app.text_quest.database.model.User;
 
 
-public interface Authorisation {
+public interface Authentication {
 
     boolean isAuthenticated();
 

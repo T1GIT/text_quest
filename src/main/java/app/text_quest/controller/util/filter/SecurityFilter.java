@@ -1,6 +1,6 @@
 package app.text_quest.controller.util.filter;
 
-import app.text_quest.security.Authorisation;
+import app.text_quest.security.Authentication;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.enums.LogType;
 import org.apache.log4j.Logger;
@@ -19,8 +19,8 @@ public class SecurityFilter extends AbstractFilter {
 
     private static final Logger requestLogger = LoggerFactory.getLogger(LogType.REQUEST);
 
-    public SecurityFilter(Authorisation authorisation) {
-        super(authorisation, "^/$");
+    public SecurityFilter(Authentication authentication) {
+        super(authentication, "^/$");
     }
 
     @Override
