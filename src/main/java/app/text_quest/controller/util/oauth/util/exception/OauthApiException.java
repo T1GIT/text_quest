@@ -1,10 +1,10 @@
 package app.text_quest.controller.util.oauth.util.exception;
 
-public class OauthApiError extends Exception {
+public class OauthApiException extends Exception {
 
     private final int code;
 
-    public OauthApiError(String msg, int code) {
+    public OauthApiException(String msg, int code) {
         super(code + " : " + msg);
         this.code = code;
     }

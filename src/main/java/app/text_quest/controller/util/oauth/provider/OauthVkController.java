@@ -6,54 +6,69 @@ import app.text_quest.controller.util.oauth.enums.PropName;
 import app.text_quest.controller.util.oauth.enums.Provider;
 import app.text_quest.controller.util.oauth.enums.ReqParam;
 import app.text_quest.controller.util.oauth.util.OauthController;
-import app.text_quest.controller.util.oauth.util.exception.OauthApiError;
+import app.text_quest.controller.util.oauth.util.exception.OauthApiException;
 import app.text_quest.controller.util.oauth.util.http_request.UrlBuilder;
 import app.text_quest.controller.util.oauth.util.http_request.types.GetRequest;
+import app.text_quest.controller.util.oauth.util.json.JsonToken;
+import app.text_quest.controller.util.oauth.util.json.vk.VkInfo;
+import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
-@RequestMapping("oauth/vk")
 public class OauthVkController extends OauthController {
 
     public OauthVkController() {
         super(Provider.VK);
     }
 
-    @GetMapping("code")
+    @GetMapping("oauth/vk")
     @Override
     public String receiveCode(HttpServletRequest request) {
         if (request.getParameter(ReqParam.ERROR.name().toLowerCase()) == null) {
-            String code = request.getParameter(ReqParam.CODE.name().toLowerCase()); // TODO: 26.02.2021 Override name() .toLowerCase()
-            UrlBuilder urlBuilder = new UrlBuilder("oauth.vk.com/access_token"); // TODO: props: to .pr-s file
-            urlBuilder.addParam(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID));
-            urlBuilder.addParam(ReqParam.CLIENT_SECRET, props.get(PropName.CLIENT_SECRET));
-            urlBuilder.addParam(ReqParam.TOKEN, code);
-            urlBuilder.addParam(ReqParam.REDIRECT_URI, String.format("%s/auth/%s/code",
-                    TextQuestApplication.getRootUrl(), Provider.VK.name().toLowerCase()));
-            GetRequest oauthReq = new GetRequest(urlBuilder.build());
-            try {
-                System.out.println(oauthReq.send()); // TODO: 26.02.2021
-            } catch (OauthApiError oauthApiError) {
-                logger.error(oauthApiError.getMessage(), oauthApiError);
-                return "redirect:/";
-            }
+            String code = request.getParameter(ReqParam.CODE.name().toLowerCase());
+            String token = receiveToken(code);
+            System.out.println(receiveId(token));
         }
         return "redirect:/";
     }
 
     @Override
     public String receiveToken(String code) {
-        return null;
+        UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_TOKEN))
+                .addParam(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID))
+                .addParam(ReqParam.CLIENT_SECRET, props.get(PropName.CLIENT_SECRET))
+                .addParam(ReqParam.CODE, code)
+                .addParam(ReqParam.REDIRECT_URI, String.format("%s/oauth/%s",
+                        TextQuestApplication.getRootUrl(), Provider.VK.name().toLowerCase()));
+        GetRequest request = new GetRequest(urlBuilder.build());
+        try {
+            String response = request.send();
+            JsonToken jsonJsonToken = new Gson().fromJson(response, JsonToken.class);
+            return jsonJsonToken.getAccessToken();
+        } catch (OauthApiException oauthApiException) {
+            logger.error(oauthApiException.getMessage(), oauthApiException);
+            return null;
+        }
     }
 
-    @GetMapping("id")
     @Override
     public String receiveId(String token) {
-        return null;
+        UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_ID))
+                .addParam(ReqParam.ACCESS_TOKEN, token)
+                .addParam(ReqParam.FIELDS, "uid")
+                .addParam(ReqParam.V, "5.130");
+        GetRequest request = new GetRequest(urlBuilder.build());
+        try {
+            String response = request.send();
+            VkInfo vkInfo = new Gson().fromJson(response, VkInfo.class);
+            return vkInfo.getResponse()[0].getId();
+        } catch (OauthApiException oauthApiException) {
+            logger.error(oauthApiException.getMessage(), oauthApiException);
+            return null;
+        }
     }
 }

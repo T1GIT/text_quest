@@ -1,6 +1,6 @@
 package app.text_quest.controller.util.oauth.util.http_request.types;
 
-import app.text_quest.controller.util.oauth.util.exception.OauthApiError;
+import app.text_quest.controller.util.oauth.util.exception.OauthApiException;
 import app.text_quest.controller.util.oauth.util.http_request.HttpRequest;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class GetRequest extends HttpRequest {
     }
 
     @Override
-    public String send() throws OauthApiError {
+    public String send() throws OauthApiException {
         try {
             HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
             con.setRequestMethod("GET");
@@ -23,7 +23,7 @@ public class GetRequest extends HttpRequest {
             if (con.getResponseCode() == 200) {
                 return readInputStream(con.getInputStream());
             } else {
-                throw new OauthApiError(con.getResponseMessage(), con.getResponseCode());
+                throw new OauthApiException(con.getResponseMessage(), con.getResponseCode());
             }
         } catch (IOException e) {
             logger.error(e.getMessage(), e);

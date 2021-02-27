@@ -7,5 +7,5 @@ public enum ReqParam {
     // For the code request
     CLIENT_ID, CLIENT_SECRET, ERROR, GRANT_TYPE, CODE,
     // For the id request
-    ACCESS_TOKEN, DISPLAY, FORMAT, ID, OAUTH_TOKEN
+    ACCESS_TOKEN, DISPLAY, FORMAT, ID, OAUTH_TOKEN, FIELDS, V
 }
