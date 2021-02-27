@@ -32,6 +32,7 @@ public class PswCrypt {
         return null;
     }
 
+    // TODO: 27.02.2021 Remove salt from the table
     public static boolean check(String psw, String pswHash) {
         try {
             String[] parts = pswHash.split(":");
