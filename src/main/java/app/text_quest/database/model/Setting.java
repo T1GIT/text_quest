@@ -1,5 +1,6 @@
 package app.text_quest.database.model;
 
+import app.text_quest.database.model.user.User;
 import app.text_quest.database.util.AuditModel;
 import app.text_quest.database.util.enums.Color;
 import app.text_quest.database.util.enums.Font;

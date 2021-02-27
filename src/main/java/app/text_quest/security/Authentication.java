@@ -1,6 +1,6 @@
 package app.text_quest.security;
 
-import app.text_quest.database.model.User;
+import app.text_quest.database.model.user.User;
 
 
 public interface Authentication {

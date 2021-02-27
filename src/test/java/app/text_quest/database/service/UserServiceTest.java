@@ -1,7 +1,6 @@
 package app.text_quest.database.service;
 
-import app.text_quest.database.model.Psw;
-import app.text_quest.database.model.User;
+import app.text_quest.database.model.user.User;
 import app.text_quest.database.util.modelFactory.types.UserFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +26,6 @@ class UserServiceTest {
     void addUser() {
         User user = userFactory.create();
         try {
-            User findUser = userService.getByEmail(user.getEmail());
-            if (findUser != null) {
-                userService.delete(findUser);
-            }
             userService.addUser(user);
         } finally {
             userService.delete(user);
@@ -41,9 +36,7 @@ class UserServiceTest {
     @Transactional
     void delete() {
         User user = userFactory.create();
-        if (userService.getByEmail(user.getEmail()) == null) {
-            userService.addUser(user);
-        }
+        userService.addUser(user);
         userService.delete(user);
     }
 
@@ -59,14 +52,8 @@ class UserServiceTest {
 
         User user = userFactory.create();
         try {
-            User findUser = userService.getByEmail(user.getEmail());
-            if (findUser != null) {
-                userService.delete(findUser);
-            }
             userService.addUser(user);
             user.setName("name");
-            Psw psw = user.getPsw();
-            psw.setSalt(new byte[]{0, 0, 0});
             userService.editUser(user);
         } finally {
             userService.delete(user);

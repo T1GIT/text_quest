@@ -1,6 +1,6 @@
 package app.text_quest.database.service.impl;
 
-import app.text_quest.database.model.User;
+import app.text_quest.database.model.user.User;
 import app.text_quest.database.repo.UserRepository;
 import app.text_quest.database.service.UserService;
 import org.springframework.stereotype.Service;
@@ -31,11 +31,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User editUser(User user) {
         return userRepository.saveAndFlush(user);
-    }
-
-    @Override
-    public User getByEmail(String email) {
-        return userRepository.findByEmail(email);
     }
 
     @Override

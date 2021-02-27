@@ -1,6 +1,6 @@
 package app.text_quest.security.impl;
 
-import app.text_quest.database.model.User;
+import app.text_quest.database.model.user.User;
 import app.text_quest.security.Authentication;
 import org.springframework.stereotype.Component;
 

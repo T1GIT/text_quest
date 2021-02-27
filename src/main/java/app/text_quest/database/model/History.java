@@ -1,6 +1,7 @@
 package app.text_quest.database.model;
 
 import app.text_quest.database.model.msg.Msg;
+import app.text_quest.database.model.user.User;
 import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;

@@ -1,0 +1,38 @@
+package app.text_quest.database.model.user.types;
+
+import app.text_quest.database.model.user.User;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "basic_users")
+public class BasicUser extends User {
+
+    @Column(nullable = false, unique = true, updatable = false)
+    private String oauthId;
+
+    @Column(nullable = false)
+    private String psw;
+
+    public BasicUser() {
+    }
+
+    public String getOauthId() {
+        return oauthId;
+    }
+
+    public void setOauthId(String oauthId) {
+        this.oauthId = oauthId;
+    }
+
+    public String getPsw() {
+        return psw;
+    }
+
+    public void setPsw(String psw) {
+        this.psw = psw;
+    }
+}

@@ -1,5 +1,8 @@
-package app.text_quest.database.model;
+package app.text_quest.database.model.user;
 
+import app.text_quest.database.model.History;
+import app.text_quest.database.model.Setting;
+import app.text_quest.database.model.State;
 import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -10,24 +13,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User extends AuditModel {
-
-    @Column(nullable = false, length = 50, updatable = false)
-    private String email;
 
     @Column(length = 50)
     private String name;
-
-    @Column(updatable = false)
-    private boolean google;
-
-    @JsonIgnore
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
-    private Psw psw;
-
-    @JsonIgnore
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
-    private Token token;
 
     @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
@@ -43,20 +33,8 @@ public class User extends AuditModel {
 
     public User() { }
 
-    public String getEmail() {
-        return email;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public Psw getPsw() {
-        return psw;
-    }
-
-    public Token getToken() {
-        return token;
     }
 
     public Setting getSetting() {
@@ -71,35 +49,13 @@ public class User extends AuditModel {
         return histories;
     }
 
-    public boolean isGoogle() {
-        return google;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setPsw(Psw psw) {
-        psw.setUser(this);
-        this.psw = psw;
-    }
-
-    public void setToken(Token token) {
-        token.setUser(this);
-        this.token = token;
     }
 
     public void setSetting(Setting setting) {
         setting.setUser(this);
         this.setting = setting;
-    }
-
-    public void setGoogle(boolean google) {
-        this.google = google;
     }
 
     public void addHistory(History history) {
@@ -115,9 +71,7 @@ public class User extends AuditModel {
     @Override
     public String toString() {
         return "User{" +
-                "email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", psw=" + psw +
+                "name='" + name + '\'' +
                 ", setting=" + setting +
                 ", states=" + states +
                 ", histories=" + histories +
