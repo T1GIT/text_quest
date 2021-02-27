@@ -2,46 +2,82 @@ package app.text_quest.security;
 
 import org.apache.log4j.Logger;
 
-import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Arrays;
-import java.util.Random;
 
 
 public class PswCrypt {
 
     private static final Logger logger = Logger.getLogger("errorLogger");
-    private static final Random RANDOM = new SecureRandom();
-    private static final int ITERATIONS = 10000;
+    private static final int ITERATIONS = 1000;
     private static final int KEY_LENGTH = 512;
+    private static final String ALGORITHM = "PBKDF2WithHmacSHA512";
 
-    private static byte[] hashBytes(char[] password, byte[] salt) {
+    public static String crypt(String password) {
         try {
-            SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-            PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
-            SecretKey key = secretKeyFactory.generateSecret(spec);
-            return key.getEncoded();
+            char[] chars = password.toCharArray();
+            byte[] salt = getSalt();
+
+            PBEKeySpec spec = new PBEKeySpec(chars, salt, ITERATIONS, KEY_LENGTH);
+            SecretKeyFactory skf = SecretKeyFactory.getInstance(ALGORITHM);
+            byte[] hash = skf.generateSecret(spec).getEncoded();
+            return String.format("%s:%d:%s:%s", ALGORITHM, ITERATIONS, toHex(salt), toHex(hash));
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            logger.error("PasswordCrypt", e);
+            logger.error(e.getMessage(), e);
         }
         return null;
     }
 
-    public static byte[] getHashOf(String password, byte[] salt) {
-        return hashBytes(password.toCharArray(), salt);
+    public static boolean check(String psw, String pswHash) {
+        try {
+            String[] parts = pswHash.split(":");
+            String algorithm = parts[0];
+            int iterations = Integer.parseInt(parts[1]);
+            byte[] salt = fromHex(parts[2]);
+            byte[] hash = fromHex(parts[3]);
+
+            PBEKeySpec spec = new PBEKeySpec(psw.toCharArray(), salt, iterations, hash.length * 8);
+            SecretKeyFactory skf = SecretKeyFactory.getInstance(algorithm);
+            byte[] testHash = skf.generateSecret(spec).getEncoded();
+
+            int diff = hash.length ^ testHash.length;
+            for (int i = 0; i < hash.length && i < testHash.length; i++) {
+                diff |= hash[i] ^ testHash[i];
+            }
+            return diff == 0;
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            logger.error(e.getMessage(), e);
+            return false;
+        }
     }
 
-    public static byte[] genSalt() {
+    private static byte[] getSalt() throws NoSuchAlgorithmException {
+        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
         byte[] salt = new byte[16];
-        RANDOM.nextBytes(salt);
+        sr.nextBytes(salt);
         return salt;
     }
 
-    public static boolean checkPassword(String password, byte[] salt, byte[] hash) {
-        return Arrays.equals(getHashOf(password, salt), hash);
+    private static String toHex(byte[] array) {
+        BigInteger bi = new BigInteger(1, array);
+        String hex = bi.toString(16);
+        int paddingLength = array.length * 2 - hex.length();
+        if (paddingLength > 0) {
+            return String.format("%0" + paddingLength + "d", 0) + hex;
+        } else {
+            return hex;
+        }
+    }
+
+    private static byte[] fromHex(String hex) throws NoSuchAlgorithmException {
+        byte[] bytes = new byte[hex.length() / 2];
+        for (int i = 0; i < bytes.length; i++) {
+            bytes[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
+        }
+        return bytes;
     }
 }
