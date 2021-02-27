@@ -10,26 +10,20 @@ import java.net.URL;
 
 public class GetRequest extends HttpRequest {
 
-    public GetRequest(String domain) {
-        super(domain);
-    }
-
-    @Override
-    public GetRequest addParam(String param, String value) {
-        this.urlBuilder.addParam(param, value);
-        return this;
+    public GetRequest(String url) {
+        super(url);
     }
 
     @Override
     public String send() throws OauthApiError {
         try {
-            HttpURLConnection con = (HttpURLConnection) new URL(urlBuilder.build()).openConnection();
+            HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
             con.setRequestMethod("GET");
             con.disconnect();
             if (con.getResponseCode() == 200) {
                 return readInputStream(con.getInputStream());
             } else {
-                throw new OauthApiError(readInputStream(con.getErrorStream()), con.getResponseCode());
+                throw new OauthApiError(con.getResponseMessage(), con.getResponseCode());
             }
         } catch (IOException e) {
             logger.error(e.getMessage(), e);

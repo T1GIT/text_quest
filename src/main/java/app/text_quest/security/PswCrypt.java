@@ -18,18 +18,17 @@ public class PswCrypt {
     private static final String ALGORITHM = "PBKDF2WithHmacSHA512";
 
     public static String crypt(String password) {
+        char[] chars = password.toCharArray();
+        byte[] salt = getSalt();
+        byte[] hash = null;
         try {
-            char[] chars = password.toCharArray();
-            byte[] salt = getSalt();
-
             PBEKeySpec spec = new PBEKeySpec(chars, salt, ITERATIONS, KEY_LENGTH);
             SecretKeyFactory skf = SecretKeyFactory.getInstance(ALGORITHM);
-            byte[] hash = skf.generateSecret(spec).getEncoded();
-            return String.format("%s:%d:%s:%s", ALGORITHM, ITERATIONS, toHex(salt), toHex(hash));
+            hash = skf.generateSecret(spec).getEncoded();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             logger.error(e.getMessage(), e);
         }
-        return null;
+        return String.format("%s:%d:%s:%s", ALGORITHM, ITERATIONS, toHex(salt), toHex(hash));
     }
 
     // TODO: 27.02.2021 Remove salt from the table
@@ -56,10 +55,14 @@ public class PswCrypt {
         }
     }
 
-    private static byte[] getSalt() throws NoSuchAlgorithmException {
-        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+    private static byte[] getSalt() {
         byte[] salt = new byte[16];
-        sr.nextBytes(salt);
+        try {
+            SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+            secureRandom.nextBytes(salt);
+        } catch (NoSuchAlgorithmException e) {
+            logger.error(e.getMessage(), e);
+        }
         return salt;
     }
 

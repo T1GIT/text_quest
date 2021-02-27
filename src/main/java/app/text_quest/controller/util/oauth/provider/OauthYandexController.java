@@ -6,12 +6,14 @@ import app.text_quest.controller.util.oauth.enums.Provider;
 import app.text_quest.controller.util.oauth.enums.ReqParam;
 import app.text_quest.controller.util.oauth.util.OauthController;
 import app.text_quest.controller.util.oauth.util.exception.OauthApiError;
+import app.text_quest.controller.util.oauth.util.http_request.UrlBuilder;
 import app.text_quest.controller.util.oauth.util.http_request.types.GetRequest;
 import app.text_quest.controller.util.oauth.util.http_request.types.PostRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 
 
 @Controller
@@ -34,12 +36,14 @@ public class OauthYandexController extends OauthController {
 
     @Override
     public String receiveToken(String code) {
-        PostRequest request = new PostRequest(props.get(PropName.DOMAIN_TOKEN));
-        request
-                .addParam(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID))
-                .addParam(ReqParam.CLIENT_SECRET, props.get(PropName.CLIENT_SECRET))
-                .addParam(ReqParam.CODE, code)
-                .addParam(ReqParam.GRANT_TYPE, "authorization_code");
+        UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_TOKEN));
+        PostRequest request = new PostRequest(urlBuilder.build());
+        HashMap<ReqParam, String> paramMap = new HashMap<>();
+        paramMap.put(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID));
+        paramMap.put(ReqParam.CLIENT_SECRET, props.get(PropName.CLIENT_SECRET));
+        paramMap.put(ReqParam.CODE, code);
+        paramMap.put(ReqParam.GRANT_TYPE, "authorization_code");
+        request.setData(paramMap);
         try {
             String response = request.send();
             return getFromJson(ReqParam.ACCESS_TOKEN, response);
@@ -49,12 +53,13 @@ public class OauthYandexController extends OauthController {
         }
     }
 
+    @GetMapping("id")
     @Override
     public String receiveId(String token) {
-        GetRequest request = new GetRequest(props.get(PropName.DOMAIN_ID));
-        request
+        UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_ID))
                 .addParam(ReqParam.FORMAT, "json")
                 .addParam(ReqParam.OAUTH_TOKEN, token);
+        GetRequest request = new GetRequest(urlBuilder.build());
         try {
             String response = request.send();
             return getFromJson(ReqParam.ID, response);

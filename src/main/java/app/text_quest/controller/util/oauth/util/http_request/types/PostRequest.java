@@ -1,28 +1,37 @@
 package app.text_quest.controller.util.oauth.util.http_request.types;
 
+import app.text_quest.controller.util.oauth.enums.ReqParam;
 import app.text_quest.controller.util.oauth.util.exception.OauthApiError;
 import app.text_quest.controller.util.oauth.util.http_request.HttpRequest;
-import app.text_quest.controller.util.oauth.util.http_request.UrlBuilder;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class PostRequest extends HttpRequest {
 
     private byte[] data = new byte[0];
 
-    public PostRequest(String domain) {
-        super(domain);
+    public PostRequest(String url) {
+        super(url);
+    }
+
+    public void setData(HashMap<ReqParam, String> data) {
+        List<String> paramList = new ArrayList<>(data.size());
+        data.forEach((k, v) -> paramList.add(k.name().toLowerCase() + "=" + v));
+        this.data = String.join("&", paramList).getBytes(StandardCharsets.UTF_8);
     }
 
     @Override
     public String send() throws OauthApiError {
         try {
-            this.data = UrlBuilder.parseParams(params).getBytes();
-            URL url = new URL(urlBuilder.build());
+            URL url = new URL(this.url);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setDoOutput(true);
             con.setInstanceFollowRedirects(false);
@@ -35,14 +44,10 @@ public class PostRequest extends HttpRequest {
                 out.write(this.data);
                 out.flush();
             }
-            if (con.getResponseCode() == 200) {
-                return readInputStream(con.getInputStream());
-            } else {
-                throw new OauthApiError(readInputStream(con.getErrorStream()), con.getResponseCode());
-            }
+            return readInputStream(con.getInputStream());
         } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-            return null;
+            e.printStackTrace();
         }
+        return null;
     }
 }
