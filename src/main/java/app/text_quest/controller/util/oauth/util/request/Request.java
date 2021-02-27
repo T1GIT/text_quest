@@ -1,4 +1,4 @@
-package app.text_quest.controller.util.oauth.util.http_request;
+package app.text_quest.controller.util.oauth.util.request;
 
 import app.text_quest.controller.util.oauth.util.exception.OauthApiException;
 import app.text_quest.util.LoggerFactory;
@@ -11,12 +11,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
-public abstract class HttpRequest {
+public abstract class Request {
 
     protected final Logger logger = LoggerFactory.getLogger(LogType.ERROR);
     protected final String url;
 
-    public HttpRequest(String url) {
+    public Request(String url) {
         this.url = url;
     }
 

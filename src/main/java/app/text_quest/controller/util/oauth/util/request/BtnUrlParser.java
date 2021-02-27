@@ -1,4 +1,4 @@
-package app.text_quest.controller.util.oauth.util.http_request;
+package app.text_quest.controller.util.oauth.util.request;
 
 import app.text_quest.TextQuestApplication;
 import app.text_quest.controller.util.oauth.enums.PropName;

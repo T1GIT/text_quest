@@ -1,8 +1,8 @@
-package app.text_quest.controller.util.oauth.util.http_request.types;
+package app.text_quest.controller.util.oauth.util.request.types;
 
 import app.text_quest.controller.util.oauth.enums.ReqParam;
 import app.text_quest.controller.util.oauth.util.exception.OauthApiException;
-import app.text_quest.controller.util.oauth.util.http_request.HttpRequest;
+import app.text_quest.controller.util.oauth.util.request.Request;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class PostRequest extends HttpRequest {
+public class PostRequest extends Request {
 
     private byte[] data = new byte[0];
 

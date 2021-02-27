@@ -1,14 +1,14 @@
-package app.text_quest.controller.util.oauth.util.http_request.types;
+package app.text_quest.controller.util.oauth.util.request.types;
 
 import app.text_quest.controller.util.oauth.util.exception.OauthApiException;
-import app.text_quest.controller.util.oauth.util.http_request.HttpRequest;
+import app.text_quest.controller.util.oauth.util.request.Request;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-public class GetRequest extends HttpRequest {
+public class GetRequest extends Request {
 
     public GetRequest(String url) {
         super(url);

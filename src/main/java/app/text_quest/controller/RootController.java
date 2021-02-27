@@ -3,7 +3,7 @@ package app.text_quest.controller;
 
 import app.text_quest.controller.util.oauth.enums.Provider;
 import app.text_quest.controller.util.oauth.util.ObjectParser;
-import app.text_quest.controller.util.oauth.util.http_request.BtnUrlParser;
+import app.text_quest.controller.util.oauth.util.request.BtnUrlParser;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.enums.LogType;
 import org.apache.log4j.Logger;
