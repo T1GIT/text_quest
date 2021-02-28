@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class BasicUser extends User {
 
     @Column(nullable = false, unique = true, updatable = false)
-    private String oauthId;
+    private String mail;
 
     @Column(nullable = false)
     private String psw;
@@ -20,12 +20,12 @@ public class BasicUser extends User {
     public BasicUser() {
     }
 
-    public String getOauthId() {
-        return oauthId;
+    public String getMail() {
+        return mail;
     }
 
-    public void setOauthId(String oauthId) {
-        this.oauthId = oauthId;
+    public void setMail(String main) {
+        this.mail = main;
     }
 
     public String getPsw() {

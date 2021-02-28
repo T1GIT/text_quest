@@ -2,15 +2,16 @@ package app.text_quest.controller.util.oauth.provider;
 
 
 import app.text_quest.TextQuestApplication;
+import app.text_quest.controller.util.oauth.OauthController;
 import app.text_quest.controller.util.oauth.enums.PropName;
 import app.text_quest.controller.util.oauth.enums.Provider;
 import app.text_quest.controller.util.oauth.enums.ReqParam;
-import app.text_quest.controller.util.oauth.util.OauthController;
 import app.text_quest.controller.util.oauth.util.exception.OauthApiException;
 import app.text_quest.controller.util.oauth.util.json.JsonToken;
 import app.text_quest.controller.util.oauth.util.json.vk.JsonVk;
 import app.text_quest.controller.util.oauth.util.request.UrlBuilder;
 import app.text_quest.controller.util.oauth.util.request.types.GetRequest;
+import app.text_quest.database.service.OauthUserService;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -23,8 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class OauthVkController extends OauthController {
 
-    public OauthVkController() {
-        super(Provider.VK);
+    public OauthVkController(OauthUserService oauthUserService) {
+        super(oauthUserService, Provider.VK);
     }
 
     @GetMapping("oauth/vk")

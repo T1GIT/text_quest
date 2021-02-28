@@ -1,4 +1,4 @@
-package app.text_quest.controller.util.oauth.util;
+package app.text_quest.controller.util.oauth;
 
 import app.text_quest.TextQuestApplication;
 import app.text_quest.controller.util.oauth.enums.PropName;
@@ -12,6 +12,9 @@ import app.text_quest.controller.util.oauth.util.props.OauthPropsFactory;
 import app.text_quest.controller.util.oauth.util.request.UrlBuilder;
 import app.text_quest.controller.util.oauth.util.request.types.GetRequest;
 import app.text_quest.controller.util.oauth.util.request.types.PostRequest;
+import app.text_quest.database.model.user.User;
+import app.text_quest.database.model.user.types.OauthUser;
+import app.text_quest.database.service.OauthUserService;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.enums.LogType;
 import com.google.gson.Gson;
@@ -26,28 +29,30 @@ public abstract class OauthController {
 
     private static final OauthPropsFactory propsFactory = new OauthPropsFactory();
     protected static final Logger logger = LoggerFactory.getLogger(LogType.ERROR);
+    protected final OauthUserService oauthUserService;
     protected final Provider provider;
     protected final OauthProps props;
 
-    public OauthController(Provider provider) {
+    public OauthController(OauthUserService oauthUserService, Provider provider) {
+        this.oauthUserService = oauthUserService;
         this.provider = provider;
         this.props = propsFactory.getFor(provider);
     }
 
-    // TODO: 25.02.2021 Random links for users
     public String oauthEndpoint(Cookie cookieState, HttpServletRequest request) {
         if (request.getParameter(ReqParam.ERROR.name().toLowerCase()) == null) {
             String code = request.getParameter(ReqParam.CODE.name().toLowerCase());
             String state = request.getParameter(ReqParam.STATE.name().toLowerCase());
             if (state.equals(cookieState.getValue())) {
                 String token = receiveToken(code);
-                System.out.println(receiveId(token)); // TODO: Authorisation
+                String oauthId = receiveId(token);
+                User user = authorise(oauthId);
             }
         }
         return "redirect:/";
     }
 
-    public String receiveToken(String code) {
+    protected String receiveToken(String code) {
         UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_TOKEN));
         PostRequest request = new PostRequest(urlBuilder.build());
         HashMap<ReqParam, String> paramMap = new HashMap<>();
@@ -68,7 +73,7 @@ public abstract class OauthController {
         }
     }
 
-    public String receiveId(String token) {
+    protected String receiveId(String token) {
         UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_ID))
                 .addParam(ReqParam.ACCESS_TOKEN, token)
                 .addParam(ReqParam.OAUTH_TOKEN, token);
@@ -81,5 +86,15 @@ public abstract class OauthController {
             logger.error(e.getMessage(), e);
             return null;
         }
+    }
+
+    protected OauthUser authorise(String oauthId) {
+        OauthUser user = oauthUserService.getByOauthId(oauthId);
+        if (user == null) {
+            user = new OauthUser();
+            user.setOauthId(oauthId);
+            oauthUserService.addOauthUser(user);
+        }
+        return user;
     }
 }
