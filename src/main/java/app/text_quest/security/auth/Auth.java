@@ -1,9 +1,9 @@
-package app.text_quest.security;
+package app.text_quest.security.auth;
 
 import app.text_quest.database.model.user.User;
 
 
-public interface Authentication {
+public interface Auth {
 
     boolean isAuthenticated();
 

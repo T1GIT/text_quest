@@ -1,25 +1,27 @@
 package app.text_quest.security;
 
+import app.text_quest.security.util.secretFactory.types.SaltFactory;
 import org.apache.log4j.Logger;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 
 
-public class PswCrypt {
+public abstract class Crypt {
 
     private static final Logger logger = Logger.getLogger("errorLogger");
+    private static final SaltFactory saltFactory = new SaltFactory();
     private static final int ITERATIONS = 1000;
     private static final int KEY_LENGTH = 512;
+    private static final int SALT_LENGTH = 16;
     private static final String ALGORITHM = "PBKDF2WithHmacSHA512";
 
     public static String crypt(String password) {
         char[] chars = password.toCharArray();
-        byte[] salt = generateSalt();
+        byte[] salt = saltFactory.create();
         byte[] hash = null;
         try {
             PBEKeySpec spec = new PBEKeySpec(chars, salt, ITERATIONS, KEY_LENGTH);
@@ -31,7 +33,6 @@ public class PswCrypt {
         return String.format("%s:%d:%s:%s", ALGORITHM, ITERATIONS, toHex(salt), toHex(hash));
     }
 
-    // TODO: 27.02.2021 Remove salt from the table
     public static boolean check(String psw, String pswHash) {
         try {
             String[] parts = pswHash.split(":");
@@ -55,18 +56,7 @@ public class PswCrypt {
         }
     }
 
-    private static byte[] generateSalt() {
-        byte[] salt = new byte[16];
-        try {
-            SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
-            secureRandom.nextBytes(salt);
-        } catch (NoSuchAlgorithmException e) {
-            logger.error(e.getMessage(), e);
-        }
-        return salt;
-    }
-
-    private static String toHex(byte[] array) {
+    public static String toHex(byte[] array) {
         BigInteger bi = new BigInteger(1, array);
         String hex = bi.toString(16);
         int paddingLength = array.length * 2 - hex.length();
@@ -77,7 +67,7 @@ public class PswCrypt {
         }
     }
 
-    private static byte[] fromHex(String hex) throws NoSuchAlgorithmException {
+    public static byte[] fromHex(String hex) throws NoSuchAlgorithmException {
         byte[] bytes = new byte[hex.length() / 2];
         for (int i = 0; i < bytes.length; i++) {
             bytes[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
