@@ -27,18 +27,18 @@ public class LoggingFilter extends AbstractFilter {
     }
 
     @Override
-    protected void doAction(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
+    protected void doAction(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         long startTime = new Date().getTime();
-        chain.doFilter(req, res);
-        String content = switch (res.getStatus()) {
-            case 302 -> "redirect:" + res.getHeader("Location");
+        chain.doFilter(request, response);
+        String content = switch (response.getStatus()) {
+            case 302 -> "redirect:" + response.getHeader("Location");
             case 404 -> "not found:redirect:" + TextQuestApplication.getRootUrl();
-            default -> res.getContentType();
+            default -> response.getContentType();
         };
         requestLogger.info(String.format("%3d %-6s %-30s %4d ms   %s",
-                res.getStatus(),
-                req.getMethod(),
-                req.getRequestURI(),
+                response.getStatus(),
+                request.getMethod(),
+                request.getRequestURI(),
                 new Date().getTime() - startTime,
                 content
                 )

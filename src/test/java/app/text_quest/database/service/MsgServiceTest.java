@@ -25,10 +25,10 @@ class MsgServiceTest {
     private MsgService msgService;
 
     @Test
-    void addMsg() {
+    void add() {
         Msg msg = msgFactory.create();
         try {
-            msgService.addMsg(msg);
+            msgService.add(msg);
         } finally {
             msgService.delete(msg);
         }
@@ -37,17 +37,17 @@ class MsgServiceTest {
     @Test
     void delete() {
         Msg msg = msgFactory.create();
-        msgService.addMsg(msg);
+        msgService.add(msg);
         msgService.delete(msg);
     }
 
     @Test
-    void editMsg() {
+    void update() {
         Text msg = textFactory.create();
         try {
-            msgService.addMsg(msg);
+            msgService.add(msg);
             msg.setVal("newText");
-            msgService.editMsg(msg);
+            msgService.add(msg);
         } finally {
             msgService.delete(msg);
         }

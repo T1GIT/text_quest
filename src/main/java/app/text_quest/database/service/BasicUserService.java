@@ -2,19 +2,10 @@ package app.text_quest.database.service;
 
 
 import app.text_quest.database.model.user.types.BasicUser;
+import app.text_quest.database.util.AbstractService;
 
-import java.util.List;
 
-
-public interface BasicUserService {
-
-    BasicUser addBasicUser(BasicUser basicUser);
-
-    void delete(BasicUser basicUser);
+public interface BasicUserService extends AbstractService<BasicUser> {
 
     BasicUser getByMail(String mail);
-
-    BasicUser editBasicUser(BasicUser basicUser);
-
-    List<BasicUser> getAll();
 }

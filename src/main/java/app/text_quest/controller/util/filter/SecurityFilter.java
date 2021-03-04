@@ -2,21 +2,20 @@ package app.text_quest.controller.util.filter;
 
 import app.text_quest.controller.oauth.util.enums.SecureParam;
 import app.text_quest.controller.util.CookieUtil;
-import app.text_quest.controller.util.JwtUtil;
-import app.text_quest.controller.util.enums.Period;
-import app.text_quest.database.model.Token;
+import app.text_quest.controller.util.exceptions.types.MissedJwtException;
+import app.text_quest.controller.util.exceptions.types.MissedRefreshException;
+import app.text_quest.controller.util.token.JwtUtil;
+import app.text_quest.controller.util.token.RefreshUtil;
+import app.text_quest.database.model.Refresh;
 import app.text_quest.database.model.user.User;
-import app.text_quest.database.service.TokenService;
+import app.text_quest.database.service.RefreshService;
 import app.text_quest.database.service.UserService;
 import app.text_quest.security.auth.Auth;
-import app.text_quest.security.util.secretFactory.types.TokenFactory;
-import app.text_quest.util.exceptions.MissedJwtException;
-import app.text_quest.util.exceptions.MissedTokenException;
+import app.text_quest.security.util.secretFactory.types.RefreshFactory;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -30,85 +29,60 @@ import java.io.IOException;
 @Order(2)
 public class SecurityFilter extends AbstractFilter {
 
-    private final static TokenFactory tokenFactory = new TokenFactory();
+    private final static RefreshFactory REFRESH_FACTORY = new RefreshFactory();
 
-    private final TokenService tokenService;
+    private final RefreshService refreshService;
     private final UserService userService;
 
-    public SecurityFilter(Auth auth, TokenService tokenService, UserService userService) {
-        super(auth, "^/|(/game/.*)$");
-        this.tokenService = tokenService;
+    public SecurityFilter(Auth auth, RefreshService refreshService, UserService userService) {
+        super(auth, "^.*$", "^/(build|oauth|auth)/.*$");
+        this.refreshService = refreshService;
         this.userService = userService;
     }
 
     @Override
-    public void doAction(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        if (req.getRequestURI().equals("/")) {
-            User user = (User) req.getSession().getAttribute(SecureParam.NEEDS_TOKENS.name());
-            if (user != null) initAuth(req, res, user);
-        } else {
-            try {
-                Cookie tokenCookie = CookieUtil.find(req, SecureParam.TOKEN.name());
-                if (tokenCookie == null) throw new MissedTokenException();
-                auth.setUser(parseUser(req, res, tokenCookie.getValue()));
-            } catch (MissedTokenException e) {
-                initAccessError(res);
+    public void doAction(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+        try {
+            Cookie tokenCookie = CookieUtil.find(request, SecureParam.REFRESH.name());
+            if (tokenCookie == null) throw new MissedRefreshException();
+            auth.setUser(parseUser(request, response, tokenCookie.getValue()));
+            chain.doFilter(request, response);
+        } catch (MissedRefreshException e) {
+            if (!request.getRequestURI().equals("/")) {
+                initAccessError(response);
+            } else {
+                chain.doFilter(request, response);
             }
         }
-        chain.doFilter(req, res);
     }
 
-    @Transactional
-    protected void initAuth(HttpServletRequest req, HttpServletResponse res, User user) {
-        Token token = new Token();
-        token.setValue(tokenFactory.create());
-        user.addToken(token);
-        userService.editUser(user);
-        attachToken(res, token);
-        attachJwt(res, user);
-        req.getSession().removeAttribute(SecureParam.NEEDS_TOKENS.name());
-    }
-
-    protected User parseUser(HttpServletRequest req, HttpServletResponse res, String tokenString) throws MissedTokenException {
+    protected User parseUser(HttpServletRequest request, HttpServletResponse response, String tokenString) throws MissedRefreshException {
         User user;
         try {
-            Cookie jwtCookie = CookieUtil.find(req, SecureParam.JWT.name());
-            if (jwtCookie == null) throw new MissedJwtException();
-            user = JwtUtil.parseUser(jwtCookie.getValue());
-            auth.setUser(user);
+            Cookie jwtCookie = CookieUtil.find(request, SecureParam.JWT.name());
+            if (jwtCookie == null) {
+                throw new MissedJwtException();
+            }
+            user = JwtUtil.extract(jwtCookie.getValue());
         } catch (MissedJwtException | SignatureException | MalformedJwtException e) {
-            Token token = tokenService.getByValue(tokenString);
-            if (token == null) throw new MissedTokenException();
-            user = token.getUser();
-            refreshTokens(res, token);
+            Refresh refresh = refreshService.getByValue(tokenString);
+            if (refresh == null) throw new MissedRefreshException();
+            updateTokens(response, refresh);
+            user = refresh.getUser();
         }
         return user;
     }
 
-    protected void initAccessError(HttpServletResponse res) throws IOException {
-        CookieUtil.remove(res, SecureParam.TOKEN.name());
-        CookieUtil.remove(res, SecureParam.JWT.name());
-        res.sendError(501);
+    protected void initAccessError(HttpServletResponse response) throws IOException {
+        CookieUtil.remove(response, SecureParam.REFRESH.name());
+        CookieUtil.remove(response, SecureParam.JWT.name());
+        response.sendError(501, "Non authorised access");
     }
 
-    protected void refreshTokens(HttpServletResponse response, Token token) {
-        token.setValue(tokenFactory.create());
-        tokenService.editToken(token);
-        attachToken(response, token);
-        attachJwt(response, token.getUser());
-    }
-
-    private void attachJwt(HttpServletResponse response, User user) {
-        response.addCookie(CookieUtil.create(
-                SecureParam.JWT.name(),
-                JwtUtil.parseJwt(user),
-                JwtUtil.getPeriod()));
-    }
-
-    private void attachToken(HttpServletResponse response, Token token) {
-        response.addCookie(CookieUtil.create(
-                SecureParam.TOKEN.name(),
-                token.getValue(),
-                Period.YEAR));
+    protected void updateTokens(HttpServletResponse response, Refresh refresh) {
+        refresh.setValue(REFRESH_FACTORY.create());
+        refreshService.update(refresh);
+        RefreshUtil.attach(response, refresh);
+        JwtUtil.attach(response, refresh.getUser());
     }
 }

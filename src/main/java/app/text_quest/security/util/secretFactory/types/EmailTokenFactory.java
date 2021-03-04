@@ -3,12 +3,14 @@ package app.text_quest.security.util.secretFactory.types;
 import app.text_quest.security.util.secretFactory.AbstractSecretFactory;
 
 
-public class TokenFactory extends AbstractSecretFactory<String> {
+public class EmailTokenFactory extends AbstractSecretFactory<String> {
 
-    private static final int LENGTH = 50;
+    public EmailTokenFactory() {
+        super(30);
+    }
 
     @Override
     public String create() {
-        return rndString(LENGTH);
+        return rndString(length);
     }
 }

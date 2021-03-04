@@ -4,7 +4,9 @@ package app.text_quest.controller;
 import app.text_quest.controller.oauth.util.enums.Provider;
 import app.text_quest.controller.oauth.util.enums.SecureParam;
 import app.text_quest.controller.oauth.util.request.BtnUrlParser;
+import app.text_quest.controller.util.CookieUtil;
 import app.text_quest.controller.util.ObjectParser;
+import app.text_quest.controller.util.enums.Period;
 import app.text_quest.security.auth.Auth;
 import app.text_quest.security.util.secretFactory.types.StateFactory;
 import app.text_quest.util.LoggerFactory;
@@ -33,10 +35,10 @@ public class RootController {
     }
 
     @GetMapping("")
-    public String root(HttpServletRequest request, Model model, HttpServletResponse response) {
+    public String root(HttpServletRequest request, Model model, HttpServletResponse res) {
         try {
 
-            injectData(request, model);
+            injectData(res, model);
 
             return "index.min";
         } catch (Exception e) {
@@ -45,9 +47,9 @@ public class RootController {
         return null; // TODO: add error page
     }
 
-    private void injectData(HttpServletRequest request, Model model) {
+    private void injectData(HttpServletResponse res, Model model) {
         String state = stateFactory.create();
-        request.getSession().setAttribute(SecureParam.STATE.name(), state);
+        CookieUtil.add(res, SecureParam.STATE.name(), state, Period.DAY);
         model.addAttribute("btnHref", ObjectParser.parse(getBtnUrl(state)));
         model.addAttribute("isAuthorised", ObjectParser.parse(auth.isAuthenticated()));
     }

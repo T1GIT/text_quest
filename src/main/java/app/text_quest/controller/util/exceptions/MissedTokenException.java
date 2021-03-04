@@ -1,4 +1,4 @@
-package app.text_quest.util.exceptions;
+package app.text_quest.controller.util.exceptions;
 
 public class MissedTokenException extends Exception {
 

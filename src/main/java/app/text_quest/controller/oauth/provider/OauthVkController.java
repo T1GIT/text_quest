@@ -6,12 +6,11 @@ import app.text_quest.controller.oauth.OauthController;
 import app.text_quest.controller.oauth.util.enums.PropName;
 import app.text_quest.controller.oauth.util.enums.Provider;
 import app.text_quest.controller.oauth.util.enums.ReqParam;
+import app.text_quest.controller.oauth.util.exceptions.types.ApiException;
 import app.text_quest.controller.oauth.util.json.JsonToken;
 import app.text_quest.controller.oauth.util.json.vk.JsonVk;
 import app.text_quest.controller.oauth.util.request.UrlBuilder;
 import app.text_quest.controller.oauth.util.request.types.GetRequest;
-import app.text_quest.security.auth.OauthAuthManager;
-import app.text_quest.util.exceptions.OauthApiException;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class OauthVkController extends OauthController {
 
-    public OauthVkController(OauthAuthManager oauthAuthManager) {
-        super(oauthAuthManager, Provider.VK);
+    public OauthVkController() {
+        super(Provider.VK);
     }
 
     @GetMapping("/vk")
@@ -34,7 +33,7 @@ public class OauthVkController extends OauthController {
     }
 
     @Override
-    public String receiveToken(String code) throws OauthApiException {
+    public String receiveToken(String code) throws ApiException {
         UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_TOKEN))
                 .addParam(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID))
                 .addParam(ReqParam.CLIENT_SECRET, props.get(PropName.CLIENT_SECRET))
@@ -48,7 +47,7 @@ public class OauthVkController extends OauthController {
     }
 
     @Override
-    public String receiveId(String token) throws OauthApiException {
+    public String receiveId(String token) throws ApiException {
         UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_ID))
                 .addParam(ReqParam.ACCESS_TOKEN, token)
                 .addParam(ReqParam.FIELDS, "uid")

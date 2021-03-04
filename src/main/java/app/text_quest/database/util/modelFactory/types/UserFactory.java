@@ -6,7 +6,6 @@ import app.text_quest.database.util.modelFactory.AbstractModelFactory;
 
 public class UserFactory extends AbstractModelFactory<User> {
     private final static SettingFactory settingFactory = new SettingFactory();
-    private final String email = "test_email@mail.ru";
     private final String name = "user_name";
     private final Setting setting = settingFactory.create();
 
@@ -16,10 +15,6 @@ public class UserFactory extends AbstractModelFactory<User> {
         user.setName(this.name);
         user.setSetting(settingFactory.create());
         return user;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getName() {

@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tokens")
-public class Token extends AuditModel {
+public class Refresh extends AuditModel {
 
     @Column(nullable = false)
     private String value;
@@ -19,7 +19,7 @@ public class Token extends AuditModel {
     @JsonIgnore
     private User user;
 
-    public Token() {
+    public Refresh() {
     }
 
     public String getValue() {

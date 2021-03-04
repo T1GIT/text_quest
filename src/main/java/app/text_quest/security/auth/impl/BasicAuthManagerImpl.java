@@ -1,18 +1,19 @@
 package app.text_quest.security.auth.impl;
 
+import app.text_quest.database.model.Refresh;
 import app.text_quest.database.model.Setting;
-import app.text_quest.database.model.Token;
 import app.text_quest.database.model.user.types.BasicUser;
 import app.text_quest.database.service.BasicUserService;
 import app.text_quest.security.auth.BasicAuthManager;
-import app.text_quest.security.util.secretFactory.types.TokenFactory;
+import app.text_quest.security.util.secretFactory.types.RefreshFactory;
 import org.springframework.stereotype.Component;
 
 
+@Deprecated
 @Component
 public class BasicAuthManagerImpl implements BasicAuthManager {
 
-    private final static TokenFactory tokenFactory = new TokenFactory();
+    private final static RefreshFactory REFRESH_FACTORY = new RefreshFactory();
 
     private final BasicUserService service;
 
@@ -31,11 +32,11 @@ public class BasicAuthManagerImpl implements BasicAuthManager {
         BasicUser user = new BasicUser();
         user.setMail(mail);
         Setting setting = new Setting();
-        Token token = new Token();
-        token.setValue(tokenFactory.create());
+        Refresh refresh = new Refresh();
+        refresh.setValue(REFRESH_FACTORY.create());
         user.setSetting(setting);
-        user.addToken(token);
-        service.addBasicUser(user);
+        user.addToken(refresh);
+        service.add(user);
         return user;
     }
 

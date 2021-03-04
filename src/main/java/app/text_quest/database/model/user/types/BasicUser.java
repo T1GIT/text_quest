@@ -17,6 +17,9 @@ public class BasicUser extends User {
     @Column(nullable = false)
     private String psw;
 
+    @Column(nullable = false)
+    private boolean verified;
+
     public BasicUser() {
     }
 
@@ -24,15 +27,23 @@ public class BasicUser extends User {
         return mail;
     }
 
-    public void setMail(String main) {
-        this.mail = main;
-    }
-
     public String getPsw() {
         return psw;
     }
 
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
     public void setPsw(String psw) {
         this.psw = psw;
+    }
+
+    public void setMail(String main) {
+        this.mail = main;
     }
 }

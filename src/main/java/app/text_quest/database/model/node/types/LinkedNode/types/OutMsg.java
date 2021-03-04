@@ -6,12 +6,11 @@ import app.text_quest.database.model.node.types.LinkedNode.LinkedNode;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "out_msg")
+//@Table(name = "out_msg")
 public class OutMsg extends LinkedNode {
     @OneToMany(mappedBy = "outMsg", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Answer> answers = new ArrayList<>();

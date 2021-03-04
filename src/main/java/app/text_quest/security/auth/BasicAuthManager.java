@@ -3,6 +3,7 @@ package app.text_quest.security.auth;
 import app.text_quest.database.model.user.types.BasicUser;
 
 
+@Deprecated
 public interface BasicAuthManager extends AuthManager<BasicUser> {
 
     @Override

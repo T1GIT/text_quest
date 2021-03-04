@@ -24,31 +24,20 @@ public abstract class CookieUtil {
         return find(request.getCookies(), name);
     }
 
-    public static Cookie create(String name, Object value, int expiresIn) {
+
+    public static void add(HttpServletResponse response, String name, Object value, Period period) {
+        add(response, name, value, period.getSec());
+    }
+
+    public static void add(HttpServletResponse response, String name, Object value, int expiresIn) {
         Cookie cookie = new Cookie(name, String.valueOf(value));
         cookie.setHttpOnly(true);
         cookie.setMaxAge(expiresIn);
         cookie.setPath("/");
-        return cookie;
-    }
-
-    public static Cookie create(String name, Object value, Period period) {
-        return create(name, value, period.getSec());
-    }
-
-    public static void create(HttpServletResponse response, String name, Object value, Period period) {
-        response.addCookie(create(name, value, period));
-    }
-
-    public static void create(HttpServletResponse response, String name, Object value, int expiresIn) {
-        response.addCookie(create(name, value, expiresIn));
-    }
-
-    public static Cookie remove(String name) {
-        return create(name, "", 0);
+        response.addCookie(cookie);
     }
 
     public static void remove(HttpServletResponse response, String name) {
-        response.addCookie(remove(name));
+        add(response, name, null, 0);
     }
 }

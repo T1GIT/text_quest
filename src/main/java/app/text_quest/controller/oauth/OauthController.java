@@ -5,6 +5,10 @@ import app.text_quest.controller.oauth.util.enums.PropName;
 import app.text_quest.controller.oauth.util.enums.Provider;
 import app.text_quest.controller.oauth.util.enums.ReqParam;
 import app.text_quest.controller.oauth.util.enums.SecureParam;
+import app.text_quest.controller.oauth.util.exceptions.OauthException;
+import app.text_quest.controller.oauth.util.exceptions.types.ApiException;
+import app.text_quest.controller.oauth.util.exceptions.types.InvalidStateException;
+import app.text_quest.controller.oauth.util.exceptions.types.MissedStateCookieException;
 import app.text_quest.controller.oauth.util.json.JsonId;
 import app.text_quest.controller.oauth.util.json.JsonToken;
 import app.text_quest.controller.oauth.util.props.OauthProps;
@@ -12,16 +16,15 @@ import app.text_quest.controller.oauth.util.props.OauthPropsFactory;
 import app.text_quest.controller.oauth.util.request.UrlBuilder;
 import app.text_quest.controller.oauth.util.request.types.GetRequest;
 import app.text_quest.controller.oauth.util.request.types.PostRequest;
-import app.text_quest.database.model.user.types.OauthUser;
-import app.text_quest.security.auth.OauthAuthManager;
-import app.text_quest.security.util.secretFactory.types.TokenFactory;
+import app.text_quest.controller.util.CookieUtil;
+import app.text_quest.security.util.secretFactory.types.RefreshFactory;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.enums.LogType;
-import app.text_quest.util.exceptions.OauthApiException;
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -32,40 +35,40 @@ public abstract class OauthController {
 
     protected final static Logger logger = LoggerFactory.getLogger(LogType.ERROR);
     private final static OauthPropsFactory propsFactory = new OauthPropsFactory();
-    private final static TokenFactory tokenFactory = new TokenFactory();
-    protected final OauthAuthManager authManager;
+    private final static RefreshFactory REFRESH_FACTORY = new RefreshFactory();
     protected final Provider provider;
     protected final OauthProps props;
 
-    public OauthController(OauthAuthManager authManager, Provider provider) {
-        this.authManager = authManager;
+    public OauthController(Provider provider) {
         this.provider = provider;
         this.props = propsFactory.getFor(provider);
     }
 
     public String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
         try {
-            if (request.getParameter(ReqParam.ERROR.lowName()) == null) {
-                String code = request.getParameter(ReqParam.CODE.lowName());
-                String state = request.getParameter(ReqParam.STATE.lowName());
-                if (state.equals(request.getSession().getAttribute(SecureParam.STATE.name()))) {
-                    String accessToken = receiveToken(code);
-                    String oauthId = receiveId(accessToken);
-                    OauthUser user = authManager.findUser(oauthId);
-                    if (user == null) {
-                        user = authManager.register(oauthId);
-                    }
-                    request.getSession().setAttribute(SecureParam.NEEDS_TOKENS.name(), user);
-                }
-                request.getSession().removeAttribute(ReqParam.STATE.lowName());
-            }
-        } catch (OauthApiException e) {
+            String code = request.getParameter(ReqParam.CODE.lowName());
+            String state = request.getParameter(ReqParam.STATE.lowName());
+            Cookie stateCookie = CookieUtil.find(request, ReqParam.STATE.name());
+            CookieUtil.remove(response, ReqParam.STATE.name());
+            if (request.getParameter(ReqParam.ERROR.lowName()) != null)
+                throw new ApiException(
+                        request.getParameter(ReqParam.ERROR_DESCRIPTION.lowName()),
+                        Integer.parseInt(request.getParameter(ReqParam.ERROR.lowName())));
+            if (stateCookie == null)
+                throw new MissedStateCookieException("Missed state cookie");
+            if (!state.equals(stateCookie.getValue()))
+                throw new InvalidStateException(state, stateCookie.getValue());
+            String accessToken = receiveToken(code);
+            String oauthId = receiveId(accessToken);
+            request.setAttribute(SecureParam.OAUTH_ID.name(), oauthId);
+            return "forward:/auth/oauth";
+        } catch (OauthException e) {
             logger.error(e.getMessage(), e);
+            return "redirect:/";
         }
-        return "redirect:/";
     }
 
-    protected String receiveToken(String code) throws OauthApiException {
+    protected String receiveToken(String code) throws ApiException {
         UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_TOKEN));
         PostRequest request = new PostRequest(urlBuilder.build());
         HashMap<ReqParam, String> paramMap = new HashMap<>();
@@ -81,7 +84,7 @@ public abstract class OauthController {
         return jsonToken.getAccessToken();
     }
 
-    protected String receiveId(String token) throws OauthApiException {
+    protected String receiveId(String token) throws ApiException {
         UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_ID))
                 .addParam(ReqParam.ACCESS_TOKEN, token)
                 .addParam(ReqParam.OAUTH_TOKEN, token);

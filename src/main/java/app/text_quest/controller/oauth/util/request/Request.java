@@ -1,8 +1,8 @@
 package app.text_quest.controller.oauth.util.request;
 
+import app.text_quest.controller.oauth.util.exceptions.types.ApiException;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.enums.LogType;
-import app.text_quest.util.exceptions.OauthApiException;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
@@ -31,5 +31,5 @@ public abstract class Request {
         return builder.toString();
     }
 
-    public abstract String send() throws OauthApiException;
+    public abstract String send() throws ApiException;
 }

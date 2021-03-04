@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VarRepository extends JpaRepository<Var, Long> {
-    Var findByNameIs(String name);
+    Var findByName(String name);
 }

@@ -1,8 +1,8 @@
 package app.text_quest.controller.oauth.util.request.types;
 
 import app.text_quest.controller.oauth.util.enums.ReqParam;
+import app.text_quest.controller.oauth.util.exceptions.types.ApiException;
 import app.text_quest.controller.oauth.util.request.Request;
-import app.text_quest.util.exceptions.OauthApiException;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class PostRequest extends Request {
     }
 
     @Override
-    public String send() throws OauthApiException {
+    public String send() throws ApiException {
         try {
             URL url = new URL(this.url);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "lnd_nodes")
+//@Table(name = "lnd_nodes")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class LinkedNode extends Node {
     @NotNull

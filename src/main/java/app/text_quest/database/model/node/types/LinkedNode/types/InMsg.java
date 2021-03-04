@@ -4,11 +4,14 @@ import app.text_quest.database.model.msg.Msg;
 import app.text_quest.database.model.node.types.LinkedNode.LinkedNode;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "in_msg")
+//@Table(name = "in_msg")
 public class InMsg extends LinkedNode {
     @NotNull
     private int delay = 0;

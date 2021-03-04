@@ -1,9 +1,9 @@
 package app.text_quest.database.model.user;
 
 import app.text_quest.database.model.History;
+import app.text_quest.database.model.Refresh;
 import app.text_quest.database.model.Setting;
 import app.text_quest.database.model.State;
-import app.text_quest.database.model.Token;
 import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,7 +26,7 @@ public class User extends AuditModel {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private final List<Token> tokens = new ArrayList<>();
+    private final List<Refresh> refreshes = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -52,8 +52,8 @@ public class User extends AuditModel {
         return setting;
     }
 
-    public List<Token> getTokens() {
-        return tokens;
+    public List<Refresh> getTokens() {
+        return refreshes;
     }
 
     public List<State> getStates() {
@@ -68,14 +68,14 @@ public class User extends AuditModel {
         this.name = name;
     }
 
-    public void addToken(Token token) {
-        this.tokens.add(token);
-        token.setUser(this);
+    public void addToken(Refresh refresh) {
+        this.refreshes.add(refresh);
+        refresh.setUser(this);
     }
 
-    public void removeToken(Token token) {
-        this.tokens.remove(token);
-        token.setUser(null);
+    public void removeToken(Refresh refresh) {
+        this.refreshes.remove(refresh);
+        refresh.setUser(null);
     }
 
     public void setSetting(Setting setting) {

@@ -11,8 +11,18 @@ public abstract class AbstractSecretFactory<T> {
 
     private static final Logger logger = Logger.getLogger("errorLogger");
 
-    public static String rndString(int length) {
+    protected final int length;
+
+    protected AbstractSecretFactory(int length) {
+        this.length = length;
+    }
+
+    protected static String rndString(int length) {
         return Crypt.toHex(rndBytes(length));
+    }
+
+    public int getLength() {
+        return length;
     }
 
     protected static byte[] rndBytes(int length) {

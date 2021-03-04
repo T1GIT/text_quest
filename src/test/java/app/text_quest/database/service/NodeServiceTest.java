@@ -29,10 +29,10 @@ class NodeServiceTest {
     private NodeService nodeService;
 
     @Test
-    void addNode() {
+    void add() {
         Node node = nodeFactory.create();
         try {
-            nodeService.addNode(node);
+            nodeService.add(node);
         } finally {
             nodeService.delete(node);
         }
@@ -41,18 +41,18 @@ class NodeServiceTest {
     @Test
     void delete() {
         Node node = nodeFactory.create();
-        nodeService.addNode(node);
+        nodeService.add(node);
         nodeService.delete(node);
     }
 
     @Transactional
     @Test
-    void editNode() {
+    void update() {
         Fork fork = forkFactory.create();
         try {
-            nodeService.addNode(fork);
+            nodeService.add(fork);
             fork.addBranch(branchFactory.create());
-            nodeService.editNode(fork);
+            nodeService.add(fork);
         } finally {
             nodeService.delete(fork);
         }
@@ -69,7 +69,7 @@ class NodeServiceTest {
         try {
             Node fork = new Fork();
             linkedNode.setNextNode(fork);
-            nodeService.addNode(linkedNode);
+            nodeService.add(linkedNode);
             Node node = linkedNode.getNextNode();
             assert Fork.class == node.getClass();
         } finally {
