@@ -39,5 +39,4 @@ public abstract class AbstractFilter implements Filter {
     }
 
     protected abstract void doAction(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException;
-
 }

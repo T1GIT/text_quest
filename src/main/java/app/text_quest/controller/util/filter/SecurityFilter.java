@@ -2,14 +2,13 @@ package app.text_quest.controller.util.filter;
 
 import app.text_quest.controller.oauth.util.enums.SecureParam;
 import app.text_quest.controller.util.CookieUtil;
-import app.text_quest.controller.util.exceptions.types.MissedJwtException;
-import app.text_quest.controller.util.exceptions.types.MissedRefreshException;
+import app.text_quest.controller.util.exceptions.missedToken.types.MissedJwtException;
+import app.text_quest.controller.util.exceptions.missedToken.types.MissedRefreshException;
 import app.text_quest.controller.util.token.JwtUtil;
 import app.text_quest.controller.util.token.RefreshUtil;
 import app.text_quest.database.model.Refresh;
 import app.text_quest.database.model.user.User;
 import app.text_quest.database.service.RefreshService;
-import app.text_quest.database.service.UserService;
 import app.text_quest.security.auth.Auth;
 import app.text_quest.security.util.secretFactory.types.RefreshFactory;
 import io.jsonwebtoken.MalformedJwtException;
@@ -32,12 +31,10 @@ public class SecurityFilter extends AbstractFilter {
     private final static RefreshFactory REFRESH_FACTORY = new RefreshFactory();
 
     private final RefreshService refreshService;
-    private final UserService userService;
 
-    public SecurityFilter(Auth auth, RefreshService refreshService, UserService userService) {
+    public SecurityFilter(Auth auth, RefreshService refreshService) {
         super(auth, "^.*$", "^/(build|oauth|auth)/.*$");
         this.refreshService = refreshService;
-        this.userService = userService;
     }
 
     @Override
