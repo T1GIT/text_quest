@@ -1,7 +1,7 @@
-package app.text_quest.controller.util.oauth.util.props;
+package app.text_quest.controller.oauth.util.props;
 
-import app.text_quest.controller.util.oauth.enums.PropName;
-import app.text_quest.controller.util.oauth.enums.Provider;
+import app.text_quest.controller.oauth.util.enums.PropName;
+import app.text_quest.controller.oauth.util.enums.Provider;
 
 import java.util.Properties;
 
@@ -18,6 +18,6 @@ public class OauthProps {
     }
 
     public String get(PropName name) {
-        return this.properties.getProperty(provider.name().toLowerCase() + "." + name.name().toLowerCase());
+        return this.properties.getProperty(provider.lowName() + "." + name.lowName());
     }
 }

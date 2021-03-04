@@ -1,11 +1,11 @@
-package app.text_quest.controller.util.oauth.util.request;
+package app.text_quest.controller.oauth.util.request;
 
 import app.text_quest.TextQuestApplication;
-import app.text_quest.controller.util.oauth.enums.PropName;
-import app.text_quest.controller.util.oauth.enums.Provider;
-import app.text_quest.controller.util.oauth.enums.ReqParam;
-import app.text_quest.controller.util.oauth.util.props.OauthProps;
-import app.text_quest.controller.util.oauth.util.props.OauthPropsFactory;
+import app.text_quest.controller.oauth.util.enums.PropName;
+import app.text_quest.controller.oauth.util.enums.Provider;
+import app.text_quest.controller.oauth.util.enums.ReqParam;
+import app.text_quest.controller.oauth.util.props.OauthProps;
+import app.text_quest.controller.oauth.util.props.OauthPropsFactory;
 
 
 public class BtnUrlParser { // TODO: 26.02.2021 May be transferred as a static method
@@ -26,8 +26,8 @@ public class BtnUrlParser { // TODO: 26.02.2021 May be transferred as a static m
         UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_AUTH))
                 .addParam(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID))
                 .addParam(ReqParam.REDIRECT_URI, String.format("%s/oauth/%s",
-                        TextQuestApplication.getRootUrl(), provider.name().toLowerCase()))
-                .addParam(ReqParam.RESPONSE_TYPE, ReqParam.CODE.name().toLowerCase())
+                        TextQuestApplication.getRootUrl(), provider.lowName()))
+                .addParam(ReqParam.RESPONSE_TYPE, ReqParam.CODE.lowName())
                 .addParam(ReqParam.DISPLAY, "popup")
                 .addParam(ReqParam.STATE, state)
                 .addParam(ReqParam.SCOPE, props.get(PropName.SCOPE));

@@ -1,6 +1,6 @@
-package app.text_quest.controller.util.oauth.util.json.vk;
+package app.text_quest.controller.oauth.util.json.vk;
 
-import app.text_quest.controller.util.oauth.util.json.JsonId;
+import app.text_quest.controller.oauth.util.json.JsonId;
 
 
 public class JsonVk {

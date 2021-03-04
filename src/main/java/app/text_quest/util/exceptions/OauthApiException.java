@@ -1,4 +1,4 @@
-package app.text_quest.controller.util.oauth.util.exception;
+package app.text_quest.util.exceptions;
 
 public class OauthApiException extends Exception {
 

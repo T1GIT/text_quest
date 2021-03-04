@@ -1,6 +1,6 @@
-package app.text_quest.controller.util.oauth.util.props;
+package app.text_quest.controller.oauth.util.props;
 
-import app.text_quest.controller.util.oauth.enums.Provider;
+import app.text_quest.controller.oauth.util.enums.Provider;
 
 import java.io.FileInputStream;
 import java.io.IOException;

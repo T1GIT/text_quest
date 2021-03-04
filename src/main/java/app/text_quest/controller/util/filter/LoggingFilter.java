@@ -1,12 +1,14 @@
 package app.text_quest.controller.util.filter;
 
-import app.text_quest.security.Authentication;
+import app.text_quest.TextQuestApplication;
+import app.text_quest.security.auth.Auth;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.enums.LogType;
 import org.apache.log4j.Logger;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,24 +18,29 @@ import java.util.Date;
 
 @Component
 @Order(1)
-public class RequestLoggingFilter extends AbstractFilter {
+public class LoggingFilter extends AbstractFilter {
 
     private static final Logger requestLogger = LoggerFactory.getLogger(LogType.REQUEST);
 
-    protected RequestLoggingFilter(Authentication authentication) {
-        super(authentication, ".*");
+    protected LoggingFilter(Auth auth) {
+        super(auth, ".*");
     }
 
     @Override
-    protected void doAction(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+    protected void doAction(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         long startTime = new Date().getTime();
-        doRequest();
+        chain.doFilter(req, res);
+        String content = switch (res.getStatus()) {
+            case 302 -> "redirect:" + res.getHeader("Location");
+            case 404 -> "not found:redirect:" + TextQuestApplication.getRootUrl();
+            default -> res.getContentType();
+        };
         requestLogger.info(String.format("%3d %-6s %-30s %4d ms   %s",
                 res.getStatus(),
                 req.getMethod(),
                 req.getRequestURI(),
                 new Date().getTime() - startTime,
-                res.getContentType()
+                content
                 )
         );
     }

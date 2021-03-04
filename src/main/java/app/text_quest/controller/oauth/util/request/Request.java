@@ -1,8 +1,8 @@
-package app.text_quest.controller.util.oauth.util.request;
+package app.text_quest.controller.oauth.util.request;
 
-import app.text_quest.controller.util.oauth.util.exception.OauthApiException;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.enums.LogType;
+import app.text_quest.util.exceptions.OauthApiException;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
@@ -20,7 +20,7 @@ public abstract class Request {
         this.url = url;
     }
 
-    protected static String readInputStream(InputStream inputStream) throws IOException {
+    public static String readInputStream(InputStream inputStream) throws IOException {
         StringBuilder builder = new StringBuilder();
         try (BufferedReader in = new BufferedReader(new InputStreamReader(inputStream))) {
             String inputLine;

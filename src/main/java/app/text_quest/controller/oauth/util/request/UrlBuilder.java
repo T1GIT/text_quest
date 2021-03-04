@@ -1,12 +1,12 @@
-package app.text_quest.controller.util.oauth.util.request;
+package app.text_quest.controller.oauth.util.request;
 
-import app.text_quest.controller.util.oauth.enums.ReqParam;
+import app.text_quest.controller.oauth.util.enums.ReqParam;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.enums.LogType;
 import org.apache.log4j.Logger;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,13 +34,9 @@ public class UrlBuilder {
         if (params.size() == 0) return "";
         List<String> paramsList = new ArrayList<>(params.size());
         params.forEach((name, value) -> {
-            try {
-                paramsList.add(String.format("%s=%s",
-                        URLEncoder.encode(name, "UTF-8"),
-                        URLEncoder.encode(value, "UTF-8")));
-            } catch (UnsupportedEncodingException e) {
-                logger.error(e.getMessage(), e);
-            }
+            paramsList.add(String.format("%s=%s",
+                    URLEncoder.encode(name, StandardCharsets.UTF_8),
+                    URLEncoder.encode(value, StandardCharsets.UTF_8)));
         });
         return String.join("&", paramsList);
     }
@@ -51,7 +47,7 @@ public class UrlBuilder {
     }
 
     public UrlBuilder addParam(ReqParam oauthParam, String value) {
-        return addParam(oauthParam.name().toLowerCase(), value);
+        return addParam(oauthParam.lowName(), value);
     }
 
     public String build() {

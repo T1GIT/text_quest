@@ -1,7 +1,7 @@
-package app.text_quest.controller.util.oauth.util.request.types;
+package app.text_quest.controller.oauth.util.request.types;
 
-import app.text_quest.controller.util.oauth.util.exception.OauthApiException;
-import app.text_quest.controller.util.oauth.util.request.Request;
+import app.text_quest.controller.oauth.util.request.Request;
+import app.text_quest.util.exceptions.OauthApiException;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

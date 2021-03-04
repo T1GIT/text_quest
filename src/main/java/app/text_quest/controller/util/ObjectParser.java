@@ -1,6 +1,5 @@
-package app.text_quest.controller.util.oauth.util;
+package app.text_quest.controller.util;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,7 +35,6 @@ public abstract class ObjectParser {
             builder.append(String.format("%s,", parse(el)));
         });
         builder.append("]");
-        System.out.println(list + "list");
         return builder.toString();
     }
 
@@ -56,7 +54,6 @@ public abstract class ObjectParser {
             builder.append(String.format("%s,", parse(el)));
         }
         builder.append("]");
-        System.out.println(Arrays.toString(array) + "array");
         return builder.toString();
     }
 }

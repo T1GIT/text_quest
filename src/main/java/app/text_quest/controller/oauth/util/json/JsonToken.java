@@ -1,4 +1,4 @@
-package app.text_quest.controller.util.oauth.util.json;
+package app.text_quest.controller.oauth.util.json;
 
 import com.google.gson.annotations.SerializedName;
 
