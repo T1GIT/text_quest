@@ -16,22 +16,22 @@ public class Setting extends AuditModel {
 
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
-    private MsgType msgType;
+    private MsgType msgType = MsgType.SQUARE;
 
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
-    private Color color;
+    private Color color = Color.BLUE;
 
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
-    private Font font;
+    private Font font = Font.ARIAL;
 
     @Column(nullable = false)
-    private int size;
+    private int size = 20;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     @MapsId
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private User user;
 
     public Setting() { }

@@ -4,7 +4,6 @@ import app.text_quest.database.model.msg.Msg;
 import app.text_quest.database.model.user.User;
 import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -12,11 +11,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "histories")
 public class History extends AuditModel {
-
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    private long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "msg_id", nullable = false)
@@ -29,10 +23,6 @@ public class History extends AuditModel {
     private User user;
 
     public History() { }
-
-    public long getId() {
-        return id;
-    }
 
     public Msg getMsg() {
         return msg;

@@ -5,10 +5,7 @@ import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.enums.LogType;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -17,8 +14,16 @@ public class GameController {
 
     private final Logger logger = LoggerFactory.getLogger(LogType.ERROR);
 
+    @GetMapping("/")
     @ResponseBody
+    public String a() {
+        return "game";
+    }
+
+
+    // TODO: 01.03.2021 Don't forget erase JWT when set user name
     @PostMapping("/test")
+    @ResponseBody
     public String auth(@RequestParam int key1, @RequestParam int key2) {
         System.out.println(key1 + key2);
         return "true";

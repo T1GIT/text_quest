@@ -7,28 +7,27 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 
-@Deprecated
 @Entity
 @Table(name = "tokens")
 public class Token extends AuditModel {
 
     @Column(nullable = false)
-    private String token;
+    private String value;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "users_id", nullable = false)
     @JsonIgnore
-    @MapsId
     private User user;
 
     public Token() {
     }
 
-    public String getToken() {
-        return token;
+    public String getValue() {
+        return value;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setValue(String token) {
+        this.value = token;
     }
 
     public User getUser() {
@@ -42,7 +41,7 @@ public class Token extends AuditModel {
     @Override
     public String toString() {
         return "Token{" +
-                "token='" + token +
+                "value='" + value +
                 '}';
     }
 }

@@ -3,6 +3,7 @@ package app.text_quest.database.model.user;
 import app.text_quest.database.model.History;
 import app.text_quest.database.model.Setting;
 import app.text_quest.database.model.State;
+import app.text_quest.database.model.Token;
 import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,13 +26,23 @@ public class User extends AuditModel {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private final List<Token> tokens = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<State> states = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<History> histories = new ArrayList<>();
 
-    public User() { }
+    public User() {
+    }
+
+    public User(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -39,6 +50,10 @@ public class User extends AuditModel {
 
     public Setting getSetting() {
         return setting;
+    }
+
+    public List<Token> getTokens() {
+        return tokens;
     }
 
     public List<State> getStates() {
@@ -51,6 +66,16 @@ public class User extends AuditModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void addToken(Token token) {
+        this.tokens.add(token);
+        token.setUser(this);
+    }
+
+    public void removeToken(Token token) {
+        this.tokens.remove(token);
+        token.setUser(null);
     }
 
     public void setSetting(Setting setting) {

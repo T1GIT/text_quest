@@ -12,10 +12,13 @@
 <body>
 <noscript>Для работы сайта включите JavaScript</noscript>
 <script id="initialScript">
+
     const btnHref = [(${btnHref})]
-    node = document.getElementById("initialScript")
-    node.previousElementSibling.remove()
-    node.remove()
+    const isAuthorised = [(${isAuthorised})]
+
+    scriptNode = document.getElementById("initialScript")
+    scriptNode.previousElementSibling.remove()
+    scriptNode.remove()
 </script>
 <div id="root"></div>
 </body>

@@ -5,7 +5,7 @@ import app.text_quest.security.util.secretFactory.AbstractSecretFactory;
 
 public class SaltFactory extends AbstractSecretFactory<byte[]> {
 
-    private static final int LENGTH = 16;
+    private static final int LENGTH = 512;
 
     @Override
     public byte[] create() {

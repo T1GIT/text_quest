@@ -12,10 +12,16 @@ import java.util.List;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public User getById(long userId) {
+        return userRepository.findById(userId).orElse(null);
     }
 
     @Override

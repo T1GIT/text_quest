@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.List;
 
 
-@Deprecated
 @Service
 @Transactional
 public class TokenServiceImpl implements TokenService {
@@ -33,8 +32,18 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
+    public Token editToken(Token token) {
+        return this.tokenRepository.saveAndFlush(token);
+    }
+
+    @Override
     public Token getByUser(User user) {
         return this.tokenRepository.findByUserId(user.getId());
+    }
+
+    @Override
+    public Token getByValue(String value) {
+        return this.tokenRepository.findTokenByValue(value);
     }
 
     @Override

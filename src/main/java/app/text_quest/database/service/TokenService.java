@@ -13,7 +13,11 @@ public interface TokenService {
 
     void delete(Token token);
 
+    Token editToken(Token token);
+
     Token getByUser(User user);
+
+    Token getByValue(String value);
 
     void deleteBefore(Date date);
 

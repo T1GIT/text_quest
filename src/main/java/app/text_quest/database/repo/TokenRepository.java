@@ -7,11 +7,12 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 
 
-@Deprecated
 @Repository
 public interface TokenRepository extends JpaRepository<Token, Long> {
 
     Token findByUserId(long userId);
+
+    Token findTokenByValue(String value);
 
     void deleteAllByCreatedAtBefore(Date date);
 }
