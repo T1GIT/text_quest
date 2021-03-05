@@ -6,24 +6,24 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-class CryptTest {
+class HashTest {
 
     @Test
     void crypt() {
-        System.out.println(Crypt.crypt("password"));
+        System.out.println(Hash.crypt("password"));
     }
 
     @Test
     void manyCrypt() {
         for (int i = 0; i < 100; i++) {
-            Crypt.crypt("password" + (i * 1234));
+            Hash.crypt("password" + (i * 1234));
         }
     }
 
     @Test
     void check() {
-        String hash = Crypt.crypt("password");
-        assertTrue(Crypt.check("password", hash));
-        assertFalse(Crypt.check("wrongPassword", hash));
+        String hash = Hash.crypt("password");
+        assertTrue(Hash.check("password", hash));
+        assertFalse(Hash.check("wrongPassword", hash));
     }
 }
