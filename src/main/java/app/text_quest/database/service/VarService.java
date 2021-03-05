@@ -1,13 +1,10 @@
 package app.text_quest.database.service;
 
 import app.text_quest.database.model.Var;
+import app.text_quest.database.util.AbstractService;
 
-import java.util.List;
 
-public interface VarService {
-    Var addVar(Var var);
-    void delete(Var var);
+public interface VarService extends AbstractService<Var> {
+
     Var getByName(String name);
-    Var editVar(Var var);
-    List<Var> getAll();
 }

@@ -1,6 +1,6 @@
 package app.text_quest.util;
 
-import app.text_quest.util.enums.LogType;
+import app.text_quest.util.constant.LogType;
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
@@ -13,11 +13,6 @@ public class LoggerFactory {
 
     private static final HashMap<String, Logger> loggers = new HashMap<String, Logger>();
     private static final Logger errorLogger = LoggerFactory.getLogger(LogType.ERROR);
-
-
-    public static Logger getLogger(LogType logType) {
-        return getLogger(logType.name().toLowerCase());
-    }
 
     public static Logger getLogger(String name) {
         if (loggers.containsKey(name)) {

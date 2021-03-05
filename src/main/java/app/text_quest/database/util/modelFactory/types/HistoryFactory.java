@@ -1,8 +1,8 @@
 package app.text_quest.database.util.modelFactory.types;
 
 import app.text_quest.database.model.History;
-import app.text_quest.database.model.User;
 import app.text_quest.database.model.msg.Msg;
+import app.text_quest.database.model.user.User;
 import app.text_quest.database.util.modelFactory.AbstractModelFactory;
 import app.text_quest.database.util.modelFactory.types.msg.MsgFactory;
 

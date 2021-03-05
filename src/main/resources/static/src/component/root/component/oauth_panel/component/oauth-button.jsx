@@ -4,7 +4,6 @@ import Style from "./oauth-button.sass";
 class OauthButton extends Component {
 
     onClick = href => event => {
-        console.log(href)
         location.href = href;
     }
 

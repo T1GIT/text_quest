@@ -12,7 +12,7 @@ public abstract class AbstractModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    protected long id;
 
     public long getId() {
         return id;

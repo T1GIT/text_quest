@@ -1,8 +1,8 @@
 package app.text_quest.database.util.modelFactory.types;
 
 import app.text_quest.database.model.State;
-import app.text_quest.database.model.User;
 import app.text_quest.database.model.Var;
+import app.text_quest.database.model.user.User;
 import app.text_quest.database.util.modelFactory.AbstractModelFactory;
 
 public class StateFactory extends AbstractModelFactory<State> {

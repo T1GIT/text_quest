@@ -1,6 +1,6 @@
 package app.text_quest.controller.util.filter;
 
-import app.text_quest.security.Authentication;
+import app.text_quest.security.auth.Auth;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -11,36 +11,31 @@ import java.util.regex.Pattern;
 
 public abstract class AbstractFilter implements Filter {
 
-    protected final Authentication authentication;
-    private final Pattern pattern;
-    private FilterChain chain;
-    private ServletRequest request;
-    private ServletResponse response;
+    protected final Auth auth;
+    private final Pattern include;
+    private Pattern exclude;
 
-    protected AbstractFilter(Authentication authentication, String regExp) {
-        this.pattern = Pattern.compile(regExp);
-        this.authentication = authentication;
+    protected AbstractFilter(Auth auth, String include) {
+        this.include = Pattern.compile(include);
+        this.auth = auth;
+    }
+
+    protected AbstractFilter(Auth auth, String include, String exclude) {
+        this(auth, include);
+        this.exclude = Pattern.compile(exclude);
     }
 
     public final void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        this.request = request;
-        this.response = response;
-        this.chain = chain;
-
-        if (pattern.matcher(req.getRequestURI()).matches()) {
-            doAction(req, res);
+        String url = req.getRequestURI();
+        if (include.matcher(url).matches() && (exclude == null || !exclude.matcher(url).matches())) {
+            doAction(req, res, chain);
         } else {
-            doRequest();
+            chain.doFilter(req, res);
         }
     }
 
-    protected abstract void doAction(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException;
-
-    protected void doRequest() throws IOException, ServletException {
-        chain.doFilter(request, response);
-    }
-
+    protected abstract void doAction(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException;
 }
