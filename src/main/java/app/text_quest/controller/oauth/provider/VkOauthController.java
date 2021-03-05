@@ -6,12 +6,13 @@ import app.text_quest.controller.oauth.OauthController;
 import app.text_quest.controller.oauth.util.constant.PropName;
 import app.text_quest.controller.oauth.util.constant.Provider;
 import app.text_quest.controller.oauth.util.constant.ReqParam;
-import app.text_quest.controller.oauth.util.exception.types.ApiException;
+import app.text_quest.controller.oauth.util.exception.OauthException;
 import app.text_quest.controller.oauth.util.json.JsonToken;
 import app.text_quest.controller.oauth.util.json.vk.JsonVk;
 import app.text_quest.controller.oauth.util.request.UrlBuilder;
 import app.text_quest.controller.oauth.util.request.types.GetRequest;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -28,12 +29,12 @@ public class VkOauthController extends OauthController {
 
     @GetMapping("/vk")
     @Override
-    public String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
+    protected String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
         return super.oauthEndpoint(request, response);
     }
 
     @Override
-    public String receiveToken(String code) throws ApiException {
+    protected String receiveToken(String code) throws OauthException, JsonSyntaxException {
         UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_TOKEN));
         GetRequest request = new GetRequest(urlBuilder);
         request
@@ -48,7 +49,7 @@ public class VkOauthController extends OauthController {
     }
 
     @Override
-    public String receiveId(String token) throws ApiException {
+    protected String receiveId(String token) throws OauthException, JsonSyntaxException {
         UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_ID));
         GetRequest request = new GetRequest(urlBuilder);
         request

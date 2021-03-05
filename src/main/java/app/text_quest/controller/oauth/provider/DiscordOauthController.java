@@ -19,7 +19,7 @@ public class DiscordOauthController extends OauthController {
 
     @GetMapping("/discord")
     @Override
-    public String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
+    protected String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
         return super.oauthEndpoint(request, response);
     }
 }

@@ -19,7 +19,7 @@ public class GoogleOauthController extends OauthController {
 
     @GetMapping("/google")
     @Override
-    public String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
+    protected String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
         return super.oauthEndpoint(request, response);
     }
 }

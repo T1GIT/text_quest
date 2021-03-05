@@ -28,7 +28,6 @@ public class PostRequest extends Request {
 
     @Override
     protected HttpURLConnection parseConnection() throws IOException {
-        System.out.println(urlBuilder.build());
         HttpURLConnection con = (HttpURLConnection) new URL(this.urlBuilder.build()).openConnection();
         con.setRequestMethod(HttpMethod.POST.name());
         headers.forEach(con::setRequestProperty);

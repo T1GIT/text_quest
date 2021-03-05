@@ -16,7 +16,6 @@ import app.text_quest.controller.oauth.util.request.UrlBuilder;
 import app.text_quest.controller.oauth.util.request.types.GetRequest;
 import app.text_quest.controller.oauth.util.request.types.PostRequest;
 import app.text_quest.controller.util.CookieUtil;
-import app.text_quest.security.util.secretFactory.types.RefreshFactory;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.constant.LogType;
 import com.google.gson.Gson;
@@ -35,7 +34,6 @@ public abstract class OauthController {
 
     protected final static Logger logger = LoggerFactory.getLogger(LogType.ERROR);
     private final static OauthPropsFactory propsFactory = new OauthPropsFactory();
-    private final static RefreshFactory REFRESH_FACTORY = new RefreshFactory();
     protected final String provider;
     protected final OauthProps props;
 
@@ -44,22 +42,11 @@ public abstract class OauthController {
         this.props = propsFactory.getFor(provider);
     }
 
-    public String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
+    protected String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
         try {
-            String code = request.getParameter(ReqParam.CODE);
-            String state = request.getParameter(ReqParam.STATE);
-            Cookie stateCookie = CookieUtil.find(request, ReqParam.STATE);
-            CookieUtil.remove(response, ReqParam.STATE);
-            String error = request.getParameter(ReqParam.ERROR);
-            if (error != null)
-                throw new ApiException(request.getParameter(ReqParam.ERROR_DESCRIPTION), Integer.parseInt(error));
-            if (stateCookie == null)
-                throw new MissedStateCookieException("Missed state cookie");
-            if (!state.equals(stateCookie.getValue()))
-                throw new InvalidStateException(state, stateCookie.getValue());
+            String code = receiveCode(request, response);
             String accessToken = receiveToken(code);
             String oauthId = receiveId(accessToken);
-            System.out.println(oauthId);
             request.setAttribute(SecureParam.OAUTH_ID, oauthId);
             return "forward:/auth/oauth";
         } catch (OauthException e) {
@@ -68,16 +55,29 @@ public abstract class OauthController {
         }
     }
 
-    protected String receiveToken(String code) throws OauthException {
+    protected String receiveCode(HttpServletRequest request, HttpServletResponse response) throws OauthException {
+        String code = request.getParameter(ReqParam.CODE);
+        String state = request.getParameter(ReqParam.STATE);
+        Cookie stateCookie = CookieUtil.find(request, ReqParam.STATE);
+        CookieUtil.remove(response, ReqParam.STATE);
+        String error = request.getParameter(ReqParam.ERROR);
+        if (error != null)
+            throw new ApiException(request.getParameter(ReqParam.ERROR_DESCRIPTION), Integer.parseInt(error));
+        if (stateCookie == null)
+            throw new MissedStateCookieException("Missed state cookie");
+        if (!state.equals(stateCookie.getValue()))
+            throw new InvalidStateException(state, stateCookie.getValue());
+        return code;
+    }
+
+    protected String receiveToken(String code) throws OauthException, JsonSyntaxException {
         UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_TOKEN));
         PostRequest request = new PostRequest(urlBuilder);
         request
-                .addHeader(HttpHeaders.ACCEPT, "application/json")
                 .addParam(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID))
                 .addParam(ReqParam.CLIENT_SECRET, props.get(PropName.CLIENT_SECRET))
                 .addParam(ReqParam.CODE, code)
                 .addParam(ReqParam.GRANT_TYPE, "authorization_code")
-                .addParam(ReqParam.FORMAT, "json")
                 .addParam(ReqParam.REDIRECT_URI, String.format("%s/oauth/%s",
                         TextQuestApplication.getRootUrl(), provider));
         String response = request.send();
@@ -89,9 +89,7 @@ public abstract class OauthController {
         UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_ID));
         GetRequest request = new GetRequest(urlBuilder);
         request
-                .addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token)
-                .addParam(ReqParam.ACCESS_TOKEN, token)
-                .addParam(ReqParam.OAUTH_TOKEN, token);
+                .addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token);
         String response = request.send();
         JsonId jsonId = new Gson().fromJson(response, JsonId.class);
         return jsonId.getId();

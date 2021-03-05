@@ -34,7 +34,7 @@ public abstract class Request {
         return this;
     }
 
-    public static String readInputStream(InputStream inputStream) throws IOException {
+    protected static String readInputStream(InputStream inputStream) throws IOException {
         StringBuilder builder = new StringBuilder();
         try (BufferedReader in = new BufferedReader(new InputStreamReader(inputStream))) {
             String inputLine;
