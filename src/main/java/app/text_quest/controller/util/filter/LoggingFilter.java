@@ -3,7 +3,7 @@ package app.text_quest.controller.util.filter;
 import app.text_quest.TextQuestApplication;
 import app.text_quest.security.auth.Auth;
 import app.text_quest.util.LoggerFactory;
-import app.text_quest.util.enums.LogType;
+import app.text_quest.util.constant.LogType;
 import org.apache.log4j.Logger;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;

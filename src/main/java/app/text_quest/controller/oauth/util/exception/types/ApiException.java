@@ -1,6 +1,6 @@
-package app.text_quest.controller.oauth.util.exceptions.types;
+package app.text_quest.controller.oauth.util.exception.types;
 
-import app.text_quest.controller.oauth.util.exceptions.OauthException;
+import app.text_quest.controller.oauth.util.exception.OauthException;
 
 
 public class ApiException extends OauthException {

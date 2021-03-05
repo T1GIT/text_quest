@@ -1,7 +1,5 @@
 package app.text_quest.controller.util;
 
-import app.text_quest.controller.util.enums.Period;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,11 +20,6 @@ public abstract class CookieUtil {
 
     public static Cookie find(HttpServletRequest request, String name) {
         return find(request.getCookies(), name);
-    }
-
-
-    public static void add(HttpServletResponse response, String name, Object value, Period period) {
-        add(response, name, value, period.getSec());
     }
 
     public static void add(HttpServletResponse response, String name, Object value, int expiresIn) {

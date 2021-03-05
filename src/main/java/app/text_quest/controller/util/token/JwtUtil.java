@@ -1,8 +1,8 @@
 package app.text_quest.controller.util.token;
 
-import app.text_quest.controller.oauth.util.enums.SecureParam;
+import app.text_quest.controller.oauth.util.constant.SecureParam;
 import app.text_quest.controller.util.CookieUtil;
-import app.text_quest.controller.util.enums.Period;
+import app.text_quest.controller.util.constant.Period;
 import app.text_quest.database.model.user.User;
 import app.text_quest.security.util.secretFactory.types.JwtKeyFactory;
 import io.jsonwebtoken.Claims;
@@ -21,12 +21,8 @@ public abstract class JwtUtil {
 
     private final static JwtKeyFactory jwtKeyFactory = new JwtKeyFactory();
 
-    private final static Period PERIOD = Period.HOUR;
+    private final static int PERIOD = Period.HOUR;
     private final static Key KEY = Keys.hmacShaKeyFor(jwtKeyFactory.create());
-
-    public static Period getPeriod() {
-        return PERIOD;
-    }
 
     public static String parse(User user) {
         HashMap<String, String> userMap = new HashMap<>();
@@ -34,7 +30,7 @@ public abstract class JwtUtil {
         userMap.put("name", user.getName());
         return Jwts.builder()
                 .setClaims(userMap)
-                .setExpiration(new Date(System.currentTimeMillis() + PERIOD.getSec() * 1000L))
+                .setExpiration(new Date(System.currentTimeMillis() + PERIOD * 1000L))
                 .signWith(KEY)
                 .compact();
     }
@@ -52,7 +48,7 @@ public abstract class JwtUtil {
     public static void attach(HttpServletResponse response, User user) {
         CookieUtil.add(
                 response,
-                SecureParam.JWT.name(),
+                SecureParam.JWT,
                 parse(user),
                 PERIOD);
     }

@@ -2,7 +2,7 @@ package app.text_quest.controller;
 
 
 import app.text_quest.util.LoggerFactory;
-import app.text_quest.util.enums.LogType;
+import app.text_quest.util.constant.LogType;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

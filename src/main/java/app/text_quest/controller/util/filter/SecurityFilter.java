@@ -1,9 +1,9 @@
 package app.text_quest.controller.util.filter;
 
-import app.text_quest.controller.oauth.util.enums.SecureParam;
+import app.text_quest.controller.oauth.util.constant.SecureParam;
 import app.text_quest.controller.util.CookieUtil;
-import app.text_quest.controller.util.exceptions.missedToken.types.MissedJwtException;
-import app.text_quest.controller.util.exceptions.missedToken.types.MissedRefreshException;
+import app.text_quest.controller.util.exception.missedToken.types.MissedJwtException;
+import app.text_quest.controller.util.exception.missedToken.types.MissedRefreshException;
 import app.text_quest.controller.util.token.JwtUtil;
 import app.text_quest.controller.util.token.RefreshUtil;
 import app.text_quest.database.model.Refresh;
@@ -40,7 +40,7 @@ public class SecurityFilter extends AbstractFilter {
     @Override
     public void doAction(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
-            Cookie tokenCookie = CookieUtil.find(request, SecureParam.REFRESH.name());
+            Cookie tokenCookie = CookieUtil.find(request, SecureParam.REFRESH);
             if (tokenCookie == null) throw new MissedRefreshException();
             auth.setUser(parseUser(request, response, tokenCookie.getValue()));
             chain.doFilter(request, response);
@@ -56,7 +56,7 @@ public class SecurityFilter extends AbstractFilter {
     protected User parseUser(HttpServletRequest request, HttpServletResponse response, String tokenString) throws MissedRefreshException {
         User user;
         try {
-            Cookie jwtCookie = CookieUtil.find(request, SecureParam.JWT.name());
+            Cookie jwtCookie = CookieUtil.find(request, SecureParam.JWT);
             if (jwtCookie == null) {
                 throw new MissedJwtException();
             }
@@ -71,8 +71,8 @@ public class SecurityFilter extends AbstractFilter {
     }
 
     protected void initAccessError(HttpServletResponse response) throws IOException {
-        CookieUtil.remove(response, SecureParam.REFRESH.name());
-        CookieUtil.remove(response, SecureParam.JWT.name());
+        CookieUtil.remove(response, SecureParam.REFRESH);
+        CookieUtil.remove(response, SecureParam.JWT);
         response.sendError(501, "Non authorised access");
     }
 

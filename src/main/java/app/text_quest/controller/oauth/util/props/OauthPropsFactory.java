@@ -1,7 +1,5 @@
 package app.text_quest.controller.oauth.util.props;
 
-import app.text_quest.controller.oauth.util.enums.Provider;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Objects;
@@ -23,7 +21,7 @@ public class OauthPropsFactory {
         }
     }
 
-    public OauthProps getFor(Provider provider) {
+    public OauthProps getFor(String provider) {
         return new OauthProps(properties, provider);
     }
 }

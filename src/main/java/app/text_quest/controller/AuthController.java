@@ -1,7 +1,7 @@
 package app.text_quest.controller;
 
 
-import app.text_quest.controller.oauth.util.enums.SecureParam;
+import app.text_quest.controller.oauth.util.constant.SecureParam;
 import app.text_quest.controller.util.token.JwtUtil;
 import app.text_quest.controller.util.token.RefreshUtil;
 import app.text_quest.database.model.Refresh;
@@ -12,7 +12,7 @@ import app.text_quest.database.service.BasicUserService;
 import app.text_quest.database.service.OauthUserService;
 import app.text_quest.database.service.UserService;
 import app.text_quest.util.LoggerFactory;
-import app.text_quest.util.enums.LogType;
+import app.text_quest.util.constant.LogType;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +39,7 @@ public class AuthController {
 
     @GetMapping("/oauth")
     public String oauth(HttpServletRequest request, HttpServletResponse response) {
-        String oauthId = (String) request.getAttribute(SecureParam.OAUTH_ID.name());
+        String oauthId = (String) request.getAttribute(SecureParam.OAUTH_ID);
         OauthUser user = oauthService.getByOauthId(oauthId);
         if (user == null) {
             user = new OauthUser();

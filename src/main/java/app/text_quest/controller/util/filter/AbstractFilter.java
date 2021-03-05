@@ -21,9 +21,8 @@ public abstract class AbstractFilter implements Filter {
     }
 
     protected AbstractFilter(Auth auth, String include, String exclude) {
-        this.include = Pattern.compile(include);
+        this(auth, include);
         this.exclude = Pattern.compile(exclude);
-        this.auth = auth;
     }
 
     public final void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

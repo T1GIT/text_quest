@@ -3,10 +3,10 @@ package app.text_quest.controller.oauth.provider;
 
 import app.text_quest.TextQuestApplication;
 import app.text_quest.controller.oauth.OauthController;
-import app.text_quest.controller.oauth.util.enums.PropName;
-import app.text_quest.controller.oauth.util.enums.Provider;
-import app.text_quest.controller.oauth.util.enums.ReqParam;
-import app.text_quest.controller.oauth.util.exceptions.types.ApiException;
+import app.text_quest.controller.oauth.util.constant.PropName;
+import app.text_quest.controller.oauth.util.constant.Provider;
+import app.text_quest.controller.oauth.util.constant.ReqParam;
+import app.text_quest.controller.oauth.util.exception.types.ApiException;
 import app.text_quest.controller.oauth.util.json.JsonToken;
 import app.text_quest.controller.oauth.util.json.vk.JsonVk;
 import app.text_quest.controller.oauth.util.request.UrlBuilder;
@@ -20,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
-public class OauthVkController extends OauthController {
+public class VkOauthController extends OauthController {
 
-    public OauthVkController() {
+    public VkOauthController() {
         super(Provider.VK);
     }
 
@@ -34,13 +34,14 @@ public class OauthVkController extends OauthController {
 
     @Override
     public String receiveToken(String code) throws ApiException {
-        UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_TOKEN))
+        UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_TOKEN));
+        GetRequest request = new GetRequest(urlBuilder);
+        request
                 .addParam(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID))
                 .addParam(ReqParam.CLIENT_SECRET, props.get(PropName.CLIENT_SECRET))
                 .addParam(ReqParam.CODE, code)
                 .addParam(ReqParam.REDIRECT_URI, String.format("%s/oauth/%s",
-                        TextQuestApplication.getRootUrl(), provider.lowName()));
-        GetRequest request = new GetRequest(urlBuilder.build());
+                        TextQuestApplication.getRootUrl(), provider));
         String response = request.send();
         JsonToken jsonToken = new Gson().fromJson(response, JsonToken.class);
         return jsonToken.getAccessToken();
@@ -48,11 +49,12 @@ public class OauthVkController extends OauthController {
 
     @Override
     public String receiveId(String token) throws ApiException {
-        UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_ID))
+        UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_ID));
+        GetRequest request = new GetRequest(urlBuilder);
+        request
                 .addParam(ReqParam.ACCESS_TOKEN, token)
                 .addParam(ReqParam.FIELDS, "uid")
                 .addParam(ReqParam.V, "5.130");
-        GetRequest request = new GetRequest(urlBuilder.build());
         String response = request.send();
         JsonVk jsonVk = new Gson().fromJson(response, JsonVk.class);
         return jsonVk.getResponse()[0].getId();
