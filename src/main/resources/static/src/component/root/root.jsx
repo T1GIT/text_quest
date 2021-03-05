@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import Style from "./root.sass";
-import Background from "./component/background/background";
-import OauthPanel from "./component/oauth_panel/oauth-panel";
+import Background from "../background/background";
+import OauthPanel from "../oauth_panel/oauth-panel";
 
 class Root extends Component {
     render() {
