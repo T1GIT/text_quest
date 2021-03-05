@@ -1,16 +1,16 @@
 package app.text_quest.security;
 
+import app.text_quest.security.util.HexConvertor;
 import app.text_quest.security.util.secretFactory.types.SaltFactory;
 import org.apache.log4j.Logger;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
 
-public abstract class Crypt {
+public abstract class Hash {
 
     private static final Logger logger = Logger.getLogger("errorLogger");
     private static final SaltFactory saltFactory = new SaltFactory();
@@ -22,7 +22,7 @@ public abstract class Crypt {
     public static String crypt(String password) {
         char[] chars = password.toCharArray();
         byte[] salt = saltFactory.create();
-        byte[] hash = null;
+        byte[] hash = null; // TODO: 06.03.2021 Add RSA crypting to form
         try {
             PBEKeySpec spec = new PBEKeySpec(chars, salt, ITERATIONS, KEY_LENGTH);
             SecretKeyFactory skf = SecretKeyFactory.getInstance(ALGORITHM);
@@ -30,7 +30,7 @@ public abstract class Crypt {
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             logger.error(e.getMessage(), e);
         }
-        return String.format("%s:%d:%s:%s", ALGORITHM, ITERATIONS, toHex(salt), toHex(hash));
+        return String.format("%s:%d:%s:%s", ALGORITHM, ITERATIONS, HexConvertor.toHex(salt), HexConvertor.toHex(hash));
     }
 
     public static boolean check(String psw, String pswHash) {
@@ -38,8 +38,8 @@ public abstract class Crypt {
             String[] parts = pswHash.split(":");
             String algorithm = parts[0];
             int iterations = Integer.parseInt(parts[1]);
-            byte[] salt = fromHex(parts[2]);
-            byte[] hash = fromHex(parts[3]);
+            byte[] salt = HexConvertor.fromHex(parts[2]);
+            byte[] hash = HexConvertor.fromHex(parts[3]);
 
             PBEKeySpec spec = new PBEKeySpec(psw.toCharArray(), salt, iterations, hash.length * 8);
             SecretKeyFactory skf = SecretKeyFactory.getInstance(algorithm);
@@ -54,24 +54,5 @@ public abstract class Crypt {
             logger.error(e.getMessage(), e);
             return false;
         }
-    }
-
-    public static String toHex(byte[] array) {
-        BigInteger bi = new BigInteger(1, array);
-        String hex = bi.toString(16);
-        int paddingLength = array.length * 2 - hex.length();
-        if (paddingLength > 0) {
-            return String.format("%0" + paddingLength + "d", 0) + hex;
-        } else {
-            return hex;
-        }
-    }
-
-    public static byte[] fromHex(String hex) throws NoSuchAlgorithmException {
-        byte[] bytes = new byte[hex.length() / 2];
-        for (int i = 0; i < bytes.length; i++) {
-            bytes[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
-        }
-        return bytes;
     }
 }

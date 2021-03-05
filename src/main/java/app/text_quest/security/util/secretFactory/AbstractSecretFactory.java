@@ -1,6 +1,6 @@
 package app.text_quest.security.util.secretFactory;
 
-import app.text_quest.security.Crypt;
+import app.text_quest.security.util.HexConvertor;
 import org.apache.log4j.Logger;
 
 import java.security.NoSuchAlgorithmException;
@@ -18,7 +18,7 @@ public abstract class AbstractSecretFactory<T> {
     }
 
     protected static String rndString(int length) {
-        return Crypt.toHex(rndBytes(length));
+        return HexConvertor.toHex(rndBytes(length));
     }
 
     public int getLength() {
