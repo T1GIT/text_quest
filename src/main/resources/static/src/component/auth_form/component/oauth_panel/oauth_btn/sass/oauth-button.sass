@@ -1,0 +1,64 @@
+@import '../../../../../../sass/var'
+@import '../../../../../../sass/mixin'
+@import "var"
+
+$svg_size: $btn_size * $svg_size_mult
+$text_size: $btn_size * $text_size_mult
+
+@keyframes spin_loading
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(360deg)
+
+
+.button
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2))
+  position: relative
+  width: $btn_size
+  height: $btn_size
+  line-height: $btn_size
+  margin: $btn_margin
+  overflow: hidden
+  border-radius: $elem_round
+  border: $border_width solid $theme_clr
+  +ani(.15s ease-out)
+
+  .wrap
+    width: max-content
+    height: $btn_size
+    white-space: nowrap
+    pointer-events: none
+
+    .svg, .text
+      float: left
+
+    .svg
+      width: $svg_size
+      height: $svg_size
+      margin: ($btn_size - $svg_size) / 2
+      fill: $theme_clr
+      stroke: $theme_clr
+
+    .text
+      width: max-content
+      height: $btn_size
+      margin: 0 $text_margin
+      font-size: $text_size
+      opacity: 0
+      +ani(.15s)
+
+  &:hover
+    .text
+      opacity: 1
+      transition-delay: .05s
+
+  &.loading
+    border-radius: 50%
+    border-color: $theme_clr transparent $theme_clr transparent
+    transform-origin: center
+    animation: spin_loading 1s ease-in-out infinite
+
+    svg
+      animation: spin_loading 1s ease-in-out infinite reverse
+

@@ -1,0 +1,26 @@
+@import "var"
+
+@mixin ani($mode: normal, $dur: false, $eas: false)
+  @if $mode == normal
+    transition: if($dur, $dur * $dur_mult, $nor_dur) if($eas, $eas, $nor_eas)
+  @else if $mode == hover
+    transition: if($dur, $dur * $dur_mult, $hov_dur) if($eas, $eas, $hov_eas)
+  @else if $mode == active
+    transition: if($dur, $dur * $dur_mult, $act_dur) if($eas, $eas, $act_eas)
+  @else
+    transition: $mode
+
+@mixin pseudo($left: 0, $top: 0)
+  content: ""
+  display: block
+  position: absolute
+  top: $top
+  left: $left
+
+@mixin debug
+  box-sizing: border-box
+  border: 1px solid red
+
+@mixin fill
+  width: 100%
+  height: 100%

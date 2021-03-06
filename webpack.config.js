@@ -42,7 +42,7 @@ module.exports = {
             filename: "index.min.css"
         }),
         new htmlWebpackPlugin({
-            hash: mode === modes.prod,
+            hash: true,
             cache: mode === modes.prod,
             template: Path.resolve(dir.src, "index.jsp"),
             filename: Path.resolve(dir.build, "index.min.html"),

@@ -1,11 +1,11 @@
-import React, {Component} from "react";
-import Style from "./root.sass";
+import React from "react";
+import style from "./root.sass";
 import Background from "../background/background";
-import OauthPanel from "../oauth_panel/oauth-panel";
+import OauthPanel from "../auth_form/component/oauth_panel/oauth-panel";
 
-class Root extends Component {
+class Root extends React.Component {
     render() {
-        return <div className={Style.root}>
+        return <div className={style.root}>
             <Background/>
             <OauthPanel/>
         </div>;
