@@ -1,34 +1,35 @@
 import React from "react";
-import style from "./sass/oauth-button.sass";
-import Svg from "../../../../svg";
+import style from "./sass/oauth-btn.sass";
+import Svg from "../../../svg";
 
-class OauthButton extends React.Component {
+class OauthBtn extends React.Component {
 
     constructor(props) {
         super(props);
-        this.elem = React.createRef()
+        this.ref = React.createRef()
     }
 
     onClick = href => event => {
-        this.elem.current.classList.add(style.loading)
-        this.elem.current.style.width = null
+        const el = this.ref.current
+        el.classList.add(style.loading)
+        el.style.width = null
         location.href = href;
     }
 
     onHover = event => {
-        const el = this.elem.current
+        const el = this.ref.current
         if (!el.classList.contains(style.loading)) {
             el.style.width = `${el.lastChild.offsetWidth}px`
         }
     }
 
     onBlur = event => {
-        this.elem.current.style.width = null
+        this.ref.current.style.width = null
     }
 
     render() {
         return <div
-            ref={this.elem}
+            ref={this.ref}
             className={style.button}
             onClick={this.onClick(btnHref[this.props.hrefName])}
             onMouseEnter={this.onHover}
@@ -44,4 +45,4 @@ class OauthButton extends React.Component {
     }
 }
 
-export default OauthButton;
+export default OauthBtn;

@@ -1,9 +1,8 @@
-@import '../../../../../../sass/var'
-@import '../../../../../../sass/mixin'
-@import "var"
+@import '../../../../../sass/config'
+@import '../../../../../sass/mixin'
+@import '../../../sass/mixin'
+@import "config"
 
-$svg_size: $btn_size * $svg_size_mult
-$text_size: $btn_size * $text_size_mult
 
 @keyframes spin_loading
   from
@@ -13,52 +12,47 @@ $text_size: $btn_size * $text_size_mult
 
 
 .button
-  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2))
-  position: relative
+  +block_shadow
   width: $btn_size
   height: $btn_size
   line-height: $btn_size
   margin: $btn_margin
   overflow: hidden
-  border-radius: $elem_round
+  border-radius: $border_radius
   border: $border_width solid $theme_clr
-  +ani(.15s ease-out)
+  +ani(normal, $ext_dur)
 
   .wrap
+    +flex_dir(row)
     width: max-content
     height: $btn_size
-    white-space: nowrap
     pointer-events: none
 
-    .svg, .text
-      float: left
-
     .svg
+      fill: $theme_clr
+      stroke: $theme_clr
       width: $svg_size
       height: $svg_size
       margin: ($btn_size - $svg_size) / 2
-      fill: $theme_clr
-      stroke: $theme_clr
 
     .text
-      width: max-content
-      height: $btn_size
+      width: min-content
       margin: 0 $text_margin
-      font-size: $text_size
       opacity: 0
-      +ani(.15s)
+      +ani(normal, $ext_dur * (1 - $text_show_delay))
 
   &:hover
     .text
       opacity: 1
-      transition-delay: .05s
+      transition-delay: $ext_dur * $text_show_delay
 
   &.loading
+    +ani(hover)
     border-radius: 50%
     border-color: $theme_clr transparent $theme_clr transparent
     transform-origin: center
-    animation: spin_loading 1s ease-in-out infinite
+    animation: spin_loading 1s ease-in-out $ext_dur infinite
 
-    svg
-      animation: spin_loading 1s ease-in-out infinite reverse
+    .svg
+      animation: spin_loading 1s ease-in-out infinite $ext_dur reverse
 

@@ -1,0 +1,20 @@
+@import '../../../../../../sass/config'
+@import '../../../../../../sass/mixin'
+@import '../../../../sass/mixin'
+@import "./config"
+
+
+.button
+  +block_shadow
+  +ani($nor_dur, ease-in)
+  line-height: 1em
+  margin: 0 $btn_margin - $btn_ext
+  padding: 0 $btn_pad + $btn_ext
+  border-radius: $border_radius
+  border: $border_width solid transparent
+
+  &.select
+    margin: 0 $btn_margin
+    padding: 0 $btn_pad
+    border-color: $theme_clr
+

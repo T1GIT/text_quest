@@ -1,0 +1,14 @@
+@import "../../sass/mixin"
+@import "./config"
+@import "../../../../sass/mixin"
+@import "../form/input-block/sass/config"
+
+
+.basic
+
+  .form_wrap
+    +flex_dir(column)
+    width: $input_width + ($text_offset + $hor_offset + $border_width) * 2
+    height: $form_height
+    position: relative
+

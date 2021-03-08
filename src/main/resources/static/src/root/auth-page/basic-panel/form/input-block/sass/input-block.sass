@@ -1,0 +1,26 @@
+@import "../../../../../../sass/mixin"
+@import "../../../../../../sass/config"
+@import "../../../sass/config"
+@import "../../../../sass/mixin"
+@import "config"
+
+.input_block
+  position: relative
+  width: min-content
+  margin: $ver_offset
+  padding: 0 $hor_offset
+
+  .label
+    pointer-events: none
+    position: absolute
+    top: 2px
+    left: $lbl_offset
+
+  .input
+    +block_shadow
+    width: $input_width
+    padding: 0 $text_offset
+    outline: none
+    background: none
+    border: $border_width solid $theme_clr
+    border-radius: $border_radius

@@ -1,0 +1,17 @@
+@import '../../../../../sass/config'
+@import '../../../../../sass/mixin'
+@import '../../../sass/mixin'
+
+
+.button
+  +block_shadow
+  +ani($nor_dur, ease-in)
+  margin: 10px
+  padding: 0 10px
+  border-radius: $border_radius
+  border: $border_width solid $theme_clr
+
+  &.clicked
+    padding: 0 30px
+    border-color: transparent
+
