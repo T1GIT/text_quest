@@ -5,16 +5,23 @@
 @import "config"
 
 .input_block
+  +ani(normal)
+  +size(fit)
   position: relative
-  width: min-content
-  margin: $ver_offset
-  padding: 0 $hor_offset
+  margin: $ver_offset $hor_offset
 
   .label
+    +ani(hover)
+    +text_shadow
     pointer-events: none
     position: absolute
-    top: 2px
+    top: $lbl_top
     left: $lbl_offset
+    opacity: 1
+
+    &.hidden
+      left: $lbl_offset + 20px
+      opacity: 0
 
   .input
     +block_shadow

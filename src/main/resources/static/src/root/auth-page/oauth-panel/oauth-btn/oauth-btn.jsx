@@ -9,11 +9,11 @@ class OauthBtn extends React.Component {
         this.ref = React.createRef()
     }
 
-    onClick = href => event => {
+    onClick = event => {
         const el = this.ref.current
         el.classList.add(style.loading)
         el.style.width = null
-        location.href = href;
+        location.href = this.props.href;
     }
 
     onHover = event => {
@@ -31,7 +31,7 @@ class OauthBtn extends React.Component {
         return <div
             ref={this.ref}
             className={style.button}
-            onClick={this.onClick(btnHref[this.props.hrefName])}
+            onClick={this.onClick}
             onMouseEnter={this.onHover}
             onMouseLeave={this.onBlur}
         >

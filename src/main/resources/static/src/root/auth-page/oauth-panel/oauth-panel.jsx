@@ -11,11 +11,11 @@ class OauthPanel extends React.Component {
 
     render() {
         return <div className={style.panel}>
-            <OauthBtn hrefName={"vk"} svg={svg_vk} text={"ВКонтакте"}/>
-            <OauthBtn hrefName={"yandex"} svg={svg_yandex} text={"Яндекс"}/>
-            <OauthBtn hrefName={"google"} svg={svg_google} text={"Google"}/>
-            <OauthBtn hrefName={"discord"} svg={svg_discord} text={"Discord"}/>
-            <OauthBtn hrefName={"git"} svg={svg_git} text={"GitHub"}/>
+            <OauthBtn href={btnHref.vk} svg={svg_vk} text={"ВКонтакте"}/>
+            <OauthBtn href={btnHref.yandex} svg={svg_yandex} text={"Яндекс"}/>
+            <OauthBtn href={btnHref.yandex} svg={svg_google} text={"Google"}/>
+            <OauthBtn href={btnHref.yandex} svg={svg_discord} text={"Discord"}/>
+            <OauthBtn href={btnHref.yandex} svg={svg_git} text={"GitHub"}/>
         </div>;
     }
 }

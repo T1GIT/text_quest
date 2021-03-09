@@ -8,6 +8,10 @@ class SubmitBtn extends React.Component {
         this.ref = React.createRef()
     }
 
+    hide = () => this.ref.current.classList.add(style.hidden)
+
+    show = () => this.ref.current.classList.remove(style.hidden)
+
     onClick = event => {
         this.ref.current.classList.add(style.clicked)
         this.props.onClick(event)
@@ -16,7 +20,11 @@ class SubmitBtn extends React.Component {
     render() {
         return <span
             ref={this.ref}
-            className={style.button}
+            className={
+                this.props.className
+                    ? `${style.button} ${this.props.className}`
+                    : style.button
+            }
             onClick={this.onClick}
         >
             Вперёд!

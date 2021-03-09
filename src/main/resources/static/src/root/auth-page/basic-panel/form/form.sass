@@ -5,3 +5,22 @@
   +abs_attach
   +size(fill)
   +flex_dir(column)
+  opacity: 0
+  pointer-events: none
+
+  .input_block
+    bottom: 20px
+
+  .submit_btn
+    transform: scale(1.1)
+
+  &.select
+    pointer-events: auto
+    opacity: 1
+
+    .input_block
+      bottom: 0
+
+    .submit_btn
+      transform: scale(1)
+    
