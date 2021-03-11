@@ -1,0 +1,28 @@
+@use "../../../../../../../sass/config" as glob_c
+@use "../../../../../../../sass/mixin" as glob_m
+@use "../../../../../sass/mixin" as auth_m
+@use "../../sass/config" as input_c
+@import "config"
+
+
+$font_size: glob_c.$font_size * $font_scale
+$offset: $top_offset + input_c.$input_v_pad + glob_c.$border_width + $font_size
+
+
+.hint
+  +glob_m.ani(normal)
+  +glob_m.size(fit_wide)
+  +auth_m.text_shadow
+  font-size: $font_size
+  position: absolute
+  left: $left_offset
+
+  &
+    bottom: -$offset
+    opacity: 1
+
+  &.hidden
+    bottom: -$offset + glob_c.$anim_len / 2
+    opacity: 0
+
+

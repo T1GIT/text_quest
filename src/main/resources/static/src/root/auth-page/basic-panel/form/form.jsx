@@ -1,5 +1,7 @@
 import React from "react";
 import style from "./form.sass";
+import {validateEmail, validatePsw} from "./js/validation";
+
 
 import InputBlock from "./input-block/input-block";
 import SubmitBtn from "./submit-btn/submit-btn";
@@ -8,48 +10,35 @@ class Form extends React.Component {
 
     constructor(props) {
         super(props);
-        this.ref = React.createRef()
         this.nodes = {}
         this.nodes.email_in = React.createRef()
         this.nodes.psw_in = React.createRef()
         this.nodes.re_psw_in = React.createRef()
+        this.nodes.btn = React.createRef()
     }
 
     componentDidMount() {
-        if (this.props.defaultSelect) {
-            this.ref.current.classList.add(style.select)
-        }
+        this.nodes.re_psw_in.current.hide()
     }
 
     onGoClick = event => {
 
     }
 
-    validateEmail = event => {
+    validateRepPsw = rep_psw => this.nodes.psw_in.current.getValue() === rep_psw
 
-    }
-
-    validatePsw = event => {
-
-    }
-
-    validateRepPsw = event => {
-
-    }
-
-    show = () => {
-        setTimeout(() => {
-                this.ref.current.classList.add(style.select)
-            },
-            200)
-
-    }
-
-    hide = () => {
-        this.ref.current.classList.remove(style.select)
-        // this.nodes.forEach((k, v) => {
-        //     v.current.erase()
-        // })
+    changePage = pageName => {
+        this.nodes.email_in.current.erase()
+        this.nodes.psw_in.current.erase()
+        this.nodes.re_psw_in.current.erase()
+        switch (pageName) {
+            case "log":
+                this.nodes.re_psw_in.current.hide()
+                break
+            case "reg":
+                this.nodes.re_psw_in.current.show()
+                break
+        }
     }
 
     render() {
@@ -59,32 +48,24 @@ class Form extends React.Component {
         >
             <InputBlock
                 ref={this.nodes.email_in}
-                className={style.input_block}
                 label="Почта"
-                name="email"
-                autoComplete="email"
-                onChange={this.validateEmail}
+                type="mail"
+                validator={validateEmail}
             />
             <InputBlock
                 ref={this.nodes.psw_in}
-                className={style.input_block}
                 label="Пароль"
-                name="psw"
-                autoComplete="password"
-                secret={true}
-                onChange={this.validatePsw}
+                type="psw"
+                validator={validatePsw}
             />
-            {this.props.rep_psw &&
             <InputBlock
                 ref={this.nodes.re_psw_in}
                 label="Повторите пароль"
-                name="rep_psw"
-                secret={true}
-                onChange={this.validateRepPsw}
+                type="rep_psw"
+                validator={this.validateRepPsw}
             />
-            }
             <SubmitBtn
-                className={style.submit_btn}
+                ref={this.nodes.btn}
                 onClick={this.onGoClick}
             />
         </form>;

@@ -9,13 +9,22 @@ import OauthBtn from "./oauth-btn/oauth-btn";
 
 class OauthPanel extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.ref = React.createRef()
+    }
+
     render() {
-        return <div className={style.panel}>
-            <OauthBtn href={btnHref.vk} svg={svg_vk} text={"ВКонтакте"}/>
-            <OauthBtn href={btnHref.yandex} svg={svg_yandex} text={"Яндекс"}/>
-            <OauthBtn href={btnHref.yandex} svg={svg_google} text={"Google"}/>
-            <OauthBtn href={btnHref.yandex} svg={svg_discord} text={"Discord"}/>
-            <OauthBtn href={btnHref.yandex} svg={svg_git} text={"GitHub"}/>
+        const {vk, yandex, google, discord, git} = btnHref
+        return <div
+            ref={this.ref}
+            className={style.panel}
+        >
+            <OauthBtn href={vk} svg={svg_vk} text={"ВКонтакте"}/>
+            <OauthBtn href={yandex} svg={svg_yandex} text={"Яндекс"}/>
+            <OauthBtn href={google} svg={svg_google} text={"Google"}/>
+            <OauthBtn href={discord} svg={svg_discord} text={"Discord"}/>
+            <OauthBtn href={git} svg={svg_git} text={"GitHub"}/>
         </div>;
     }
 }

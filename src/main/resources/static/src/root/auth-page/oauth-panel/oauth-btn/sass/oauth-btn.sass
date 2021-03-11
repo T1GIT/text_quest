@@ -1,6 +1,6 @@
-@import '../../../../../sass/config'
-@import '../../../../../sass/mixin'
-@import '../../../sass/mixin'
+@use '../../../../../sass/config' as glob_c
+@use '../../../../../sass/mixin' as glob_m
+@use '../../../sass/mixin' as auth_m
 @import "config"
 
 
@@ -12,33 +12,34 @@
 
 
 .button
-  +ani(normal, $ext_dur)
-  +block_shadow
+  +glob_m.ani(normal, $ext_dur)
+  +auth_m.block_shadow
+  cursor: pointer
   width: $btn_size
   height: $btn_size
   margin: $btn_margin
   overflow: hidden
-  border-radius: $border_radius
-  border: $border_width solid $theme_clr
+  border-radius: glob_c.$border_rad
+  border: glob_c.$border_width solid glob_c.$main_clr
 
   .wrap
-    +flex_dir(row)
+    +glob_m.flex_dir(row)
     width: max-content
     height: $btn_size
     pointer-events: none
 
     .svg
-      fill: $theme_clr
-      stroke: $theme_clr
+      fill: glob_c.$main_clr
+      stroke: glob_c.$main_clr
       width: $svg_size
       height: $svg_size
       margin: ($btn_size - $svg_size) / 2
 
     .text
       width: min-content
-      margin: 0 $text_margin
+      margin: 0 $text_h_mar
       opacity: 0
-      +ani(normal, $ext_dur * (1 - $text_show_delay))
+      +glob_m.ani(normal, $ext_dur * (1 - $text_show_delay))
 
   &:hover
     .text
@@ -46,10 +47,9 @@
       transition-delay: $ext_dur * $text_show_delay
 
   &.loading
-    +ani(hover)
+    +glob_m.ani(hover)
     border-radius: 50%
-    border-color: $theme_clr transparent $theme_clr transparent
-    //transform-origin: center
+    border-color: glob_c.$main_clr transparent glob_c.$main_clr transparent
     animation: spin_loading 1s ease-in-out $ext_dur infinite
 
     .svg

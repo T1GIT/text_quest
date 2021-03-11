@@ -1,17 +1,19 @@
-@import '../../../sass/config'
 @import '../../../sass/mixin'
-@import "../basic-panel/sass/config"
-
-.auth_block
-  +debug
-  +size(fit)
-  display: flex
-  flex-direction: row
-  align-items: center
-  position: absolute
-  margin-top: -$form_height / 2
-  top: 50vh
 
 
+.wrap
+  +ani(normal)
+  +size(fill)
+  +flex_dir(row)
 
+  &
+    opacity: 1
 
+  &.hidden
+    opacity: 0
+
+  .auth_block
+    +size(fit)
+    display: flex
+    flex-direction: row
+    align-items: center

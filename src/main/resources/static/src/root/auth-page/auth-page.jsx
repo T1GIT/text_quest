@@ -24,10 +24,12 @@ class AuthPage extends React.Component {
     }
 
     render() {
-        return <div className={style.auth_block}>
-            <BasicPanel/>
-            <OauthPanel/>
-        </div>;
+        return <div className={style.wrap}>
+            <div className={style.auth_block}>
+                <BasicPanel/>
+                <OauthPanel/>
+            </div>
+        </div>
     }
 }
 

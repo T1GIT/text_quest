@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./submit-btn.sass";
+import style from "./sass/submit-btn.sass";
 
 class SubmitBtn extends React.Component {
 
@@ -18,7 +18,7 @@ class SubmitBtn extends React.Component {
     }
 
     render() {
-        return <span
+        return <button
             ref={this.ref}
             className={
                 this.props.className
@@ -26,9 +26,10 @@ class SubmitBtn extends React.Component {
                     : style.button
             }
             onClick={this.onClick}
+            type="submit"
         >
             Вперёд!
-        </span>
+        </button>
     }
 }
 

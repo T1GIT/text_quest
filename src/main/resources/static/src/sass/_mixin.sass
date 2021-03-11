@@ -1,12 +1,12 @@
-@import "./config"
+@use "./config"
 
 @mixin ani($mode: normal, $dur: false, $eas: false)
   @if $mode == normal
-    transition: if($dur, $dur * $dur_mult, $nor_dur) if($eas, $eas, $nor_eas)
+    transition: if($dur, $dur * config.$dur_mult, config.$nor_dur) if($eas, $eas, config.$nor_eas)
   @else if $mode == hover
-    transition: if($dur, $dur * $dur_mult, $hov_dur) if($eas, $eas, $hov_eas)
+    transition: if($dur, $dur * config.$dur_mult, config.$hov_dur) if($eas, $eas, config.$hov_eas)
   @else if $mode == active
-    transition: if($dur, $dur * $dur_mult, $act_dur) if($eas, $eas, $act_eas)
+    transition: if($dur, $dur * config.$dur_mult, config.$act_dur) if($eas, $eas, config.$act_eas)
   @else
     transition: $mode
 
@@ -28,6 +28,10 @@
   @else if $mode == fit
     width: min-content
     height: min-content
+  @else if $mode == fit_wide
+    width: max-content
+    height: min-content
+
 
 @mixin abs_attach
   position: absolute

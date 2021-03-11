@@ -1,20 +1,24 @@
-@import '../../../../../../sass/config'
-@import '../../../../../../sass/mixin'
-@import '../../../../sass/mixin'
-@import "./config"
+@use '../../../../../../sass/config' as glob_c
+@use '../../../../../../sass/mixin' as glob_m
+@use '../../../../sass/mixin' as auth_m
+@import "config"
 
 
 .button
-  +block_shadow
-  +ani($nor_dur, ease-in)
+  +glob_m.ani(glob_c.$nor_dur, ease-in)
+  +auth_m.block_shadow
+  cursor: pointer
   line-height: 1em
-  margin: 0 $btn_margin - $btn_ext
-  padding: 0 $btn_pad + $btn_ext
-  border-radius: $border_radius
-  border: $border_width solid transparent
+  border-radius: glob_c.$border_rad
+  border: glob_c.$border_width solid transparent
+
+  &
+    margin: 0 $btn_mar - glob_c.$anim_len
+    padding: $btn_v_pad $btn_pad + glob_c.$anim_len
+    border-color: transparent
 
   &.select
-    margin: 0 $btn_margin
-    padding: 0 $btn_pad
-    border-color: $theme_clr
+    margin: 0 $btn_mar
+    padding: $btn_v_pad $btn_pad
+    border-color: glob_c.$main_clr
 

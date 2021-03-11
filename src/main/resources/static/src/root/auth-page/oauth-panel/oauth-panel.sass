@@ -1,8 +1,8 @@
-@import "./oauth-btn/sass/config"
-@import "../../../sass/config"
-@import "../basic-panel/sass/config"
+@import "../../../sass/mixin"
 
 .panel
-  width: ($border_width + $btn_margin) * 2 + $btn_size
-  align-items: center
+  +flex_dir(column)
+  align-items: flex-start
+  width: min-content
+
 
