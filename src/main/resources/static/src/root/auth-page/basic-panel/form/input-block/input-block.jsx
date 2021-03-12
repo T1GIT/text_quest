@@ -15,6 +15,10 @@ class InputBlock extends React.Component {
         this.valid = false
     }
 
+    componentDidMount() {
+        this.height = this.ref.current.offsetHeight
+    }
+
     onChange = event => {
         const input = this.nodes.input.current
         const lbl = this.nodes.label.current
@@ -33,9 +37,17 @@ class InputBlock extends React.Component {
 
     isValid = () => this.valid
 
-    hide = () => this.ref.current.classList.add(style.hidden)
+    hide = () => {
+        const el = this.ref.current
+        el.height = null
+        el.classList.add(style.hidden);
+    }
 
-    show = () => this.ref.current.classList.remove(style.hidden)
+    show = () => {
+        const el = this.ref.current
+        el.height = this.height + "px"
+        el.classList.remove(style.hidden);
+    }
 
     getValue = () => this.nodes.input.current.value
 

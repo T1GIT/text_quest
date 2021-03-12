@@ -26,6 +26,11 @@ class Header extends React.Component {
         this.props.onChangePage(pageName)
     }
 
+    reset = () => {
+        this.nodes.reg_btn.current.unSelect()
+        this.nodes.log_btn.current.select()
+    }
+
     render() {
         return <div className={style.header}>
             <HeaderBtn

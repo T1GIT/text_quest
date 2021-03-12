@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./sass/oauth-btn.sass";
-import Svg from "../../../svg";
+import Svg from "../../../../util/svg";
 
 class OauthBtn extends React.Component {
 
@@ -10,21 +10,33 @@ class OauthBtn extends React.Component {
     }
 
     onClick = event => {
-        const el = this.ref.current
+        let el = this.ref.current
         el.classList.add(style.loading)
         el.style.width = null
-        location.href = this.props.href;
+        let params = "" +
+            "menubar=no," +
+            "location=no," +
+            "directories=no," +
+            "status=no"
+        let oauthWindow = window.open(this.props.href, "oauth_window", params)
+        oauthWindow.focus()
     }
 
     onHover = event => {
-        const el = this.ref.current
+        let el = this.ref.current
         if (!el.classList.contains(style.loading)) {
-            el.style.width = `${el.lastChild.offsetWidth}px`
+            el.style.width = el.lastChild.offsetWidth + "px"
         }
     }
 
     onBlur = event => {
         this.ref.current.style.width = null
+    }
+
+    reset = () => {
+        const el = this.ref.current
+        el.style.width = null
+        el.classList.remove(style.loading)
     }
 
     render() {

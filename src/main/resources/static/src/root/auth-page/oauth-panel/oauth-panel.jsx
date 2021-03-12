@@ -12,6 +12,16 @@ class OauthPanel extends React.Component {
     constructor(props) {
         super(props);
         this.ref = React.createRef()
+        this.nodes = {}
+        this.nodes.vk = React.createRef()
+        this.nodes.yandex = React.createRef()
+        this.nodes.google = React.createRef()
+        this.nodes.discord = React.createRef()
+        this.nodes.git = React.createRef()
+    }
+
+    reset = () => {
+        for (const k in this.nodes) this.nodes[k].current.reset()
     }
 
     render() {
@@ -20,11 +30,11 @@ class OauthPanel extends React.Component {
             ref={this.ref}
             className={style.panel}
         >
-            <OauthBtn href={vk} svg={svg_vk} text={"ВКонтакте"}/>
-            <OauthBtn href={yandex} svg={svg_yandex} text={"Яндекс"}/>
-            <OauthBtn href={google} svg={svg_google} text={"Google"}/>
-            <OauthBtn href={discord} svg={svg_discord} text={"Discord"}/>
-            <OauthBtn href={git} svg={svg_git} text={"GitHub"}/>
+            <OauthBtn ref={this.nodes.vk} href={vk} svg={svg_vk} text={"ВКонтакте"}/>
+            <OauthBtn ref={this.nodes.yandex} href={yandex} svg={svg_yandex} text={"Яндекс"}/>
+            <OauthBtn ref={this.nodes.google} href={google} svg={svg_google} text={"Google"}/>
+            <OauthBtn ref={this.nodes.discord} href={discord} svg={svg_discord} text={"Discord"}/>
+            <OauthBtn ref={this.nodes.git} href={git} svg={svg_git} text={"GitHub"}/>
         </div>;
     }
 }

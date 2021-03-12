@@ -1,12 +1,12 @@
 @use "./config"
 
-@mixin ani($mode: normal, $dur: false, $eas: false)
+@mixin ani($mode: normal, $eas: false)
   @if $mode == normal
-    transition: if($dur, $dur * config.$dur_mult, config.$nor_dur) if($eas, $eas, config.$nor_eas)
-  @else if $mode == hover
-    transition: if($dur, $dur * config.$dur_mult, config.$hov_dur) if($eas, $eas, config.$hov_eas)
+    transition: config.$nor_dur if($eas, $eas, config.$nor_eas)
+  @else if $mode == fast
+    transition: config.$hov_dur if($eas, $eas, config.$fast_eas)
   @else if $mode == active
-    transition: if($dur, $dur * config.$dur_mult, config.$act_dur) if($eas, $eas, config.$act_eas)
+    transition: config.$act_dur if($eas, $eas, config.$act_eas)
   @else
     transition: $mode
 

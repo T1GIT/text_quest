@@ -12,7 +12,7 @@
 
 
 .button
-  +glob_m.ani(normal, $ext_dur)
+  +glob_m.ani($ext_dur)
   +auth_m.block_shadow
   cursor: pointer
   width: $btn_size
@@ -39,7 +39,7 @@
       width: min-content
       margin: 0 $text_h_mar
       opacity: 0
-      +glob_m.ani(normal, $ext_dur * (1 - $text_show_delay))
+      +glob_m.ani($ext_dur * (1 - $text_show_delay))
 
   &:hover
     .text
@@ -47,7 +47,7 @@
       transition-delay: $ext_dur * $text_show_delay
 
   &.loading
-    +glob_m.ani(hover)
+    +glob_m.ani(fast)
     border-radius: 50%
     border-color: glob_c.$main_clr transparent glob_c.$main_clr transparent
     animation: spin_loading 1s ease-in-out $ext_dur infinite

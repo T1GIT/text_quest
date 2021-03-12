@@ -9,14 +9,19 @@ class BasicPanel extends React.Component {
         super(props);
         this.nodes = {}
         this.nodes.form = React.createRef()
-        this.state = {
-            page: "log"
-        }
+        this.nodes.header = React.createRef()
+        this.page = "log"
+    }
+
+    reset = () => {
+        this.nodes.form.current.reset()
+        this.nodes.header.current.reset()
+        this.page = "log"
     }
 
     onChangePage = pageName => {
-        if (this.state.page !== pageName) {
-            this.state.page = pageName
+        if (this.page !== pageName) {
+            this.page = pageName
             this.nodes.form.current.changePage(pageName)
         }
     }
@@ -24,6 +29,7 @@ class BasicPanel extends React.Component {
     render() {
         return <div className={style.basic}>
             <Header
+                ref={this.nodes.header}
                 onChangePage={this.onChangePage}
             />
             <Form

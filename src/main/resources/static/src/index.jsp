@@ -12,15 +12,17 @@
 </head>
 <body>
 <noscript style="color: black">Для работы сайта включите JavaScript</noscript>
-<script id="initialScript">
 
-    const btnHref = [(${btnHref})]
-    const isAuthorised = [(${isAuthorised})]
-
-    scriptNode = document.getElementById("initialScript")
-    scriptNode.previousElementSibling.remove()
-    scriptNode.remove()
-</script>
 <div id="root"></div>
+
 </body>
+
+
+<script id="initialScript">
+    let btnHref = [(${btnHref})]
+    let isAuthorised = [(${isAuthorised})]
+    document.querySelector("noscript").remove()
+    document.getElementById("initialScript").remove()
+</script>
+
 </html>

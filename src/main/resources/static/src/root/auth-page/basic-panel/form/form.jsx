@@ -41,6 +41,13 @@ class Form extends React.Component {
         }
     }
 
+    reset = () => {
+        this.nodes.email_in.current.erase()
+        this.nodes.psw_in.current.erase()
+        this.nodes.re_psw_in.current.erase()
+        this.nodes.re_psw_in.current.hide()
+    }
+
     render() {
         return <form
             className={style.form}
