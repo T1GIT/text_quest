@@ -28,8 +28,11 @@ module.exports = {
     },
     mode: mode,
     watchOptions: {
-        ignored: /node_modules/,
+        ignored: /(node_modules|build)/,
         aggregateTimeout: 500,
+    },
+    resolve: {
+        extensions: [".jsx", ".js"],
     },
     plugins: [
         new Webpack.ProgressPlugin(),
@@ -40,9 +43,9 @@ module.exports = {
             filename: "index.min.css"
         }),
         new htmlWebpackPlugin({
-            hash: mode === modes.prod,
+            hash: true,
             cache: mode === modes.prod,
-            template: Path.resolve(dir.src, "index.html"),
+            template: Path.resolve(dir.src, "index.jsp"),
             filename: Path.resolve(dir.build, "index.min.html"),
             favicon: Path.resolve(dir.src, "resources", "favicon.ico"),
             publicPath: "build",
@@ -52,7 +55,7 @@ module.exports = {
     module: {
         rules: [
             { // JavaScript
-                test: /\.(js|jsx)$/,
+                test: /\.(jsx|js)$/,
                 include: dir.src,
                 exclude: /node_modules/,
                 use: {

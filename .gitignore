@@ -9,3 +9,6 @@ node_modules/
 # GENERATED
 target
 .log
+
+# OTHER
+scripts
