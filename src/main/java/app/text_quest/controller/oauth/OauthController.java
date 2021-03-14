@@ -29,8 +29,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@RequestMapping("/oauth")  // TODO: 05.03.2021 Add cookie filter with crypting
-public abstract class OauthController { // TODO: 06.03.2021 Add Steam and Telegram oauth
+@RequestMapping("/oauth")
+public abstract class OauthController {
 
     protected final static Logger logger = LoggerFactory.getLogger(LogType.ERROR);
     private final static OauthPropsFactory propsFactory = new OauthPropsFactory();
