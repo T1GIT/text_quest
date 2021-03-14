@@ -73,7 +73,7 @@ public class SecurityFilter extends AbstractFilter {
     protected void initAccessError(HttpServletResponse response) throws IOException {
         CookieUtil.remove(response, SecureParam.REFRESH);
         CookieUtil.remove(response, SecureParam.JWT);
-        response.sendError(501, "Non authorised access");
+        response.sendError(401, "Non authorised access");
     }
 
     protected void updateTokens(HttpServletResponse response, Refresh refresh) {

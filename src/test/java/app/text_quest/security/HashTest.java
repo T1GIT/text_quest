@@ -23,6 +23,8 @@ class HashTest {
     @Test
     void check() {
         String hash = Hash.crypt("password");
+        System.out.println(hash);
+        System.out.println(hash.length());
         assertTrue(Hash.check("password", hash));
         assertFalse(Hash.check("wrongPassword", hash));
     }

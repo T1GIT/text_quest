@@ -1,10 +1,17 @@
-@use "debug"
+@import "config"
+@import "mixin"
 
-html, body, body > div
+.body, #root
+  +size(fill)
+  +abs_attach
   margin: 0
   padding: 0
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
+
+  *
+    color: $main_clr
+    font-family: $font
+    font-size: $font_size
+    font-weight: $font_weight
+
+    &:not(input)
+      user-select: none
