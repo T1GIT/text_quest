@@ -17,6 +17,8 @@ class Root extends Component {
         setTimeout(this.load, 10)
         window.login = this.login
         window.logout = this.logout
+
+        alert("TEST BUILD") // PROD: Remove
     }
 
     load = () => {
