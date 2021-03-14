@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class TextQuestApplication {
 
     private static final Logger errorLogger = LoggerFactory.getLogger(LogType.ERROR);
-    private static final String rootUrl = "http://localhost:8080"; // PROD: Change
+    private static final String rootUrl = "https://t1magic.herokuapp.com";
 
 
     public static String getRootUrl() {
