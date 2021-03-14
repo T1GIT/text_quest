@@ -1,100 +1,100 @@
-2021-02-22T12:13:13.193274+00:00 app[web.1]: 2021-02-22 12:13:13.193 DEBUG 4 --- [io-55055-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to app.text_quest.controller.RootController#root()
-2021-02-22T12:13:13.195633+00:00 app[web.1]: 2021-02-22 12:13:13.195 DEBUG 4 --- [io-55055-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Using 'text/html', given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, application/signed-exchange;v=b3;q=0.9, */*;q=0.8] and supported [text/plain, */*, text/plain, */*, application/json, application/*+json, application/json, application/*+json]
-2021-02-22T12:13:13.199662+00:00 app[web.1]: 2021-02-22 12:13:13.199 DEBUG 4 --- [io-55055-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Writing [""]
-2021-02-22T12:13:13.200954+00:00 app[web.1]: 2021-02-22 12:13:13.200 DEBUG 4 --- [io-55055-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2021-02-22T12:13:13.202545+00:00 heroku[router]: at=info method=GET path="/" host=t1magic.herokuapp.com request_id=238f6aab-9077-40e2-a75c-c491495ecce2 fwd="194.186.188.251" dyno=web.1 connect=0ms service=16ms status=200 bytes=131 protocol=https
-2021-02-22T12:13:13.732574+00:00 app[api]: Release v44 created by user derbindima1@gmail.com
-2021-02-22T12:13:13.732574+00:00 app[api]: Deploy f6395934 by user derbindima1@gmail.com
-2021-02-22T12:13:14.984853+00:00 heroku[web.1]: Restarting
-2021-02-22T12:13:15.008955+00:00 heroku[web.1]: State changed from up to starting
-2021-02-22T12:13:16.778308+00:00 heroku[web.1]: Stopping all processes with SIGTERM
-2021-02-22T12:13:17.037279+00:00 app[web.1]: 2021-02-22 12:13:17.037  INFO 4 --- [extShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2021-02-22T12:13:17.100470+00:00 app[web.1]: 2021-02-22 12:13:17.100  INFO 4 --- [extShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2021-02-22T12:13:17.114749+00:00 app[web.1]: 2021-02-22 12:13:17.114  INFO 4 --- [extShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2021-02-22T12:13:17.228555+00:00 app[web.1]: 2021-02-22 12:13:17.228  INFO 4 --- [extShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2021-02-22T12:13:17.447064+00:00 heroku[web.1]: Process exited with status 143
-2021-02-22T12:13:19.001517+00:00 heroku[web.1]: Starting process with command `java -Dserver.port=12024 $JAVA_OPTS -jar target/*.jar`
-2021-02-22T12:13:21.051824+00:00 app[web.1]: Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them.
-2021-02-22T12:13:21.055360+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS: -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8
-2021-02-22T12:13:22.877056+00:00 app[web.1]: 
-2021-02-22T12:13:22.877108+00:00 app[web.1]: .   ____          _            __ _ _
-2021-02-22T12:13:22.877162+00:00 app[web.1]: /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-2021-02-22T12:13:22.877217+00:00 app[web.1]: ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
-2021-02-22T12:13:22.877270+00:00 app[web.1]: \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-2021-02-22T12:13:22.877324+00:00 app[web.1]: '  |____| .__|_| |_|_| |_\__, | / / / /
-2021-02-22T12:13:22.877376+00:00 app[web.1]: =========|_|==============|___/=/_/_/_/
-2021-02-22T12:13:22.878418+00:00 app[web.1]: :: Spring Boot ::                (v2.4.2)
-2021-02-22T12:13:22.878455+00:00 app[web.1]: 
-2021-02-22T12:13:23.062582+00:00 app[web.1]: 2021-02-22 12:13:23.057  INFO 4 --- [           main] app.text_quest.TextQuestApplication      : Starting TextQuestApplication v0.0.3-DEPLOY using Java 1.8.0_282-heroku on f92eb873-21c4-4313-8021-90d288999948 with PID 4 (/app/target/text_quest-0.0.3-DEPLOY.jar started by u14881 in /app)
-2021-02-22T12:13:23.064290+00:00 app[web.1]: 2021-02-22 12:13:23.064  INFO 4 --- [           main] app.text_quest.TextQuestApplication      : No active profile set, falling back to default profiles: default
-2021-02-22T12:13:24.762423+00:00 app[web.1]: 2021-02-22 12:13:24.762  INFO 4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2021-02-22T12:13:24.978253+00:00 app[web.1]: 2021-02-22 12:13:24.978  INFO 4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 204 ms. Found 12 JPA repository interfaces.
-2021-02-22T12:13:25.726200+00:00 app[web.1]: 2021-02-22 12:13:25.725  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.hateoas.config.HateoasConfiguration' of type [org.springframework.hateoas.config.HateoasConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.730874+00:00 app[web.1]: 2021-02-22 12:13:25.730  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'relProviderPluginRegistry' of type [org.springframework.plugin.core.support.PluginRegistryFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.744154+00:00 app[web.1]: 2021-02-22 12:13:25.743  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'relProviderPluginRegistry' of type [org.springframework.plugin.core.OrderAwarePluginRegistry] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.750258+00:00 app[web.1]: 2021-02-22 12:13:25.750  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean '_relProvider' of type [org.springframework.hateoas.server.core.DelegatingLinkRelationProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.758175+00:00 app[web.1]: 2021-02-22 12:13:25.757  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'messageResolver' of type [org.springframework.hateoas.mediatype.MessageSourceResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.760026+00:00 app[web.1]: 2021-02-22 12:13:25.759  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.data.web.config.SpringDataJacksonConfiguration' of type [org.springframework.data.web.config.SpringDataJacksonConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.767249+00:00 app[web.1]: 2021-02-22 12:13:25.767  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'jacksonGeoModule' of type [org.springframework.data.geo.GeoModule] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.794014+00:00 app[web.1]: 2021-02-22 12:13:25.793  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration' of type [org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.797096+00:00 app[web.1]: 2021-02-22 12:13:25.796  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperBuilderConfiguration' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperBuilderConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.799711+00:00 app[web.1]: 2021-02-22 12:13:25.799  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$Jackson2ObjectMapperBuilderCustomizerConfiguration' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$Jackson2ObjectMapperBuilderCustomizerConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.828179+00:00 app[web.1]: 2021-02-22 12:13:25.827  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.jackson-org.springframework.boot.autoconfigure.jackson.JacksonProperties' of type [org.springframework.boot.autoconfigure.jackson.JacksonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.829786+00:00 app[web.1]: 2021-02-22 12:13:25.829  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'standardJacksonObjectMapperBuilderCustomizer' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$Jackson2ObjectMapperBuilderCustomizerConfiguration$StandardJackson2ObjectMapperBuilderCustomizer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.834079+00:00 app[web.1]: 2021-02-22 12:13:25.833  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$ParameterNamesModuleConfiguration' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$ParameterNamesModuleConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.838374+00:00 app[web.1]: 2021-02-22 12:13:25.838  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'parameterNamesModule' of type [com.fasterxml.jackson.module.paramnames.ParameterNamesModule] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.840654+00:00 app[web.1]: 2021-02-22 12:13:25.840  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.857001+00:00 app[web.1]: 2021-02-22 12:13:25.856  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'jsonComponentModule' of type [org.springframework.boot.jackson.JsonComponentModule] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.859573+00:00 app[web.1]: 2021-02-22 12:13:25.859  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'jacksonObjectMapperBuilder' of type [org.springframework.http.converter.json.Jackson2ObjectMapperBuilder] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.868013+00:00 app[web.1]: 2021-02-22 12:13:25.867  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.data.rest-org.springframework.boot.autoconfigure.data.rest.RepositoryRestProperties' of type [org.springframework.boot.autoconfigure.data.rest.RepositoryRestProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.868906+00:00 app[web.1]: 2021-02-22 12:13:25.868  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'springBootRepositoryRestConfigurer' of type [org.springframework.boot.autoconfigure.data.rest.SpringBootRepositoryRestConfigurer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.870239+00:00 app[web.1]: 2021-02-22 12:13:25.870  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'configurerDelegate' of type [org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerDelegate] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.879329+00:00 app[web.1]: 2021-02-22 12:13:25.879  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration$StringHttpMessageConverterConfiguration' of type [org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration$StringHttpMessageConverterConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.887628+00:00 app[web.1]: 2021-02-22 12:13:25.887  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'stringHttpMessageConverter' of type [org.springframework.http.converter.StringHttpMessageConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.889247+00:00 app[web.1]: 2021-02-22 12:13:25.889  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.http.JacksonHttpMessageConvertersConfiguration$MappingJackson2HttpMessageConverterConfiguration' of type [org.springframework.boot.autoconfigure.http.JacksonHttpMessageConvertersConfiguration$MappingJackson2HttpMessageConverterConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.890383+00:00 app[web.1]: 2021-02-22 12:13:25.890  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.897169+00:00 app[web.1]: 2021-02-22 12:13:25.896  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'jacksonObjectMapperBuilder' of type [org.springframework.http.converter.json.Jackson2ObjectMapperBuilder] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.920324+00:00 app[web.1]: 2021-02-22 12:13:25.919  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'jacksonObjectMapper' of type [com.fasterxml.jackson.databind.ObjectMapper] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.933809+00:00 app[web.1]: 2021-02-22 12:13:25.933  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'mappingJackson2HttpMessageConverter' of type [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:25.935693+00:00 app[web.1]: 2021-02-22 12:13:25.935  INFO 4 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration' of type [org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-02-22T12:13:26.419746+00:00 app[web.1]: 2021-02-22 12:13:26.419  INFO 4 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 12024 (http)
-2021-02-22T12:13:26.439976+00:00 app[web.1]: 2021-02-22 12:13:26.439  INFO 4 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-02-22T12:13:26.440259+00:00 app[web.1]: 2021-02-22 12:13:26.440  INFO 4 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2021-02-22T12:13:26.517700+00:00 app[web.1]: 2021-02-22 12:13:26.517  INFO 4 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-02-22T12:13:26.517900+00:00 app[web.1]: 2021-02-22 12:13:26.517  INFO 4 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3351 ms
-2021-02-22T12:13:26.624714+00:00 app[web.1]: 2021-02-22 12:13:26.624 DEBUG 4 --- [           main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
-2021-02-22T12:13:26.624979+00:00 app[web.1]: 2021-02-22 12:13:26.624 DEBUG 4 --- [           main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
-2021-02-22T12:13:26.954798+00:00 app[web.1]: 2021-02-22 12:13:26.952  INFO 4 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2021-02-22T12:13:27.263534+00:00 app[web.1]: 2021-02-22 12:13:27.263  INFO 4 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.27.Final
-2021-02-22T12:13:27.521441+00:00 app[web.1]: 2021-02-22 12:13:27.521  INFO 4 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2021-02-22T12:13:27.715172+00:00 app[web.1]: 2021-02-22 12:13:27.714  INFO 4 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2021-02-22T12:13:28.262012+00:00 app[web.1]: 2021-02-22 12:13:28.261  INFO 4 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2021-02-22T12:13:28.300332+00:00 app[web.1]: 2021-02-22 12:13:28.300  INFO 4 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
-2021-02-22T12:13:28.797011+00:00 app[web.1]: 2021-02-22 12:13:28.796  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.node.types.LinkedNode.LinkedNode
-2021-02-22T12:13:28.803400+00:00 app[web.1]: 2021-02-22 12:13:28.803  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.node.types.LinkedNode.types.InMsg
-2021-02-22T12:13:28.804668+00:00 app[web.1]: 2021-02-22 12:13:28.804  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.node.types.LinkedNode.types.OutMsg
-2021-02-22T12:13:28.806218+00:00 app[web.1]: 2021-02-22 12:13:28.806  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.node.types.Fork
-2021-02-22T12:13:28.829025+00:00 app[web.1]: 2021-02-22 12:13:28.828  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.msg.types.Image
-2021-02-22T12:13:28.832252+00:00 app[web.1]: 2021-02-22 12:13:28.832  WARN 4 --- [           main] org.hibernate.cfg.AnnotationBinder       : HHH000139: Illegal use of @Table in a subclass of a SINGLE_TABLE hierarchy: app.text_quest.model.msg.types.Text
-2021-02-22T12:13:29.802028+00:00 app[web.1]: 2021-02-22 12:13:29.801  INFO 4 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2021-02-22T12:13:29.813513+00:00 app[web.1]: 2021-02-22 12:13:29.813  INFO 4 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2021-02-22T12:13:31.000000+00:00 app[api]: Build succeeded
-2021-02-22T12:13:31.739359+00:00 app[web.1]: 2021-02-22 12:13:31.739  WARN 4 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2021-02-22T12:13:32.338303+00:00 app[web.1]: 2021-02-22 12:13:32.338  INFO 4 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-02-22T12:13:32.381579+00:00 app[web.1]: 2021-02-22 12:13:32.381 DEBUG 4 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2021-02-22T12:13:32.729993+00:00 app[web.1]: 2021-02-22 12:13:32.729 DEBUG 4 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
-2021-02-22T12:13:32.855930+00:00 app[web.1]: 2021-02-22 12:13:32.855 DEBUG 4 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2021-02-22T12:13:32.882477+00:00 app[web.1]: 2021-02-22 12:13:32.882 DEBUG 4 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
-2021-02-22T12:13:33.860632+00:00 app[web.1]: 2021-02-22 12:13:33.860  INFO 4 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 12024 (http) with context path ''
-2021-02-22T12:13:33.886949+00:00 app[web.1]: 2021-02-22 12:13:33.886  INFO 4 --- [           main] app.text_quest.TextQuestApplication      : Started TextQuestApplication in 11.729 seconds (JVM running for 12.831)
-2021-02-22T12:13:33.895928+00:00 app[web.1]: java.lang.RuntimeException
-2021-02-22T12:13:33.896123+00:00 app[web.1]: at app.text_quest.TextQuestApplication.main(TextQuestApplication.java:21)
-2021-02-22T12:13:33.896240+00:00 app[web.1]: at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-2021-02-22T12:13:33.896319+00:00 app[web.1]: at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-2021-02-22T12:13:33.896395+00:00 app[web.1]: at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-2021-02-22T12:13:33.896512+00:00 app[web.1]: at java.lang.reflect.Method.invoke(Method.java:498)
-2021-02-22T12:13:33.896589+00:00 app[web.1]: at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49)
-2021-02-22T12:13:33.896700+00:00 app[web.1]: at org.springframework.boot.loader.Launcher.launch(Launcher.java:107)
-2021-02-22T12:13:33.896774+00:00 app[web.1]: at org.springframework.boot.loader.Launcher.launch(Launcher.java:58)
-2021-02-22T12:13:33.896900+00:00 app[web.1]: at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:88)
-2021-02-22T12:13:33.901150+00:00 heroku[web.1]: State changed from starting to up
+2021-03-14T16:31:45.514295+00:00 app[web.1]: at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:426)
+2021-03-14T16:31:45.514664+00:00 app[web.1]: at org.springframework.boot.SpringApplication.run(SpringApplication.java:326)
+2021-03-14T16:31:45.514754+00:00 app[web.1]: at org.springframework.boot.SpringApplication.run(SpringApplication.java:1311)
+2021-03-14T16:31:45.514844+00:00 app[web.1]: at org.springframework.boot.SpringApplication.run(SpringApplication.java:1300)
+2021-03-14T16:31:45.514931+00:00 app[web.1]: at app.text_quest.TextQuestApplication.main(TextQuestApplication.java:27)
+2021-03-14T16:31:45.515003+00:00 app[web.1]: at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2021-03-14T16:31:45.515077+00:00 app[web.1]: at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+2021-03-14T16:31:45.515152+00:00 app[web.1]: at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-03-14T16:31:45.515234+00:00 app[web.1]: at java.lang.reflect.Method.invoke(Method.java:498)
+2021-03-14T16:31:45.515315+00:00 app[web.1]: at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49)
+2021-03-14T16:31:45.515420+00:00 app[web.1]: at org.springframework.boot.loader.Launcher.launch(Launcher.java:107)
+2021-03-14T16:31:45.515486+00:00 app[web.1]: at org.springframework.boot.loader.Launcher.launch(Launcher.java:58)
+2021-03-14T16:31:45.515553+00:00 app[web.1]: at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:88)
+2021-03-14T16:31:46.222934+00:00 app[web.1]: 2021-03-14 16:31:46.222  WARN 4 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-03-14T16:31:47.075002+00:00 app[web.1]: 2021-03-14 16:31:47.074  INFO 4 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-03-14T16:31:49.167005+00:00 app[web.1]: 2021-03-14 16:31:49.166  INFO 4 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8383 (http) with context path ''
+2021-03-14T16:31:49.195072+00:00 app[web.1]: 2021-03-14 16:31:49.194  INFO 4 --- [           main] app.text_quest.TextQuestApplication      : Started TextQuestApplication in 16.988 seconds (JVM running for 18.349)
+2021-03-14T16:31:49.486250+00:00 heroku[web.1]: State changed from starting to up
+2021-03-14T16:31:50.000000+00:00 app[api]: Build succeeded
+2021-03-14T16:32:15.341596+00:00 app[web.1]: 2021-03-14 16:32:15.341  INFO 4 --- [nio-8383-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-03-14T16:32:15.341807+00:00 app[web.1]: 2021-03-14 16:32:15.341  INFO 4 --- [nio-8383-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-03-14T16:32:15.343530+00:00 app[web.1]: 2021-03-14 16:32:15.343  INFO 4 --- [nio-8383-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2021-03-14T16:32:15.420838+00:00 app[web.1]: java.io.FileNotFoundException: file:/app/target/text_quest-0.0.1.jar!/BOOT-INF/classes!/oauth.properties (No such file or directory)
+2021-03-14T16:32:15.421103+00:00 app[web.1]: at java.io.FileInputStream.open0(Native Method)
+2021-03-14T16:32:15.421188+00:00 app[web.1]: at java.io.FileInputStream.open(FileInputStream.java:195)
+2021-03-14T16:32:15.421238+00:00 app[web.1]: at java.io.FileInputStream.<init>(FileInputStream.java:138)
+2021-03-14T16:32:15.421290+00:00 app[web.1]: at java.io.FileInputStream.<init>(FileInputStream.java:93)
+2021-03-14T16:32:15.421359+00:00 app[web.1]: at app.text_quest.controller.oauth.util.props.OauthPropsFactory.<init>(OauthPropsFactory.java:18)
+2021-03-14T16:32:15.421426+00:00 app[web.1]: at app.text_quest.controller.oauth.util.BtnUrlParser.<clinit>(BtnUrlParser.java:13)
+2021-03-14T16:32:15.421493+00:00 app[web.1]: at app.text_quest.controller.RootController.getBtnUrl(RootController.java:61)
+2021-03-14T16:32:15.421559+00:00 app[web.1]: at app.text_quest.controller.RootController.injectData(RootController.java:54)
+2021-03-14T16:32:15.421624+00:00 app[web.1]: at app.text_quest.controller.RootController.root(RootController.java:42)
+2021-03-14T16:32:15.421691+00:00 app[web.1]: at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2021-03-14T16:32:15.421775+00:00 app[web.1]: at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+2021-03-14T16:32:15.421844+00:00 app[web.1]: at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-03-14T16:32:15.421913+00:00 app[web.1]: at java.lang.reflect.Method.invoke(Method.java:498)
+2021-03-14T16:32:15.421988+00:00 app[web.1]: at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+2021-03-14T16:32:15.422087+00:00 app[web.1]: at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+2021-03-14T16:32:15.422156+00:00 app[web.1]: at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+2021-03-14T16:32:15.422225+00:00 app[web.1]: at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)
+2021-03-14T16:32:15.422293+00:00 app[web.1]: at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+2021-03-14T16:32:15.422362+00:00 app[web.1]: at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+2021-03-14T16:32:15.422476+00:00 app[web.1]: at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)
+2021-03-14T16:32:15.422561+00:00 app[web.1]: at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)
+2021-03-14T16:32:15.422680+00:00 app[web.1]: at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+2021-03-14T16:32:15.422787+00:00 app[web.1]: at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+2021-03-14T16:32:15.422876+00:00 app[web.1]: at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+2021-03-14T16:32:15.422990+00:00 app[web.1]: at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+2021-03-14T16:32:15.422996+00:00 app[web.1]: at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+2021-03-14T16:32:15.423049+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+2021-03-14T16:32:15.423097+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+2021-03-14T16:32:15.423126+00:00 app[web.1]: at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+2021-03-14T16:32:15.423172+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+2021-03-14T16:32:15.423214+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+2021-03-14T16:32:15.423245+00:00 app[web.1]: at app.text_quest.controller.util.filter.SecurityFilter.doAction(SecurityFilter.java:51)
+2021-03-14T16:32:15.423275+00:00 app[web.1]: at app.text_quest.controller.util.filter.AbstractFilter.doFilter(AbstractFilter.java:34)
+2021-03-14T16:32:15.423323+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+2021-03-14T16:32:15.423378+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+2021-03-14T16:32:15.423408+00:00 app[web.1]: at app.text_quest.controller.util.filter.LoggingFilter.doAction(LoggingFilter.java:32)
+2021-03-14T16:32:15.423455+00:00 app[web.1]: at app.text_quest.controller.util.filter.AbstractFilter.doFilter(AbstractFilter.java:34)
+2021-03-14T16:32:15.423537+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+2021-03-14T16:32:15.423593+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+2021-03-14T16:32:15.423688+00:00 app[web.1]: at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+2021-03-14T16:32:15.423768+00:00 app[web.1]: at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+2021-03-14T16:32:15.423836+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+2021-03-14T16:32:15.423925+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+2021-03-14T16:32:15.424019+00:00 app[web.1]: at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+2021-03-14T16:32:15.424124+00:00 app[web.1]: at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+2021-03-14T16:32:15.424217+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+2021-03-14T16:32:15.424346+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+2021-03-14T16:32:15.424452+00:00 app[web.1]: at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+2021-03-14T16:32:15.424541+00:00 app[web.1]: at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+2021-03-14T16:32:15.424631+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+2021-03-14T16:32:15.424716+00:00 app[web.1]: at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+2021-03-14T16:32:15.424808+00:00 app[web.1]: at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+2021-03-14T16:32:15.424893+00:00 app[web.1]: at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+2021-03-14T16:32:15.425005+00:00 app[web.1]: at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+2021-03-14T16:32:15.425077+00:00 app[web.1]: at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+2021-03-14T16:32:15.425412+00:00 app[web.1]: at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+2021-03-14T16:32:15.425412+00:00 app[web.1]: at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+2021-03-14T16:32:15.425413+00:00 app[web.1]: at org.apache.catalina.valves.RemoteIpValve.invoke(RemoteIpValve.java:764)
+2021-03-14T16:32:15.425413+00:00 app[web.1]: at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+2021-03-14T16:32:15.425414+00:00 app[web.1]: at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+2021-03-14T16:32:15.425414+00:00 app[web.1]: at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+2021-03-14T16:32:15.425414+00:00 app[web.1]: at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:888)
+2021-03-14T16:32:15.425418+00:00 app[web.1]: at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1597)
+2021-03-14T16:32:15.425495+00:00 app[web.1]: at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+2021-03-14T16:32:15.425565+00:00 app[web.1]: at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+2021-03-14T16:32:15.425633+00:00 app[web.1]: at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+2021-03-14T16:32:15.425681+00:00 app[web.1]: at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+2021-03-14T16:32:15.425978+00:00 app[web.1]: at java.lang.Thread.run(Thread.java:748)
+2021-03-14T16:32:15.442497+00:00 heroku[router]: at=info method=GET path="/" host=t1magic.herokuapp.com request_id=66f083ca-95bf-40fa-8e76-fe2b3f1ac216 fwd="178.176.75.151" dyno=web.1 connect=0ms service=186ms status=200 bytes=244 protocol=https
+2021-03-14T16:32:15.892358+00:00 heroku[router]: at=info method=GET path="/favicon.ico" host=t1magic.herokuapp.com request_id=7a9498cb-ff42-41b4-b355-8323b5cc2545 fwd="178.176.75.151" dyno=web.1 connect=2ms service=226ms status=401 bytes=514 protocol=https
+2021-03-14T16:32:17.003691+00:00 heroku[router]: at=info method=GET path="/" host=t1magic.herokuapp.com request_id=f74b08d2-e383-40ab-ad31-03a506e9e142 fwd="178.176.75.151" dyno=web.1 connect=1ms service=7ms status=200 bytes=244 protocol=https
+2021-03-14T16:32:17.226430+00:00 heroku[router]: at=info method=GET path="/favicon.ico" host=t1magic.herokuapp.com request_id=ab2447fc-819c-4e40-b8f1-a9ddedb010cb fwd="178.176.75.151" dyno=web.1 connect=1ms service=10ms status=401 bytes=514 protocol=https
+2021-03-14T16:32:17.874641+00:00 heroku[router]: at=info method=GET path="/" host=t1magic.herokuapp.com request_id=12a22807-fee4-45d0-88ec-2c35bbabcd09 fwd="178.176.75.151" dyno=web.1 connect=3ms service=15ms status=200 bytes=244 protocol=https
+2021-03-14T16:32:18.116360+00:00 heroku[router]: at=info method=GET path="/favicon.ico" host=t1magic.herokuapp.com request_id=2806979c-ba38-404b-b8d0-f0f2c8b5346e fwd="178.176.75.151" dyno=web.1 connect=1ms service=9ms status=401 bytes=514 protocol=https
+2021-03-14T16:32:18.898136+00:00 heroku[router]: at=info method=GET path="/" host=t1magic.herokuapp.com request_id=11b1af98-98b2-4a19-b5d8-26c19af19fbd fwd="178.176.75.151" dyno=web.1 connect=2ms service=21ms status=200 bytes=244 protocol=https
+2021-03-14T16:32:19.155674+00:00 heroku[router]: at=info method=GET path="/favicon.ico" host=t1magic.herokuapp.com request_id=34a5ce08-e310-4b31-9d56-3d5ee2ac9950 fwd="178.176.75.151" dyno=web.1 connect=0ms service=9ms status=401 bytes=514 protocol=https
+2021-03-14T16:34:29.511180+00:00 heroku[router]: at=info method=HEAD path="/" host=t1magic.herokuapp.com request_id=44b3b4e1-c905-45fa-baad-4a3632c9c5ad fwd="69.162.124.237" dyno=web.1 connect=1ms service=13ms status=200 bytes=244 protocol=https
