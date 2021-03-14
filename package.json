@@ -7,7 +7,7 @@
     "npm": "7.x"
   },
   "scripts": {
-    "build": "webpack --mode production"
+    "build": "SET NODE_ENV=production&&webpack"
   },
   "dependencies": {},
   "devDependencies": {
