@@ -1,18 +1,21 @@
 import React from "react";
 import style from "./sass/oauth-btn.sass";
 import Svg from "../../../../util/svg";
+import Component from "../../../../util/component";
 
-class OauthBtn extends React.Component {
+class OauthBtn extends Component {
 
     constructor(props) {
         super(props);
-        this.ref = React.createRef()
     }
 
     onClick = event => {
-        let el = this.ref.current
-        el.classList.add(style.loading)
-        el.style.width = null
+        this.self.classList.add(style.loading)
+        this.self.style.width = null
+        setTimeout(this.openWindow, 200)
+    }
+
+    openWindow = () => {
         let params = "" +
             "menubar=no," +
             "location=no," +
@@ -23,25 +26,23 @@ class OauthBtn extends React.Component {
     }
 
     onHover = event => {
-        let el = this.ref.current
-        if (!el.classList.contains(style.loading)) {
-            el.style.width = el.lastChild.offsetWidth + "px"
+        if (!this.self.classList.contains(style.loading)) {
+            this.self.style.width = this.self.lastChild.offsetWidth + "px"
         }
     }
 
     onBlur = event => {
-        this.ref.current.style.width = null
+        this.self.style.width = null
     }
 
     reset = () => {
-        const el = this.ref.current
-        el.style.width = null
-        el.classList.remove(style.loading)
+        this.self.style.width = null
+        this.self.classList.remove(style.loading)
     }
 
     render() {
         return <div
-            ref={this.ref}
+            ref={this.self}
             className={style.button}
             onClick={this.onClick}
             onMouseEnter={this.onHover}

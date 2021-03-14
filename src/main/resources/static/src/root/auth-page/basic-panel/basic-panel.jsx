@@ -2,32 +2,32 @@ import React from "react";
 import style from "./basic-panel.sass";
 import Header from "./header/header";
 import Form from "./form/form";
+import Component from "../../../util/component";
 
-class BasicPanel extends React.Component {
+class BasicPanel extends Component {
 
     constructor(props) {
         super(props);
-        this.nodes = {}
         this.nodes.form = React.createRef()
         this.nodes.header = React.createRef()
         this.page = "log"
     }
 
     reset = () => {
-        this.nodes.form.current.reset()
-        this.nodes.header.current.reset()
-        this.page = "log"
+        this.nodes.form.reset()
+        this.nodes.header.reset()
+        super.reset()
     }
 
     onChangePage = pageName => {
-        if (this.page !== pageName) {
-            this.page = pageName
-            this.nodes.form.current.changePage(pageName)
-        }
+        this.nodes.form.changePage(pageName)
     }
 
     render() {
-        return <div className={style.basic}>
+        return <div
+            ref={this.self}
+            className={style.basic}
+        >
             <Header
                 ref={this.nodes.header}
                 onChangePage={this.onChangePage}

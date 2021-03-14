@@ -2,12 +2,12 @@ import React from "react";
 import style from "./sass/header.sass";
 
 import HeaderBtn from "./header-btn/header-btn";
+import Component from "../../../../util/component";
 
-class Header extends React.Component {
+class Header extends Component {
 
     constructor(props) {
         super(props);
-        this.nodes = {}
         this.nodes.log_btn = React.createRef()
         this.nodes.reg_btn = React.createRef()
     }
@@ -15,24 +15,28 @@ class Header extends React.Component {
     onChangePage = pageName => event => {
         switch (pageName) {
             case "log":
-                this.nodes.reg_btn.current.unSelect()
-                this.nodes.log_btn.current.select()
+                this.nodes.reg_btn.unSelect()
+                this.nodes.log_btn.select()
                 break
             case "reg":
-                this.nodes.log_btn.current.unSelect()
-                this.nodes.reg_btn.current.select()
+                this.nodes.log_btn.unSelect()
+                this.nodes.reg_btn.select()
                 break
         }
         this.props.onChangePage(pageName)
     }
 
     reset = () => {
-        this.nodes.reg_btn.current.unSelect()
-        this.nodes.log_btn.current.select()
+        this.nodes.reg_btn.unSelect()
+        this.nodes.log_btn.select()
+        super.reset()
     }
 
     render() {
-        return <div className={style.header}>
+        return <div
+            ref={this.self}
+            className={style.header}
+        >
             <HeaderBtn
                 ref={this.nodes.log_btn}
                 defaultSelect={true}

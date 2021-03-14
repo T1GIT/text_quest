@@ -2,27 +2,22 @@ import React from "react";
 import style from "./sass/input-block.sass";
 import Hint from "./hint/hint";
 import Label from "./label/label";
+import Component from "../../../../../util/component";
 
-class InputBlock extends React.Component {
+class InputBlock extends Component {
 
     constructor(props) {
         super(props);
-        this.nodes = {}
-        this.ref = React.createRef()
         this.nodes.input = React.createRef()
         this.nodes.label = React.createRef()
         this.nodes.hint = React.createRef()
         this.valid = false
     }
 
-    componentDidMount() {
-        this.height = this.ref.current.offsetHeight
-    }
-
     onChange = event => {
-        const input = this.nodes.input.current
-        const lbl = this.nodes.label.current
-        const hint = this.nodes.hint.current
+        let input = this.nodes.input
+        let lbl = this.nodes.label
+        let hint = this.nodes.hint
         if (input.value === "") {
             lbl.show()
             hint.changeText("")
@@ -38,23 +33,21 @@ class InputBlock extends React.Component {
     isValid = () => this.valid
 
     hide = () => {
-        const el = this.ref.current
-        el.height = null
-        el.classList.add(style.hidden);
+        this.self.classList.add(style.hidden);
+        this.self.style.height = null
     }
 
     show = () => {
-        const el = this.ref.current
-        el.height = this.height + "px"
-        el.classList.remove(style.hidden);
+        this.self.style.height = this.nodes.input.offsetHeight + "px"
+        this.self.classList.remove(style.hidden);
     }
 
-    getValue = () => this.nodes.input.current.value
+    getValue = () => this.nodes.input.value
 
-    erase = () => {
-        this.nodes.input.current.value = ""
-        this.nodes.label.current.show()
-        this.nodes.hint.current.changeText("")
+    reset = () => {
+        this.nodes.input.value = ""
+        this.nodes.label.show()
+        this.nodes.hint.changeText("")
         this.valid = false
     }
 
@@ -73,7 +66,7 @@ class InputBlock extends React.Component {
                 break
         }
         return <div
-            ref={this.ref}
+            ref={this.self}
             className={style.input_block}
         >
             <Label

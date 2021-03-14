@@ -1,26 +1,26 @@
 import React from "react";
 import style from "./sass/header-btn.sass";
+import Component from "../../../../../util/component";
 
-class HeaderBtn extends React.Component {
+class HeaderBtn extends Component {
 
     constructor(props) {
         super(props);
-        this.ref = React.createRef();
     }
 
-    componentDidMount() {
+    afterRender() {
         if (this.props.defaultSelect) {
-            this.ref.current.classList.add(style.select)
+            this.self.classList.add(style.select)
         }
     }
 
-    select = () => this.ref.current.classList.add(style.select)
+    select = () => this.self.classList.add(style.select)
 
-    unSelect = () => this.ref.current.classList.remove(style.select)
+    unSelect = () => this.self.classList.remove(style.select)
 
     render() {
         return <span
-            ref={this.ref}
+            ref={this.self}
             className={style.button}
             onClick={this.props.onClick}
         >

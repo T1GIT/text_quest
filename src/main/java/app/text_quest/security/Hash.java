@@ -14,7 +14,7 @@ public abstract class Hash {
 
     private static final Logger logger = Logger.getLogger("errorLogger");
     private static final SaltFactory saltFactory = new SaltFactory();
-    private static final int ITERATIONS = 10000;
+    private static final int ITERATIONS = 50000;
     private static final int KEY_LENGTH = 512;
     private static final int SALT_LENGTH = 16;
     private static final String ALGORITHM = "PBKDF2WithHmacSHA512";

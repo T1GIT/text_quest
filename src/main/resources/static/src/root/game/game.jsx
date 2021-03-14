@@ -1,6 +1,7 @@
 import React from "react";
+import Component from "../../util/component";
 
-class Game extends React.Component {
+class Game extends Component {
 
     constructor(props) {
         super(props);
@@ -14,12 +15,8 @@ class Game extends React.Component {
 
     }
 
-    setName = name => {
-        this.name = name
-    }
-
     render() {
-        return <div>
+        return <div ref={this.self}>
         </div>
     }
 }

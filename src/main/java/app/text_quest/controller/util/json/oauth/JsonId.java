@@ -1,4 +1,4 @@
-package app.text_quest.controller.oauth.util.json;
+package app.text_quest.controller.util.json.oauth;
 
 public class JsonId {
 

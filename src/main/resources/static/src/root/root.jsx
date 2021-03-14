@@ -3,43 +3,41 @@ import style from "./root.sass";
 import Background from "./background/background";
 import AuthPage from "./auth-page/auth-page";
 import Game from "./game/game";
+import Component from "../util/component";
 
-class Root extends React.Component {
+class Root extends Component {
 
     constructor(props) {
         super(props);
-        this.ref = React.createRef()
-        this.nodes = {}
         this.nodes.game = React.createRef()
         this.nodes.auth_page = React.createRef()
     }
 
-    componentDidMount() {
-        setTimeout(this.load, 0)
+    afterRender() {
+        setTimeout(this.load, 10)
         window.login = this.login
         window.logout = this.logout
     }
 
     load = () => {
-        this.ref.current.classList.add(style.loaded)
+        this.self.classList.add(style.loaded)
     }
 
-    login = name => {
-        this.nodes.game.current.setName(name)
+    login = () => {
         // TODO
-        this.nodes.auth_page.current.hide()
+        this.nodes.auth_page.hide()
         console.log("login")
     }
 
     logout = () => {
-        this.nodes.auth_page.current.show()
+        this.nodes.auth_page.show()
         console.log("logout")
         // TODO
     }
 
     render() {
         return <div
-            ref={this.ref}
+            ref={this.self}
             className={style.root}
         >
             <Background/>

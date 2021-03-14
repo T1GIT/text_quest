@@ -6,13 +6,12 @@ import svg_google from "./oauth-btn/svg/google.svg"
 import svg_vk from "./oauth-btn/svg/vk.svg"
 import svg_yandex from "./oauth-btn/svg/yandex.svg"
 import OauthBtn from "./oauth-btn/oauth-btn";
+import Component from "../../../util/component";
 
-class OauthPanel extends React.Component {
+class OauthPanel extends Component {
 
     constructor(props) {
         super(props);
-        this.ref = React.createRef()
-        this.nodes = {}
         this.nodes.vk = React.createRef()
         this.nodes.yandex = React.createRef()
         this.nodes.google = React.createRef()
@@ -20,14 +19,10 @@ class OauthPanel extends React.Component {
         this.nodes.git = React.createRef()
     }
 
-    reset = () => {
-        for (const k in this.nodes) this.nodes[k].current.reset()
-    }
-
     render() {
-        const {vk, yandex, google, discord, git} = btnHref
+        const {vk, yandex, google, discord, git} = window.btnHref
         return <div
-            ref={this.ref}
+            ref={this.self}
             className={style.panel}
         >
             <OauthBtn ref={this.nodes.vk} href={vk} svg={svg_vk} text={"ВКонтакте"}/>

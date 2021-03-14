@@ -1,79 +1,127 @@
 import React from "react";
+import axios from "axios";
 import style from "./form.sass";
-import {validateEmail, validatePsw} from "./js/validation";
+import {validateEmail, validatePsw, validateRepPsw} from "./js/validation";
 
 
 import InputBlock from "./input-block/input-block";
 import SubmitBtn from "./submit-btn/submit-btn";
+import Component from "../../../../util/component";
 
-class Form extends React.Component {
+class Form extends Component {
 
     constructor(props) {
         super(props);
-        this.nodes = {}
         this.nodes.email_in = React.createRef()
         this.nodes.psw_in = React.createRef()
         this.nodes.re_psw_in = React.createRef()
         this.nodes.btn = React.createRef()
+        this.page = "log"
     }
 
-    componentDidMount() {
-        this.nodes.re_psw_in.current.hide()
+    afterRender() {
+        this.nodes.re_psw_in.hide()
     }
 
-    onGoClick = event => {
-
+    onSubmit = event => {
+        event.preventDefault()
+        if (this.nodes.email_in.isValid()
+            && this.nodes.psw_in.isValid()
+            && (this.page === "log" || this.nodes.re_psw_in.isValid())) {
+            switch (this.page) {
+                case "log":
+                    this.login();
+                    break
+                case "reg":
+                    this.register();
+                    break
+            }
+        }
     }
 
-    validateRepPsw = rep_psw => this.nodes.psw_in.current.getValue() === rep_psw
+    login = () => {
+        axios.post("/auth/login", {
+            mail: this.nodes.email_in.getValue(),
+            psw: this.nodes.psw_in.getValue()
+        }).then(response => {
+            if (response.data.accepted) {
+                window.login()
+            } else {
+                alert(response.data.msg) // TODO: My own alert
+            }
+        }).catch(error => {
+            console.error(error)
+        })
+    }
+
+    register = () => {
+        axios.post("/auth/register", {
+            mail: this.nodes.email_in.getValue(),
+            psw: this.nodes.psw_in.getValue()
+        }).then(response => {
+            if (response.data.accepted) {
+                window.login()
+            } else {
+                alert(response.data.msg) // TODO: My own alert
+            }
+        }).catch(error => {
+            console.error(error)
+        })
+    }
+
+    validateRepPsw = repPsw => validateRepPsw(this.nodes.psw_in.getValue(), repPsw)
 
     changePage = pageName => {
-        this.nodes.email_in.current.erase()
-        this.nodes.psw_in.current.erase()
-        this.nodes.re_psw_in.current.erase()
-        switch (pageName) {
-            case "log":
-                this.nodes.re_psw_in.current.hide()
-                break
-            case "reg":
-                this.nodes.re_psw_in.current.show()
-                break
+        if (this.page !== pageName) {
+            this.nodes.email_in.reset()
+            this.nodes.psw_in.reset()
+            this.nodes.re_psw_in.reset()
+            switch (pageName) {
+                case "log":
+                    this.nodes.re_psw_in.hide()
+                    break
+                case "reg":
+                    this.nodes.re_psw_in.show()
+                    break
+            }
+            this.page = pageName
         }
     }
 
     reset = () => {
-        this.nodes.email_in.current.erase()
-        this.nodes.psw_in.current.erase()
-        this.nodes.re_psw_in.current.erase()
-        this.nodes.re_psw_in.current.hide()
+        this.nodes.re_psw_in.hide()
+        super.reset()
     }
 
     render() {
         return <form
+            ref={this.self}
             className={style.form}
-            ref={this.ref}
+            onSubmit={this.onSubmit}
         >
             <InputBlock
                 ref={this.nodes.email_in}
                 label="Почта"
                 type="mail"
+                onSubmit={this.onSubmit}
                 validator={validateEmail}
             />
             <InputBlock
                 ref={this.nodes.psw_in}
                 label="Пароль"
                 type="psw"
+                onSubmit={this.onSubmit}
                 validator={validatePsw}
             />
             <InputBlock
                 ref={this.nodes.re_psw_in}
                 label="Повторите пароль"
                 type="rep_psw"
+                onSubmit={this.onSubmit}
                 validator={this.validateRepPsw}
             />
             <SubmitBtn
                 ref={this.nodes.btn}
-                onClick={this.onGoClick}
             />
         </form>;
     }

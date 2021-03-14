@@ -1,31 +1,17 @@
 import React from "react";
 import style from "./sass/submit-btn.sass";
+import Component from "../../../../../util/component";
 
-class SubmitBtn extends React.Component {
+class SubmitBtn extends Component {
 
-    constructor(props) {
-        super(props);
-        this.ref = React.createRef()
-    }
+    hide = () => this.self.classList.add(style.hidden)
 
-    hide = () => this.ref.current.classList.add(style.hidden)
-
-    show = () => this.ref.current.classList.remove(style.hidden)
-
-    onClick = event => {
-        this.ref.current.classList.add(style.clicked)
-        this.props.onClick(event)
-    }
+    show = () => this.self.classList.remove(style.hidden)
 
     render() {
         return <button
-            ref={this.ref}
-            className={
-                this.props.className
-                    ? `${style.button} ${this.props.className}`
-                    : style.button
-            }
-            onClick={this.onClick}
+            ref={this.self}
+            className={style.button}
             type="submit"
         >
             Вперёд!

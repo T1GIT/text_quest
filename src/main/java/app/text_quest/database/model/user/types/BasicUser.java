@@ -14,7 +14,7 @@ public class BasicUser extends User {
     @Column(nullable = false, unique = true, updatable = false)
     private String mail;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1180)
     private String psw;
 
     @Column(nullable = false)
