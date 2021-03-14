@@ -97,10 +97,11 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
+                    <include>static/build/*</include>
+                    <include>static/build/**/*</include>
+                    <include>**/**/**/*</include>
+                    <include>**/**/*</include>
                     <include>**/*</include>
-                    <include>src/build/*</include>
-                    <include>src/build/**/*</include>
-                    <include>src/build/**</include>
                     <include>*</include>
                 </includes>
                 <excludes>
