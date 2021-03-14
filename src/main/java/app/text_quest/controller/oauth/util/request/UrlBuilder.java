@@ -1,7 +1,7 @@
 package app.text_quest.controller.oauth.util.request;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 
@@ -33,9 +33,12 @@ public class UrlBuilder {
         if (params.size() > 0) {
             res.append("?");
             params.forEach((name, value) -> {
-                res.append(String.format("%s=%s&",
-                        URLEncoder.encode(name, StandardCharsets.UTF_8),
-                        URLEncoder.encode(value, StandardCharsets.UTF_8)));
+                try {
+                    res.append(String.format("%s=%s&",
+                            URLEncoder.encode(name, "UTF-8"),
+                            URLEncoder.encode(value, "UTF-8")));
+                } catch (UnsupportedEncodingException ignored) {
+                }
             });
         }
         return res.toString();
