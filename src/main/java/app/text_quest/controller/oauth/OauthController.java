@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/oauth")
 public abstract class OauthController {
 
-    protected final static Logger oauthLogger = LoggerFactory.getLogger(LogType.ERROR);
+    protected final static Logger oauthLogger = LoggerFactory.getLogger(LogType.OAUTH);
     protected final static Logger errLogger = LoggerFactory.getLogger(LogType.ERROR);
     private final static OauthPropsFactory propsFactory = new OauthPropsFactory();
     protected final String provider;

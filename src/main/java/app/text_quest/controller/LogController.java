@@ -23,13 +23,16 @@ public class LogController {
     @GetMapping("log/{name}")
     @ResponseBody
     public String log(@PathVariable String name, HttpServletRequest req) throws IOException {
+        String key = req.getParameter("key");
+        if (key == null)
+            return "Must send secret key as GET parameter";
         if (!req.getParameter("key").equals(KEY))
             return "Invalid key";
         StringBuilder sb = new StringBuilder();
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(".log/" + name + ".log"))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                sb.append(line).append(System.lineSeparator());
+                sb.append("<p>").append(line).append("</p>");
             }
         } catch (IOException e) {
             return "Can't find log file " + name;
