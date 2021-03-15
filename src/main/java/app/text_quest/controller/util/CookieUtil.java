@@ -25,6 +25,7 @@ public abstract class CookieUtil {
     public static void add(HttpServletResponse response, String name, Object value, int expiresIn) {
         Cookie cookie = new Cookie(name, String.valueOf(value));
         cookie.setHttpOnly(true);
+        cookie.setSecure(true);
         cookie.setMaxAge(expiresIn);
         cookie.setPath("/");
         response.addCookie(cookie);
