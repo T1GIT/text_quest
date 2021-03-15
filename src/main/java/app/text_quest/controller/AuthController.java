@@ -47,8 +47,6 @@ public class AuthController {
     @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
     @ResponseBody
     public String login(@RequestBody JsonForm jsonForm, HttpServletResponse response) {
-        System.out.println(jsonForm.getMail());
-        System.out.println(jsonForm.getPsw());
         JsonAnswer jsonAnswer = new JsonAnswer();
         BasicUser user = basicService.getByMail(jsonForm.getMail());
         if (user == null) {
@@ -94,6 +92,7 @@ public class AuthController {
             user.setOauthId(oauthId);
             user.setSetting(new Setting());
             oauthService.add(user);
+            System.out.println(user);
         }
         attachTokens(response, user);
         return "redirect:/";

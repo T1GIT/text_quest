@@ -45,8 +45,11 @@ public abstract class OauthController {
     protected String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
         try {
             String code = receiveCode(request, response);
+            System.out.println("code: " + code);
             String accessToken = receiveToken(code);
+            System.out.println("token: " + accessToken);
             String oauthId = receiveId(accessToken);
+            System.out.println("id: " + oauthId);
             request.setAttribute(SecureParam.OAUTH_ID, oauthId);
             return "forward:/auth/oauth";
         } catch (OauthException e) {
