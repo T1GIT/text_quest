@@ -6,6 +6,7 @@ public final class LogType {
     public final static String ROOT = "root";
     public final static String ERROR = "error";
     public final static String REQUEST = "request";
+    public final static String OAUTH = "oauth";
 
     private LogType() {
     }

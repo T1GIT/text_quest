@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final static Logger logger = LoggerFactory.getLogger(LogType.ERROR);
+    protected final static Logger oauthLogger = LoggerFactory.getLogger(LogType.ERROR);
     private final static Gson gson = new Gson();
     private final BasicUserService basicService;
     private final OauthUserService oauthService;
@@ -92,7 +92,7 @@ public class AuthController {
             user.setOauthId(oauthId);
             user.setSetting(new Setting());
             oauthService.add(user);
-            System.out.println(user);
+            oauthLogger.info("user: " + user);
         }
         attachTokens(response, user);
         return "redirect:/";
