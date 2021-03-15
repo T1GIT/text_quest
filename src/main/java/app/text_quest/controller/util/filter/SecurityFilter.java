@@ -33,7 +33,7 @@ public class SecurityFilter extends AbstractFilter {
     private final RefreshService refreshService;
 
     public SecurityFilter(Auth auth, RefreshService refreshService) {
-        super(auth, "^.*$", "^/(build|oauth|auth)/.*$");
+        super(auth, "^.*$", "^/(build|oauth|auth|log)/.*$");
         this.refreshService = refreshService;
     }
 
