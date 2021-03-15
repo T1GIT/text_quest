@@ -63,6 +63,8 @@ public abstract class OauthController {
         String code = request.getParameter(ReqParam.CODE);
         String state = request.getParameter(ReqParam.STATE);
         Cookie stateCookie = CookieUtil.find(request, ReqParam.STATE);
+        System.out.println(state);
+        System.out.println(stateCookie.getValue());
         CookieUtil.remove(response, ReqParam.STATE);
         String error = request.getParameter(ReqParam.ERROR);
         if (error != null)
