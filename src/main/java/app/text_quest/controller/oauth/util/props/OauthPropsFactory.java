@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class OauthPropsFactory {
 
-    private final String path = "classpath:/oauth.properties";
+    private final String path = "src/main/resources/oauth.properties";
     private final Properties properties;
 
     public OauthPropsFactory() {
