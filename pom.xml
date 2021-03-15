@@ -97,9 +97,9 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>*</include>
                     <include>static/build/*</include>
                     <include>static/*</include>
+                    <include>*</include>
                     <include>**/*</include>
                     <include>**/**/*</include>
                     <include>**/**/**/*</include>

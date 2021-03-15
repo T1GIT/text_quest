@@ -8,13 +8,12 @@ import java.util.Properties;
 
 public class OauthPropsFactory {
 
-    private final String fileName = "oauth.properties";
+    private final String path = "classpath:/oauth.properties";
     private final Properties properties;
 
     public OauthPropsFactory() {
         this.properties = new Properties();
         try {
-            String path = Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource(fileName)).getPath();
             properties.load(new FileInputStream(path));
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
