@@ -32,7 +32,8 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/oauth")  // TODO: 05.03.2021 Add cookie filter with crypting
 public abstract class OauthController { // TODO: 06.03.2021 Add Steam and Telegram oauth
 
-    protected final static Logger logger = LoggerFactory.getLogger(LogType.ERROR);
+    protected final static Logger oauthLogger = LoggerFactory.getLogger(LogType.OAUTH);
+    protected final static Logger errLogger = LoggerFactory.getLogger(LogType.ERROR);
     private final static OauthPropsFactory propsFactory = new OauthPropsFactory();
     protected final String provider;
     protected final OauthProps props;
@@ -45,12 +46,15 @@ public abstract class OauthController { // TODO: 06.03.2021 Add Steam and Telegr
     protected String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
         try {
             String code = receiveCode(request, response);
+            oauthLogger.info("code: " + code);
             String accessToken = receiveToken(code);
+            oauthLogger.info("token: " + accessToken);
             String oauthId = receiveId(accessToken);
+            oauthLogger.info("id: " + oauthId);
             request.setAttribute(SecureParam.OAUTH_ID, oauthId);
             return "forward:/auth/oauth";
         } catch (OauthException e) {
-            logger.error(e.getMessage(), e);
+            errLogger.error(e.getMessage(), e);
             return "redirect:/";
         }
     }

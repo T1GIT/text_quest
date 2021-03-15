@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final static Logger logger = LoggerFactory.getLogger(LogType.ERROR);
+    protected final static Logger oauthLogger = LoggerFactory.getLogger(LogType.OAUTH);
     private final static Gson gson = new Gson();
     private final BasicUserService basicService;
     private final OauthUserService oauthService;
@@ -47,8 +47,6 @@ public class AuthController {
     @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
     @ResponseBody
     public String login(@RequestBody JsonForm jsonForm, HttpServletResponse response) {
-        System.out.println(jsonForm.getMail());
-        System.out.println(jsonForm.getPsw());
         JsonAnswer jsonAnswer = new JsonAnswer();
         BasicUser user = basicService.getByMail(jsonForm.getMail());
         if (user == null) {
@@ -94,6 +92,7 @@ public class AuthController {
             user.setOauthId(oauthId);
             user.setSetting(new Setting());
             oauthService.add(user);
+            oauthLogger.info("user: " + user);
         }
         attachTokens(response, user);
         return "redirect:/";
