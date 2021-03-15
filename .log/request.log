@@ -1,0 +1,13 @@
+2021-03-15 18:17:20 INFO  - 200 GET    /                               724 ms   text/html;charset=UTF-8
+2021-03-15 18:17:20 INFO  - 200 GET    /build/index.min.css             47 ms   text/css
+2021-03-15 18:17:20 INFO  - 200 GET    /build/index.min.js              70 ms   application/javascript
+2021-03-15 18:17:20 INFO  - 200 GET    /build/sprites.svg                6 ms   image/svg+xml
+2021-03-15 18:17:20 INFO  - 200 GET    /build/favicon.ico               31 ms   image/x-icon
+2021-03-15 18:17:24 INFO  - 200 GET    /                                11 ms   text/html;charset=UTF-8
+2021-03-15 18:17:24 INFO  - 200 GET    /build/favicon.ico                6 ms   image/x-icon
+2021-03-15 18:17:25 INFO  - 200 GET    /                                 6 ms   text/html;charset=UTF-8
+2021-03-15 18:17:26 INFO  - 200 GET    /build/favicon.ico                7 ms   image/x-icon
+2021-03-15 18:17:27 INFO  - 200 GET    /                                 6 ms   text/html;charset=UTF-8
+2021-03-15 18:17:27 INFO  - 200 GET    /build/favicon.ico               12 ms   image/x-icon
+2021-03-15 18:17:52 INFO  - 200 GET    /                                 6 ms   text/html;charset=UTF-8
+2021-03-15 18:17:52 INFO  - 200 GET    /build/favicon.ico                3 ms   image/x-icon
