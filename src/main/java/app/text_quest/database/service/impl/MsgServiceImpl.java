@@ -3,15 +3,17 @@ package app.text_quest.database.service.impl;
 import app.text_quest.database.model.msg.Msg;
 import app.text_quest.database.repo.MsgRepository;
 import app.text_quest.database.service.MsgService;
-import app.text_quest.database.util.AbstractServiceImpl;
+import app.text_quest.database.util.abstractService.impl.AbstractService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+/**
+ @see app.text_quest.database.service.MsgService */
 @Service
 @Transactional
 public class MsgServiceImpl
-        extends AbstractServiceImpl<Msg, MsgRepository>
+        extends AbstractService<Msg, MsgRepository>
         implements MsgService {
 
     public MsgServiceImpl(MsgRepository repository) {

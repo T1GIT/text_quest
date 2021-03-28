@@ -27,8 +27,6 @@ public class Branch extends AuditModel {
     @JsonIgnore
     private Node nextNode;
 
-    public Branch() { }
-
     public List<Limit> getReqs() {
         return limits;
     }

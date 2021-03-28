@@ -21,8 +21,6 @@ public class InMsg extends LinkedNode {
     @JsonIgnore
     private Msg msg;
 
-    public InMsg() { }
-
     public int getDelay() {
         return delay;
     }

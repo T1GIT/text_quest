@@ -5,6 +5,8 @@ import app.text_quest.security.auth.Auth;
 import org.springframework.stereotype.Component;
 
 
+/**
+ @see app.text_quest.security.auth.Auth */
 @Component
 public class AuthImpl implements Auth {
 

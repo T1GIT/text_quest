@@ -13,9 +13,6 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Node extends AuditModel {
 
-    public Node() {
-    }
-
     @Override
     public String toString() {
         return super.toString();

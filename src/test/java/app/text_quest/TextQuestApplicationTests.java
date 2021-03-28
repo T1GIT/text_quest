@@ -13,7 +13,7 @@ class TextQuestApplicationTests {
 
 
     @Test
-    void main() {
+    void main() throws Exception {
         TextQuestApplication.main(null);
     }
 

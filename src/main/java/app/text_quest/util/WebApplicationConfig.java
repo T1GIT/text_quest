@@ -10,6 +10,11 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
+/**
+ <h2> A class {@link WebApplicationConfig}
+
+ <p> Used for redirecting to home page when error 404 is received
+ */
 @Configuration
 public class WebApplicationConfig implements WebMvcConfigurer {
 
@@ -17,7 +22,6 @@ public class WebApplicationConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/notFound").setViewName("redirect:/");
     }
-
 
     @Bean
     public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> containerCustomizer() {

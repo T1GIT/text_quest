@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./sass/oauth-btn.sass";
+import panelStyle from "../oauth-panel.sass"
 import Svg from "../../../../util/svg";
 import Component from "../../../../util/component";
 
@@ -7,12 +8,21 @@ class OauthBtn extends Component {
 
     constructor(props) {
         super(props);
+        this.href = undefined;
     }
 
+    afterRender() {
+        this.self.classList.add(panelStyle.oauth_btn)
+    }
+
+    setHref = href => this.href = href
+
     onClick = event => {
-        this.self.classList.add(style.loading)
-        this.self.style.width = null
-        setTimeout(this.openWindow, 200)
+        if (this.href) {
+            this.self.classList.add(style.loading)
+            this.self.style.width = null
+            setTimeout(this.openWindow, 200)
+        }
     }
 
     openWindow = () => {
@@ -23,7 +33,7 @@ class OauthBtn extends Component {
             "location=no," +
             "directories=no," +
             "status=no"
-        let oauthWindow = window.open(this.props.href, "oauth_window", params)
+        let oauthWindow = window.open(this.href, "oauth_window", params)
         oauthWindow.focus()
     }
 

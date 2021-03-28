@@ -27,8 +27,8 @@ class Header extends Component {
     }
 
     reset = () => {
-        this.nodes.reg_btn.unSelect()
-        this.nodes.log_btn.select()
+        this.nodes.log_btn.unSelect()
+        this.nodes.reg_btn.select()
         super.reset()
     }
 
@@ -39,12 +39,12 @@ class Header extends Component {
         >
             <HeaderBtn
                 ref={this.nodes.log_btn}
-                defaultSelect={true}
                 text="Вход"
                 onClick={this.onChangePage("log")}
             />
             <HeaderBtn
                 ref={this.nodes.reg_btn}
+                defaultSelect={true}
                 text="Регистрация"
                 onClick={this.onChangePage("reg")}
             />

@@ -13,24 +13,6 @@
     opacity: 1
     margin: $ver_offset $hor_offset
   &.hidden
-    top: glob_c.$anim_len
+    top: -(glob_c.$anim_len)
     opacity: 0
-    height: 0
     margin: 0 $hor_offset
-
-  .input
-    +glob_m.ani(fast)
-    +auth_m.block_shadow
-    width: $input_width
-    padding: $input_v_pad $text_offset
-    outline: none
-    background: none
-    border: glob_c.$border_width solid glob_c.$main_clr
-    border-radius: glob_c.$border_rad
-
-    &
-      opacity: 1
-
-  &.hidden
-    .input
-      opacity: 0

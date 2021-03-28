@@ -36,14 +36,6 @@ public class User extends AuditModel {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<History> histories = new ArrayList<>();
 
-    public User() {
-    }
-
-    public User(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public String getName() {
         return name;
     }
@@ -66,6 +58,14 @@ public class User extends AuditModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public User() {
+        super();
+    }
+
+    public User(long id) {
+        super(id);
     }
 
     public void addToken(Refresh refresh) {

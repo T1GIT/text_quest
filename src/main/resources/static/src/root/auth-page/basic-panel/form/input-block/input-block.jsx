@@ -3,6 +3,8 @@ import style from "./sass/input-block.sass";
 import Hint from "./hint/hint";
 import Label from "./label/label";
 import Component from "../../../../../util/component";
+import Input from "./input/input";
+import Toggler from "./toggler/toggler";
 
 class InputBlock extends Component {
 
@@ -14,17 +16,22 @@ class InputBlock extends Component {
         this.valid = false
     }
 
+    afterRender() {
+        if (this.props.type in ["psw", "rep_psw"])
+            this.nodes.svg_eye.addClass(style.hidden)
+    }
+
     onChange = event => {
         let input = this.nodes.input
         let lbl = this.nodes.label
         let hint = this.nodes.hint
-        if (input.value === "") {
+        if (input.getValue() === "") {
             lbl.show()
-            hint.changeText("")
+            hint.reset()
             this.valid = false
         } else {
             lbl.hide()
-            const res = this.props.validator(input.value)
+            const res = this.props.validator(input.getValue())
             hint.changeText(res.hint)
             this.valid = res.valid
         }
@@ -33,38 +40,35 @@ class InputBlock extends Component {
     isValid = () => this.valid
 
     hide = () => {
+        this.height = this.self.offsetHeight
         this.self.classList.add(style.hidden);
-        this.self.style.height = null
+        this.self.style.height = "0px"
     }
 
     show = () => {
-        this.self.style.height = this.nodes.input.offsetHeight + "px"
+        this.self.style.height = this.height + "px"
         this.self.classList.remove(style.hidden);
     }
 
-    getValue = () => this.nodes.input.value
+    getValue = () => this.nodes.input.getValue();
+
+    onTogglerClick = action => {
+        switch (action) {
+            case "hide":
+                this.nodes.input.setType("password")
+                break
+            case "show":
+                this.nodes.input.setType("text")
+                break
+        }
+    }
 
     reset = () => {
-        this.nodes.input.value = ""
-        this.nodes.label.show()
-        this.nodes.hint.changeText("")
         this.valid = false
+        super.reset()
     }
 
     render() {
-        const attr = {}
-        switch (this.props.type) {
-            case "mail":
-                attr.name = attr.autoComplete = "mail"
-                attr.type = "text"
-                break
-            case "psw":
-                attr.name = attr.type = attr.autoComplete = "password"
-                break
-            case "rep_psw":
-                attr.name = attr.type = attr.autoComplete = "password"
-                break
-        }
         return <div
             ref={this.self}
             className={style.input_block}
@@ -73,17 +77,14 @@ class InputBlock extends Component {
                 ref={this.nodes.label}
                 text={this.props.label}
             />
-            <input
+            <Input
                 ref={this.nodes.input}
-                name={attr.name}
-                type={attr.type}
-                autoComplete={attr.autoComplete}
-                className={style.input}
                 onChange={this.onChange}
+                type={this.props.type}
+                field={this.props.toggler}
             />
-            <Hint
-                ref={this.nodes.hint}
-            />
+            {this.props.toggler && <Toggler onClick={this.onTogglerClick}/>}
+            <Hint ref={this.nodes.hint}/>
         </div>
     }
 }

@@ -9,7 +9,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+/**
+ <h2> A class {@link Setting}
 
+ <p> It's object-oriented representation for table <u>settings</u>
+
+ <p> <b> Storages: </b>
+ <p> User's settings
+ */
 @Entity
 @Table(name = "settings")
 public class Setting extends AuditModel {
@@ -33,8 +40,6 @@ public class Setting extends AuditModel {
     @MapsId
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private User user;
-
-    public Setting() { }
 
     public MsgType getMsgType() {
         return msgType;

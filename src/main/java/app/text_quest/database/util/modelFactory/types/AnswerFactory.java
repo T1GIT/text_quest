@@ -8,6 +8,8 @@ import app.text_quest.database.util.modelFactory.types.msg.types.TextFactory;
 import app.text_quest.database.util.modelFactory.types.node.types.LinkedNode.types.OutMsgFactory;
 
 
+/**
+ @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
 public class AnswerFactory extends AbstractModelFactory<Answer> {
 
     private final static OutMsgFactory outMsgFactory = new OutMsgFactory();

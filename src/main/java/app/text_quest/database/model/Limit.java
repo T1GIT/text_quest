@@ -6,6 +6,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 
+/**
+ <h2> A class {@link Var}
+
+ <p> It's object-oriented representation for table <u>vars</u>
+
+ <p> <b> Storages: </b>
+ <p> Variables' names
+ <p> <b> Logic: </b>
+ <p> When user make a {@link Answer choice} game changes the {@link State state}
+ of {@link Change any} variables. So, all available variables are in this table.
+ */
 @Entity
 @Table(name = "limits")
 public class Limit extends AuditModel {
@@ -23,8 +34,6 @@ public class Limit extends AuditModel {
     @JoinColumn(name = "branches_id", nullable = false)
     @JsonIgnore
     private Branch branch;
-
-    public Limit() { }
 
     public int getMin() {
         return min;

@@ -22,8 +22,6 @@ public class History extends AuditModel {
     @JsonIgnore
     private User user;
 
-    public History() { }
-
     public Msg getMsg() {
         return msg;
     }

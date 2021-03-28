@@ -6,6 +6,9 @@ import app.text_quest.database.util.enums.Font;
 import app.text_quest.database.util.enums.MsgType;
 import app.text_quest.database.util.modelFactory.AbstractModelFactory;
 
+
+/**
+ @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
 public class SettingFactory extends AbstractModelFactory<Setting> {
     private final Color color = Color.BLUE;
     private final Font font = Font.ARIAL;

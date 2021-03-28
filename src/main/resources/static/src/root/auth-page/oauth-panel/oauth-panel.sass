@@ -5,4 +5,19 @@
   align-items: flex-start
   width: min-content
 
+  &:not(.loaded)
+
+    .oauth_btn
+      opacity: 0
+      transform: scale(0.5)
+      pointer-events: none
+
+  &.loaded
+
+    .oauth_btn
+      opacity: 1
+      transform: scale(1)
+      pointer-events: auto
+
+
 

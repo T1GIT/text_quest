@@ -1,7 +1,8 @@
 import React from "react";
 import style from "./sass/label.sass";
+import Component from "../../../../../../util/component";
 
-class Label extends React.Component {
+class Label extends Component {
 
     constructor(props) {
         super(props);
@@ -9,16 +10,21 @@ class Label extends React.Component {
     }
 
     hide = () => {
-        this.ref.current.classList.add(style.hidden);
+        this.self.classList.add(style.hidden);
     }
 
     show = () => {
-        this.ref.current.classList.remove(style.hidden);
+        this.self.classList.remove(style.hidden);
+    }
+
+    reset() {
+        this.show();
+        super.reset();
     }
 
     render() {
         return <div
-            ref={this.ref}
+            ref={this.self}
             className={style.label}
         >
             {this.props.text}

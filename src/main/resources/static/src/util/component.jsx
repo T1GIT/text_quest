@@ -6,6 +6,15 @@ class Component extends React.Component {
         super(props);
         this.self = React.createRef()
         this.nodes = {}
+        this.elems = {}
+    }
+
+    addClass(className) {
+        this.self.classList.add(className)
+    }
+
+    removeClass(className) {
+        this.self.classList.remove(className)
     }
 
     afterRender() {
@@ -13,10 +22,13 @@ class Component extends React.Component {
 
     componentDidMount() {
         this.self = this.self.current
-        for (let node in this.nodes) {
-            this.nodes[node] = this.nodes[node].current
-        }
+        this.self.style.opacity = 0
+        for (let node in this.nodes) this.nodes[node] = this.nodes[node].current
+        for (let elem in this.elems) this.elems[elem] = this.elems[elem].current
         this.afterRender()
+        setTimeout(() => {
+            this.self.style.opacity = null
+        }, 100)
     }
 
     reset() {

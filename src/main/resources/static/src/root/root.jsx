@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./root.sass";
-import Background from "./background/background";
 import AuthPage from "./auth-page/auth-page";
 import Game from "./game/game";
 import Component from "../util/component";
@@ -14,24 +13,31 @@ class Root extends Component {
     }
 
     afterRender() {
-        setTimeout(this.load, 10)
         window.login = this.login
         window.logout = this.logout
-    }
 
-    load = () => {
-        this.self.classList.add(style.loaded)
+        console.log(window.isAuthorised)
+
+
+        if (window.isAuthorised) {
+            this.nodes.auth_page.hide()
+            console.log(1)
+        } else {
+            console.log(2)
+            this.nodes.game.hide()
+        }
+
     }
 
     login = () => {
         // TODO
         this.nodes.auth_page.hide()
-        console.log("login")
+        this.nodes.game.show()
     }
 
     logout = () => {
         this.nodes.auth_page.show()
-        console.log("logout")
+        this.nodes.game.hide()
         // TODO
     }
 
@@ -40,8 +46,10 @@ class Root extends Component {
             ref={this.self}
             className={style.root}
         >
-            <Background/>
-            <AuthPage ref={this.nodes.auth_page}/>
+            <AuthPage
+                ref={this.nodes.auth_page}
+                quote="Самая мощная видеокарта - наше воображение"
+            />
             <Game ref={this.nodes.game}/>
         </div>;
     }

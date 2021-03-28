@@ -1,8 +1,6 @@
 package app.text_quest.controller;
 
 
-import app.text_quest.controller.oauth.util.BtnUrlParser;
-import app.text_quest.controller.oauth.util.constant.Provider;
 import app.text_quest.controller.oauth.util.constant.SecureParam;
 import app.text_quest.controller.util.CookieUtil;
 import app.text_quest.controller.util.ObjectParser;
@@ -19,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
-import java.util.HashMap;
 
 
 @Controller
@@ -39,7 +35,8 @@ public class RootController {
     public String root(HttpServletRequest request, Model model, HttpServletResponse res) {
         try {
 
-            injectData(res, model);
+            CookieUtil.add(res, SecureParam.STATE, stateFactory.create(), Period.DAY);
+            model.addAttribute("isAuthorised", ObjectParser.parse(auth.isAuthenticated()));
 
             return "index.min";
         } catch (Exception e) {
@@ -48,18 +45,4 @@ public class RootController {
         return null; // TODO: add error page
     }
 
-    private void injectData(HttpServletResponse res, Model model) {
-        String state = stateFactory.create();
-        CookieUtil.add(res, SecureParam.STATE, state, Period.DAY);
-        model.addAttribute("btnHref", ObjectParser.parse(getBtnUrl(state)));
-        model.addAttribute("isAuthorised", ObjectParser.parse(auth.isAuthenticated()));
-    }
-
-    private HashMap<String, String> getBtnUrl(String state) {
-        HashMap<String, String> urlMap = new HashMap<>();
-        for (String provider : Arrays.asList(Provider.VK, Provider.YANDEX, Provider.GOOGLE, Provider.DISCORD, Provider.GIT)) {
-            urlMap.put(provider, BtnUrlParser.generateUrl(state, provider));
-        }
-        return urlMap;
-    }
 }

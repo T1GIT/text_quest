@@ -16,8 +16,6 @@ public class Fork extends Node {
     @OneToMany(mappedBy = "fork", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private final List<Branch> branches = new ArrayList<>();
 
-    public Fork() { }
-
     public List<Branch> getBranches() {
         return branches;
     }

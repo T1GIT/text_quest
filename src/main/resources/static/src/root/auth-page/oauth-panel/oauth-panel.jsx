@@ -7,6 +7,7 @@ import svg_vk from "./oauth-btn/svg/vk.svg"
 import svg_yandex from "./oauth-btn/svg/yandex.svg"
 import OauthBtn from "./oauth-btn/oauth-btn";
 import Component from "../../../util/component";
+import axios from "axios";
 
 class OauthPanel extends Component {
 
@@ -19,17 +20,28 @@ class OauthPanel extends Component {
         this.nodes.git = React.createRef()
     }
 
+    afterRender() {
+        axios.post("/auth/url"
+        ).then(response => {
+            for (let provider in response.data) {
+                this.nodes[provider].setHref(response.data[provider])
+            }
+            this.self.classList.add(style.loaded)
+        }).catch(error => {
+            console.error(error)
+        })
+    }
+
     render() {
-        const {vk, yandex, google, discord, git} = window.btnHref
         return <div
             ref={this.self}
             className={style.panel}
         >
-            <OauthBtn ref={this.nodes.vk} href={vk} svg={svg_vk} text={"ВКонтакте"}/>
-            <OauthBtn ref={this.nodes.yandex} href={yandex} svg={svg_yandex} text={"Яндекс"}/>
-            <OauthBtn ref={this.nodes.google} href={google} svg={svg_google} text={"Google"}/>
-            <OauthBtn ref={this.nodes.discord} href={discord} svg={svg_discord} text={"Discord"}/>
-            <OauthBtn ref={this.nodes.git} href={git} svg={svg_git} text={"GitHub"}/>
+            <OauthBtn ref={this.nodes.vk} svg={svg_vk} text={"ВКонтакте"}/>
+            <OauthBtn ref={this.nodes.yandex} svg={svg_yandex} text={"Яндекс"}/>
+            <OauthBtn ref={this.nodes.google} svg={svg_google} text={"Google"}/>
+            <OauthBtn ref={this.nodes.discord} svg={svg_discord} text={"Discord"}/>
+            <OauthBtn ref={this.nodes.git} svg={svg_git} text={"GitHub"}/>
         </div>;
     }
 }

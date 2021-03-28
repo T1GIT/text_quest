@@ -1,6 +1,7 @@
 package app.text_quest.database.service;
 
 import app.text_quest.database.model.user.User;
+import app.text_quest.database.service.userService.UserService;
 import app.text_quest.database.util.modelFactory.types.UserFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

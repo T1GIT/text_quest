@@ -15,8 +15,6 @@ public class OutMsg extends LinkedNode {
     @OneToMany(mappedBy = "outMsg", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Answer> answers = new ArrayList<>();
 
-    public OutMsg() { }
-
     public List<Answer> getAnswers() {
         return answers;
     }

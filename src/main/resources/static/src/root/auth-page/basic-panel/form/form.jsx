@@ -16,18 +16,13 @@ class Form extends Component {
         this.nodes.psw_in = React.createRef()
         this.nodes.re_psw_in = React.createRef()
         this.nodes.btn = React.createRef()
-        this.page = "log"
-    }
-
-    afterRender() {
-        this.nodes.re_psw_in.hide()
+        this.page = "reg"
     }
 
     onSubmit = event => {
         event.preventDefault()
-        if (this.nodes.email_in.isValid()
-            && this.nodes.psw_in.isValid()
-            && (this.page === "log" || this.nodes.re_psw_in.isValid())) {
+        let {email_in, psw_in, re_psw_in} = this.nodes
+        if (email_in.isValid() && psw_in.isValid() && (this.page === "log" || re_psw_in.isValid())) {
             switch (this.page) {
                 case "log":
                     this.login();
@@ -72,16 +67,18 @@ class Form extends Component {
     validateRepPsw = repPsw => validateRepPsw(this.nodes.psw_in.getValue(), repPsw)
 
     changePage = pageName => {
+        console.log(this.page, pageName)
         if (this.page !== pageName) {
-            this.nodes.email_in.reset()
-            this.nodes.psw_in.reset()
-            this.nodes.re_psw_in.reset()
+            let {email_in, psw_in, re_psw_in} = this.nodes
+            email_in.reset();
+            psw_in.reset();
+            re_psw_in.reset()
             switch (pageName) {
                 case "log":
-                    this.nodes.re_psw_in.hide()
+                    re_psw_in.hide();
                     break
                 case "reg":
-                    this.nodes.re_psw_in.show()
+                    psw_in.show();
                     break
             }
             this.page = pageName
@@ -112,6 +109,7 @@ class Form extends Component {
                 type="psw"
                 onSubmit={this.onSubmit}
                 validator={validatePsw}
+                toggler={true}
             />
             <InputBlock
                 ref={this.nodes.re_psw_in}
@@ -119,6 +117,7 @@ class Form extends Component {
                 type="rep_psw"
                 onSubmit={this.onSubmit}
                 validator={this.validateRepPsw}
+                toggler={true}
             />
             <SubmitBtn
                 ref={this.nodes.btn}

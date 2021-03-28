@@ -4,7 +4,6 @@ import Root from "./root/root.jsx";
 import style from "./sass/index.sass"
 
 
-window.btnHref = btnHref
 window.isAuthorised = isAuthorised
 
 window.login = undefined

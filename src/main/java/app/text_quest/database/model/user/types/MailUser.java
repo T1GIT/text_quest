@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "basic_users")
-public class BasicUser extends User {
+public class MailUser extends User {
 
     @Column(nullable = false, unique = true, updatable = false)
     private String mail;
@@ -19,9 +19,6 @@ public class BasicUser extends User {
 
     @Column(nullable = false)
     private boolean verified;
-
-    public BasicUser() {
-    }
 
     public String getMail() {
         return mail;

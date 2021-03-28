@@ -11,15 +11,17 @@
     <title>TextQuest</title>
 </head>
 <body>
-<noscript style="color: black">Для работы сайта включите JavaScript</noscript>
+<noscript style="color: black; font-size: 30px !important;">Для работы сайта включите JavaScript</noscript>
 
+<div id="preloader" style="color: gray; text-align: center; font-size: 30px !important;"> Загрузка, пожалуйста,
+    подождите
+</div>
 <div id="root"></div>
 
 </body>
 
 
 <script id="initialScript">
-    let btnHref = [(${btnHref})]
     let isAuthorised = [(${isAuthorised})]
     document.querySelector("noscript").remove()
     document.getElementById("initialScript").remove()

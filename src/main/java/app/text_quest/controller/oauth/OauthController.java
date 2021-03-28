@@ -68,7 +68,7 @@ public abstract class OauthController { // TODO: 06.03.2021 Add Steam and Telegr
         if (error != null)
             throw new ApiException(request.getParameter(ReqParam.ERROR_DESCRIPTION), Integer.parseInt(error));
         if (stateCookie == null)
-            throw new MissedStateCookieException("Missed state cookie");
+            throw new MissedStateCookieException();
         if (!state.equals(stateCookie.getValue()))
             throw new InvalidStateException(state, stateCookie.getValue());
         return code;
@@ -82,8 +82,7 @@ public abstract class OauthController { // TODO: 06.03.2021 Add Steam and Telegr
                 .addParam(ReqParam.CLIENT_SECRET, props.get(PropName.CLIENT_SECRET))
                 .addParam(ReqParam.CODE, code)
                 .addParam(ReqParam.GRANT_TYPE, "authorization_code")
-                .addParam(ReqParam.REDIRECT_URI, String.format("%s/oauth/%s",
-                        TextQuestApplication.getRootUrl(), provider));
+                .addParam(ReqParam.REDIRECT_URI, String.format("%s/oauth/%s", TextQuestApplication.getRootUrl(), provider));
         String response = request.send();
         JsonToken jsonToken = new Gson().fromJson(response, JsonToken.class);
         return jsonToken.getAccessToken();

@@ -6,6 +6,8 @@ import app.text_quest.database.util.modelFactory.AbstractModelFactory;
 import app.text_quest.database.util.modelFactory.types.node.NodeFactory;
 
 
+/**
+ @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
 public class LinkedNodeFactory extends AbstractModelFactory<LinkedNode> {
 
     private final static NodeFactory nodeFactory = new NodeFactory();

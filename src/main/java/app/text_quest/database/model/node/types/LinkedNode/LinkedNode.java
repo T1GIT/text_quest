@@ -14,8 +14,6 @@ public class LinkedNode extends Node {
     @JoinColumn(name = "nodes_id")
     private Node nextNode;
 
-    public LinkedNode() { }
-
     public Node getNextNode() {
         return nextNode;
     }

@@ -8,6 +8,8 @@ import app.text_quest.database.util.modelFactory.types.msg.MsgFactory;
 import app.text_quest.database.util.modelFactory.types.node.NodeFactory;
 
 
+/**
+ @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
 public class InMsgFactory extends AbstractModelFactory<InMsg> {
 
     private final static MsgFactory msgFactory = new MsgFactory();

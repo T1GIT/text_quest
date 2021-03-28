@@ -1,0 +1,20 @@
+@use '../../../../sass/mixin' as glob_m
+@import "config"
+
+.wrap
+  position: absolute
+  top: 0
+  right: 0
+  height: 100%
+  width: min-content
+
+  .side_menu
+    +glob_m.abs_attach
+    +glob_m.size(fill)
+    +glob_m.ani(1s)
+
+    &:not(.hidden)
+
+    &.hidden
+
+

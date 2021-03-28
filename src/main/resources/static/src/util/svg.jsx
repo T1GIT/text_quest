@@ -1,8 +1,12 @@
 import React from "react";
+import Component from "./component";
 
-class Svg extends React.Component {
+class Svg extends Component {
     render() {
-        return <svg className={this.props.className}>
+        return <svg
+            ref={this.self}
+            onClick={this.props.click}
+            className={this.props.className}>
             <use xlinkHref={this.props.svg}/>
         </svg>
     }

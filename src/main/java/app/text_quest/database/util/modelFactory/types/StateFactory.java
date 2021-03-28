@@ -5,6 +5,9 @@ import app.text_quest.database.model.Var;
 import app.text_quest.database.model.user.User;
 import app.text_quest.database.util.modelFactory.AbstractModelFactory;
 
+
+/**
+ @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
 public class StateFactory extends AbstractModelFactory<State> {
     private final static UserFactory userFactory = new UserFactory();
     private final static VarFactory varFactory = new VarFactory();

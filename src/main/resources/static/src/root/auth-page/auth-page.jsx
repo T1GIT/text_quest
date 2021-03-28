@@ -3,6 +3,7 @@ import style from "./sass/auth-page.sass";
 import OauthPanel from "./oauth-panel/oauth-panel";
 import BasicPanel from "./basic-panel/basic-panel";
 import Component from "../../util/component";
+import Background from "../background/background";
 
 class AuthPage extends Component {
 
@@ -12,22 +13,14 @@ class AuthPage extends Component {
         this.nodes.oauthPanel = React.createRef()
     }
 
-    afterRender() {
-        if (window.isAuthorised) {
-            this.hide()
-        }
-    }
-
     show = () => {
-        this.self.classList.remove(style.hidden)
-        // TODO
+        this.removeClass(style.hidden)
     }
 
     hide = () => {
         this.nodes.basicPanel.reset()
         this.nodes.oauthPanel.reset()
-        this.self.classList.add(style.hidden)
-        // TODO
+        this.addClass(style.hidden)
     }
 
     reset() {
@@ -37,9 +30,13 @@ class AuthPage extends Component {
 
     render() {
         return <div className={style.wrap} ref={this.self}>
+            <Background left="#ff9fe0" right="#a2edff"/>
             <div className={style.auth_block}>
                 <BasicPanel ref={this.nodes.basicPanel}/>
                 <OauthPanel ref={this.nodes.oauthPanel}/>
+            </div>
+            <div className={style.quote}>
+                {this.props.quote}
             </div>
         </div>
     }

@@ -23,8 +23,6 @@ public class Change extends AuditModel {
     @JsonIgnore
     private Answer answer;
 
-    public Change() { }
-
     public int getVal() {
         return val;
     }

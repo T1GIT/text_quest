@@ -1,11 +1,21 @@
 package app.text_quest.security.util;
 
 import java.math.BigInteger;
-import java.security.NoSuchAlgorithmException;
 
 
+/**
+ <h2> An abstract class {@link HexConvertor}
+
+ <p> Converts between bytes array and hex string representation
+ */
 public abstract class HexConvertor {
 
+    /**
+     Converts bytes array into a hex string
+
+     @param array bytes array for converting
+     @return converted hex string
+     */
     public static String toHex(byte[] array) {
         BigInteger bi = new BigInteger(1, array);
         String hex = bi.toString(16);
@@ -17,7 +27,13 @@ public abstract class HexConvertor {
         }
     }
 
-    public static byte[] fromHex(String hex) throws NoSuchAlgorithmException {
+    /**
+     Converts hex string into a bytes array
+
+     @param hex string for converting
+     @return converted bytes array
+     */
+    public static byte[] fromHex(String hex) {
         byte[] bytes = new byte[hex.length() / 2];
         for (int i = 0; i < bytes.length; i++) {
             bytes[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);

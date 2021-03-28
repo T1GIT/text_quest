@@ -39,10 +39,9 @@ public abstract class JwtUtil {
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(KEY)
                 .build().parseClaimsJws(jwt).getBody();
-        return new User(
-                Long.parseLong((String) claims.get("id")),
-                (String) claims.get("name")
-        );
+        User user = new User(Long.parseLong((String) claims.get("id")));
+        user.setName((String) claims.get("name"));
+        return user;
     }
 
     public static void attach(HttpServletResponse response, User user) {

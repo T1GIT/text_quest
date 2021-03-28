@@ -27,8 +27,6 @@ public class Answer extends AuditModel {
     @JsonIgnore
     private OutMsg outMsg;
 
-    public Answer() { }
-
     public List<Change> getChanges() {
         return changes;
     }
