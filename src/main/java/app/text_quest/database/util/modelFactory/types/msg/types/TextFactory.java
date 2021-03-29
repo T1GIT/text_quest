@@ -5,7 +5,8 @@ import app.text_quest.database.util.modelFactory.AbstractModelFactory;
 
 
 /**
- @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
+ * @see app.text_quest.database.util.modelFactory.AbstractModelFactory
+ */
 public class TextFactory extends AbstractModelFactory<Text> {
     private final String val = "textVal";
 

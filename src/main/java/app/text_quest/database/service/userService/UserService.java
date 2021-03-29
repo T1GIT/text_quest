@@ -5,9 +5,10 @@ import app.text_quest.database.util.abstractService.ServiceInterface;
 
 
 /**
- Service for variables
-
- @see app.text_quest.database.util.abstractService.ServiceInterface */
+ * Service for variables
+ *
+ * @see app.text_quest.database.util.abstractService.ServiceInterface
+ */
 public interface UserService extends ServiceInterface<User> {
 
 }

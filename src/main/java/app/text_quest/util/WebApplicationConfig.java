@@ -11,9 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 /**
- <h2> A class {@link WebApplicationConfig}
-
- <p> Used for redirecting to home page when error 404 is received
+ * Used for redirecting to home page when error 404 is received
  */
 @Configuration
 public class WebApplicationConfig implements WebMvcConfigurer {

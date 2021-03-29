@@ -2,9 +2,7 @@ package app.text_quest.database.util.enums;
 
 
 /**
- <h2> An enum {@link Color}
-
- <p> Holds color of the user's theme
+ * Holds color of the user's theme.
  */
 public enum Color {
     RED(""),
@@ -14,7 +12,7 @@ public enum Color {
     PURPLE("");
 
     /**
-     Contains the hex code of the current color.
+     * Contains the hex code of the current color.
      */
     private final String value;
 

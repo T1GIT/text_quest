@@ -6,9 +6,10 @@ import app.text_quest.database.util.abstractService.ServiceInterface;
 
 
 /**
- Service for nodes
-
- @see app.text_quest.database.util.abstractService.ServiceInterface */
+ * Service for nodes
+ *
+ * @see app.text_quest.database.util.abstractService.ServiceInterface
+ */
 public interface NodeService extends ServiceInterface<Node> {
 
 }

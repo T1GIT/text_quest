@@ -5,7 +5,8 @@ import app.text_quest.database.util.modelFactory.AbstractModelFactory;
 
 
 /**
- @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
+ * @see app.text_quest.database.util.modelFactory.AbstractModelFactory
+ */
 public class VarFactory extends AbstractModelFactory<Var> {
     private final String name = "varName";
 

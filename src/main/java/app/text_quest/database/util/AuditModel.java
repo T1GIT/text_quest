@@ -13,21 +13,21 @@ import java.util.Date;
 
 
 /**
- <h2>  An abstract class {@link AuditModel}
-
- <p> Is a wrap for the {@link AbstractModel}, adding to models
- attributes for the auditing.
+ * Is a wrap for the {@link AbstractModel}, adding to models attributes for the auditing.
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(
-        value = {"createdAt", "updatedAt"},
-        allowGetters = true
-)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
 public abstract class AuditModel extends AbstractModel {
 
     /**
-     Date of the record creating
+     * Date of the record creating
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * <li> constant
+     * </ul>
      */
     @JsonIgnore
     @CreatedDate
@@ -35,20 +35,17 @@ public abstract class AuditModel extends AbstractModel {
     private Date createdAt;
 
     /**
-     Date of the last record updating
+     * Date of the last record updating
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * </ul>
      */
     @JsonIgnore
     @LastModifiedDate
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
 
     public AuditModel() {
         super();
@@ -56,6 +53,14 @@ public abstract class AuditModel extends AbstractModel {
 
     public AuditModel(long id) {
         super(id);
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
     @Override

@@ -8,16 +8,17 @@ import java.util.List;
 
 
 /**
- @param <ModelClass>      type of a model to work with
- @param <repositoryClass> repository to interact with the given model
- @see app.text_quest.database.util.abstractService.ServiceInterface */
+ * @param <ModelClass>      type of a model to work with
+ * @param <repositoryClass> repository to interact with the given model
+ * @see app.text_quest.database.util.abstractService.ServiceInterface
+ */
 public abstract class AbstractService
         <ModelClass extends AbstractModel,
                 repositoryClass extends JpaRepository<ModelClass, Long>>
         implements ServiceInterface<ModelClass> {
 
     /**
-     A repository to interact with database
+     * A repository to interact with database
      */
     protected final repositoryClass repository;
 

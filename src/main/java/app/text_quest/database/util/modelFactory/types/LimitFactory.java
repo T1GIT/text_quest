@@ -7,7 +7,8 @@ import app.text_quest.database.util.modelFactory.AbstractModelFactory;
 
 
 /**
- @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
+ * @see app.text_quest.database.util.modelFactory.AbstractModelFactory
+ */
 public class LimitFactory extends AbstractModelFactory<Limit> {
 
     private final static VarFactory varFactory = new VarFactory();

@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 
 /**
- @see MailUserService */
+ * @see MailUserService
+ */
 @Service
 public class MailUserServiceImpl
         extends AbstractService<MailUser, MailUserRepository>

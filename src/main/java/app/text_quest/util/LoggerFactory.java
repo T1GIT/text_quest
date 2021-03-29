@@ -10,37 +10,36 @@ import java.util.HashMap;
 
 
 /**
- <h2> A class {@link LoggerFactory}
-
- <p> Creates {@link Logger logger} from name.
-
- <p> Creates file in the directory {@link LoggerFactory#logPath}
- with name: "[given name].log".
- <p> Holds all the loggers in the hashMap, and doesn't create a new one if you
- try to create logger with existing name, but just returns it
+ * Creates {@link Logger logger} from name.
+ * <p>
+ * Creates file in the directory {@link LoggerFactory#logPath}
+ * with name: "[given name].log".
+ * <p>
+ * Holds all the loggers in the hashMap, and doesn't create a new one if you
+ * try to create logger with existing name, but just returns it.
  */
 public class LoggerFactory {
 
     /**
-     Directory for saving log files
+     * Directory for saving log files
      */
     private static final String logPath = ".log";
 
     /**
-     Holds loggers for fast accessing
+     * Holds loggers for fast accessing
      */
     private static final HashMap<String, Logger> loggers = new HashMap<String, Logger>();
 
     /**
-     Logger to output errors
+     * Logger to output errors
      */
     private static final Logger errorLogger = LoggerFactory.getLogger(LogType.ERROR);
 
     /**
-     Creates logger with appender to file with name "[name].log".
-
-     @param name file name for the logger
-     @return logger
+     * Creates logger with appender to file with name "[name].log".
+     *
+     * @param name file name for the logger
+     * @return logger
      */
     public static Logger getLogger(String name) {
         if (loggers.containsKey(name)) {

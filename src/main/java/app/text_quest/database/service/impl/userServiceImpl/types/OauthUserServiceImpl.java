@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 
 /**
- @see app.text_quest.database.service.userService.types.OauthUserService */
+ * @see app.text_quest.database.service.userService.types.OauthUserService
+ */
 @Service
 public class OauthUserServiceImpl
         extends AbstractService<OauthUser, OauthUserRepository>

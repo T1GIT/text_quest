@@ -8,17 +8,45 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 
+/**
+ * Object-oriented representation for table <u>histories</u>
+ * <p>
+ * <b>Storages:</b>
+ * Messages, that user already got.
+ * <p>
+ * <b>Logic:</b>
+ * Every time, when {@link User user} receives a {@link Msg message} it saving into
+ * this table.
+ */
 @Entity
 @Table(name = "histories")
 public class History extends AuditModel {
 
+    /**
+     * Received message
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * <li> constant
+     * </ul>
+     */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "msg_id", nullable = false)
+    @JoinColumn(name = "msg_id", nullable = false, updatable = false)
     @JsonIgnore
     private Msg msg;
 
+    /**
+     * User, who got this message
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * <li> constant
+     * </ul>
+     */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "users_id", nullable = false)
+    @JoinColumn(name = "users_id", nullable = false, updatable = false)
     @JsonIgnore
     private User user;
 
@@ -26,12 +54,12 @@ public class History extends AuditModel {
         return msg;
     }
 
-    public User getUser() {
-        return user;
-    }
-
     public void setMsg(Msg msg) {
         this.msg = msg;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public void setUser(User user) {

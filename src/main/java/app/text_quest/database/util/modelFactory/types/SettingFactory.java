@@ -8,7 +8,8 @@ import app.text_quest.database.util.modelFactory.AbstractModelFactory;
 
 
 /**
- @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
+ * @see app.text_quest.database.util.modelFactory.AbstractModelFactory
+ */
 public class SettingFactory extends AbstractModelFactory<Setting> {
     private final Color color = Color.BLUE;
     private final Font font = Font.ARIAL;

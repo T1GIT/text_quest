@@ -9,7 +9,8 @@ import app.text_quest.database.util.modelFactory.types.node.types.LinkedNode.typ
 
 
 /**
- @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
+ * @see app.text_quest.database.util.modelFactory.AbstractModelFactory
+ */
 public class AnswerFactory extends AbstractModelFactory<Answer> {
 
     private final static OutMsgFactory outMsgFactory = new OutMsgFactory();

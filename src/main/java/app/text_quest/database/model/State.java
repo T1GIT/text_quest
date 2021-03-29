@@ -8,15 +8,14 @@ import javax.persistence.*;
 
 
 /**
- <h2> A class {@link State}
-
- <p> It's object-oriented representation for table <u>states</u>
-
- <p> <b> Storages: </b>
- <p> Values of variables for each user
- <p> <b>Logic:</b>
- <p> When user make a {@link Answer choice} game changes the {@link State state}
- of {@link Change any} variables. So, all available variables are in this table.
+ * Object-oriented representation for table <u>states</u>
+ * <p>
+ * <b>Storages:</b>
+ * Values of variables for each user
+ * <p>
+ * <b>Logic:</b>
+ * When {@link User user}  make a {@link Answer choice} game changes the {@link State state}
+ * of {@link Change any} variables. So, all available variables are in this table.
  */
 @Entity
 @Table(name = "states")
@@ -26,13 +25,15 @@ public class State extends AuditModel {
     private int val = 0;
 
     /**
-     The variable model.
-     <p> <b> Constraints: </b>
-     <ul>
-     <li> required
-     <li> constant
-     <li> unique
-     <li> length < 31
+     * The variable model.
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * <li> constant
+     * <li> unique
+     * <li> length < 31
+     * </ul>
      */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "var_id", nullable = false, updatable = false)
@@ -40,11 +41,13 @@ public class State extends AuditModel {
     private Var var;
 
     /**
-     The user model.
-     <p> <b> Constraints: </b>
-     <ul>
-     <li> required
-     <li> constant
+     * The user model.
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * <li> constant
+     * </ul>
      */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "users_id", nullable = false, updatable = false)

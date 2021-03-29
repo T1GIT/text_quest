@@ -9,31 +9,32 @@ import java.util.List;
 
 
 /**
- Service for refresh tokens
-
- @see app.text_quest.database.util.abstractService.ServiceInterface */
+ * Service for refresh tokens
+ *
+ * @see app.text_quest.database.util.abstractService.ServiceInterface
+ */
 public interface RefreshService extends ServiceInterface<Refresh> {// TODO: 04.03.2021 Add fingerprint. Storage with tokens
 
     /**
-     Gets all user's refresh tokens.
-
-     @param user for collecting refresh tokens
-     @return list of user's tokens
+     * Gets all user's refresh tokens.
+     *
+     * @param user for collecting refresh tokens
+     * @return list of user's tokens
      */
     List<Refresh> getByUser(User user);
 
     /**
-     Gets token by its name.
-
-     @param value for searching
-     @return refresh token model or null if didn't found
+     * Gets token by its name.
+     *
+     * @param value for searching
+     * @return refresh token model or null if didn't found
      */
     Refresh getByValue(String value);
 
     /**
-     Deletes all old data before the given date
-
-     @param date bound for searching
+     * Deletes all old data before the given date
+     *
+     * @param date bound for searching
      */
     void deleteBefore(Date date);
 }

@@ -8,31 +8,30 @@ import java.io.Serializable;
 
 
 /**
- <h2> An abstract class {@link AbstractModel}
-
- <p> Represents database record in the Object-oriented form.
- Adds attribute {@link AbstractModel#id} to a model.
+ * Represents database record in the Object-oriented form.
+ * Adds attribute {@link AbstractModel#id} to a model.
  */
 @MappedSuperclass
 public abstract class AbstractModel implements Serializable {
 
     /**
-     Unique identifier for the each record in the database table
+     * Unique identifier for the each record in the database table
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected long id;
 
     /**
-     Constructs a new empty model
+     * Class constructor.
      */
     public AbstractModel() {
 
     }
 
     /**
-     Construct model with a predefined id
-     @param id to set
+     * Class constructor, specifying id
+     *
+     * @param id record's identifier
      */
     public AbstractModel(long id) {
         this.id = id;

@@ -8,7 +8,8 @@ import app.text_quest.database.util.modelFactory.types.msg.MsgFactory;
 
 
 /**
- @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
+ * @see app.text_quest.database.util.modelFactory.AbstractModelFactory
+ */
 public class HistoryFactory extends AbstractModelFactory<History> {
 
     private final static MsgFactory msgFactory = new MsgFactory();

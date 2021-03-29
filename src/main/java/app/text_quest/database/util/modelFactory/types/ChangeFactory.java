@@ -7,7 +7,8 @@ import app.text_quest.database.util.modelFactory.AbstractModelFactory;
 
 
 /**
- @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
+ * @see app.text_quest.database.util.modelFactory.AbstractModelFactory
+ */
 public class ChangeFactory extends AbstractModelFactory<Change> {
 
     private final static AnswerFactory answerFactory = new AnswerFactory();

@@ -9,7 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 /**
- @see app.text_quest.database.service.VarService */
+ * @see app.text_quest.database.service.VarService
+ */
 @Service
 @Transactional
 public class VarServiceImpl

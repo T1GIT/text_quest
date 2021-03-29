@@ -4,17 +4,16 @@ import java.math.BigInteger;
 
 
 /**
- <h2> An abstract class {@link HexConvertor}
-
- <p> Converts between bytes array and hex string representation
+ * Provides static methods for converting between
+ * bytes array and hex string representation
  */
 public abstract class HexConvertor {
 
     /**
-     Converts bytes array into a hex string
-
-     @param array bytes array for converting
-     @return converted hex string
+     * Converts bytes array into a hex string
+     *
+     * @param array bytes array for converting
+     * @return converted hex string
      */
     public static String toHex(byte[] array) {
         BigInteger bi = new BigInteger(1, array);
@@ -28,10 +27,10 @@ public abstract class HexConvertor {
     }
 
     /**
-     Converts hex string into a bytes array
-
-     @param hex string for converting
-     @return converted bytes array
+     * Converts hex string into a bytes array
+     *
+     * @param hex string for converting
+     * @return converted bytes array
      */
     public static byte[] fromHex(String hex) {
         byte[] bytes = new byte[hex.length() / 2];

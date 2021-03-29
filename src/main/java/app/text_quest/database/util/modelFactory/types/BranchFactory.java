@@ -9,7 +9,8 @@ import app.text_quest.database.util.modelFactory.types.node.types.ForkFactory;
 
 
 /**
- @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
+ * @see app.text_quest.database.util.modelFactory.AbstractModelFactory
+ */
 public class BranchFactory extends AbstractModelFactory<Branch> {
 
     private final static ForkFactory forkFactory = new ForkFactory();

@@ -5,7 +5,8 @@ import app.text_quest.database.util.modelFactory.AbstractModelFactory;
 
 
 /**
- @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
+ * @see app.text_quest.database.util.modelFactory.AbstractModelFactory
+ */
 public class NodeFactory extends AbstractModelFactory<Node> {
     public Node create() {
         return new Node();

@@ -6,9 +6,10 @@ import app.text_quest.database.util.abstractService.ServiceInterface;
 
 
 /**
- Service for messages
-
- @see app.text_quest.database.util.abstractService.ServiceInterface */
+ * Service for messages
+ *
+ * @see app.text_quest.database.util.abstractService.ServiceInterface
+ */
 public interface MsgService extends ServiceInterface<Msg> {
 
 }

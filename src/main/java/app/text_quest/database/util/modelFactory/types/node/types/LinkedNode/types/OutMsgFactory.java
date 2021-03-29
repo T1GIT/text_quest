@@ -7,7 +7,8 @@ import app.text_quest.database.util.modelFactory.types.node.NodeFactory;
 
 
 /**
- @see app.text_quest.database.util.modelFactory.AbstractModelFactory */
+ * @see app.text_quest.database.util.modelFactory.AbstractModelFactory
+ */
 public class OutMsgFactory extends AbstractModelFactory<OutMsg> {
 
     private final static NodeFactory nodeFactory = new NodeFactory();

@@ -1,5 +1,6 @@
 package app.text_quest.database.model;
 
+import app.text_quest.database.model.user.User;
 import app.text_quest.database.util.AuditModel;
 
 import javax.persistence.Column;
@@ -8,26 +9,26 @@ import javax.persistence.Table;
 
 
 /**
- <h2> A class {@link Var}
-
- <p> It's object-oriented representation for table <u>vars</u>
-
- <p> <b> Storages: </b>
- <p> Variables' names
- <p> <b> Logic: </b>
- <p> When user make a {@link Answer choice} game changes the {@link State state}
- of {@link Change any} variables. So, all available variables are in this table.
+ * Object-oriented representation for table <u>vars</u>
+ * <p>
+ * <b>Storages:</b>
+ * Variables' names
+ * <p>
+ * <b>Logic:</b>
+ * When {@link User user}  make a {@link Answer choice} game changes the {@link State state}
+ * of {@link Change any} variables. So, all available variables are in this table.
  */
 @Entity
 @Table(name = "vars")
 public class Var extends AuditModel {
 
     /**
-     The name of the variable.
-     <p> <b> Constraints: </b>
-     <ul>
-     <li> required
-     <li> unique
+     * The name of the variable
+     * <p> <b> Constraints: </b> </p>
+     * <ul>
+     *     <li> required </li>
+     *     <li> unique </li>
+     * </ul>
      */
     @Column(nullable = false, unique = true)
     private String name;

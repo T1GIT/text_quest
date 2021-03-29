@@ -9,7 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 /**
- @see app.text_quest.database.service.NodeService */
+ * @see app.text_quest.database.service.NodeService
+ */
 @Service
 @Transactional
 public class NodeServiceImpl

@@ -13,7 +13,8 @@ import java.util.List;
 
 
 /**
- @see app.text_quest.database.service.RefreshService */
+ * @see app.text_quest.database.service.RefreshService
+ */
 @Service
 @Transactional
 public class RefreshServiceImpl

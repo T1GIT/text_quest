@@ -9,7 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 /**
- @see app.text_quest.database.service.userService.UserService */
+ * @see app.text_quest.database.service.userService.UserService
+ */
 @Service
 @Transactional
 public class UserServiceImpl

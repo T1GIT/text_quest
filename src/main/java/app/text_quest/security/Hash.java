@@ -11,51 +11,50 @@ import java.security.spec.InvalidKeySpecException;
 
 
 /**
- <h2> An abstract class {@link Hash}
-
- <p> Provides static methods for hashing passwords.
- <p>
- p> Uses algorithms:
- <ol>
- <li> SHA1PRNG for generating salt
- <li> PBKDF2WithHmac for generating random keys
- <li> SHA512 for hashing
+ * Provides static methods for hashing passwords.
+ * <p>
+ * Uses algorithms:
+ * <ol>
+ * <li> SHA1PRNG for generating salt
+ * <li> PBKDF2WithHmac for generating random keys
+ * <li> SHA512 for hashing
+ * </ol>
  */
 public abstract class Hash {
 
     /**
-     Logger to output errors
+     * Logger to output errors
      */
     private static final Logger logger = Logger.getLogger("errorLogger");
 
     /**
-     Factory for generating salt.
+     * Factory for generating salt.
      */
     private static final SaltFactory saltFactory = new SaltFactory();
 
     /**
-     Amount of hash algorithm repeating
+     * Amount of hash algorithm repeating
      */
     private static final int iterations = 50000;
 
     /**
-     Amount of symbols in the key for the algorithm.
+     * Amount of symbols in the key for the algorithm.
      */
     private static final int keyLength = 512;
 
     /**
-     Name of the used algorithm.
+     * Name of the used algorithm.
      */
     private static final String algorithm = "PBKDF2WithHmacSHA512";
 
     /**
-     Parses hash string from the password string.
-     Uses PBKDF2WithHmac algorithm for generating key
-     and SHA512 for hashing.
-
-     @param password string to crypt
-     @return String encrypted string with template:
-     [algorithm]:[iterations]:[salt]:[hash]
+     * Parses hash string from the password string.
+     * Uses PBKDF2WithHmac algorithm for generating key
+     * and SHA512 for hashing.
+     *
+     * @param password string to crypt
+     * @return String encrypted string with template:
+     * [algorithm]:[iterations]:[salt]:[hash]
      */
     public static String crypt(String password) {
         char[] chars = password.toCharArray();
@@ -72,11 +71,11 @@ public abstract class Hash {
     }
 
     /**
-     Checks if password matches hash.
-
-     @param psw     raw password
-     @param pswHash password hash
-     @return true if passwords matches
+     * Checks if password matches hash.
+     *
+     * @param psw     raw password
+     * @param pswHash password hash
+     * @return true if passwords matches
      */
     public static boolean check(String psw, String pswHash) {
         try {
