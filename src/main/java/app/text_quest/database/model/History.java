@@ -1,6 +1,6 @@
 package app.text_quest.database.model;
 
-import app.text_quest.database.model.msg.Msg;
+import app.text_quest.database.model.node.Node;
 import app.text_quest.database.model.user.User;
 import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,7 +15,7 @@ import javax.persistence.*;
  * Messages, that user already got.
  * <p>
  * <b>Logic:</b>
- * Every time, when {@link User user} receives a {@link Msg message} it saving into
+ * Every time, when {@link User user} receives a {@link Node message} it saving into
  * this table.
  */
 @Entity
@@ -34,7 +34,7 @@ public class History extends AuditModel {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "msg_id", nullable = false, updatable = false)
     @JsonIgnore
-    private Msg msg;
+    private Node node;
 
     /**
      * User, who got this message
@@ -50,12 +50,12 @@ public class History extends AuditModel {
     @JsonIgnore
     private User user;
 
-    public Msg getMsg() {
-        return msg;
+    public Node getNode() {
+        return node;
     }
 
-    public void setMsg(Msg msg) {
-        this.msg = msg;
+    public void setNode(Node node) {
+        this.node = node;
     }
 
     public User getUser() {
@@ -69,7 +69,8 @@ public class History extends AuditModel {
     @Override
     public String toString() {
         return "History{" +
-                "msg=" + msg +
+                "node=" + node +
+                ", user=" + user +
                 '}';
     }
 }

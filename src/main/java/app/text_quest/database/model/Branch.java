@@ -34,6 +34,11 @@ public class Branch extends AuditModel {
 
     /**
      * Owner fork
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * </ul>
      */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "forks_id", nullable = false)
@@ -42,6 +47,11 @@ public class Branch extends AuditModel {
 
     /**
      * Goal of the redirect
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * </ul>
      */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "nodes_id", nullable = false)
@@ -87,3 +97,4 @@ public class Branch extends AuditModel {
                 '}';
     }
 }
+

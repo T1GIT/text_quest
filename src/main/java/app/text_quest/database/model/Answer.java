@@ -1,7 +1,7 @@
 package app.text_quest.database.model;
 
-import app.text_quest.database.model.msg.types.Text;
-import app.text_quest.database.model.node.types.LinkedNode.types.OutMsg;
+import app.text_quest.database.model.node.types.LinkedNode.types.Question;
+import app.text_quest.database.model.user.User;
 import app.text_quest.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -10,41 +10,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * Object-oriented representation for table <u>answers</u>
+ * <p>
+ * <b>Storages:</b>
+ * Possible user's responses to the question
+ * <p>
+ * <b>Logic:</b>
+ * When {@link User user} gets the {@link Question question} he can choose
+ * between {@link Answer answers} and every of them has {@link Change impact}
+ * on the {@link State state} of {@link Var variables}.
+ */
 @Entity
 @Table(name = "answers")
 public class Answer extends AuditModel {
 
+    /**
+     * All impacts of this answer
+     */
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Change> changes = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "texts_id", nullable = false)
-    @JsonIgnore
-    private Text text;
+    /**
+     * Text of the answer
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * </ul>
+     */
+    @Column(columnDefinition = "text", nullable = false)
+    private String text;
 
+    /**
+     * The question, whom this answer is
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * </ul>
+     */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "out_msg_id", nullable = false)
+    @JoinColumn(name = "question_id", nullable = false)
     @JsonIgnore
-    private OutMsg outMsg;
+    private Question question;
 
     public List<Change> getChanges() {
         return changes;
     }
 
-    public Text getText() {
+    public String getText() {
         return text;
     }
 
-    public OutMsg getOutMsg() {
-        return outMsg;
-    }
-
-    public void setText(Text text) {
+    public void setText(String text) {
         this.text = text;
     }
 
-    public void setOutMsg(OutMsg outMsg) {
-        this.outMsg = outMsg;
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     public void addChange(Change change) {
@@ -61,8 +89,8 @@ public class Answer extends AuditModel {
     public String toString() {
         return "Answer{" +
                 "changes=" + changes +
-                ", text=" + text +
-                ", outMsg=" + outMsg +
+                ", text='" + text + '\'' +
+                ", question=" + question +
                 '}';
     }
 }

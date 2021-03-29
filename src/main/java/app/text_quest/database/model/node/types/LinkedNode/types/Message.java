@@ -1,47 +1,42 @@
 package app.text_quest.database.model.node.types.LinkedNode.types;
 
-import app.text_quest.database.model.msg.Msg;
 import app.text_quest.database.model.node.types.LinkedNode.LinkedNode;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-//@Table(name = "in_msg")
-public class InMsg extends LinkedNode {
+@Table(name = "messages")
+public class Message extends LinkedNode {
     @NotNull
     private int delay = 0;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "msg_id")
-    @JsonIgnore
-    private Msg msg;
+    @Column(columnDefinition = "text", nullable = false)
+    private String text;
 
     public int getDelay() {
         return delay;
     }
 
-    public Msg getMsg() {
-        return msg;
+    public String getText() {
+        return text;
     }
 
     public void setDelay(int delay) {
         this.delay = delay;
     }
 
-    public void setMsg(Msg msg) {
-        this.msg = msg;
+    public void setText(String msg) {
+        this.text = msg;
     }
 
     @Override
     public String toString() {
         return "InMsg{" +
                 "delay=" + delay +
-                ", msg=" + msg +
+                ", msg=" + text +
                 '}';
     }
 }

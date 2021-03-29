@@ -6,13 +6,14 @@ import app.text_quest.database.model.node.types.LinkedNode.LinkedNode;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-//@Table(name = "out_msg")
-public class OutMsg extends LinkedNode {
-    @OneToMany(mappedBy = "outMsg", cascade = CascadeType.ALL, orphanRemoval = true)
+@Table(name = "questions")
+public class Question extends LinkedNode {
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Answer> answers = new ArrayList<>();
 
     public List<Answer> getAnswers() {
@@ -21,12 +22,12 @@ public class OutMsg extends LinkedNode {
 
     public void addAnswer(Answer answer) {
         this.answers.add(answer);
-        answer.setOutMsg(this);
+        answer.setQuestion(this);
     }
 
     public void removeAnswer(Answer answer) {
         this.answers.remove(answer);
-        answer.setOutMsg(null);
+        answer.setQuestion(null);
     }
 
     @Override

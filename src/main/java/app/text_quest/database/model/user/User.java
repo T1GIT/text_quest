@@ -12,29 +12,70 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * Object-oriented representation for table <u>users</u>
+ * <p>
+ * <b>Storages:</b>
+ * Users information
+ * <p>
+ * <b>Logic:</b>
+ * The base {@link User} class, linked with: {@link Setting}, {@link Refresh}, {@link State}, {@link History}.
+ * Contains user's name.
+ */
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User extends AuditModel {
 
-    @Column(length = 50)
-    private String name;
-
-    @JsonIgnore
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
-    private Setting setting;
-
+    /**
+     * Refresh tokens of the user
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * </ul>
+     */
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<Refresh> refreshes = new ArrayList<>();
-
+    /**
+     * State of variables for this user
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * </ul>
+     */
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<State> states = new ArrayList<>();
-
+    /**
+     * Messages received by this user
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * </ul>
+     */
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<History> histories = new ArrayList<>();
+    /**
+     * User's name.
+     */
+    @Column(length = 50)
+    private String name;
+    /**
+     * Settings of the game, belong to user
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * </ul>
+     */
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
+    private Setting setting;
 
     public String getName() {
         return name;

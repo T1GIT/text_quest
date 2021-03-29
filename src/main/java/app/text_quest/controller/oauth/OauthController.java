@@ -51,7 +51,7 @@ public abstract class OauthController { // TODO: 06.03.2021 Add Steam and Telegr
             oauthLogger.info("token: " + accessToken);
             String oauthId = receiveId(accessToken);
             oauthLogger.info("id: " + oauthId);
-            request.setAttribute(SecureParam.OAUTH_ID, oauthId);
+            request.setAttribute(SecureParam.OAUTH_ID, provider + ":" + oauthId);
             return "forward:/auth/oauth";
         } catch (OauthException e) {
             errLogger.error(e.getMessage(), e);

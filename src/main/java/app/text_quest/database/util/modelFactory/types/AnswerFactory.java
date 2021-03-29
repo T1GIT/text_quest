@@ -1,11 +1,9 @@
 package app.text_quest.database.util.modelFactory.types;
 
 import app.text_quest.database.model.Answer;
-import app.text_quest.database.model.msg.types.Text;
-import app.text_quest.database.model.node.types.LinkedNode.types.OutMsg;
+import app.text_quest.database.model.node.types.LinkedNode.types.Question;
 import app.text_quest.database.util.modelFactory.AbstractModelFactory;
-import app.text_quest.database.util.modelFactory.types.msg.types.TextFactory;
-import app.text_quest.database.util.modelFactory.types.node.types.LinkedNode.types.OutMsgFactory;
+import app.text_quest.database.util.modelFactory.types.node.types.LinkedNode.types.QuestionFactory;
 
 
 /**
@@ -13,23 +11,22 @@ import app.text_quest.database.util.modelFactory.types.node.types.LinkedNode.typ
  */
 public class AnswerFactory extends AbstractModelFactory<Answer> {
 
-    private final static OutMsgFactory outMsgFactory = new OutMsgFactory();
-    private final static TextFactory textFactory = new TextFactory();
-    private final OutMsg outMsg = outMsgFactory.create();
-    private final Text text = textFactory.create();
+    private final static QuestionFactory QUESTION_FACTORY = new QuestionFactory();
+    private final Question question = QUESTION_FACTORY.create();
+    private final String text = "text";
 
     public Answer create() {
         Answer answer = new Answer();
-        answer.setOutMsg(outMsgFactory.create());
-        answer.setText(textFactory.create());
+        answer.setQuestion(QUESTION_FACTORY.create());
+        answer.setText(text);
         return answer;
     }
 
-    public OutMsg getOutMsg() {
-        return outMsg;
+    public Question getOutMsg() {
+        return question;
     }
 
-    public Text getText() {
+    public String getText() {
         return text;
     }
 }
