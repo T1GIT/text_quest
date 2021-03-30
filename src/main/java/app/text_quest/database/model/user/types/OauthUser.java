@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class OauthUser extends User {
 
     /**
-     * Unique identifier received from the oauth service.
+     * Unique identifier received from the oauth service
      * <p>
      * <b>Constraints:</b>
      * <ul>
