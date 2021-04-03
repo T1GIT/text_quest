@@ -1,7 +1,11 @@
 package app.text_quest.database.model.node.types.LinkedNode.types;
 
 import app.text_quest.database.model.Answer;
+import app.text_quest.database.model.Change;
+import app.text_quest.database.model.State;
+import app.text_quest.database.model.Var;
 import app.text_quest.database.model.node.types.LinkedNode.LinkedNode;
+import app.text_quest.database.model.user.User;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,9 +14,25 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Object-oriented representation for table <u>questions</u>
+ * <p>
+ * <b>Storages:</b>
+ * Income message from the user
+ * <p>
+ * <b>Logic:</b>
+ * When {@link User user} gets the {@link Question question} he can choose
+ * between {@link Answer answers} and every of them has {@link Change impact}
+ * on the {@link State state} of {@link Var variables}.
+ */
 @Entity
 @Table(name = "questions")
 public class Question extends LinkedNode {
+
+    /**
+     * Collection of the possible answers
+     */
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Answer> answers = new ArrayList<>();
 

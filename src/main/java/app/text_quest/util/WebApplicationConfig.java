@@ -11,19 +11,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 /**
- * Used for redirecting to home page when error 404 is received
+ * Used for redirecting to home page when gets errors
  */
 @Configuration
 public class WebApplicationConfig implements WebMvcConfigurer {
 
     @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
+    public void addViewControllers(ViewControllerRegistry registry) {// TODO: Add errors forward and errorController
         registry.addViewController("/notFound").setViewName("redirect:/");
+        registry.addViewController("/unAuthorised").setViewName("redirect:/");
     }
 
     @Bean
     public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> containerCustomizer() {
         return container -> {
+            container.addErrorPages(new ErrorPage(HttpStatus.UNAUTHORIZED, "/unAuthorised"));
             container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/notFound"));
         };
     }

@@ -35,17 +35,17 @@ public abstract class Hash {
     /**
      * Amount of hash algorithm repeating
      */
-    private static final int iterations = 50000;
+    private static final int ITERATIONS = 50000;
 
     /**
      * Amount of symbols in the key for the algorithm.
      */
-    private static final int keyLength = 512;
+    private static final int KEY_LENGTH = 512;
 
     /**
      * Name of the used algorithm.
      */
-    private static final String algorithm = "PBKDF2WithHmacSHA512";
+    private static final String ALGORITHM = "PBKDF2WithHmacSHA512";
 
     /**
      * Parses hash string from the password string.
@@ -61,13 +61,13 @@ public abstract class Hash {
         byte[] salt = saltFactory.create();
         byte[] hash = null;
         try {
-            PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, keyLength);
-            SecretKeyFactory skf = SecretKeyFactory.getInstance(algorithm);
+            PBEKeySpec spec = new PBEKeySpec(chars, salt, ITERATIONS, KEY_LENGTH);
+            SecretKeyFactory skf = SecretKeyFactory.getInstance(ALGORITHM);
             hash = skf.generateSecret(spec).getEncoded();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             logger.error(e.getMessage(), e);
         }
-        return String.format("%s:%d:%s:%s", algorithm, iterations, HexConvertor.toHex(salt), HexConvertor.toHex(hash));
+        return String.format("%s:%d:%s:%s", ALGORITHM, ITERATIONS, HexConvertor.toHex(salt), HexConvertor.toHex(hash));
     }
 
     /**

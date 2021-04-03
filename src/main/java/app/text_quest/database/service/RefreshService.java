@@ -4,7 +4,6 @@ import app.text_quest.database.model.Refresh;
 import app.text_quest.database.model.user.User;
 import app.text_quest.database.util.abstractService.ServiceInterface;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -30,11 +29,4 @@ public interface RefreshService extends ServiceInterface<Refresh> {// TODO: 04.0
      * @return refresh token model or null if didn't found
      */
     Refresh getByValue(String value);
-
-    /**
-     * Deletes all old data before the given date
-     *
-     * @param date bound for searching
-     */
-    void deleteBefore(Date date);
 }

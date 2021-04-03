@@ -1,8 +1,19 @@
 package app.text_quest.controller.util.json.auth;
 
+
+/**
+ * A GSON template for parsing json answer on the attempt of authorising
+ */
 public class JsonAnswer {
 
+    /**
+     * True if authorisation was allowed
+     */
     private boolean accepted = false;
+
+    /**
+     * Contains information why authorisation was rejected
+     */
     private String msg = "";
 
     public void setAccepted(boolean accepted) {

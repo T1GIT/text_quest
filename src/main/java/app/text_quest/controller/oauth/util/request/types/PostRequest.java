@@ -1,7 +1,6 @@
 package app.text_quest.controller.oauth.util.request.types;
 
 import app.text_quest.controller.oauth.util.request.Request;
-import app.text_quest.controller.oauth.util.request.UrlBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 
@@ -14,18 +13,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * Creates POST requests.
+ * <p>
+ * Data transferred in the x-www-form-urlencoded form.
+ */
 public class PostRequest extends Request {
 
-    public PostRequest(UrlBuilder urlBuilder) {
-        super(urlBuilder);
+    /**
+     * Class constructor, specifying protocol and host
+     *
+     * @param protocol to set in the url
+     * @param domain   to set in the url
+     */
+    public PostRequest(String protocol, String domain) {
+        super(protocol, domain);
     }
 
+    /**
+     * Class constructor, specifying only host.
+     *
+     * @param domain host to set in the url
+     */
+    public PostRequest(String domain) {
+        super(domain);
+    }
+
+    /**
+     * Converts parameters map into the bytes array, form of the x-www-form-urlencoded
+     *
+     * @return parsed data
+     */
     private byte[] parseData() {
         List<String> paramList = new ArrayList<>(params.size());
         params.forEach((k, v) -> paramList.add(k + "=" + v));
         return String.join("&", paramList).getBytes(StandardCharsets.UTF_8);
     }
 
+    /**
+     * Prepares connection.
+     *
+     * @return url connection
+     * @throws IOException if if input output error while reading occurs
+     */
     @Override
     protected HttpURLConnection parseConnection() throws IOException {
         HttpURLConnection con = (HttpURLConnection) new URL(this.urlBuilder.build()).openConnection();

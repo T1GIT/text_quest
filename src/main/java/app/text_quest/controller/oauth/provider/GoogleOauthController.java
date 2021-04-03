@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+/**
+ * @see app.text_quest.controller.oauth.OauthController
+ */
 @Controller
 public class GoogleOauthController extends OauthController {
 
@@ -19,7 +22,7 @@ public class GoogleOauthController extends OauthController {
 
     @GetMapping("/google")
     @Override
-    protected String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
+    public String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
         return super.oauthEndpoint(request, response);
     }
 }

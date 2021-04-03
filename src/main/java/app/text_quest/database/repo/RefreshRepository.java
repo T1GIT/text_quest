@@ -4,7 +4,6 @@ import app.text_quest.database.model.Refresh;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -32,10 +31,4 @@ public interface RefreshRepository extends JpaRepository<Refresh, Long> {
      */
     Refresh findByValue(String value);
 
-    /**
-     * Erases all records created before given date
-     *
-     * @param date bound for erasing
-     */
-    void deleteAllByCreatedAtBefore(Date date);
 }

@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "answers")
-public class Answer extends AuditModel {
+public class Answer extends AuditModel {// TODO: May be add "aborted"(link to next node) and "delay" if user will not answer
 
     /**
      * All impacts of this answer

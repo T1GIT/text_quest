@@ -1,6 +1,7 @@
 package app.text_quest.database.service.impl.userServiceImpl;
 
 import app.text_quest.database.model.user.User;
+import app.text_quest.database.repo.AdminRepository;
 import app.text_quest.database.repo.userRepository.UserRepository;
 import app.text_quest.database.service.userService.UserService;
 import app.text_quest.database.util.abstractService.impl.AbstractService;
@@ -17,7 +18,18 @@ public class UserServiceImpl
         extends AbstractService<User, UserRepository>
         implements UserService {
 
-    public UserServiceImpl(UserRepository repository) {
+    /**
+     * Repository to access administrators
+     */
+    private final AdminRepository adminRepository;
+
+    public UserServiceImpl(UserRepository repository, AdminRepository adminRepository) {
         super(repository);
+        this.adminRepository = adminRepository;
+    }
+
+    @Override
+    public boolean isAdmin(User user) {
+        return adminRepository.existsById(user.getId());
     }
 }

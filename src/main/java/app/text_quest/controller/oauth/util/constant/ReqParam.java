@@ -1,7 +1,13 @@
 package app.text_quest.controller.oauth.util.constant;
 
 
-public final class ReqParam {
+import app.text_quest.util.AbstractConstant;
+
+
+/**
+ * A constant class for using as a parameter name in requests.
+ */
+public final class ReqParam extends AbstractConstant {
 
     // For button's ref
     public final static String REDIRECT_URI = "redirect_uri";
@@ -25,6 +31,4 @@ public final class ReqParam {
     public final static String ERROR = "error";
     public final static String ERROR_DESCRIPTION = "error_description";
 
-    private ReqParam() {
-    }
 }

@@ -1,7 +1,5 @@
 package app.text_quest.controller.util.filter;
 
-import app.text_quest.security.auth.Auth;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,22 +7,57 @@ import java.io.IOException;
 import java.util.regex.Pattern;
 
 
+/**
+ * Realisation of the filter with possibility of including and excluding url using a
+ * regular expression.
+ * <p>
+ * Base class for filters. Children must call parent constructor and
+ * override {@link AbstractFilter#doAction(HttpServletRequest, HttpServletResponse, FilterChain)}
+ * <p>
+ * If url is included then it will execute {@link AbstractFilter#doFilter(ServletRequest, ServletResponse, FilterChain)}
+ * otherwise just pass request to the next filter
+ */
 public abstract class AbstractFilter implements Filter {
 
-    protected final Auth auth;
+    /**
+     * A regexp pattern to process request via this filter
+     */
     private final Pattern include;
+
+    /**
+     * A regexp pattern to pass request without processing
+     */
     private Pattern exclude;
 
-    protected AbstractFilter(Auth auth, String include) {
+    /**
+     * Class constructor specifies only including expression
+     *
+     * @param include regExp for including urls
+     */
+    protected AbstractFilter(String include) {
         this.include = Pattern.compile(include);
-        this.auth = auth;
     }
 
-    protected AbstractFilter(Auth auth, String include, String exclude) {
-        this(auth, include);
+    /**
+     * Class constructor specifies including and excluding expressions
+     *
+     * @param include regExp for including urls
+     * @param exclude regExp for excluding urls
+     */
+    protected AbstractFilter(String include, String exclude) {
+        this(include);
         this.exclude = Pattern.compile(exclude);
     }
 
+    /**
+     * Checks if url is included in this filter, otherwise passes processing
+     *
+     * @param request  to processing
+     * @param response response
+     * @param chain    other filters
+     * @throws IOException      if error with input output occurs
+     * @throws ServletException if error when {@code chain.doFilter()} occurs
+     */
     public final void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
@@ -37,5 +70,15 @@ public abstract class AbstractFilter implements Filter {
         }
     }
 
+    /**
+     * Abstract method, executing only if request url matches included regexp.
+     * In this method children classes must insert their work.
+     *
+     * @param req   request
+     * @param res   response
+     * @param chain other filters
+     * @throws IOException      if problem with input output occurs
+     * @throws ServletException if error when {@code chain.doFilter()} occurs
+     */
     protected abstract void doAction(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException;
 }

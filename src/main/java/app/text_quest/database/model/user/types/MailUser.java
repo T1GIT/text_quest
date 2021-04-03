@@ -36,7 +36,7 @@ public class MailUser extends User {
      * <b>Constraints:</b>
      * <ul>
      * <li> required
-     * <li> length <1181
+     * <li> length {@literal <} 1181
      * </ul>
      */
     @Column(nullable = false, length = 1180)

@@ -3,6 +3,9 @@ package app.text_quest.controller.oauth.util.exception.types;
 import app.text_quest.controller.oauth.util.exception.OauthException;
 
 
+/**
+ * An exception throwing if oauth server responded with an error
+ */
 public class ApiException extends OauthException {
 
     private final int code;

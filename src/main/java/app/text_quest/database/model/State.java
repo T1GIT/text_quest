@@ -32,7 +32,7 @@ public class State extends AuditModel {
      * <li> required
      * <li> constant
      * <li> unique
-     * <li> length < 31
+     * <li> length {@literal <} 31
      * </ul>
      */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

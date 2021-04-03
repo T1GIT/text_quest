@@ -6,8 +6,7 @@ import app.text_quest.controller.oauth.OauthController;
 import app.text_quest.controller.oauth.util.constant.PropName;
 import app.text_quest.controller.oauth.util.constant.Provider;
 import app.text_quest.controller.oauth.util.constant.ReqParam;
-import app.text_quest.controller.oauth.util.exception.OauthException;
-import app.text_quest.controller.oauth.util.request.UrlBuilder;
+import app.text_quest.controller.oauth.util.exception.types.ApiException;
 import app.text_quest.controller.oauth.util.request.types.GetRequest;
 import app.text_quest.controller.util.json.oauth.JsonToken;
 import app.text_quest.controller.util.json.oauth.vk.JsonVk;
@@ -20,6 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+/**
+ * @see app.text_quest.controller.oauth.OauthController
+ */
 @Controller
 public class VkOauthController extends OauthController {
 
@@ -29,17 +31,16 @@ public class VkOauthController extends OauthController {
 
     @GetMapping("/vk")
     @Override
-    protected String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
+    public String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
         return super.oauthEndpoint(request, response);
     }
 
     @Override
-    protected String receiveToken(String code) throws OauthException, JsonSyntaxException {
-        UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_TOKEN));
-        GetRequest request = new GetRequest(urlBuilder);
+    protected String receiveToken(String code) throws ApiException, JsonSyntaxException {
+        GetRequest request = new GetRequest(props.getProperty(PropName.DOMAIN_TOKEN));
         request
-                .addParam(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID))
-                .addParam(ReqParam.CLIENT_SECRET, props.get(PropName.CLIENT_SECRET))
+                .addParam(ReqParam.CLIENT_ID, props.getProperty(PropName.CLIENT_ID))
+                .addParam(ReqParam.CLIENT_SECRET, props.getProperty(PropName.CLIENT_SECRET))
                 .addParam(ReqParam.CODE, code)
                 .addParam(ReqParam.REDIRECT_URI, String.format("%s/oauth/%s",
                         TextQuestApplication.getRootUrl(), provider));
@@ -49,9 +50,8 @@ public class VkOauthController extends OauthController {
     }
 
     @Override
-    protected String receiveId(String token) throws OauthException, JsonSyntaxException {
-        UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_ID));
-        GetRequest request = new GetRequest(urlBuilder);
+    protected String receiveId(String token) throws ApiException, JsonSyntaxException {
+        GetRequest request = new GetRequest(props.getProperty(PropName.DOMAIN_ID));
         request
                 .addParam(ReqParam.ACCESS_TOKEN, token)
                 .addParam(ReqParam.FIELDS, "uid")

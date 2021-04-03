@@ -8,7 +8,6 @@ import app.text_quest.database.util.abstractService.impl.AbstractService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -33,10 +32,5 @@ public class RefreshServiceImpl
     @Override
     public Refresh getByValue(String value) {
         return repository.findByValue(value);
-    }
-
-    @Override
-    public void deleteBefore(Date date) {
-        repository.deleteAllByCreatedAtBefore(date);
     }
 }

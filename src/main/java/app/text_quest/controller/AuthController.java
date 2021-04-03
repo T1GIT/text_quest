@@ -2,14 +2,13 @@ package app.text_quest.controller;
 
 
 import app.text_quest.TextQuestApplication;
+import app.text_quest.controller.oauth.OauthController;
 import app.text_quest.controller.oauth.util.constant.PropName;
 import app.text_quest.controller.oauth.util.constant.Provider;
 import app.text_quest.controller.oauth.util.constant.ReqParam;
 import app.text_quest.controller.oauth.util.constant.SecureParam;
 import app.text_quest.controller.oauth.util.exception.OauthException;
 import app.text_quest.controller.oauth.util.exception.types.MissedStateCookieException;
-import app.text_quest.controller.oauth.util.props.OauthProps;
-import app.text_quest.controller.oauth.util.props.OauthPropsFactory;
 import app.text_quest.controller.oauth.util.request.UrlBuilder;
 import app.text_quest.controller.util.CookieUtil;
 import app.text_quest.controller.util.ObjectParser;
@@ -28,6 +27,7 @@ import app.text_quest.database.service.userService.types.MailUserService;
 import app.text_quest.database.service.userService.types.OauthUserService;
 import app.text_quest.security.Hash;
 import app.text_quest.security.util.Validator;
+import app.text_quest.util.AbstractConstant;
 import app.text_quest.util.LoggerFactory;
 import app.text_quest.util.constant.LogType;
 import com.google.gson.Gson;
@@ -38,28 +38,93 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Properties;
 
-
+/**
+ * Authorisation logic server.
+ * <p>
+ * Provides mappings for login and registration.
+ * <p>
+ * Website supports 2 types of authorisation:
+ * <ul>
+ * <li> Via a email
+ * <li> Via an oauth2 service
+ * </ul>
+ * Requests on types:
+ * <ul>
+ * <li> <b>email</b> - it accepts requests on login and register
+ * <li> <b>oauth</b> - it accepts forwards from the {@link OauthController}
+ * </ul>
+ * Either it sends parsed url to oauth buttons.
+ */
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
 
+    /**
+     * Logger for recording codes and tokens in the process of the oauth authorisation
+     */
     protected final static Logger oauthLogger = LoggerFactory.getLogger(LogType.OAUTH);
-    private final static OauthPropsFactory propsFactory = new OauthPropsFactory();
+
+    /**
+     * Json parser
+     */
     private final static Gson gson = new Gson();
+
+    /**
+     * Service for interacting with mail users
+     */
     private final MailUserService basicService;
+
+    /**
+     * Service for interacting with oauth users
+     */
     private final OauthUserService oauthService;
+
+    /**
+     * Service for interacting with all types of users
+     */
     private final UserService userService;
 
-    public AuthController(MailUserService basicService, OauthUserService oauthService, UserService userService) {
+    /**
+     * Contains properties for each oauth service
+     * [provider name]: [Properties]
+     */
+    private final HashMap<String, Properties> propsMap;
+
+    /**
+     * Class constructor injecting user services
+     *
+     * @param basicService injects basic users service
+     * @param oauthService injects oauth users service
+     * @param userService  injects all users service
+     * @throws IOException if props file doesn't exist
+     */
+    public AuthController(MailUserService basicService, OauthUserService oauthService, UserService userService) throws IOException {
         this.basicService = basicService;
         this.oauthService = oauthService;
         this.userService = userService;
+        this.propsMap = new HashMap<>();
+        for (Object providerObj : AbstractConstant.getValues(Provider.class)) {
+            String provider = (String) providerObj;
+            Properties props = new Properties();
+            props.load(new FileInputStream("src/main/resources/oauth_props/" + provider + ".properties"));
+            propsMap.put(provider, props);
+        }
     }
 
+    /**
+     * Mapping for login users via an email.
+     * Checks existing of the email and validates the password.
+     * If it all are right, returns positive answer.
+     *
+     * @param jsonForm json form, containing email and password
+     * @param response response to attach JWT and Refresh tokens
+     * @return json answer, containing if login is confirmed and the message
+     */
     @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
     @ResponseBody
     public String login(@RequestBody JsonForm jsonForm, HttpServletResponse response) {
@@ -76,6 +141,15 @@ public class AuthController {
         return gson.toJson(jsonAnswer, jsonAnswer.getClass());
     }
 
+    /**
+     * Mapping for register users via an email.
+     * Checks existing of the email and validates email and password.
+     * If it all are right, returns positive answer and saves new user into the database.
+     *
+     * @param jsonForm json form, containing email and password
+     * @param response response to attach JWT and Refresh tokens
+     * @return json answer, containing if register is confirmed and the message
+     */
     @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
     @ResponseBody
     public String register(@RequestBody JsonForm jsonForm, HttpServletResponse response) {
@@ -99,6 +173,14 @@ public class AuthController {
         return gson.toJson(jsonAnswer, jsonAnswer.getClass());
     }
 
+    /**
+     * Mapping for oauth authorising. If received oauth id doesn't exist in the database,
+     * creates it.
+     *
+     * @param request  containing oauth id
+     * @param response for attaching JWT and Refresh tokens
+     * @return redirect to the home page
+     */
     @GetMapping("/oauth")
     public String oauth(HttpServletRequest request, HttpServletResponse response) {
         String oauthId = (String) request.getAttribute(SecureParam.OAUTH_ID);
@@ -114,6 +196,17 @@ public class AuthController {
         return "redirect:/";
     }
 
+    /**
+     * Mapping for getting urls for oauth authorising.
+     * Button on the page will redirect user to this link.
+     * User will authorise on this service and the service will
+     * send request to the {@link OauthController#oauthEndpoint(HttpServletRequest, HttpServletResponse)}
+     *
+     * @param request  containing cookie with state
+     * @param response response for sending errors
+     * @return json map with link for each provider
+     * @throws IOException if an input or output error occurs
+     */
     @PostMapping(path = "/url", produces = "application/json")
     @ResponseBody
     public String getBtnUrl(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -123,34 +216,43 @@ public class AuthController {
                 throw new MissedStateCookieException();
             String state = stateCookie.getValue();
             HashMap<String, String> urlMap = new HashMap<>();
-            for (String providerName :
-                    Arrays.asList(Provider.VK, Provider.YANDEX, Provider.GOOGLE, Provider.DISCORD, Provider.GIT)) {
-                OauthProps props = propsFactory.getFor(providerName);
-                UrlBuilder urlBuilder = new UrlBuilder(props.get(PropName.DOMAIN_AUTH));
+            for (Object providerObj : AbstractConstant.getValues(Provider.class)) {
+                String provider = (String) providerObj;
+                Properties props = propsMap.get(provider);
+                UrlBuilder urlBuilder = new UrlBuilder(props.getProperty(PropName.DOMAIN_AUTH));
                 urlBuilder
-                        .addParam(ReqParam.CLIENT_ID, props.get(PropName.CLIENT_ID))
+                        .addParam(ReqParam.CLIENT_ID, props.getProperty(PropName.CLIENT_ID))
                         .addParam(ReqParam.REDIRECT_URI, String.format("%s/oauth/%s",
-                                TextQuestApplication.getRootUrl(), providerName))
+                                TextQuestApplication.getRootUrl(), provider))
                         .addParam(ReqParam.RESPONSE_TYPE, ReqParam.CODE)
                         .addParam(ReqParam.DISPLAY, "popup")
                         .addParam(ReqParam.STATE, state)
-                        .addParam(ReqParam.SCOPE, props.get(PropName.SCOPE));
-                String url = urlBuilder.build();
-                urlMap.put(providerName, url);
+                        .addParam(ReqParam.SCOPE, props.getProperty(PropName.SCOPE));
+                urlMap.put(provider, urlBuilder.build());
             }
             return ObjectParser.parse(urlMap);
         } catch (OauthException e) {
             response.sendError(402);
-            return null;
         }
+        return null;
     }
 
-    private void attachTokens(HttpServletResponse res, User user) {
+    /**
+     * Adds cookies to the response:
+     * <ul>
+     * <li> JWT token
+     * <li> Refresh token
+     * </ul>
+     *
+     * @param response for attaching cookies
+     * @param user     for parsing JWT token
+     */
+    private void attachTokens(HttpServletResponse response, User user) {
         Refresh refresh = new Refresh();
         refresh.setValue(RefreshUtil.parse());
         user.addToken(refresh);
         userService.update(user);
-        RefreshUtil.attach(res, refresh);
-        JwtUtil.attach(res, user);
+        RefreshUtil.attach(response, refresh);
+        JwtUtil.attach(response, user);
     }
 }

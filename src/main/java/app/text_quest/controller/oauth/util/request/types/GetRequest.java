@@ -1,7 +1,6 @@
 package app.text_quest.controller.oauth.util.request.types;
 
 import app.text_quest.controller.oauth.util.request.Request;
-import app.text_quest.controller.oauth.util.request.UrlBuilder;
 import org.springframework.http.HttpMethod;
 
 import java.io.IOException;
@@ -9,12 +8,38 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
+/**
+ * Creates GET requests.
+ * <p>
+ * Data transferred as url parameters.
+ */
 public class GetRequest extends Request {
 
-    public GetRequest(UrlBuilder urlBuilder) {
-        super(urlBuilder);
+    /**
+     * Class constructor, specifying protocol and host
+     *
+     * @param protocol to set in the url
+     * @param domain   to set in the url
+     */
+    public GetRequest(String protocol, String domain) {
+        super(protocol, domain);
     }
 
+    /**
+     * Class constructor, specifying only host.
+     *
+     * @param domain host to set in the url
+     */
+    public GetRequest(String domain) {
+        super(domain);
+    }
+
+    /**
+     * Prepares connection.
+     *
+     * @return url connection
+     * @throws IOException if if input output error while reading occurs
+     */
     @Override
     protected HttpURLConnection parseConnection() throws IOException {
         params.forEach(urlBuilder::addParam);

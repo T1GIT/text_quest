@@ -10,7 +10,7 @@
     </parent>
     <groupId>app</groupId>
     <artifactId>text_quest</artifactId>
-    <version>0.0.1</version>
+    <version>0.8</version>
     <name>text_quest</name>
     <description>Game text quest</description>
     <properties>

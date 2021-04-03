@@ -10,7 +10,6 @@ import app.text_quest.database.model.Refresh;
 import app.text_quest.database.model.user.User;
 import app.text_quest.database.service.RefreshService;
 import app.text_quest.security.auth.Auth;
-import app.text_quest.security.util.secretFactory.types.RefreshFactory;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.core.annotation.Order;
@@ -24,19 +23,42 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
+/**
+ * Filter for validating requests and filling authorisation context.
+ */
 @Component
 @Order(2)
 public class SecurityFilter extends AbstractFilter {
 
-    private final static RefreshFactory REFRESH_FACTORY = new RefreshFactory();
-
+    /**
+     * Service for interaction with refresh tokens in the database
+     */
     private final RefreshService refreshService;
 
+    /**
+     * Authorisation context
+     */
+    private final Auth auth;
+
     public SecurityFilter(Auth auth, RefreshService refreshService) {
-        super(auth, "^.*$", "^/(build|oauth|auth)/.*$");
+        super("^.*$", "^/(build|oauth|auth)/.*$");
+        this.auth = auth;
         this.refreshService = refreshService;
     }
 
+    /**
+     * Filter body.
+     * Checks if JWT cookie exists, in this case validates it, if it's valid, then parses user and fill auth context.
+     * If JWT cookie doesn't exist or JWT is invalid, then checks refresh token.
+     * If refresh token cookie exists and the same token is found in the database, parses JWT and attaches it to the
+     * cookie. Otherwise cleans tokens in the cookie and answers with error code 401.
+     *
+     * @param request  contains cookie
+     * @param response for attaching tokens and returning error
+     * @param chain    other filters
+     * @throws IOException      if error with input output occurs
+     * @throws ServletException if error when {@code chain.doFilter()} occurs
+     */
     @Override
     public void doAction(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
@@ -45,39 +67,57 @@ public class SecurityFilter extends AbstractFilter {
             auth.setUser(parseUser(request, response, tokenCookie.getValue()));
             chain.doFilter(request, response);
         } catch (MissedRefreshException e) {
-            if (!request.getRequestURI().equals("/")) {
-                initAccessError(response);
-            } else {
+            CookieUtil.remove(response, SecureParam.REFRESH);
+            CookieUtil.remove(response, SecureParam.JWT);
+            if (request.getRequestURI().equals("/")) {
                 chain.doFilter(request, response);
+            } else {
+                response.sendError(401, "Non authorised access");
             }
         }
     }
 
+    /**
+     * Parses user from the JWT. Checks if JWT cookie exists, in this case validates it, if it's valid, then parses user and fill auth context.
+     * If JWT cookie doesn't exist or JWT is invalid, then checks refresh token.
+     * If refresh token cookie exists and the same token is found in the database, parses JWT and attaches it to the
+     * cookie. Otherwise throws {@link MissedRefreshException}.
+     *
+     * @param request     contains cookie
+     * @param response    for attaching tokens and returning error
+     * @param tokenString JWT string
+     * @return parsed {@link User} object
+     * @throws MissedRefreshException if cookie doesn't contain refresh token or it wasn't found in the database
+     */
     protected User parseUser(HttpServletRequest request, HttpServletResponse response, String tokenString) throws MissedRefreshException {
         User user;
         try {
             Cookie jwtCookie = CookieUtil.find(request, SecureParam.JWT);
-            if (jwtCookie == null) {
+            if (jwtCookie == null)
                 throw new MissedJwtException();
-            }
             user = JwtUtil.extract(jwtCookie.getValue());
         } catch (MissedJwtException | SignatureException | MalformedJwtException e) {
             Refresh refresh = refreshService.getByValue(tokenString);
-            if (refresh == null) throw new MissedRefreshException();
+            if (refresh == null)
+                throw new MissedRefreshException();
             updateTokens(response, refresh);
             user = refresh.getUser();
         }
         return user;
     }
 
-    protected void initAccessError(HttpServletResponse response) throws IOException {
-        CookieUtil.remove(response, SecureParam.REFRESH);
-        CookieUtil.remove(response, SecureParam.JWT);
-        response.sendError(401, "Non authorised access");
-    }
-
+    /**
+     * Change refresh token value and adds cookies to the response, including:
+     * <ul>
+     * <li> JWT
+     * <li> Refresh token
+     * </ul>
+     *
+     * @param response target for attaching tokens
+     * @param refresh  refresh token object
+     */
     protected void updateTokens(HttpServletResponse response, Refresh refresh) {
-        refresh.setValue(REFRESH_FACTORY.create());
+        refresh.setValue(RefreshUtil.parse());
         refreshService.update(refresh);
         RefreshUtil.attach(response, refresh);
         JwtUtil.attach(response, refresh.getUser());

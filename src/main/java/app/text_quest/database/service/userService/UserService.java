@@ -11,4 +11,12 @@ import app.text_quest.database.util.abstractService.ServiceInterface;
  */
 public interface UserService extends ServiceInterface<User> {
 
+    /**
+     * Checks if user is administrator.
+     *
+     * @param user to check
+     * @return true if user is administrator
+     */
+    boolean isAdmin(User user);
+
 }

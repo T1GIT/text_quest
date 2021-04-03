@@ -15,6 +15,8 @@ import java.util.List;
 /**
  * Object-oriented representation for table <u>users</u>
  * <p>
+ * Base entity for specified types of users, using JOINED strategy for an inheritance
+ * <p>
  * <b>Storages:</b>
  * Users information
  * <p>

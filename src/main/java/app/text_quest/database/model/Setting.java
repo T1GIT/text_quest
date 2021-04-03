@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 /**
- * It's object-oriented representation for table <u> settings </u>
+ * It's object-oriented representation for table <u>settings</u>
  *
  * <b>Storages:</b>
  * User's settings
