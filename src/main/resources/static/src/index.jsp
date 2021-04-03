@@ -11,8 +11,8 @@
 <noscript style="color: black; font-size: 30px !important;">Для работы сайта включите JavaScript</noscript>
 
 <div id="preloader"
-     style="font-family: sans-serif !important; color: gray; text-align: center; font-size: 30px !important;"> Загрузка,
-    пожалуйста, подождите
+     style="font-family: sans-serif !important; color: gray; text-align: center; font-size: 30px !important; height: 50px;">
+    Загрузка, пожалуйста, подождите
 </div>
 <div id="root"></div>
 

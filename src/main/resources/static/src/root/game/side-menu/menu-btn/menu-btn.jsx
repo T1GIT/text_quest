@@ -19,7 +19,7 @@ class MenuBtn extends Component {
     }
 
     render() {
-        return <div ref={this.self} className={style.game}>
+        return <div ref={this.self} className={style.menu_btn}>
         </div>
     }
 }

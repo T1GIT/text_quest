@@ -2,6 +2,7 @@
 @import "config"
 
 .wrap
+  background: red
   position: absolute
   top: 0
   right: 0
@@ -9,12 +10,14 @@
   width: min-content
 
   .side_menu
-    +glob_m.abs_attach
-    +glob_m.size(fill)
+    height: 100%
+    width: min-content
     +glob_m.ani(1s)
+    position: relative
 
     &:not(.hidden)
+      left: 0
 
     &.hidden
-
+      left: $hide_offset
 

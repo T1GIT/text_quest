@@ -17,14 +17,25 @@ class SideMenu extends Component {
         this.addClass(style.hidden)
     }
 
+    onClickBtn = state => {
+        switch (state) {
+            case "hide":
+                this.hide()
+                break
+            case "show":
+                this.show()
+                break
+        }
+    }
+
     reset() {
-        // TODO
+        this.hide();
         super.reset();
     }
 
     render() {
         return <div ref={this.self} className={style.wrap}>
-            <MenuBtn/>
+            <MenuBtn onClick={this.onClickBtn}/>
             <div className={style.side_menu}>
 
             </div>

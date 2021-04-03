@@ -30,7 +30,7 @@ Information receives from the [OpenWeatherAPI](https://openweathermap.org/api)
 1. Download project
 2. Install java version 14 or newer
 3. Install [Maven dependencies](#maven-dependencies)
-4. Run [Main.java](src/main/java/Main.java) from the IntelliJ IDE
+4. Run [Main.java](backend/main/java/Main.java) from the IntelliJ IDE
 
 ## Using
 
@@ -48,14 +48,14 @@ Information receives from the [OpenWeatherAPI](https://openweathermap.org/api)
 
 ### Administrating
 
-**Your chatID must be in the [list](src/main/deploy/administrators.txt) for getting you administrative access**
+**Your chatID must be in the [list](backend/main/deploy/administrators.txt) for getting you administrative access**
 
 Just write to the bot command starting with $ to receiving logs
 
-* **$telegram** - [telegram.log](src/main/deploy/logs/telegram.log) - messages
-* **$weather** - [weather.log](src/main/deploy/logs/weather.log) - requests to openweather API and responses
-* **$errors** - [errors.log](src/main/deploy/logs/errors.log) - exception traces
-* **$key** - [keys.txt](src/main/resources/api_keys.txt) - api key using now
+* **$telegram** - [telegram.log](backend/main/deploy/logs/telegram.log) - messages
+* **$weather** - [weather.log](backend/main/deploy/logs/weather.log) - requests to openweather API and responses
+* **$errors** - [errors.log](backend/main/deploy/logs/errors.log) - exception traces
+* **$key** - [keys.txt](backend/main/resources/api_keys.txt) - api key using now
 
 ### Maven dependencies
 

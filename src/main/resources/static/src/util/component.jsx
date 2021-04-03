@@ -2,6 +2,8 @@ import React from "react";
 
 class Component extends React.Component {
 
+    SHOW_DELAY = 100
+
     constructor(props) {
         super(props);
         this.self = React.createRef()
@@ -28,7 +30,7 @@ class Component extends React.Component {
         this.afterRender()
         setTimeout(() => {
             this.self.style.opacity = null
-        }, 100)
+        }, this.SHOW_DELAY)
     }
 
     reset() {

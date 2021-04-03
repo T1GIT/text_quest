@@ -17,8 +17,14 @@ class InputBlock extends Component {
     }
 
     afterRender() {
-        if (this.props.type in ["psw", "rep_psw"])
-            this.nodes.svg_eye.addClass(style.hidden)
+        this.onRender((self) => {
+            console.log(self)
+            this.height = this.self.offsetHeight
+        })
+        // setTimeout(() => {
+        //     this.height = this.self.offsetHeight
+        // }, 10)
+        super.afterRender();
     }
 
     onChange = event => {
@@ -40,14 +46,13 @@ class InputBlock extends Component {
     isValid = () => this.valid
 
     hide = () => {
-        this.height = this.self.offsetHeight
-        this.self.classList.add(style.hidden);
+        this.addClass(style.hidden);
         this.self.style.height = "0px"
     }
 
     show = () => {
         this.self.style.height = this.height + "px"
-        this.self.classList.remove(style.hidden);
+        this.removeClass(style.hidden);
     }
 
     getValue = () => this.nodes.input.getValue();

@@ -7,20 +7,18 @@
 .input
   +glob_m.ani(fast)
   +auth_m.block_shadow
+  height: glob_c.$font_size
   width: $input_width
   padding: $input_v_pad $text_offset
   outline: none
   background: none
   border: glob_c.$border_width solid glob_c.$main_clr
   border-radius: glob_c.$border_rad
-
   &.field
     width: $input_width - $field
     padding-right: $field
-
   &
     opacity: 1
-
   &.hidden
     .input
       opacity: 0

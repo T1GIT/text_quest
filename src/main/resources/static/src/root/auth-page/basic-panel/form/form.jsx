@@ -67,7 +67,6 @@ class Form extends Component {
     validateRepPsw = repPsw => validateRepPsw(this.nodes.psw_in.getValue(), repPsw)
 
     changePage = pageName => {
-        console.log(this.page, pageName)
         if (this.page !== pageName) {
             let {email_in, psw_in, re_psw_in} = this.nodes
             email_in.reset();
@@ -78,7 +77,7 @@ class Form extends Component {
                     re_psw_in.hide();
                     break
                 case "reg":
-                    psw_in.show();
+                    re_psw_in.show();
                     break
             }
             this.page = pageName
