@@ -1,0 +1,16 @@
+@use 'web/index/sass/mixin' as glob_m
+@import "config"
+
+.game
+  +glob_m.abs_attach
+  +glob_m.size(fill)
+  +glob_m.ani(1s)
+
+  &:not(.hidden)
+    opacity: 1
+    pointer-events: auto
+
+  &.hidden
+    opacity: 0
+    pointer-events: none
+

@@ -1,0 +1,28 @@
+@import 'web/index/sass/config'
+@import 'web/index/sass/mixin'
+@import 'web/index/root/auth-page/sass/mixin'
+@import "config"
+
+
+.button
+  +block_shadow
+  +ani(normal, ease-in)
+  margin: $btn_v_mar
+  border-radius: $border_rad
+  background: transparent
+  border: $border_width solid $main_clr
+  outline: none
+
+  &
+    opacity: 1
+    padding: $btn_v_pad 10px
+
+  &.hidden
+    opacity: 0
+    padding: 0 20px
+
+  &.clicked
+    padding: 0 30px
+    border-color: transparent
+
+

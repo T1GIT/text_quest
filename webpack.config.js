@@ -9,25 +9,24 @@ const Webpack = require("webpack")
 const SpriteLoaderPlugin = require("svg-sprite-loader/plugin")
 
 // Paths
-const dir = {}
-dir.res = Path.resolve("./src/main/resources");
-dir.stat = Path.resolve(dir.res, "static");
-dir.src = Path.resolve(dir.stat, "src");
-dir.build = Path.resolve(dir.stat, "build");
+const dir = {
+    src: Path.resolve("./web"),
+    build: Path.resolve("./src/main/resources/static")
+}
 
 // Mode
 const modes = {prod: "production", dev: "development"}
 const mode = process.env.NODE_ENV === modes.prod ? modes.prod : modes.dev
 
 module.exports = {
-    entry: Path.resolve(dir.src, "index.jsx"),
+    entry: Path.resolve(dir.src, "index", "index.jsx"),
     output: {
         path: dir.build,
         filename: "index.min.js"
     },
     mode: mode,
     watchOptions: {
-        ignored: /(node_modules|build)/,
+        ignored: /(node_modules|static)/,
         aggregateTimeout: 500,
     },
     resolve: {
@@ -44,10 +43,9 @@ module.exports = {
         new htmlWebpackPlugin({
             hash: true,
             cache: mode === modes.prod,
-            template: Path.resolve(dir.src, "index.jsp"),
+            template: Path.resolve(dir.src, "index", "index.jsp"),
             filename: Path.resolve(dir.build, "index.min.html"),
             favicon: Path.resolve(dir.src, "resources", "favicon.ico"),
-            publicPath: "build",
             minify: mode === modes.prod,
         }),
     ],
