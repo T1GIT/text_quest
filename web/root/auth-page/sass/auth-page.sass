@@ -1,0 +1,21 @@
+@import 'web/sass'
+
+
+.wrap
+  +ani(normal)
+  +size(fill)
+  +flex_dir(row)
+
+  &
+    opacity: 1
+
+  &.hidden
+    opacity: 0
+    pointer-events: none
+
+  .auth_block
+    +size(fit)
+    +flex_dir(row)
+
+  .quote
+    font-style: italic

@@ -1,0 +1,45 @@
+@use "web/sass/config"
+
+@mixin ani($mode: normal, $eas: false)
+  @if $mode == normal
+    transition: config.$nor_dur if($eas, $eas, config.$nor_eas)
+  @else if $mode == fast
+    transition: config.$hov_dur if($eas, $eas, config.$fast_eas)
+  @else if $mode == active
+    transition: config.$act_dur if($eas, $eas, config.$act_eas)
+  @else
+    transition: $mode
+
+@mixin pseudo($left: 0, $top: 0)
+  content: ""
+  display: block
+  position: absolute
+  top: $top
+  left: $left
+
+@mixin debug
+  box-sizing: border-box
+  border: 1px solid red
+
+@mixin size($mode)
+  @if $mode == fill
+    width: 100%
+    height: 100%
+  @else if $mode == fit
+    width: min-content
+    height: min-content
+  @else if $mode == fit_wide
+    width: max-content
+    height: min-content
+
+
+@mixin abs_attach
+  position: absolute
+  top: 0
+  left: 0
+
+@mixin flex_dir($direction)
+  display: flex
+  flex-direction: $direction
+  align-items: center
+

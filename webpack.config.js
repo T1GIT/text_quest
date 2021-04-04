@@ -19,7 +19,7 @@ const modes = {prod: "production", dev: "development"}
 const mode = process.env.NODE_ENV === modes.prod ? modes.prod : modes.dev
 
 module.exports = {
-    entry: Path.resolve(dir.src, "index", "index.jsx"),
+    entry: Path.resolve(dir.src, "index.jsx"),
     output: {
         path: dir.build,
         filename: "index.min.js"
@@ -43,7 +43,7 @@ module.exports = {
         new htmlWebpackPlugin({
             hash: true,
             cache: mode === modes.prod,
-            template: Path.resolve(dir.src, "index", "index.jsp"),
+            template: Path.resolve(dir.src, "index.jsp"),
             filename: Path.resolve(dir.build, "index.min.html"),
             favicon: Path.resolve(dir.src, "resources", "favicon.ico"),
             minify: mode === modes.prod,
