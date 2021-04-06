@@ -25,9 +25,9 @@ class Hint extends Component {
         this.hint_timer = setTimeout(func, PERIOD)
     }
 
-    hide = () => this.self.classList.add(style.hidden)
+    hide = () => $(this.self).addClass(style.hidden)
 
-    show = () => this.self.classList.remove(style.hidden)
+    show = () => $(this.self).removeClass(style.hidden)
 
     reset() {
         this.changeText("")

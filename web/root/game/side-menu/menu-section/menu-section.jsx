@@ -9,7 +9,11 @@ class MenuSection extends Component {
     }
 
     render() {
-        return <div ref={this.self} className={style.game}>
+        return <div
+            ref={this.self}
+            className={style.menu_section}
+            onClick={this.props.onClick}>
+            {this.props.text}
         </div>
     }
 }

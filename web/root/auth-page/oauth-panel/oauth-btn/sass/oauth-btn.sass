@@ -22,6 +22,16 @@
   border-radius: glob_c.$border_rad
   border: glob_c.$border_width solid glob_c.$main_clr
 
+  &:not(.loaded)
+    opacity: 0
+    transform: scale(0.5)
+    pointer-events: none
+
+  &.loaded
+    opacity: 1
+    transform: scale(1)
+    pointer-events: auto
+
   .wrap
     +glob_m.flex_dir(row)
     width: max-content
@@ -46,7 +56,7 @@
       opacity: 1
       transition-delay: $ext_dur * $text_show_delay
 
-  &.loading
+  &.pc_loading
     +glob_m.ani(fast)
     border-radius: 50%
     border-color: glob_c.$main_clr transparent glob_c.$main_clr transparent

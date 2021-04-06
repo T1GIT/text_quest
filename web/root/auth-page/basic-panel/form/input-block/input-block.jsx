@@ -17,7 +17,7 @@ class InputBlock extends Component {
     }
 
     afterRender() {
-        this.height = this.self.offsetHeight
+        this.height = $(this.self).css("height")
     }
 
     onChange = event => {
@@ -34,18 +34,21 @@ class InputBlock extends Component {
             hint.changeText(res.hint)
             this.valid = res.valid
         }
+        this.props.onChange()
     }
 
     isValid = () => this.valid
 
     hide = () => {
-        this.addClass(style.hidden);
-        this.self.style.height = "0px"
+        let el = $(this.self)
+        el.addClass(style.hidden)
+        el.css({height: "0px"})
     }
 
     show = () => {
-        this.self.style.height = this.height + "px"
-        this.removeClass(style.hidden);
+        let el = $(this.self)
+        el.css({height: this.height})
+        el.removeClass(style.hidden)
     }
 
     getValue = () => this.nodes.input.getValue();

@@ -3,6 +3,10 @@ package app.controller.util;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Provides static methods for working with cookies.
@@ -14,15 +18,28 @@ public abstract class CookieUtil {
      *
      * @param cookies cookies array
      * @param name    cookie name
-     * @return cookie object
+     * @return cookie object or null if cookie was not found
      */
-    public static Cookie find(Cookie[] cookies, String name) {
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(name)) {
-                    return cookie;
-                }
+    public static Cookie getCookie(Cookie[] cookies, String name) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(name)) {
+                return cookie;
             }
+        }
+        return null;
+    }
+
+    /**
+     * Gets a cookie from the array of cookies by its name.
+     *
+     * @param cookies cookies array
+     * @param name    cookie name
+     * @return value of the cookie or null if cookie was not found
+     */
+    public static String get(Cookie[] cookies, String name) {
+        Cookie cookie = getCookie(cookies, name);
+        if (cookie != null) {
+            return URLDecoder.decode(cookie.getValue(), StandardCharsets.UTF_8);
         }
         return null;
     }
@@ -32,10 +49,10 @@ public abstract class CookieUtil {
      *
      * @param request for searching cookie
      * @param name    cookie name
-     * @return cookie object
+     * @return value of the cookie or null if cookie was not found
      */
-    public static Cookie find(HttpServletRequest request, String name) {
-        return find(request.getCookies(), name);
+    public static String get(HttpServletRequest request, String name) {
+        return get(request.getCookies(), name);
     }
 
     /**
@@ -47,7 +64,7 @@ public abstract class CookieUtil {
      * @param expiresIn life time of the cookie in seconds
      */
     public static void add(HttpServletResponse response, String name, Object value, int expiresIn) {
-        Cookie cookie = new Cookie(name, String.valueOf(value));
+        Cookie cookie = new Cookie(name, URLEncoder.encode(String.valueOf(value), StandardCharsets.UTF_8));
         cookie.setHttpOnly(true);
         cookie.setMaxAge(expiresIn);
         cookie.setPath("/");

@@ -13,6 +13,9 @@ import app.controller.oauth.util.request.UrlBuilder;
 import app.controller.util.CookieUtil;
 import app.controller.util.ObjectParser;
 import app.controller.util.constant.Status;
+import app.controller.util.exception.missedToken.MissedTokenException;
+import app.controller.util.exception.missedToken.types.MissedJwtException;
+import app.controller.util.exception.missedToken.types.MissedRefreshException;
 import app.controller.util.json.auth.JsonAnswer;
 import app.controller.util.json.auth.JsonForm;
 import app.controller.util.token.JwtUtil;
@@ -22,11 +25,14 @@ import app.database.model.Setting;
 import app.database.model.user.User;
 import app.database.model.user.types.MailUser;
 import app.database.model.user.types.OauthUser;
+import app.database.service.RefreshService;
 import app.database.service.userService.UserService;
 import app.database.service.userService.types.MailUserService;
 import app.database.service.userService.types.OauthUserService;
 import app.security.Hash;
+import app.security.auth.Auth;
 import app.security.util.Validator;
+import app.security.util.secretFactory.types.EmailTokenFactory;
 import app.util.AbstractConstant;
 import app.util.LoggerFactory;
 import app.util.constant.LogType;
@@ -35,7 +41,6 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
@@ -75,6 +80,11 @@ public class AuthController {
     private final static Gson gson = new Gson();
 
     /**
+     * Factory for producing email tokens
+     */
+    private final static EmailTokenFactory tokenFactory = new EmailTokenFactory();
+
+    /**
      * Service for interacting with mail users
      */
     private final MailUserService basicService;
@@ -90,6 +100,11 @@ public class AuthController {
     private final UserService userService;
 
     /**
+     * Service for interacting with refresh tokens
+     */
+    private final RefreshService refreshService;
+
+    /**
      * Contains properties for each oauth service
      * [provider name]: [Properties]
      */
@@ -98,15 +113,17 @@ public class AuthController {
     /**
      * Class constructor injecting user services
      *
-     * @param basicService injects basic users service
-     * @param oauthService injects oauth users service
-     * @param userService  injects all users service
+     * @param basicService   injects basic users service
+     * @param oauthService   injects oauth users service
+     * @param userService    injects all users service
+     * @param refreshService injects refresh token service
      * @throws IOException if props file doesn't exist
      */
-    public AuthController(MailUserService basicService, OauthUserService oauthService, UserService userService) throws IOException {
+    public AuthController(MailUserService basicService, OauthUserService oauthService, UserService userService, RefreshService refreshService) throws IOException {
         this.basicService = basicService;
         this.oauthService = oauthService;
         this.userService = userService;
+        this.refreshService = refreshService;
         this.propsMap = new HashMap<>();
         for (Object providerObj : AbstractConstant.getValues(Provider.class)) {
             String provider = (String) providerObj;
@@ -166,10 +183,37 @@ public class AuthController {
             user.setSetting(new Setting());
             user.setMail(jsonForm.getMail());
             user.setPsw(Hash.crypt(jsonForm.getPsw()));
+            user.setToken(tokenFactory.create());
             user.setVerified(false);
             jsonAnswer.setAccepted(true);
             attachTokens(response, user);
         }
+        return gson.toJson(jsonAnswer, jsonAnswer.getClass());
+    }
+
+
+    @PostMapping(path = "/logout", produces = "application/json")
+    @ResponseBody
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        JsonAnswer jsonAnswer = null;
+        try {
+            jsonAnswer = new JsonAnswer();
+            String refreshCookie = CookieUtil.get(request, SecureParam.REFRESH);
+            if (refreshCookie == null) {
+                System.out.println(2);
+                throw new MissedRefreshException();
+            }
+            Refresh refresh = refreshService.getByValue(refreshCookie);
+            if (refresh == null) {
+                System.out.println(3);
+                throw new MissedRefreshException();
+            }
+            jsonAnswer.setAccepted(true);
+        } catch (MissedTokenException e) {
+            jsonAnswer.setMsg(Status.INVALID_TOKENS);
+        }
+        CookieUtil.remove(response, SecureParam.JWT);
+        CookieUtil.remove(response, SecureParam.REFRESH);
         return gson.toJson(jsonAnswer, jsonAnswer.getClass());
     }
 
@@ -211,10 +255,9 @@ public class AuthController {
     @ResponseBody
     public String getBtnUrl(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            Cookie stateCookie = CookieUtil.find(request, ReqParam.STATE);
-            if (stateCookie == null)
+            String state = CookieUtil.get(request, ReqParam.STATE);
+            if (state == null)
                 throw new MissedStateCookieException();
-            String state = stateCookie.getValue();
             HashMap<String, String> urlMap = new HashMap<>();
             for (Object providerObj : AbstractConstant.getValues(Provider.class)) {
                 String provider = (String) providerObj;

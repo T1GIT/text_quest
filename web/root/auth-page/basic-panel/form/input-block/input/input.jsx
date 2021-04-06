@@ -10,7 +10,7 @@ class Input extends Component {
 
     afterRender() {
         if (this.props.field) {
-            super.addClass(style.field)
+            $(this.self).addClass(style.field)
         }
     }
 

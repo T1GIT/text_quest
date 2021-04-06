@@ -20,22 +20,28 @@ class Root extends Component {
         } else {
             this.nodes.game.hide()
         }
-        this.addClass(style.loaded)
         if (window.error !== "null") {
             alert(window.error)
         }
+        setTimeout(this.load, 100)
+    }
+
+    load = () => {
+        $(this.self).addClass(style.loaded)
+        let preloader = $("#initialPreloader")
+        preloader.animate({opacity: 0}, 100, undefined, () => {preloader.css({display: "none"})})
     }
 
     login = () => {
-        // TODO
         this.nodes.auth_page.hide()
         this.nodes.game.show()
+        window.isAuthorised = true
     }
 
     logout = () => {
         this.nodes.auth_page.show()
         this.nodes.game.hide()
-        // TODO
+        window.isAuthorised = false
     }
 
     render() {
@@ -45,7 +51,7 @@ class Root extends Component {
         >
             <AuthPage
                 ref={this.nodes.auth_page}
-                quote="Самая мощная видеокарта - наше воображение"
+                quote="Самая мощная видеокарта - ваше воображение"
             />
             <Game ref={this.nodes.game}/>
         </div>;

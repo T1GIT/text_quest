@@ -16,7 +16,7 @@ class Game extends Component {
     }
 
     hide = () => {
-        this.addClass(style.hidden)
+        $(this.self).addClass(style.hidden)
         this.reset()
     }
 

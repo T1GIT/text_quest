@@ -1,23 +1,11 @@
-@import "web/sass"
+@use "web/sass/mixin" as glob_m
+@use "web/sass/config" as glob_c
 
 .panel
-  +flex_dir(column)
-  align-items: flex-start
+  +glob_m.flex_dir(column)
   width: min-content
 
-  &:not(.loaded)
-
-    .oauth_btn
-      opacity: 0
-      transform: scale(0.5)
-      pointer-events: none
-
-  &.loaded
-
-    .oauth_btn
-      opacity: 1
-      transform: scale(1)
-      pointer-events: auto
-
-
-
+@media (max-width: glob_c.$rotate_oauth)
+  .panel
+    margin-top: 40px
+    flex-direction: row

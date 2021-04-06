@@ -2,8 +2,6 @@ import React from "react";
 
 class Component extends React.Component {
 
-    SHOW_DELAY = 100
-
     constructor(props) {
         super(props);
         this.self = React.createRef()

@@ -1,4 +1,4 @@
-package app.util;
+package app.controller.util;
 
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;

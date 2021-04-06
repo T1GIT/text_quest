@@ -137,12 +137,12 @@ public abstract class OauthController { // TODO: 06.03.2021 Add Steam and Telegr
      */
     protected void validateState(HttpServletRequest request, HttpServletResponse response) throws MissedStateCookieException, InvalidStateException {
         String state = request.getParameter(ReqParam.STATE);
-        Cookie stateCookie = CookieUtil.find(request, ReqParam.STATE);
-        CookieUtil.remove(response, ReqParam.STATE);
+        String stateCookie = CookieUtil.get(request, ReqParam.STATE);
         if (stateCookie == null)
             throw new MissedStateCookieException();
-        if (!state.equals(stateCookie.getValue()))
-            throw new InvalidStateException(state, stateCookie.getValue());
+        CookieUtil.remove(response, ReqParam.STATE);
+        if (!state.equals(stateCookie))
+            throw new InvalidStateException(state, stateCookie);
     }
 
     /**

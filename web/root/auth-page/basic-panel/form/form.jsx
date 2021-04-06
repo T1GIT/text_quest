@@ -19,6 +19,11 @@ class Form extends Component {
         this.page = "reg"
     }
 
+    afterRender() {
+        this.nodes.btn.hide()
+        super.afterRender();
+    }
+
     onSubmit = event => {
         event.preventDefault()
         let {email_in, psw_in, re_psw_in} = this.nodes
@@ -34,8 +39,8 @@ class Form extends Component {
         }
     }
 
-    login = () => {
-        axios.post("/auth/login", {
+    login = () => axios
+        .post("/auth/login", {
             mail: this.nodes.email_in.getValue(),
             psw: this.nodes.psw_in.getValue()
         }).then(response => {
@@ -47,10 +52,9 @@ class Form extends Component {
         }).catch(error => {
             console.error(error)
         })
-    }
 
-    register = () => {
-        axios.post("/auth/register", {
+    register = () => axios
+        .post("/auth/register", {
             mail: this.nodes.email_in.getValue(),
             psw: this.nodes.psw_in.getValue()
         }).then(response => {
@@ -62,16 +66,16 @@ class Form extends Component {
         }).catch(error => {
             console.error(error)
         })
-    }
 
     validateRepPsw = repPsw => validateRepPsw(this.nodes.psw_in.getValue(), repPsw)
 
     changePage = pageName => {
         if (this.page !== pageName) {
-            let {email_in, psw_in, re_psw_in} = this.nodes
+            let {email_in, psw_in, re_psw_in, btn} = this.nodes
             email_in.reset();
             psw_in.reset();
             re_psw_in.reset()
+            btn.reset()
             switch (pageName) {
                 case "log":
                     re_psw_in.hide();
@@ -84,8 +88,27 @@ class Form extends Component {
         }
     }
 
+    checkValid = event => {
+        switch (this.page) {
+            case "reg":
+                if (this.nodes.email_in.isValid() && this.nodes.psw_in.isValid() && this.nodes.re_psw_in.isValid()) {
+                    this.nodes.btn.show()
+                } else {
+                    this.nodes.btn.hide()
+                }
+                break
+            case "log":
+                if (this.nodes.email_in.isValid() && this.nodes.psw_in.isValid()) {
+                    this.nodes.btn.show()
+                } else {
+                    this.nodes.btn.hide()
+                }
+                break
+        }
+    }
+
     reset = () => {
-        this.nodes.re_psw_in.hide()
+        this.nodes.re_psw_in.show()
         super.reset()
     }
 
@@ -100,6 +123,7 @@ class Form extends Component {
                 label="Почта"
                 type="mail"
                 onSubmit={this.onSubmit}
+                onChange={this.checkValid}
                 validator={validateEmail}
             />
             <InputBlock
@@ -107,6 +131,7 @@ class Form extends Component {
                 label="Пароль"
                 type="psw"
                 onSubmit={this.onSubmit}
+                onChange={this.checkValid}
                 validator={validatePsw}
                 toggler={true}
             />
@@ -115,6 +140,7 @@ class Form extends Component {
                 label="Повторите пароль"
                 type="rep_psw"
                 onSubmit={this.onSubmit}
+                onChange={this.checkValid}
                 validator={this.validateRepPsw}
                 toggler={true}
             />

@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./sass/oauth-btn.sass";
-import panelStyle from "../oauth-panel.sass"
 import Svg from "../../../../util/svg";
 import Component from "../../../../util/component";
 
@@ -11,17 +10,20 @@ class OauthBtn extends Component {
         this.href = undefined;
     }
 
-    afterRender() {
-        this.self.classList.add(panelStyle.oauth_btn)
+    setHref = href => {
+        $(this.self).addClass(style.loaded)
+        return this.href = href;
     }
 
-    setHref = href => this.href = href
-
     onClick = event => {
-        if (this.href) {
-            this.self.classList.add(style.loading)
-            this.self.style.width = null
-            setTimeout(this.openWindow, 200)
+        if (window.isMobile) {
+            // TODO: Add mobile loading
+            document.location.href = this.href
+        } else {
+            let el = $(this.self)
+            el.css({width: ""})
+            el.addClass(style.pc_loading)
+            this.openWindow()
         }
     }
 
@@ -33,23 +35,32 @@ class OauthBtn extends Component {
             "location=no," +
             "directories=no," +
             "status=no"
-        let oauthWindow = window.open(this.href, "oauth_window", params)
-        oauthWindow.focus()
+        window.open(this.href, "oauth_window", params).focus()
     }
 
     onHover = event => {
-        if (!this.self.classList.contains(style.loading)) {
-            this.self.style.width = this.self.lastChild.offsetWidth + "px"
+        if (!window.isMobile) {
+            let el = $(this.self)
+            if (!el.hasClass(style.pc_loading)) {
+                el.css({width: el.children()[0].offsetWidth + "px"})
+            }
         }
     }
 
     onBlur = event => {
-        this.self.style.width = null
+        if (!window.isMobile) {
+            $(this.self).css({width: ""})
+        }
     }
 
     reset = () => {
-        this.self.style.width = null
-        this.self.classList.remove(style.loading)
+        if (window.isMobile) {
+            // TODO: Add mobile loading
+        } else {
+            let el = $(this.self)
+            el.css({width: ""})
+            el.removeClass(style.pc_loading)
+        }
     }
 
     render() {

@@ -43,3 +43,32 @@
   flex-direction: $direction
   align-items: center
 
+@mixin only_pc
+  @media (hover: hover) and (pointer: fine)
+    @content
+
+@mixin only_phone
+  @media (hover: none) and (pointer: coarse)
+    @content
+
+//@mixin scale_w($to: none, $from: none)
+//  @if $from != none
+//    @if $to != none
+//      @media (min-width: $from) and (max-width: $to)
+//    @else
+//      @media (min-width: $from)
+//  @else
+//    @if $to != none
+//      @media (max-width: $to)
+//    @content
+//
+//@mixin scale_h($to: none, $from: none)
+//  @if $from != none
+//    @if $to != none
+//      @media (min-height: $from) and (max-height: $to)
+//    @else
+//      @media (min-height: $from)
+//  @else
+//    @if $to != none
+//      @media (min-height: $to)
+//    @content

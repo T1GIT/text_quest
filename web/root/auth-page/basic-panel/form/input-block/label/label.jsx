@@ -10,11 +10,11 @@ class Label extends Component {
     }
 
     hide = () => {
-        this.self.classList.add(style.hidden);
+        $(this.self).addClass(style.hidden)
     }
 
     show = () => {
-        this.self.classList.remove(style.hidden);
+        $(this.self).removeClass(style.hidden)
     }
 
     reset() {

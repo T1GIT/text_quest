@@ -34,4 +34,8 @@ public final class Status extends AbstractConstant {
      */
     public final static String BAD_PSW = "bad_psw";
 
+    /**
+     * If context has not a user when logout
+     */
+    public final static String INVALID_TOKENS = "invalid_tokens";
 }

@@ -2,6 +2,8 @@ import React from "react";
 import Component from "../../../util/component";
 import style from "./sass/side-menu.sass"
 import MenuBtn from "./menu-btn/menu-btn";
+import MenuSection from "./menu-section/menu-section";
+import axios from "axios";
 
 class SideMenu extends Component {
 
@@ -10,14 +12,28 @@ class SideMenu extends Component {
     }
 
     show = () => {
-        this.removeClass(style.hidden)
+        $(this.self).removeClass(style.hidden)
     }
 
     hide = () => {
-        this.addClass(style.hidden)
+        $(this.self).addClass(style.hidden)
     }
 
-    onClickBtn = state => {
+    onClickLogout = event => {
+        window.logout()
+        axios.post("/auth/logout"
+            ).then(response => {
+                if (response.data.accepted) {
+
+                } else {
+                    alert(response.data.msg)
+                }
+            }).catch(error => {
+                console.error(error)
+            })
+    }
+
+    changeState = state => {
         switch (state) {
             case "hide":
                 this.hide()
@@ -35,9 +51,15 @@ class SideMenu extends Component {
 
     render() {
         return <div ref={this.self} className={style.wrap}>
-            <MenuBtn onClick={this.onClickBtn}/>
+            <MenuBtn onClick={this.changeState}/>
             <div className={style.side_menu}>
-
+                <MenuSection
+                    text={"Настройки"}
+                />
+                <MenuSection
+                    text={"Выйти"}
+                    onClick={this.onClickLogout}
+                />
             </div>
         </div>
     }

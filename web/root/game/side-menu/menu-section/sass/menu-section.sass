@@ -1,12 +1,15 @@
-@use 'web/sass' as glob_m
+@use 'web/sass/mixin' as glob_m
+@use "web/root/game/side-menu/sass/config" as menu_c
 @import "config"
 
 .menu_section
+  +glob_m.ani(normal)
   background: transparent
   width: 100%
   height: $height
   line-height: $height
   margin: $v_mar 0
+  padding: $v_pad $h_pad
 
   &:hover
-    background: $hover_bg
+    background: menu_c.$bg

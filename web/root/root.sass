@@ -1,10 +1,11 @@
-@import "web/sass"
+@use "web/sass/mixin" as glob_m
 
 
 .root
-  +ani(1s)
-  +size(fill)
-  +abs_attach
+  +glob_m.ani(1s)
+  +glob_m.size(fill)
+  +glob_m.abs_attach
+  overflow: hidden
 
   &.loaded
     opacity: 1

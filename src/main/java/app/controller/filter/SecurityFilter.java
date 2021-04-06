@@ -41,7 +41,7 @@ public class SecurityFilter extends AbstractFilter {
     private final Auth auth;
 
     public SecurityFilter(Auth auth, RefreshService refreshService) {
-        super("^/game/.*$");
+        super("^/(game|log)/.*$");
         this.auth = auth;
         this.refreshService = refreshService;
     }
@@ -62,9 +62,8 @@ public class SecurityFilter extends AbstractFilter {
     @Override
     public void doAction(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
-            Cookie tokenCookie = CookieUtil.find(request, SecureParam.REFRESH);
-            if (tokenCookie == null) throw new MissedRefreshException();
-            auth.setUser(parseUser(request, response, tokenCookie.getValue()));
+            System.out.println("try");
+            auth.setUser(parseUser(request, response));
             chain.doFilter(request, response);
         } catch (MissedRefreshException e) {
             CookieUtil.remove(response, SecureParam.REFRESH);
@@ -85,19 +84,25 @@ public class SecurityFilter extends AbstractFilter {
      *
      * @param request     contains cookie
      * @param response    for attaching tokens and returning error
-     * @param tokenString JWT string
      * @return parsed {@link User} object
      * @throws MissedRefreshException if cookie doesn't contain refresh token or it wasn't found in the database
      */
-    protected User parseUser(HttpServletRequest request, HttpServletResponse response, String tokenString) throws MissedRefreshException {
+    protected User parseUser(HttpServletRequest request, HttpServletResponse response) throws MissedRefreshException {
         User user;
         try {
-            Cookie jwtCookie = CookieUtil.find(request, SecureParam.JWT);
+            String jwtCookie = CookieUtil.get(request, SecureParam.JWT);
+            System.out.println(jwtCookie);
             if (jwtCookie == null)
                 throw new MissedJwtException();
-            user = JwtUtil.extract(jwtCookie.getValue());
+            user = JwtUtil.extract(jwtCookie);
+            System.out.println(user);
         } catch (MissedJwtException | SignatureException | MalformedJwtException e) {
-            Refresh refresh = refreshService.getByValue(tokenString);
+            String refreshCookie = CookieUtil.get(request, SecureParam.REFRESH);
+            System.out.println(refreshCookie);
+            if (refreshCookie == null)
+                throw new MissedRefreshException();
+            Refresh refresh = refreshService.getByValue(refreshCookie);
+            System.out.println(refresh);
             if (refresh == null)
                 throw new MissedRefreshException();
             updateTokens(response, refresh);

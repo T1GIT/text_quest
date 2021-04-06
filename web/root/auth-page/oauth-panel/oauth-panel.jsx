@@ -26,7 +26,6 @@ class OauthPanel extends Component {
             for (let provider in response.data) {
                 this.nodes[provider].setHref(response.data[provider])
             }
-            this.self.classList.add(style.loaded)
         }).catch(error => {
             console.error(error)
         })
