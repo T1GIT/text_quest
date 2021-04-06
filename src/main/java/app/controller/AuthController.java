@@ -30,7 +30,6 @@ import app.database.service.userService.UserService;
 import app.database.service.userService.types.MailUserService;
 import app.database.service.userService.types.OauthUserService;
 import app.security.Hash;
-import app.security.auth.Auth;
 import app.security.util.Validator;
 import app.security.util.secretFactory.types.EmailTokenFactory;
 import app.util.AbstractConstant;
@@ -41,6 +40,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
@@ -199,15 +199,12 @@ public class AuthController {
         try {
             jsonAnswer = new JsonAnswer();
             String refreshCookie = CookieUtil.get(request, SecureParam.REFRESH);
-            if (refreshCookie == null) {
-                System.out.println(2);
+            if (refreshCookie == null)
                 throw new MissedRefreshException();
-            }
             Refresh refresh = refreshService.getByValue(refreshCookie);
-            if (refresh == null) {
-                System.out.println(3);
+            if (refresh == null)
                 throw new MissedRefreshException();
-            }
+            refreshService.delete(refresh);
             jsonAnswer.setAccepted(true);
         } catch (MissedTokenException e) {
             jsonAnswer.setMsg(Status.INVALID_TOKENS);
@@ -276,8 +273,8 @@ public class AuthController {
             return ObjectParser.parse(urlMap);
         } catch (OauthException e) {
             response.sendError(402);
+            return null;
         }
-        return null;
     }
 
     /**

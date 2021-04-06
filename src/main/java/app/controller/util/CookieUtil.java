@@ -21,6 +21,9 @@ public abstract class CookieUtil {
      * @return cookie object or null if cookie was not found
      */
     public static Cookie getCookie(Cookie[] cookies, String name) {
+        if (cookies == null) {
+            return null;
+        }
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals(name)) {
                 return cookie;

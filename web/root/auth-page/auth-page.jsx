@@ -20,13 +20,13 @@ class AuthPage extends Component {
     }
 
     show = () => {
-        $(this.self).removeClass(style.hidden)
+        super.show(style.hidden, function () {console.log(this)})
     }
 
     hide = () => {
         this.nodes.basicPanel.reset()
         this.nodes.oauthPanel.reset()
-        $(this.self).addClass(style.hidden)
+        super.hide(style.hidden, function () {console.log(this)})
     }
 
 

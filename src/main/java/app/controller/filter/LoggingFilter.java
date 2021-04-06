@@ -49,7 +49,6 @@ public class LoggingFilter extends AbstractFilter {
     @Override
     protected void doAction(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         long startTime = new Date().getTime();
-        System.out.println("log");
         chain.doFilter(request, response);
         String contentType = switch (response.getStatus()) {
             case 302 -> "redirect:" + response.getHeader("Location");

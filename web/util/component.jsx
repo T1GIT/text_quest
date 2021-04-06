@@ -17,6 +17,27 @@ class Component extends React.Component {
         this.self.classList.remove(className)
     }
 
+    hide(hiddenClassName, callback) {
+        let el = $(this.self)
+        let dur = parseFloat(el.css("transition-duration").slice(0, -1)) * 1000
+        el.addClass(hiddenClassName)
+        callback.bind(el)
+        setTimeout(() => {
+            el.css({display: "none"})
+            callback()
+        }, dur)
+    }
+
+    show(hiddenClassName, callback) {
+        let el = $(this.self)
+        el.css({display: ""})
+        callback.bind(el)
+        setTimeout(() => {
+            el.removeClass(hiddenClassName)
+            callback()
+        }, 1)
+    }
+
     afterRender() {
     }
 

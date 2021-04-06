@@ -41,7 +41,7 @@ public class SecurityFilter extends AbstractFilter {
     private final Auth auth;
 
     public SecurityFilter(Auth auth, RefreshService refreshService) {
-        super("^/(game|log)/.*$");
+        super("^((/(game|log)/)|/).*$");
         this.auth = auth;
         this.refreshService = refreshService;
     }
@@ -62,15 +62,18 @@ public class SecurityFilter extends AbstractFilter {
     @Override
     public void doAction(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
-            System.out.println("try");
             auth.setUser(parseUser(request, response));
             chain.doFilter(request, response);
         } catch (MissedRefreshException e) {
             CookieUtil.remove(response, SecureParam.REFRESH);
             CookieUtil.remove(response, SecureParam.JWT);
+            System.out.println(1);
+            System.out.println(request.getRequestURI());
             if (request.getRequestURI().equals("/")) {
+                System.out.println(2);
                 chain.doFilter(request, response);
             } else {
+                System.out.println(3);
                 response.sendError(401, "Non authorised access");
             }
         }
@@ -91,18 +94,14 @@ public class SecurityFilter extends AbstractFilter {
         User user;
         try {
             String jwtCookie = CookieUtil.get(request, SecureParam.JWT);
-            System.out.println(jwtCookie);
             if (jwtCookie == null)
                 throw new MissedJwtException();
             user = JwtUtil.extract(jwtCookie);
-            System.out.println(user);
         } catch (MissedJwtException | SignatureException | MalformedJwtException e) {
             String refreshCookie = CookieUtil.get(request, SecureParam.REFRESH);
-            System.out.println(refreshCookie);
             if (refreshCookie == null)
                 throw new MissedRefreshException();
             Refresh refresh = refreshService.getByValue(refreshCookie);
-            System.out.println(refresh);
             if (refresh == null)
                 throw new MissedRefreshException();
             updateTokens(response, refresh);
