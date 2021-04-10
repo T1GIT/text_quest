@@ -1,11 +1,43 @@
 @use 'web/sass/mixin' as glob_m
+@use 'web/sass/config' as glob_c
 @import "config"
 
 .menu_btn
+  +glob_m.ani(normal)
+  z-index: 2
   position: absolute
   top: $offset
   right: $offset
   width: $btn_size
   height: $btn_size
   margin: $btn_mar
+
+  div
+    +glob_m.ani(normal)
+    background: glob_c.$main_clr
+    height: $d_height
+    width: $d_width
+    margin: $d_mar 0
+    border-radius: 10px
+    transform: rotate(0) scaleX(1)
+    transform-origin: left
+
+  &:not(.row):hover
+    div:first-child
+      transform: translateY(-2px)
+
+    div:last-child
+      transform: translateY(2px)
+
+  &.row
+    &:hover
+      transform: scale(1.1)
+
+    $x: 1.7
+
+    div:first-child
+      transform: rotate(-$d_rot) scaleX($d_scale) translate(-$d_mar * $x, $d_mar * $x)
+
+    div:last-child
+      transform: rotate($d_rot) scaleX($d_scale) translate(-$d_mar * $x, -$d_mar * $x)
 

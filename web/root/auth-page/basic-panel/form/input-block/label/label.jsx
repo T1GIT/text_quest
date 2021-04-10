@@ -9,13 +9,9 @@ class Label extends Component {
         this.ref = React.createRef()
     }
 
-    hide = () => {
-        $(this.self).addClass(style.hidden)
-    }
+    hide = () => super.hide(style.hidden)
 
-    show = () => {
-        $(this.self).removeClass(style.hidden)
-    }
+    show = () => super.show(style.hidden)
 
     reset() {
         this.show();

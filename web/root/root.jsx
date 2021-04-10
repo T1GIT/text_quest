@@ -33,14 +33,18 @@ class Root extends Component {
     }
 
     login = () => {
-        this.nodes.auth_page.hide()
-        this.nodes.game.show()
+        const {auth_page, game} = this.nodes;
+        game.show()
+        auth_page.hide()
+        auth_page.reset()
         window.isAuthorised = true
     }
 
     logout = () => {
-        this.nodes.auth_page.show()
-        this.nodes.game.hide()
+        const {auth_page, game} = this.nodes;
+        auth_page.show()
+        game.hide()
+        game.reset()
         window.isAuthorised = false
     }
 

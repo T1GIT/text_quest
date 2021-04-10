@@ -6,21 +6,27 @@ import Component from "../../../util/component";
 
 class BasicPanel extends Component {
 
+    def_page = "reg"
+
     constructor(props) {
         super(props);
         this.nodes.form = React.createRef()
         this.nodes.header = React.createRef()
-        this.page = "log"
     }
 
-    reset = () => {
-        this.nodes.form.reset()
-        this.nodes.header.reset()
-        super.reset()
+    afterRender() {
+        const {form, header} = this.nodes
+        form.changePage(this.def_page)
+        header.onChangePage(this.def_page)
     }
 
-    onChangePage = pageName => {
-        this.nodes.form.changePage(pageName)
+    onChangePage = pageName => this.nodes.form.changePage(pageName)
+
+    reset() {
+        const {form, header} = this.nodes
+        form.changePage(this.def_page)
+        header.onChangePage(this.def_page)
+        super.reset();
     }
 
     render() {

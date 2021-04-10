@@ -1,6 +1,5 @@
 @use "web/sass/config" as glob_c
 @use "web/sass/mixin" as glob_m
-@use "web/root/auth-page/sass/mixin" as auth_m
 @import "config"
 
 
@@ -11,7 +10,6 @@ $offset: $top_offset + glob_c.$border_width + glob_c.$font_size
 .hint
   +glob_m.ani(normal)
   +glob_m.size(fit_wide)
-  +auth_m.text_shadow
   font-size: $font_size !important
   position: absolute
   left: $left_offset

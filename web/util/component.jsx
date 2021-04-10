@@ -7,35 +7,35 @@ class Component extends React.Component {
         this.self = React.createRef()
         this.nodes = {}
         this.elems = {}
+        this.hidden = false
+        this.hideTimer = setTimeout(() => {}, 0)
     }
 
-    addClass(className) {
-        this.self.classList.add(className)
+    hide(hiddenClassName, callback = () => {}) {
+        if (!this.hidden) {
+            clearTimeout(this.hideTimer)
+            let el = $(this.self)
+            let dur = parseFloat(el.css("transition-duration").slice(0, -1)) * 1000
+            el.addClass(hiddenClassName)
+            this.hideTimer = setTimeout(() => {
+                el.css({display: "none"})
+                callback.bind(el)()
+            }, dur)
+            this.hidden = true
+        }
     }
 
-    removeClass(className) {
-        this.self.classList.remove(className)
-    }
-
-    hide(hiddenClassName, callback) {
-        let el = $(this.self)
-        let dur = parseFloat(el.css("transition-duration").slice(0, -1)) * 1000
-        el.addClass(hiddenClassName)
-        callback.bind(el)
-        setTimeout(() => {
-            el.css({display: "none"})
-            callback()
-        }, dur)
-    }
-
-    show(hiddenClassName, callback) {
-        let el = $(this.self)
-        el.css({display: ""})
-        callback.bind(el)
-        setTimeout(() => {
-            el.removeClass(hiddenClassName)
-            callback()
-        }, 1)
+    show(hiddenClassName, callback = () => {}) {
+        if (this.hidden) {
+            clearTimeout(this.hideTimer)
+            let el = $(this.self)
+            el.css({display: ""})
+            this.hideTimer = setTimeout(() => {
+                el.removeClass(hiddenClassName)
+                callback.bind(el)()
+            }, 1)
+            this.hidden = false
+        }
     }
 
     afterRender() {
@@ -49,6 +49,7 @@ class Component extends React.Component {
     }
 
     reset() {
+        console.log(this)
         for (let node in this.nodes) {
             this.nodes[node].reset()
         }

@@ -27,7 +27,7 @@ public class Admin extends AuditModel {
      */
     @JsonIgnore
     @MapsId
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     private User user;
 
     public User getUser() {

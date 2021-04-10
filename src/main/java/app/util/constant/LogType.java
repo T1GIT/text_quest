@@ -31,6 +31,11 @@ public final class LogType extends AbstractConstant {
     public final static String OAUTH = "oauth";
 
     /**
+     * Info about procedure of email authorising
+     */
+    public final static String EMAIL = "email";
+
+    /**
      * Info about accessing of administrators to their rights
      */
     public final static String ADMIN = "admin";

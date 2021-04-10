@@ -4,14 +4,12 @@
 
 .menu_section
   +glob_m.ani(normal)
+  position: relative
   background: transparent
   width: 100%
   height: $height
   line-height: $height
-  margin: $v_mar + $hover_offset 0
-  padding: $v_pad - $hover_offset $h_pad
-
+  margin: $v_mar 0
+  padding: $v_pad $h_pad
   &:hover
     background: menu_c.$bg
-    margin: $v_mar 0
-    padding: $v_pad $h_pad

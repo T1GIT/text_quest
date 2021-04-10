@@ -41,14 +41,6 @@ import javax.servlet.http.HttpServletResponse;
 public class RootController {
 
     /**
-     * Logger for recording exceptions
-     */
-    private final static Logger logger = LoggerFactory.getLogger(LogType.ERROR);
-    /**
-     * Factory for parsing state - string for identifying user for oauth service
-     */
-    private final static StateFactory stateFactory = new StateFactory();
-    /**
      * Authorisation in the current request context
      */
     private final Auth auth;
@@ -71,7 +63,6 @@ public class RootController {
      */
     @GetMapping("")
     public String root(Model model, HttpServletRequest request, HttpServletResponse response) {
-        CookieUtil.add(response, SecureParam.STATE, stateFactory.create(), Period.YEAR);
         String errorCookie = CookieUtil.get(request, ReqParam.ERROR);
         CookieUtil.add(response, ReqParam.ERROR, null, Period.YEAR);
         model.addAttribute("isAuthorised", ObjectParser.parse(auth.isAuthenticated()));

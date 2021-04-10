@@ -7,14 +7,12 @@ import app.controller.oauth.util.constant.PropName;
 import app.controller.oauth.util.constant.Provider;
 import app.controller.oauth.util.constant.ReqParam;
 import app.controller.oauth.util.constant.SecureParam;
-import app.controller.oauth.util.exception.OauthException;
-import app.controller.oauth.util.exception.types.MissedStateCookieException;
 import app.controller.oauth.util.request.UrlBuilder;
 import app.controller.util.CookieUtil;
 import app.controller.util.ObjectParser;
+import app.controller.util.constant.Period;
 import app.controller.util.constant.Status;
 import app.controller.util.exception.missedToken.MissedTokenException;
-import app.controller.util.exception.missedToken.types.MissedJwtException;
 import app.controller.util.exception.missedToken.types.MissedRefreshException;
 import app.controller.util.json.auth.JsonAnswer;
 import app.controller.util.json.auth.JsonForm;
@@ -32,6 +30,7 @@ import app.database.service.userService.types.OauthUserService;
 import app.security.Hash;
 import app.security.util.Validator;
 import app.security.util.secretFactory.types.EmailTokenFactory;
+import app.security.util.secretFactory.types.StateFactory;
 import app.util.AbstractConstant;
 import app.util.LoggerFactory;
 import app.util.constant.LogType;
@@ -40,11 +39,11 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -70,9 +69,19 @@ import java.util.Properties;
 public class AuthController {
 
     /**
+     * Factory for parsing state - string for identifying user for oauth service
+     */
+    private final static StateFactory stateFactory = new StateFactory();
+
+    /**
      * Logger for recording codes and tokens in the process of the oauth authorisation
      */
     protected final static Logger oauthLogger = LoggerFactory.getLogger(LogType.OAUTH);
+
+    /**
+     * Logger for recording codes and tokens in the process of the oauth authorisation
+     */
+    protected final static Logger emailLogger = LoggerFactory.getLogger(LogType.EMAIL);
 
     /**
      * Json parser
@@ -87,7 +96,7 @@ public class AuthController {
     /**
      * Service for interacting with mail users
      */
-    private final MailUserService basicService;
+    private final MailUserService mailService;
 
     /**
      * Service for interacting with oauth users
@@ -113,14 +122,14 @@ public class AuthController {
     /**
      * Class constructor injecting user services
      *
-     * @param basicService   injects basic users service
+     * @param mailService   injects basic users service
      * @param oauthService   injects oauth users service
      * @param userService    injects all users service
      * @param refreshService injects refresh token service
      * @throws IOException if props file doesn't exist
      */
-    public AuthController(MailUserService basicService, OauthUserService oauthService, UserService userService, RefreshService refreshService) throws IOException {
-        this.basicService = basicService;
+    public AuthController(MailUserService mailService, OauthUserService oauthService, UserService userService, RefreshService refreshService) throws IOException {
+        this.mailService = mailService;
         this.oauthService = oauthService;
         this.userService = userService;
         this.refreshService = refreshService;
@@ -146,7 +155,12 @@ public class AuthController {
     @ResponseBody
     public String login(@RequestBody JsonForm jsonForm, HttpServletResponse response) {
         JsonAnswer jsonAnswer = new JsonAnswer();
-        MailUser user = basicService.getByMail(jsonForm.getMail());
+        MailUser user = mailService.getByMail(jsonForm.getMail().toLowerCase());
+
+        System.out.println(mailService.getAll());
+        System.out.println(jsonForm.getMail());
+        System.out.println(user);
+
         if (user == null) {
             jsonAnswer.setMsg(Status.NOT_FOUND);
         } else if (!Hash.check(jsonForm.getPsw(), user.getPsw())) {
@@ -154,7 +168,11 @@ public class AuthController {
         } else {
             jsonAnswer.setAccepted(true);
             attachTokens(response, user);
+            emailLogger.info("login: email:" + user.getMail());
         }
+
+        System.out.println(mailService.getAll());
+
         return gson.toJson(jsonAnswer, jsonAnswer.getClass());
     }
 
@@ -171,7 +189,12 @@ public class AuthController {
     @ResponseBody
     public String register(@RequestBody JsonForm jsonForm, HttpServletResponse response) {
         JsonAnswer jsonAnswer = new JsonAnswer();
-        MailUser user = basicService.getByMail(jsonForm.getMail());
+        MailUser user = mailService.getByMail(jsonForm.getMail().toLowerCase());
+
+        System.out.println(mailService.getAll());
+        System.out.println(jsonForm.getMail());
+        System.out.println(user);
+
         if (user != null) {
             jsonAnswer.setMsg(Status.EXISTS);
         } else if (!Validator.mail(jsonForm.getMail())) {
@@ -187,7 +210,11 @@ public class AuthController {
             user.setVerified(false);
             jsonAnswer.setAccepted(true);
             attachTokens(response, user);
+            emailLogger.info("register: email:" + user.getMail());
         }
+
+        System.out.println(mailService.getAll());
+
         return gson.toJson(jsonAnswer, jsonAnswer.getClass());
     }
 
@@ -206,6 +233,7 @@ public class AuthController {
                 throw new MissedRefreshException();
             refreshService.delete(refresh);
             jsonAnswer.setAccepted(true);
+            emailLogger.info("logout: refresh token:" + refreshCookie);
         } catch (MissedTokenException e) {
             jsonAnswer.setMsg(Status.INVALID_TOKENS);
         }
@@ -231,7 +259,9 @@ public class AuthController {
             user.setOauthId(oauthId);
             user.setSetting(new Setting());
             oauthService.add(user);
-            oauthLogger.info("user: " + user);
+            oauthLogger.info("User with id:" + oauthId + " was created");
+        } else {
+            oauthLogger.info("User with id:" + oauthId + " was in the database");
         }
         attachTokens(response, user);
         return "redirect:/";
@@ -251,30 +281,24 @@ public class AuthController {
     @PostMapping(path = "/url", produces = "application/json")
     @ResponseBody
     public String getBtnUrl(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        try {
-            String state = CookieUtil.get(request, ReqParam.STATE);
-            if (state == null)
-                throw new MissedStateCookieException();
-            HashMap<String, String> urlMap = new HashMap<>();
-            for (Object providerObj : AbstractConstant.getValues(Provider.class)) {
-                String provider = (String) providerObj;
-                Properties props = propsMap.get(provider);
-                UrlBuilder urlBuilder = new UrlBuilder(props.getProperty(PropName.DOMAIN_AUTH));
-                urlBuilder
-                        .addParam(ReqParam.CLIENT_ID, props.getProperty(PropName.CLIENT_ID))
-                        .addParam(ReqParam.REDIRECT_URI, String.format("%s/oauth/%s",
-                                TextQuestApplication.getRootUrl(), provider))
-                        .addParam(ReqParam.RESPONSE_TYPE, ReqParam.CODE)
-                        .addParam(ReqParam.DISPLAY, "popup")
-                        .addParam(ReqParam.STATE, state)
-                        .addParam(ReqParam.SCOPE, props.getProperty(PropName.SCOPE));
-                urlMap.put(provider, urlBuilder.build());
-            }
-            return ObjectParser.parse(urlMap);
-        } catch (OauthException e) {
-            response.sendError(402);
-            return null;
+        String state = stateFactory.create();
+        CookieUtil.add(response, SecureParam.STATE, state, Period.YEAR);
+        HashMap<String, String> urlMap = new HashMap<>();
+        for (Object providerObj : AbstractConstant.getValues(Provider.class)) {
+            String provider = (String) providerObj;
+            Properties props = propsMap.get(provider);
+            UrlBuilder urlBuilder = new UrlBuilder(props.getProperty(PropName.DOMAIN_AUTH));
+            urlBuilder
+                    .addParam(ReqParam.CLIENT_ID, props.getProperty(PropName.CLIENT_ID))
+                    .addParam(ReqParam.REDIRECT_URI, String.format("%s/oauth/%s",
+                            TextQuestApplication.getRootUrl(), provider))
+                    .addParam(ReqParam.RESPONSE_TYPE, ReqParam.CODE)
+                    .addParam(ReqParam.DISPLAY, "popup")
+                    .addParam(ReqParam.STATE, state)
+                    .addParam(ReqParam.SCOPE, props.getProperty(PropName.SCOPE));
+            urlMap.put(provider, urlBuilder.build());
         }
+        return ObjectParser.parse(urlMap);
     }
 
     /**
@@ -292,6 +316,7 @@ public class AuthController {
         refresh.setValue(RefreshUtil.parse());
         user.addToken(refresh);
         userService.update(user);
+        System.out.println(refresh.getValue());
         RefreshUtil.attach(response, refresh);
         JwtUtil.attach(response, user);
     }

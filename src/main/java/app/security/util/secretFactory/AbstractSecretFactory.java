@@ -29,12 +29,18 @@ public abstract class AbstractSecretFactory<T> {
     /**
      * Logger for recording exceptions
      */
-    private static final Logger logger = Logger.getLogger("errorLogger");
+    private static final Logger errLoger = Logger.getLogger("errorLogger");
 
     /**
      * The name of the used algorithm
      */
-    private static final String algorithm = "SHA1PRNG";
+    private static final String ALGORITHM = "SHA1PRNG";
+
+
+    /**
+     * Secure random object
+     */
+    private SecureRandom secureRandom;
 
     /**
      * Amount of symbols in the parsed secret key
@@ -51,6 +57,11 @@ public abstract class AbstractSecretFactory<T> {
      */
     protected AbstractSecretFactory(int length) {
         this.length = length;
+        try {
+            this.secureRandom = SecureRandom.getInstance(ALGORITHM);
+        } catch (NoSuchAlgorithmException e) {
+            errLoger.error(e.getMessage(), e);
+        }
     }
 
     /**
@@ -61,7 +72,26 @@ public abstract class AbstractSecretFactory<T> {
      * @return created string
      */
     protected String rndString() {
-        return HexConvertor.toHex(rndBytes());
+        return HexConvertor
+                .toHex(rndBytes((int)
+                        Math.round(
+                                Math.ceil(
+                                        length / 2d))))
+                .substring(0, length);
+    }
+
+    /**
+     * Creates secure pseudo-random bytes array.
+     * Should be used in the {@link AbstractSecretFactory#create()}
+     * of the specified child class.
+     *
+     * @param length amount of elements in the array
+     * @return created bytes array
+     */
+    private byte[] rndBytes(int length) {
+        byte[] bytes = new byte[length];
+        secureRandom.nextBytes(bytes);
+        return bytes;
     }
 
     /**
@@ -72,14 +102,7 @@ public abstract class AbstractSecretFactory<T> {
      * @return created bytes array
      */
     protected byte[] rndBytes() {
-        byte[] bytes = new byte[length];
-        try {
-            SecureRandom secureRandom = SecureRandom.getInstance(algorithm);
-            secureRandom.nextBytes(bytes);
-        } catch (NoSuchAlgorithmException e) {
-            logger.error(e.getMessage(), e);
-        }
-        return bytes;
+        return rndBytes(this.length);
     }
 
     /**

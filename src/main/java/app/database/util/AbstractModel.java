@@ -18,7 +18,7 @@ public abstract class AbstractModel implements Serializable {
      * Unique identifier for the each record in the database table
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
 
     /**

@@ -18,7 +18,13 @@ class Input extends Component {
 
     setValue = value => this.self.value = value
 
-    setType = type => this.self.type = type
+    showText = () => {
+        this.self.type = "text"
+    }
+
+    hideText = () => {
+        this.self.type = "password"
+    }
 
     reset() {
         this.setValue("")

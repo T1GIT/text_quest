@@ -1,6 +1,5 @@
 @use 'web/sass/config' as glob_c
 @use 'web/sass/mixin' as glob_m
-@use 'web/root/auth-page/sass/mixin' as auth_m
 @import "config"
 
 
@@ -13,7 +12,7 @@
 
 .button
   +glob_m.ani($ext_dur)
-  +auth_m.block_shadow
+  +glob_m.block_shadow
   cursor: pointer
   width: $btn_size
   height: $btn_size

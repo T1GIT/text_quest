@@ -1,5 +1,6 @@
 package app.security.util.secretFactory.types;
 
+import app.security.util.constants.SecretLength;
 import app.security.util.secretFactory.AbstractSecretFactory;
 
 
@@ -14,7 +15,7 @@ public class JwtKeyFactory extends AbstractSecretFactory<byte[]> {
      * Creates factory for parsing JWT key
      */
     public JwtKeyFactory() {
-        super(100);
+        super(SecretLength.JWT_KEY);
     }
 
     /**

@@ -78,7 +78,7 @@ public class Setting extends AuditModel {
      */
     @JsonIgnore
     @MapsId
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     private User user;
 
     public MsgType getMsgType() {

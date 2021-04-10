@@ -1,10 +1,12 @@
 package app.database.model.user.types;
 
 import app.database.model.user.User;
+import app.security.util.constants.SecretLength;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.nio.charset.StandardCharsets;
 
 
 /**
@@ -62,7 +64,7 @@ public class MailUser extends User {
      * <li> required
      * </ul>
      */
-    @Column(nullable = false)
+    @Column(nullable = false, length = SecretLength.EMAIL_TOKEN)
     private String token;
 
     public String getMail() {

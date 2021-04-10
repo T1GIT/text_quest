@@ -2,6 +2,7 @@ package app.database.model;
 
 import app.database.model.user.User;
 import app.database.util.AuditModel;
+import app.security.util.constants.SecretLength;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -27,9 +28,10 @@ public class Refresh extends AuditModel {
      * <b>Constraints:</b>
      * <ul>
      * <li> required
+     * <li> unique
      * </ul>
      */
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true, length = SecretLength.REFRESH)
     private String value;
 
     /**
@@ -41,7 +43,7 @@ public class Refresh extends AuditModel {
      * <li> constant
      * </ul>
      */
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "users_id", nullable = false, updatable = false)
     @JsonIgnore
     private User user;

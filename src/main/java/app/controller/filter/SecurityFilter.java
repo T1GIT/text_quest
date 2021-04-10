@@ -15,8 +15,7 @@ import io.jsonwebtoken.security.SignatureException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,9 +25,7 @@ import java.io.IOException;
 /**
  * Filter for validating requests and filling authorisation context.
  */
-@Component
-@Order(2)
-public class SecurityFilter extends AbstractFilter {
+public class SecurityFilter implements Filter {
 
     /**
      * Service for interaction with refresh tokens in the database
@@ -40,8 +37,12 @@ public class SecurityFilter extends AbstractFilter {
      */
     private final Auth auth;
 
+    /**
+     * Class constructor, specifies authorisation context and refresh service
+     * @param auth authorisation context
+     * @param refreshService service for refresh tokens
+     */
     public SecurityFilter(Auth auth, RefreshService refreshService) {
-        super("^((/(game|log)/)|/).*$");
         this.auth = auth;
         this.refreshService = refreshService;
     }
@@ -59,26 +60,24 @@ public class SecurityFilter extends AbstractFilter {
      * @throws IOException      if error with input output occurs
      * @throws ServletException if error when {@code chain.doFilter()} occurs
      */
+
     @Override
-    public void doAction(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
         try {
-            auth.setUser(parseUser(request, response));
+            auth.setUser(parseUser(req, res));
             chain.doFilter(request, response);
         } catch (MissedRefreshException e) {
-            CookieUtil.remove(response, SecureParam.REFRESH);
-            CookieUtil.remove(response, SecureParam.JWT);
-            System.out.println(1);
-            System.out.println(request.getRequestURI());
-            if (request.getRequestURI().equals("/")) {
-                System.out.println(2);
+            CookieUtil.remove(res, SecureParam.REFRESH);
+            CookieUtil.remove(res, SecureParam.JWT);
+            if (req.getRequestURI().equals("/")) {
                 chain.doFilter(request, response);
             } else {
-                System.out.println(3);
-                response.sendError(401, "Non authorised access");
+                res.sendError(401, "Non authorised access");
             }
         }
     }
-
     /**
      * Parses user from the JWT. Checks if JWT cookie exists, in this case validates it, if it's valid, then parses user and fill auth context.
      * If JWT cookie doesn't exist or JWT is invalid, then checks refresh token.

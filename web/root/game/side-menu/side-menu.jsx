@@ -9,50 +9,66 @@ class SideMenu extends Component {
 
     constructor(props) {
         super(props);
+        this.nodes.toggler = React.createRef()
+        this.elems.menu = React.createRef()
+        this.opened = false
     }
 
-    show = () => {
-        $(this.self).removeClass(style.hidden)
+    afterRender() {
+        this.nodes.toggler.setIcon("menu")
+        $(this.elems.menu).addClass(style.hidden)
     }
 
-    hide = () => {
-        $(this.self).addClass(style.hidden)
-    }
+    hide = () => super.hide(style.hidden)
+
+    show = () => super.show(style.hidden)
+
 
     onClickLogout = event => {
         window.logout()
         axios.post("/auth/logout"
             ).then(response => {
-                if (response.data.accepted) {
+            const {accepted, msg} = response.data;
+            if (accepted) {
 
                 } else {
-                    alert(response.data.msg)
+                    alert(msg)
                 }
             }).catch(error => {
                 console.error(error)
             })
     }
 
-    changeState = state => {
-        switch (state) {
-            case "hide":
-                this.hide()
-                break
-            case "show":
-                this.show()
-                break
+    onClickBtn = event => {
+        const {toggler} = this.nodes
+        const {menu} = this.elems
+        if (this.opened) {
+            toggler.setIcon("menu")
+            $(menu).addClass(style.hidden)
+            this.opened = false
+        } else {
+            toggler.setIcon("row")
+            $(menu).removeClass(style.hidden)
+            this.opened = true
         }
     }
 
     reset() {
-        this.hide();
+        $(this.elems.menu).addClass(style.hidden)
+        this.nodes.toggler.setIcon("menu")
+        this.opened = false
         super.reset();
     }
 
     render() {
         return <div ref={this.self} className={style.wrap}>
-            <MenuBtn onClick={this.changeState}/>
-            <div className={style.side_menu}>
+            <MenuBtn
+                ref={this.nodes.toggler}
+                onClick={this.onClickBtn}
+            />
+            <div
+                ref={this.elems.menu}
+                className={style.side_menu}>
                 <MenuSection
                     text={"Настройки"}
                 />

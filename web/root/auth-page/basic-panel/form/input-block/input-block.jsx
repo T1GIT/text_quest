@@ -14,27 +14,36 @@ class InputBlock extends Component {
         this.nodes.label = React.createRef()
         this.nodes.hint = React.createRef()
         this.valid = false
+        if (this.props.toggler) {
+            this.nodes.toggler = React.createRef()
+            this.showed = false
+        }
     }
 
     afterRender() {
         this.height = $(this.self).css("height")
+        if (this.props.toggler)
+            this.nodes.toggler.setIcon("eye")
     }
 
-    onChange = event => {
-        let input = this.nodes.input
-        let lbl = this.nodes.label
-        let hint = this.nodes.hint
+
+    refresh = () => {
+        let {input, label, hint} = this.nodes
         if (input.getValue() === "") {
-            lbl.show()
+            label.show()
             hint.reset()
             this.valid = false
         } else {
-            lbl.hide()
+            label.hide()
             const res = this.props.validator(input.getValue())
             hint.changeText(res.hint)
             this.valid = res.valid
         }
-        this.props.onChange()
+    }
+
+    onChange = event => {
+        this.refresh()
+        this.props.onChange(event)
     }
 
     isValid = () => this.valid
@@ -53,18 +62,25 @@ class InputBlock extends Component {
 
     getValue = () => this.nodes.input.getValue();
 
-    onTogglerClick = action => {
-        switch (action) {
-            case "hide":
-                this.nodes.input.setType("password")
-                break
-            case "show":
-                this.nodes.input.setType("text")
-                break
+    onTogglerClick = event => {
+        let {input, toggler} = this.nodes
+        if (this.showed) {
+            input.hideText()
+            toggler.setIcon("eye")
+        } else {
+            input.showText()
+            toggler.setIcon("key")
         }
+        this.showed = !this.showed
     }
 
     reset = () => {
+        if (this.props.toggler) {
+            const {input, toggler} = this.nodes
+            this.showed = false
+            input.hideText()
+            toggler.setIcon("eye")
+        }
         this.valid = false
         super.reset()
     }
@@ -84,7 +100,11 @@ class InputBlock extends Component {
                 type={this.props.type}
                 field={this.props.toggler}
             />
-            {this.props.toggler && <Toggler onClick={this.onTogglerClick}/>}
+            {this.props.toggler &&
+            <Toggler
+                ref={this.nodes.toggler}
+                onClick={this.onTogglerClick}/>
+            }
             <Hint ref={this.nodes.hint}/>
         </div>
     }

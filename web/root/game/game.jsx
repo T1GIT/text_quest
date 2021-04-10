@@ -9,26 +9,21 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.nodes.game = React.createRef()
+        this.nodes.menu = React.createRef()
     }
 
-    show = () => {
-        this.removeClass(style.hidden)
-    }
+    show = () => super.show(style.hidden)
 
-    hide = () => {
-        $(this.self).addClass(style.hidden)
-        this.reset()
-    }
+    hide = () => super.hide(style.hidden)
 
     reset() {
-        // TODO
         super.reset();
     }
 
     render() {
         return <div ref={this.self} className={style.game}>
             <Background ref={this.nodes.game} left="#44A08D" right="#093637"/>
-            <SideMenu/>
+            <SideMenu ref={this.nodes.menu}/>
         </div>
     }
 }

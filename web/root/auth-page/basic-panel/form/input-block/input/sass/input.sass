@@ -1,11 +1,10 @@
 @use "web/sass/config" as glob_c
 @use "web/sass/mixin" as glob_m
-@use "web/root/auth-page/sass/mixin" as auth_m
 @import "config"
 
 .input
   +glob_m.ani(fast)
-  +auth_m.block_shadow
+  +glob_m.block_shadow
   height: glob_c.$font_size
   width: $input_width
   padding: $input_v_pad $text_offset

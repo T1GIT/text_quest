@@ -5,23 +5,23 @@ import app.security.util.secretFactory.AbstractSecretFactory;
 
 
 /**
- * Parses state token suitable for identifying request from the oauth server.
+ * Parses socket id suitable for subscribing as a part of the url.
  *
  * @see AbstractSecretFactory
  */
-public class StateFactory extends AbstractSecretFactory<String> {
+public class SocketIdFactory extends AbstractSecretFactory<String> {
 
     /**
-     * Creates factory for parsing state tokens
+     * Creates factory for parsing email tokens
      */
-    public StateFactory() {
-        super(SecretLength.STATE);
+    public SocketIdFactory() {
+        super(SecretLength.SOCKET_ID);
     }
 
     /**
-     * Creates state token
+     * Creates a socket id
      *
-     * @return token string
+     * @return id string
      */
     @Override
     public String create() {

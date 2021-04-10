@@ -26,14 +26,15 @@ class Form extends Component {
 
     onSubmit = event => {
         event.preventDefault()
-        let {email_in, psw_in, re_psw_in} = this.nodes
+        let {email_in, psw_in, re_psw_in, btn} = this.nodes
         if (email_in.isValid() && psw_in.isValid() && (this.page === "log" || re_psw_in.isValid())) {
+            btn.submit()
             switch (this.page) {
                 case "log":
-                    this.login();
+                    setTimeout(this.login, 100)
                     break
                 case "reg":
-                    this.register();
+                    setTimeout(this.register, 100)
                     break
             }
         }
@@ -44,28 +45,30 @@ class Form extends Component {
             mail: this.nodes.email_in.getValue(),
             psw: this.nodes.psw_in.getValue()
         }).then(response => {
-            if (response.data.accepted) {
+            const {accepted, msg} = response.data;
+            if (accepted) {
                 window.login()
             } else {
-                alert(response.data.msg) // TODO: My own alert
+                alert(msg) // TODO: My own alert
             }
         }).catch(error => {
             console.error(error)
-        })
+        }).then(this.reset)
 
     register = () => axios
         .post("/auth/register", {
             mail: this.nodes.email_in.getValue(),
             psw: this.nodes.psw_in.getValue()
         }).then(response => {
-            if (response.data.accepted) {
+            const {accepted, msg} = response.data;
+            if (accepted) {
                 window.login()
             } else {
-                alert(response.data.msg) // TODO: My own alert
+                alert(msg) // TODO: My own alert
             }
         }).catch(error => {
             console.error(error)
-        })
+        }).then(this.reset)
 
     validateRepPsw = repPsw => validateRepPsw(this.nodes.psw_in.getValue(), repPsw)
 
@@ -75,7 +78,7 @@ class Form extends Component {
             email_in.reset();
             psw_in.reset();
             re_psw_in.reset()
-            btn.reset()
+            btn.hide()
             switch (pageName) {
                 case "log":
                     re_psw_in.hide();
@@ -89,26 +92,30 @@ class Form extends Component {
     }
 
     checkValid = event => {
+        const {email_in, psw_in, re_psw_in, btn} = this.nodes
+        if (event.target === psw_in.nodes.input.self && this.page === "reg") {
+            re_psw_in.refresh()
+        }
         switch (this.page) {
             case "reg":
-                if (this.nodes.email_in.isValid() && this.nodes.psw_in.isValid() && this.nodes.re_psw_in.isValid()) {
-                    this.nodes.btn.show()
+                if (email_in.isValid() && psw_in.isValid() && re_psw_in.isValid()) {
+                    btn.show()
                 } else {
-                    this.nodes.btn.hide()
+                    btn.hide()
                 }
                 break
             case "log":
-                if (this.nodes.email_in.isValid() && this.nodes.psw_in.isValid()) {
-                    this.nodes.btn.show()
+                if (email_in.isValid() && psw_in.isValid()) {
+                    btn.show()
                 } else {
-                    this.nodes.btn.hide()
+                    btn.hide()
                 }
                 break
         }
     }
 
     reset = () => {
-        this.nodes.re_psw_in.show()
+        this.nodes.btn.hide()
         super.reset()
     }
 
@@ -133,7 +140,7 @@ class Form extends Component {
                 onSubmit={this.onSubmit}
                 onChange={this.checkValid}
                 validator={validatePsw}
-                toggler={true}
+                toggler
             />
             <InputBlock
                 ref={this.nodes.re_psw_in}
@@ -142,7 +149,7 @@ class Form extends Component {
                 onSubmit={this.onSubmit}
                 onChange={this.checkValid}
                 validator={this.validateRepPsw}
-                toggler={true}
+                toggler
             />
             <SubmitBtn
                 ref={this.nodes.btn}

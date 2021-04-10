@@ -1,5 +1,6 @@
 package app.security.util.secretFactory.types;
 
+import app.security.util.constants.SecretLength;
 import app.security.util.secretFactory.AbstractSecretFactory;
 
 
@@ -14,7 +15,7 @@ public class SaltFactory extends AbstractSecretFactory<byte[]> {
      * Creates factory for parsing salt
      */
     public SaltFactory() {
-        super(512);
+        super(SecretLength.SALT);
     }
 
     /**

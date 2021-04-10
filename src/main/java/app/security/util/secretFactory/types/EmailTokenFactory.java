@@ -1,5 +1,6 @@
 package app.security.util.secretFactory.types;
 
+import app.security.util.constants.SecretLength;
 import app.security.util.secretFactory.AbstractSecretFactory;
 
 
@@ -14,7 +15,7 @@ public class EmailTokenFactory extends AbstractSecretFactory<String> {
      * Creates factory for parsing email tokens
      */
     public EmailTokenFactory() {
-        super(100);
+        super(SecretLength.EMAIL_TOKEN);
     }
 
     /**

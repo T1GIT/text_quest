@@ -5,6 +5,7 @@ import app.database.model.Refresh;
 import app.database.model.Setting;
 import app.database.model.State;
 import app.database.util.AuditModel;
+import app.security.util.constants.SecretLength;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -28,6 +29,17 @@ import java.util.List;
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User extends AuditModel {
+
+    /**
+     * Id to subscribe in the socket url
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> unique
+     * </ul>
+     */
+    @Column(unique = true, length = SecretLength.SOCKET_ID)
+    private String socketId;
 
     /**
      * Refresh tokens of the user

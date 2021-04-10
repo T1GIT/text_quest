@@ -31,7 +31,7 @@ public class History extends AuditModel {
      * <li> constant
      * </ul>
      */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "msg_id", nullable = false, updatable = false)
     @JsonIgnore
     private Node node;
@@ -45,7 +45,7 @@ public class History extends AuditModel {
      * <li> constant
      * </ul>
      */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id", nullable = false, updatable = false)
     @JsonIgnore
     private User user;

@@ -1,5 +1,6 @@
 package app.security.util.secretFactory.types;
 
+import app.security.util.constants.SecretLength;
 import app.security.util.secretFactory.AbstractSecretFactory;
 
 
@@ -14,7 +15,7 @@ public class RefreshFactory extends AbstractSecretFactory<String> {
      * Creates factory for parsing refresh tokens
      */
     public RefreshFactory() {
-        super(50);
+        super(SecretLength.REFRESH);
     }
 
     /**

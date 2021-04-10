@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./sass/auth-page.sass";
+import style from "./auth-page.sass";
 import OauthPanel from "./oauth-panel/oauth-panel";
 import BasicPanel from "./basic-panel/basic-panel";
 import Component from "../../util/component";
@@ -19,20 +19,12 @@ class AuthPage extends Component {
         el.css({width: el.css("width")})
     }
 
-    show = () => {
-        super.show(style.hidden, function () {console.log(this)})
-    }
+    show = () => super.show(style.hidden)
 
     hide = () => {
         this.nodes.basicPanel.reset()
         this.nodes.oauthPanel.reset()
-        super.hide(style.hidden, function () {console.log(this)})
-    }
-
-
-    reset() {
-        this.show()
-        super.reset();
+        super.hide(style.hidden)
     }
 
     render() {

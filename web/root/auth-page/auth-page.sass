@@ -1,6 +1,5 @@
 @use 'web/sass/mixin' as glob_m
 @use 'web/sass/config' as glob_c
-@use 'web/root/auth-page/sass/mixin' as auth_m
 
 
 .wrap
@@ -19,14 +18,10 @@
     +glob_m.flex_dir(row)
 
   .quote
-    +auth_m.text_shadow
+    +glob_m.ani(normal)
+    margin-right: 40px
     font-style: italic
     z-index: 1
-
-@media (max-width: glob_c.$rotate_oauth)
-  .wrap
-    .auth_block
-      flex-direction: column
 
 @media (max-width: glob_c.$quote_down)
   .wrap
@@ -37,3 +32,15 @@
 
     .quote
       margin: 0 auto 15vh
+
+  @media (max-height: 580px)
+    .wrap .quote
+        opacity: 0
+
+@media (max-width: glob_c.$rotate_oauth)
+  .wrap .auth_block
+      flex-direction: column
+
+  @media (max-height: 680px)
+    .wrap .quote
+      opacity: 0

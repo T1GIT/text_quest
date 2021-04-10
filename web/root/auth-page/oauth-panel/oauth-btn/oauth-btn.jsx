@@ -21,20 +21,21 @@ class OauthBtn extends Component {
             document.location.href = this.href
         } else {
             let el = $(this.self)
-            el.css({width: ""})
-            el.addClass(style.pc_loading)
-            this.openWindow()
+            el.css({width: ""}).addClass(style.pc_loading)
+            setTimeout(this.openWindow, 100)
         }
     }
 
     openWindow = () => {
         let params = "" +
-            "width=500" +
-            "height=600" +
-            "menubar=no," +
-            "location=no," +
-            "directories=no," +
-            "status=no"
+            "width=500," +
+            "height=600," +
+            "top=0," +
+            "left=0," +
+            "menubar=false," +
+            "location=false," +
+            "directories=false," +
+            "status=false"
         window.open(this.href, "oauth_window", params).focus()
     }
 

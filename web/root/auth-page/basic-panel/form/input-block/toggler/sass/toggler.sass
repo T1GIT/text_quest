@@ -1,11 +1,10 @@
 @use "web/sass/config" as glob_c
 @use "web/sass/mixin" as glob_m
-@use "web/root/auth-page/sass/mixin" as auth_m
 @use "web/root/auth-page/basic-panel/form/input-block/sass/config" as input_c
 @import "config"
 
 .toggler
-  +auth_m.block_shadow
+  +glob_m.block_shadow
   position: absolute
   right: $btn_v_offset
   top: 50%

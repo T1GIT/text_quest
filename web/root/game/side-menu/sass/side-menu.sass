@@ -9,16 +9,17 @@
   width: min-content
 
   .side_menu
-    +glob_m.ani(1s)
-    background: rgba($bg, 0.5)
+    background: rgba($bg, $opacity)
     padding-top: $pad_top
     height: 100%
     width: min-content
     position: absolute
-
     &:not(.hidden)
+      +glob_m.ani(normal, ease-out)
       right: 0
-
+      opacity: 1
     &.hidden
+      +glob_m.ani(normal, ease-in)
       right: -$hide_offset
+      opacity: 0
 

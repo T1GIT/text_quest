@@ -53,7 +53,7 @@ public class Limit extends AuditModel {
      * <li> required
      * </ul>
      */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "var_id", nullable = false)
     @JsonIgnore
     private Var var;
@@ -66,7 +66,7 @@ public class Limit extends AuditModel {
      * <li> required
      * </ul>
      */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branches_id", nullable = false)
     @JsonIgnore
     private Branch branch;

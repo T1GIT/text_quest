@@ -8,8 +8,12 @@ class SubmitBtn extends Component {
 
     show = () => $(this.self).removeClass(style.hidden)
 
+    submit = () => {
+        return $(this.self).addClass(style.clicked);
+    }
+
     reset() {
-        this.hide()
+        $(this.self).removeClass(style.clicked)
         super.reset();
     }
 
@@ -17,6 +21,7 @@ class SubmitBtn extends Component {
         return <button
             ref={this.self}
             className={style.button}
+            onClick={this.props.submit}
             type="submit"
         >
             Вперёд!

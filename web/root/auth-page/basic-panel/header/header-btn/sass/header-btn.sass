@@ -1,12 +1,11 @@
 @use "web/sass/config" as glob_c
 @use "web/sass/mixin" as glob_m
-@use "web/root/auth-page/sass/mixin" as auth_m
 @import "config"
 
 
 .button
   +glob_m.ani(normal, ease-in)
-  +auth_m.block_shadow
+  +glob_m.block_shadow
   cursor: pointer
   line-height: 1em
   border-radius: glob_c.$border_rad
