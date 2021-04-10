@@ -1,0 +1,36 @@
+@use "web/sass/config" as glob_c
+@use "web/sass/mixin" as glob_m
+@use "web/root/auth-page/basic-panel/form/input-block/sass/config" as input_c
+@import "config"
+
+.toggler
+  +glob_m.block_shadow
+  position: absolute
+  right: $btn_v_offset
+  top: 50%
+  margin-top: -$btn_size / 2
+  width: $btn_size
+  height: $btn_size
+  cursor: pointer
+
+  .svg
+    +glob_m.abs_attach
+    +glob_m.size(fill)
+    +glob_m.ani($anim_dur)
+    fill: glob_c.$main_clr
+    stroke: glob_c.$main_clr
+    stroke-width: $stroke_width
+    stroke-linecap: round
+    stroke-linejoin: round
+    pointer-events: none
+
+    &:not(.hidden)
+      transition-delay: $anim_dur / 2
+      transform: rotateY(0)
+
+    &.hidden
+      transform: rotateY(90deg)
+
+
+
+

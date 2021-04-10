@@ -1,0 +1,17 @@
+@use "web/sass/mixin" as glob_m
+
+
+.root
+  +glob_m.ani(1s)
+  +glob_m.size(fill)
+  +glob_m.abs_attach
+  overflow: hidden
+
+  &.loaded
+    opacity: 1
+
+  &:not(.loaded)
+    opacity: 0
+
+    *
+      transition: none !important

@@ -10,7 +10,7 @@
     </parent>
     <groupId>app</groupId>
     <artifactId>text_quest</artifactId>
-    <version>0.0.1</version>
+    <version>0.8</version>
     <name>text_quest</name>
     <description>Game text quest</description>
     <properties>
@@ -95,6 +95,10 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency> <!-- PROD: Clean redundent deps -->
     </dependencies>
 
@@ -116,9 +120,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration> <!-- PROD: remove -->
-                    <excludeDevtools>false</excludeDevtools>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

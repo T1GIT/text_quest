@@ -1,0 +1,27 @@
+@use 'web/sass/config' as glob_c
+@use 'web/sass/mixin' as glob_m
+@import "config"
+
+
+.button
+  +glob_m.block_shadow
+  +glob_m.ani(normal, ease-in)
+  margin: $btn_v_mar auto 0
+  border-radius: glob_c.$border_rad
+  background: transparent
+  border: glob_c.$border_width solid glob_c.$main_clr
+  outline: none
+  cursor: pointer
+  &
+    opacity: 1
+    padding: $btn_v_pad 10px
+  &.hidden
+    opacity: 0
+    padding: 0 20px
+  &.clicked
+    transform: scale(2)
+    padding: 0 30px
+    opacity: 0
+    border-color: transparent
+
+

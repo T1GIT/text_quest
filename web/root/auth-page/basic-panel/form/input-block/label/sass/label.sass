@@ -1,0 +1,21 @@
+@use "web/sass/config" as glob_c
+@use "web/sass/mixin" as glob_m
+@import "config"
+
+
+.label
+  +glob_m.ani(fast)
+  +glob_m.size(fit_wide)
+  pointer-events: none
+  position: absolute
+  top: $lbl_top
+
+  &
+    left: $lbl_offset
+    opacity: 1
+
+  &.hidden
+    left: $lbl_offset + glob_c.$anim_len
+    opacity: 0
+
+

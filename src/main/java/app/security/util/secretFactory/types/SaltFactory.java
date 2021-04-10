@@ -1,0 +1,30 @@
+package app.security.util.secretFactory.types;
+
+import app.security.util.constants.SecretLength;
+import app.security.util.secretFactory.AbstractSecretFactory;
+
+
+/**
+ * Parses salt suitable for adding to hash.
+ *
+ * @see AbstractSecretFactory
+ */
+public class SaltFactory extends AbstractSecretFactory<byte[]> {
+
+    /**
+     * Creates factory for parsing salt
+     */
+    public SaltFactory() {
+        super(SecretLength.SALT);
+    }
+
+    /**
+     * Creates a salt
+     *
+     * @return salt bytes array
+     */
+    @Override
+    public byte[] create() {
+        return rndBytes();
+    }
+}

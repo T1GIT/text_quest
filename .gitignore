@@ -9,7 +9,7 @@ node_modules/
 # GENERATED
 target
 .log
-src/main/resources/static/build
+src/main/resources/static
 
 # OTHER
 scripts
