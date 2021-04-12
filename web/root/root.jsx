@@ -38,6 +38,7 @@ class Root extends Component {
         auth_page.hide()
         auth_page.reset()
         window.isAuthorised = true
+        game.start()
     }
 
     logout = () => {

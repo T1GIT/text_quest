@@ -6,7 +6,6 @@ import app.security.util.constants.SecretLength;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.nio.charset.StandardCharsets;
 
 
 /**

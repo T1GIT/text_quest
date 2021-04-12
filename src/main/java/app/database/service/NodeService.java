@@ -12,4 +12,12 @@ import app.database.util.abstractService.ServiceInterface;
  */
 public interface NodeService extends ServiceInterface<Node> {
 
+
+    /**
+     * Gets first node from the database
+     *
+     * @return first node
+     */
+    Node getFirst();
+
 }

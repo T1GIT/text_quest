@@ -20,4 +20,9 @@ public class NodeServiceImpl
     public NodeServiceImpl(NodeRepository repository) {
         super(repository);
     }
+
+    @Override
+    public Node getFirst() {
+        return repository.findFirstByOrderById();
+    }
 }

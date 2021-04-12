@@ -70,6 +70,9 @@ class SideMenu extends Component {
                 ref={this.elems.menu}
                 className={style.side_menu}>
                 <MenuSection
+                    text={"Профиль"}
+                />
+                <MenuSection
                     text={"Настройки"}
                 />
                 <MenuSection

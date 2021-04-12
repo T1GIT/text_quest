@@ -29,7 +29,7 @@ public class Branch extends AuditModel {
     /**
      * All required limits
      */
-    @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private final List<Limit> limits = new ArrayList<>();
 
     /**

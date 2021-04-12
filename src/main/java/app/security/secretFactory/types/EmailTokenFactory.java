@@ -1,7 +1,7 @@
-package app.security.util.secretFactory.types;
+package app.security.secretFactory.types;
 
 import app.security.util.constants.SecretLength;
-import app.security.util.secretFactory.AbstractSecretFactory;
+import app.security.secretFactory.AbstractSecretFactory;
 
 
 /**

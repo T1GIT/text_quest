@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  * Provides static methods to check if
  * email or password string is valid
  */
-public abstract class Validator {
+public abstract class ValidatorUtil {
 
     /**
      * RegExp for validating email address

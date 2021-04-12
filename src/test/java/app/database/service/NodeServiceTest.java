@@ -24,7 +24,6 @@ class NodeServiceTest {
     private final static NodeFactory nodeFactory = new NodeFactory();
     private final static ForkFactory forkFactory = new ForkFactory();
     private final static BranchFactory branchFactory = new BranchFactory();
-    @Resource
     @Autowired
     private NodeService nodeService;
 

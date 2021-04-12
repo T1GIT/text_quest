@@ -12,4 +12,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface NodeRepository extends JpaRepository<Node, Long> {
+
+    /**
+     * Searches the first node
+     *
+     * @return first node
+     */
+    Node findFirstByOrderById();
 }

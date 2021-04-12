@@ -27,14 +27,26 @@ public class History extends AuditModel {
      * <p>
      * <b>Constraints:</b>
      * <ul>
-     * <li> required
      * <li> constant
      * </ul>
      */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "msg_id", nullable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "node_id", updatable = false)
     @JsonIgnore
     private Node node;
+
+    /**
+     * Received message
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> constant
+     * </ul>
+     */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "answer_id", updatable = false)
+    @JsonIgnore
+    private Answer answer;
 
     /**
      * User, who got this message
@@ -56,6 +68,14 @@ public class History extends AuditModel {
 
     public void setNode(Node node) {
         this.node = node;
+    }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
 
     public User getUser() {

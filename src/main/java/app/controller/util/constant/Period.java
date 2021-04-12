@@ -14,4 +14,11 @@ public final class Period extends AbstractConstant {
     public final static int DAY = 24 * HOUR;
     public final static int YEAR = 365 * DAY;
 
+    public static int getMillis(int time) {
+        return (int) (time * 1e3);
+    }
+
+    public static int getNanos(int time) {
+        return (int) (time * 1e9);
+    }
 }

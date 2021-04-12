@@ -1,10 +1,11 @@
-package app.controller.util.token;
+package app.security.util.tokenUtil;
 
 import app.controller.oauth.util.constant.SecureParam;
 import app.controller.util.CookieUtil;
+import app.security.util.constants.JwtClaims;
 import app.controller.util.constant.Period;
 import app.database.model.user.User;
-import app.security.util.secretFactory.types.JwtKeyFactory;
+import app.security.secretFactory.types.JwtKeyFactory;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -46,8 +47,9 @@ public abstract class JwtUtil {
      */
     public static String parse(User user) {
         HashMap<String, String> userMap = new HashMap<>();
-        userMap.put("id", String.valueOf(user.getId()));
-        userMap.put("name", user.getName());
+        userMap.put(JwtClaims.ID, String.valueOf(user.getId()));
+        userMap.put(JwtClaims.NAME, user.getName());
+        userMap.put(JwtClaims.SOCKET_ID, user.getSocketId());
         return Jwts.builder()
                 .setClaims(userMap)
                 .setExpiration(new Date(System.currentTimeMillis() + PERIOD * 1000L))
@@ -67,8 +69,10 @@ public abstract class JwtUtil {
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(KEY)
                 .build().parseClaimsJws(jwt).getBody();
-        User user = new User(Long.parseLong((String) claims.get("id")));
-        user.setName((String) claims.get("name"));
+        User user = new User();
+        user.setId(Long.parseLong((String) claims.get(JwtClaims.ID)));
+        user.setName((String) claims.get(JwtClaims.NAME));
+        user.setSocketId((String) claims.get(JwtClaims.SOCKET_ID));
         return user;
     }
 

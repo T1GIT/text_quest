@@ -28,6 +28,7 @@ public class Answer extends AuditModel {// TODO: May be add "aborted"(link to ne
     /**
      * All impacts of this answer
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Change> changes = new ArrayList<>();
 
@@ -54,6 +55,13 @@ public class Answer extends AuditModel {// TODO: May be add "aborted"(link to ne
     @JoinColumn(name = "question_id", nullable = false)
     @JsonIgnore
     private Question question;
+
+    @ManyToMany
+    @JoinTable(
+            name = "student_answers",
+            joinColumns = @JoinColumn(name = "answer_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> users;
 
     public List<Change> getChanges() {
         return changes;
@@ -85,12 +93,21 @@ public class Answer extends AuditModel {// TODO: May be add "aborted"(link to ne
         change.setAnswer(null);
     }
 
+    public void addUser(User user) {
+        this.users.add(user);
+        user.addAnswer(this);
+    }
+
+    public void removeUser(User user) {
+        this.users.remove(user);
+        user.removeAnswer(this);
+    }
+
     @Override
     public String toString() {
         return "Answer{" +
                 "changes=" + changes +
                 ", text='" + text + '\'' +
-                ", question=" + question +
                 '}';
     }
 }

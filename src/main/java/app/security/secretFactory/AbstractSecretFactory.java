@@ -1,4 +1,4 @@
-package app.security.util.secretFactory;
+package app.security.secretFactory;
 
 import app.security.util.HexConvertor;
 import org.apache.log4j.Logger;

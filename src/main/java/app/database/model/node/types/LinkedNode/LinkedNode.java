@@ -2,6 +2,7 @@ package app.database.model.node.types.LinkedNode;
 
 import app.database.model.node.Node;
 import app.database.model.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -23,9 +24,9 @@ import javax.validation.constraints.NotNull;
 @Table(name = "lnd_nodes")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class LinkedNode extends Node {
-    @NotNull
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "nodes_id")
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "next_node_id")
     private Node nextNode;
 
     public Node getNextNode() {

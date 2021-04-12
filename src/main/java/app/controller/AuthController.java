@@ -16,10 +16,11 @@ import app.controller.util.exception.missedToken.MissedTokenException;
 import app.controller.util.exception.missedToken.types.MissedRefreshException;
 import app.controller.util.json.auth.JsonAnswer;
 import app.controller.util.json.auth.JsonForm;
-import app.controller.util.token.JwtUtil;
-import app.controller.util.token.RefreshUtil;
-import app.database.model.Refresh;
 import app.database.model.Setting;
+import app.database.service.NodeService;
+import app.security.util.tokenUtil.JwtUtil;
+import app.security.util.tokenUtil.RefreshUtil;
+import app.database.model.Refresh;
 import app.database.model.user.User;
 import app.database.model.user.types.MailUser;
 import app.database.model.user.types.OauthUser;
@@ -28,9 +29,9 @@ import app.database.service.userService.UserService;
 import app.database.service.userService.types.MailUserService;
 import app.database.service.userService.types.OauthUserService;
 import app.security.Hash;
-import app.security.util.Validator;
-import app.security.util.secretFactory.types.EmailTokenFactory;
-import app.security.util.secretFactory.types.StateFactory;
+import app.security.util.ValidatorUtil;
+import app.security.secretFactory.types.EmailTokenFactory;
+import app.security.secretFactory.types.StateFactory;
 import app.util.AbstractConstant;
 import app.util.LoggerFactory;
 import app.util.constant.LogType;
@@ -43,7 +44,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -69,29 +69,25 @@ import java.util.Properties;
 public class AuthController {
 
     /**
-     * Factory for parsing state - string for identifying user for oauth service
-     */
-    private final static StateFactory stateFactory = new StateFactory();
-
-    /**
      * Logger for recording codes and tokens in the process of the oauth authorisation
      */
     protected final static Logger oauthLogger = LoggerFactory.getLogger(LogType.OAUTH);
-
     /**
      * Logger for recording codes and tokens in the process of the oauth authorisation
      */
     protected final static Logger emailLogger = LoggerFactory.getLogger(LogType.EMAIL);
-
     /**
-     * Json parser
+     * Factory for parsing state - string for identifying user for oauth service
      */
-    private final static Gson gson = new Gson();
-
+    private final static StateFactory stateFactory = new StateFactory();
     /**
      * Factory for producing email tokens
      */
     private final static EmailTokenFactory tokenFactory = new EmailTokenFactory();
+    /**
+     * Json parser
+     */
+    private final static Gson gson = new Gson();
 
     /**
      * Service for interacting with mail users
@@ -114,6 +110,11 @@ public class AuthController {
     private final RefreshService refreshService;
 
     /**
+     * Service for interacting with nodes
+     */
+    private final NodeService nodeService;
+
+    /**
      * Contains properties for each oauth service
      * [provider name]: [Properties]
      */
@@ -122,17 +123,19 @@ public class AuthController {
     /**
      * Class constructor injecting user services
      *
-     * @param mailService   injects basic users service
+     * @param mailService    injects basic users service
      * @param oauthService   injects oauth users service
      * @param userService    injects all users service
      * @param refreshService injects refresh token service
+     * @param nodeService    injects nodes service
      * @throws IOException if props file doesn't exist
      */
-    public AuthController(MailUserService mailService, OauthUserService oauthService, UserService userService, RefreshService refreshService) throws IOException {
+    public AuthController(MailUserService mailService, OauthUserService oauthService, UserService userService, RefreshService refreshService, NodeService nodeService) throws IOException {
         this.mailService = mailService;
         this.oauthService = oauthService;
         this.userService = userService;
         this.refreshService = refreshService;
+        this.nodeService = nodeService;
         this.propsMap = new HashMap<>();
         for (Object providerObj : AbstractConstant.getValues(Provider.class)) {
             String provider = (String) providerObj;
@@ -156,11 +159,6 @@ public class AuthController {
     public String login(@RequestBody JsonForm jsonForm, HttpServletResponse response) {
         JsonAnswer jsonAnswer = new JsonAnswer();
         MailUser user = mailService.getByMail(jsonForm.getMail().toLowerCase());
-
-        System.out.println(mailService.getAll());
-        System.out.println(jsonForm.getMail());
-        System.out.println(user);
-
         if (user == null) {
             jsonAnswer.setMsg(Status.NOT_FOUND);
         } else if (!Hash.check(jsonForm.getPsw(), user.getPsw())) {
@@ -170,9 +168,6 @@ public class AuthController {
             attachTokens(response, user);
             emailLogger.info("login: email:" + user.getMail());
         }
-
-        System.out.println(mailService.getAll());
-
         return gson.toJson(jsonAnswer, jsonAnswer.getClass());
     }
 
@@ -197,12 +192,13 @@ public class AuthController {
 
         if (user != null) {
             jsonAnswer.setMsg(Status.EXISTS);
-        } else if (!Validator.mail(jsonForm.getMail())) {
+        } else if (!ValidatorUtil.mail(jsonForm.getMail())) {
             jsonAnswer.setMsg(Status.BAD_EMAIL);
-        } else if (!Validator.psw(jsonForm.getPsw())) {
+        } else if (!ValidatorUtil.psw(jsonForm.getPsw())) {
             jsonAnswer.setMsg(Status.BAD_PSW);
         } else {
             user = new MailUser();
+            user.setLastNode(nodeService.getFirst());
             user.setSetting(new Setting());
             user.setMail(jsonForm.getMail());
             user.setPsw(Hash.crypt(jsonForm.getPsw()));
@@ -256,8 +252,9 @@ public class AuthController {
         OauthUser user = oauthService.getByOauthId(oauthId);
         if (user == null) {
             user = new OauthUser();
-            user.setOauthId(oauthId);
+            user.setLastNode(nodeService.getFirst());
             user.setSetting(new Setting());
+            user.setOauthId(oauthId);
             oauthService.add(user);
             oauthLogger.info("User with id:" + oauthId + " was created");
         } else {
@@ -316,7 +313,6 @@ public class AuthController {
         refresh.setValue(RefreshUtil.parse());
         user.addToken(refresh);
         userService.update(user);
-        System.out.println(refresh.getValue());
         RefreshUtil.attach(response, refresh);
         JwtUtil.attach(response, user);
     }

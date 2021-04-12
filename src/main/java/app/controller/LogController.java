@@ -35,7 +35,7 @@ public class LogController {
      * Collection storing ids of administrators' accounts,
      * having access to receiving log files.
      */
-    private final HashSet<Long> admins;
+    private final static HashSet<Long> admins = new HashSet<>();
 
     /**
      * Secret key, identifying administrator
@@ -49,7 +49,6 @@ public class LogController {
      */
     public LogController(Auth auth) {
         this.auth = auth;
-        this.admins = new HashSet<>();
         admins.add(2930582334L);
         admins.add(3940340340L);
     }

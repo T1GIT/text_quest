@@ -1,10 +1,15 @@
 package app.database.util;
 
+import app.controller.util.exception.game.types.ModelNotFoundException;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 
 /**
@@ -28,17 +33,12 @@ public abstract class AbstractModel implements Serializable {
 
     }
 
-    /**
-     * Class constructor, specifying id
-     *
-     * @param id record's identifier
-     */
-    public AbstractModel(long id) {
-        this.id = id;
-    }
-
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override

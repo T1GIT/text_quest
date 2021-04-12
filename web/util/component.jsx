@@ -49,7 +49,6 @@ class Component extends React.Component {
     }
 
     reset() {
-        console.log(this)
         for (let node in this.nodes) {
             this.nodes[node].reset()
         }

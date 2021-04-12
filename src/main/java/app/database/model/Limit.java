@@ -53,7 +53,7 @@ public class Limit extends AuditModel {
      * <li> required
      * </ul>
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "var_id", nullable = false)
     @JsonIgnore
     private Var var;

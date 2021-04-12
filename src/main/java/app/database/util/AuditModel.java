@@ -47,22 +47,6 @@ public abstract class AuditModel extends AbstractModel {
     @Column(name = "updatedAt", nullable = false)
     private Date updatedAt;
 
-    /**
-     * Class constructor
-     */
-    public AuditModel() {
-        super();
-    }
-
-    /**
-     * Class constructor specified an id
-     *
-     * @param id to set
-     */
-    public AuditModel(long id) {
-        super(id);
-    }
-
     public Date getCreatedAt() {
         return createdAt;
     }
