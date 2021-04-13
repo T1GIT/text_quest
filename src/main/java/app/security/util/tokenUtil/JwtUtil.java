@@ -2,6 +2,7 @@ package app.security.util.tokenUtil;
 
 import app.controller.oauth.util.constant.SecureParam;
 import app.controller.util.CookieUtil;
+import app.database.util.enums.Role;
 import app.security.util.constants.JwtClaims;
 import app.controller.util.constant.Period;
 import app.database.model.user.User;
@@ -50,6 +51,7 @@ public abstract class JwtUtil {
         userMap.put(JwtClaims.ID, String.valueOf(user.getId()));
         userMap.put(JwtClaims.NAME, user.getName());
         userMap.put(JwtClaims.SOCKET_ID, user.getSocketId());
+        userMap.put(JwtClaims.ROLE, user.getRole().name());
         return Jwts.builder()
                 .setClaims(userMap)
                 .setExpiration(new Date(System.currentTimeMillis() + PERIOD * 1000L))
@@ -73,9 +75,9 @@ public abstract class JwtUtil {
         user.setId(Long.parseLong((String) claims.get(JwtClaims.ID)));
         user.setName((String) claims.get(JwtClaims.NAME));
         user.setSocketId((String) claims.get(JwtClaims.SOCKET_ID));
+        user.setRole(Role.valueOf((String) claims.get(JwtClaims.ROLE)));
         return user;
     }
-
 
     /**
      * Adds refresh token cookie to the response

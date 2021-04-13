@@ -18,17 +18,37 @@ class Game extends Component {
 
     hide = () => super.hide(style.hidden)
 
+    start = () => {
+        const client = new Client();
+        client.brokerURL = `ws://${window.location.host}/game/connect`
+        client.onConnect = this.onConnect(client)
+        client.onStompError = client.onWebSocketError = receipt => console.error(receipt)
+        client.activate()
+    }
+
+    onConnect = (client) => () => axios
+        .get("/game/start")
+        .then(response => {
+            const {socketId, lastNode} = (response.data)
+            if ("delay" in lastNode) {
+                this.showMessage(lastNode)
+            } else {
+                this.showQuestion(lastNode)
+            }
+            client.subscribe(`/user/${socketId}/next_node`, this.onMessage);
+        })
+        .catch(error => console.error(error))
+
     onMessage = (msg) => {
-        console.log(msg.body)
         switch (JSON.parse(msg.body)) {
             case "question": axios
                 .get("/game/question")
-                .then(response => console.log(response.data))
+                .then(response => this.showQuestion(response.data))
                 .catch(error => console.error(error))
                 break
             case "message": axios
                 .get("/game/message")
-                .then(response => console.log(response.data))
+                .then(response => this.showMessage(response.data))
                 .catch(error => console.error(error))
                 break
             default:
@@ -36,17 +56,16 @@ class Game extends Component {
         }
     }
 
-    onConnect = (client) => () => axios
-        .get("/game/start")
-        .then(response => client.subscribe(`/user/${response.data}/next_node`, this.onMessage))
-        .catch(error => console.error(error))
+    showMessage = node => {
+        const {text} = node
 
-    start = () => {
-        const client = new Client();
-        client.brokerURL = `ws://${window.location.host}/game/connect`
-        client.onConnect = this.onConnect(client)
-        client.onStompError = client.onWebSocketError = receipt => console.error(receipt)
-        client.activate()
+
+        console.log("message", text)
+    }
+
+    showQuestion = node => {
+        const {answers} = node;
+        console.log("question", answers)
     }
 
     reset() {

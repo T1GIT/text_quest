@@ -19,6 +19,7 @@ import app.database.model.user.User;
 import app.database.service.HistoryService;
 import app.database.service.NodeService;
 import app.database.service.userService.UserService;
+import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.util.List;
@@ -68,7 +69,8 @@ public class NotifyTimer extends TimerTask {
     public void run() {
         User user = userService.getById(userId);
         if (user.getLastNode().getClass() != Question.class) {
-            Node nextNode = nodeService.getById(getNextLinkedNode(user));
+            long nextNodeId = getNextLinkedNode(user.getLastNode(), user.getStates());
+            LinkedNode nextNode = (LinkedNode) nodeService.getById(nextNodeId);
             user.setLastNode(nextNode);
             userService.update(user);
             addHistory(user, nextNode);
@@ -76,13 +78,12 @@ public class NotifyTimer extends TimerTask {
         }
     }
 
-    private long getNextLinkedNode(User user) throws GoingThrowQuestionWIithoutAnswerException, FinishException {
-        Node node = user.getLastNode();
+    private long getNextLinkedNode(Node node, List<State> stateList) throws GoingThrowQuestionWIithoutAnswerException, FinishException {
         Node nextNode;
         if (node == null) {
             throw new FinishException();
         } else if (node.getClass() == Fork.class) {
-            Branch branch = chooseBranch(((Fork) node).getBranches(), user.getStates());
+            Branch branch = chooseBranch(((Fork) node).getBranches(), stateList);
             nextNode = branch.getNextNode();
         } else if (node.getClass() == Message.class) {
             nextNode = ((LinkedNode) node).getNextNode();
@@ -90,7 +91,7 @@ public class NotifyTimer extends TimerTask {
             throw new NodeTypeException(node.getClass());
         }
         if (nextNode.getClass() == Fork.class) {
-            return getNextLinkedNode(user);
+            return getNextLinkedNode(nextNode, stateList);
         }
         return nextNode.getId();
     }

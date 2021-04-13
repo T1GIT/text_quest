@@ -2,7 +2,9 @@ package app.database.model.user;
 
 import app.database.model.*;
 import app.database.model.node.Node;
+import app.database.model.node.types.LinkedNode.LinkedNode;
 import app.database.util.AuditModel;
+import app.database.util.enums.Role;
 import app.security.util.constants.SecretLength;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -46,9 +48,13 @@ public class User extends AuditModel {
     @Column(unique = true, length = SecretLength.SOCKET_ID)
     private String socketId;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "last_node_id")
-    private Node lastNode = null;
+    private LinkedNode lastNode = null;
 
     /**
      * Refresh tokens of the user
@@ -97,7 +103,7 @@ public class User extends AuditModel {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
     private Setting setting;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "student_answers",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -112,11 +118,15 @@ public class User extends AuditModel {
         return socketId;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
     public Setting getSetting() {
         return setting;
     }
 
-    public Node getLastNode() {
+    public LinkedNode getLastNode() {
         return lastNode;
     }
 
@@ -140,7 +150,11 @@ public class User extends AuditModel {
         this.socketId = socketId;
     }
 
-    public void setLastNode(Node lastNode) {
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public void setLastNode(LinkedNode lastNode) {
         this.lastNode = lastNode;
     }
 

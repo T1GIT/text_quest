@@ -1,6 +1,8 @@
 package app.controller;
 
 
+import app.database.model.user.User;
+import app.database.util.enums.Role;
 import app.security.auth.Auth;
 import app.util.LoggerFactory;
 import app.util.constant.LogType;
@@ -32,12 +34,6 @@ public class LogController {
     private final static Logger adminLogger = LoggerFactory.getLogger(LogType.ADMIN);
 
     /**
-     * Collection storing ids of administrators' accounts,
-     * having access to receiving log files.
-     */
-    private final static HashSet<Long> admins = new HashSet<>();
-
-    /**
      * Secret key, identifying administrator
      */
     private final Auth auth;
@@ -49,8 +45,6 @@ public class LogController {
      */
     public LogController(Auth auth) {
         this.auth = auth;
-        admins.add(2930582334L);
-        admins.add(3940340340L);
     }
 
     /**
@@ -63,9 +57,11 @@ public class LogController {
     @GetMapping("/{name}")
     @ResponseBody
     public String log(@PathVariable String name) {
-        if (admins.contains(auth.getUser().getId()))
+        User user = auth.getUser();
+        if (user.getRole() != Role.ADMIN)
             return "You are not an administrator";
-        adminLogger.info(auth.getUser().getId() + ":" + name + ".log");
+        adminLogger.info(String.format("admin id: %5d name: %s.log",
+                user.getId(), name));
         StringBuilder sb = new StringBuilder();
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(".log/" + name + ".log"))) {
             String line;

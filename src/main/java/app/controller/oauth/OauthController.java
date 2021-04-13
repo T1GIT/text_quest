@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Random;
+import java.util.UUID;
 
 
 /**
@@ -112,13 +114,14 @@ public abstract class OauthController { // TODO: 06.03.2021 Add Steam and Telegr
      */
     public String oauthEndpoint(HttpServletRequest request, HttpServletResponse response) {
         try {
+            UUID sessionNumber = UUID.randomUUID();
             validateState(request, response);
             String code = receiveCode(request);
-            oauthLogger.info("code: " + code);
+            oauthLogger.info(String.format("session: %s code: %s", sessionNumber, code));
             String accessToken = receiveToken(code);
-            oauthLogger.info("token: " + accessToken);
+            oauthLogger.info(String.format("session: %s access token: %s", sessionNumber, accessToken));
             String oauthId = receiveId(accessToken);
-            oauthLogger.info("id: " + oauthId);
+            oauthLogger.info(String.format("session: %s id: %s", sessionNumber, oauthId));
             request.setAttribute(SecureParam.OAUTH_ID, provider + ":" + oauthId);
             return "forward:/auth/oauth";
         } catch (OauthException e) {

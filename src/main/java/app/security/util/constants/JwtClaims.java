@@ -7,5 +7,6 @@ public class JwtClaims extends AbstractConstant {
     public final static String ID = "id";
     public final static String NAME = "name";
     public final static String SOCKET_ID = "socketId";
+    public final static String ROLE = "role";
 
 }

@@ -3,6 +3,7 @@ package app.controller;
 
 import app.controller.util.NotifyTimer;
 import app.controller.util.exception.game.types.ModelNotFoundException;
+import app.controller.util.json.game.InitialResponse;
 import app.database.model.*;
 import app.database.model.node.Node;
 import app.database.model.node.types.LinkedNode.types.Message;
@@ -15,6 +16,9 @@ import app.security.auth.Auth;
 import app.security.secretFactory.types.SocketIdFactory;
 import app.util.LoggerFactory;
 import app.util.constant.LogType;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -28,13 +32,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 // TODO: Document
-@Controller
+@RestController
 @RequestMapping("/game")
 public class GameController {
 
     private final static Logger errLogger = LoggerFactory.getLogger(LogType.ERROR);
-
     private final static SocketIdFactory socketIdFactory = new SocketIdFactory();
+    private final static Gson gson = new Gson();
 
     private final SimpMessagingTemplate messagingTemplate;
     private final Auth auth;
@@ -54,9 +58,8 @@ public class GameController {
         this.historyService = historyService;
     }
 
-    @GetMapping("/start")
-    @ResponseBody
-    public String start() {
+    @GetMapping(value = "/start", produces = "application/json")
+    public InitialResponse start() {
         User user = userService.getById(auth.getUser().getId());
         String socketId = socketIdFactory.create();
         user.setSocketId(socketId);
@@ -64,17 +67,18 @@ public class GameController {
         TimerTask task = new NotifyTimer(socketId, user.getId(), messagingTemplate,
                 userService, nodeService, historyService);
         new Timer().schedule(task, 1000);
-        return socketId;
+        InitialResponse response = new InitialResponse();
+        response.setSocketId(socketId);
+        response.setLastNode(user.getLastNode());
+        return response;
     }
 
     @GetMapping(value = "/message", produces = "application/json")
-    @ResponseBody
     public Message sendMessage() {
         return (Message) userService.getById(auth.getUser().getId()).getLastNode();
     }
 
     @GetMapping(value = "/question", produces = "application/json")
-    @ResponseBody
     public Question sendQuestion() {
         return (Question) userService.getById(auth.getUser().getId()).getLastNode();
     }

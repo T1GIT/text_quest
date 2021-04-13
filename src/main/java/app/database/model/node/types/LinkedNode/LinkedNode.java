@@ -2,6 +2,7 @@ package app.database.model.node.types.LinkedNode;
 
 import app.database.model.node.Node;
 import app.database.model.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
