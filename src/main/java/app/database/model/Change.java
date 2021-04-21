@@ -90,7 +90,6 @@ public class Change extends AuditModel {
         return "Change{" +
                 "val=" + val +
                 ", var=" + var +
-                ", answer=" + answer +
                 '}';
     }
 }

@@ -48,13 +48,17 @@ public class User extends AuditModel {
     @Column(unique = true, length = SecretLength.SOCKET_ID)
     private String socketId;
 
+    /**
+     * Role, specifying user's rights
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * </ul>
+     */
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "last_node_id")
-    private LinkedNode lastNode = null;
 
     /**
      * Refresh tokens of the user
@@ -126,10 +130,6 @@ public class User extends AuditModel {
         return setting;
     }
 
-    public LinkedNode getLastNode() {
-        return lastNode;
-    }
-
     public List<Refresh> getTokens() {
         return refreshes;
     }
@@ -152,10 +152,6 @@ public class User extends AuditModel {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public void setLastNode(LinkedNode lastNode) {
-        this.lastNode = lastNode;
     }
 
     public void setSetting(Setting setting) {
@@ -195,12 +191,10 @@ public class User extends AuditModel {
 
     public void addAnswer(Answer answer) {
         this.answers.add(answer);
-        answer.addUser(this);
     }
 
     public void removeAnswer(Answer answer) {
         this.answers.remove(answer);
-        answer.removeUser(this);
     }
 
     @Override

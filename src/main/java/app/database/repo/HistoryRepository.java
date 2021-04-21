@@ -17,4 +17,6 @@ import java.util.List;
 public interface HistoryRepository extends JpaRepository<History, Long> {
 
     List<History> findFirst10ByUserIdOrderByCreatedAtDesc(long userId);
+
+    History findFirstByUserIdOrderByCreatedAtDesc(long userId);
 }

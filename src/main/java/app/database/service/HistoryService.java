@@ -22,6 +22,8 @@ public interface HistoryService extends ServiceInterface<History> {
      *
      * @return 10 last nodes
      */
-    List<History> getLastNodes(User user);
+    List<History> getLast10(User user);
+
+    History getLast(User user);
 
 }

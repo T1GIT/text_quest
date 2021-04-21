@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
  * specified in the {@link LinkedNode#nextNode}.
  */
 @Entity
-@Table(name = "lnd_nodes")
+@Table(name = "linked_nodes")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class LinkedNode extends Node {
     @JsonIgnore

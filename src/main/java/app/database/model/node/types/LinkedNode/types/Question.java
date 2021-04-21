@@ -49,7 +49,7 @@ public class Question extends LinkedNode {
 
     @Override
     public String toString() {
-        return "OutMsg{" +
+        return "Question{" +
                 "answers=" + answers +
                 '}';
     }

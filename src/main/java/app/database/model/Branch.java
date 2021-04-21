@@ -92,8 +92,6 @@ public class Branch extends AuditModel {
     public String toString() {
         return "Branch{" +
                 "limits=" + limits +
-                ", fork=" + fork +
-                ", nextNode=" + nextNode +
                 '}';
     }
 }

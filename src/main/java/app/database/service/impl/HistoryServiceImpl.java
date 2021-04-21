@@ -27,9 +27,14 @@ public class HistoryServiceImpl
     }
 
     @Override
-    public List<History> getLastNodes(User user) {
+    public List<History> getLast10(User user) {
         List<History> historyList = repository.findFirst10ByUserIdOrderByCreatedAtDesc(user.getId());
         Collections.reverse(historyList);
         return historyList;
+    }
+
+    @Override
+    public History getLast(User user) {
+        return repository.findFirstByUserIdOrderByCreatedAtDesc(user.getId());
     }
 }

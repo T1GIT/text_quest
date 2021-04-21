@@ -1,4 +1,5 @@
-@use 'web/sass' as glob_m
+@use 'web/sass/config' as glob_c
+@use 'web/sass/mixin' as glob_m
 @import "config"
 
 .game
@@ -14,3 +15,38 @@
     opacity: 0
     pointer-events: none
 
+  .message
+    z-index: 10
+    position: absolute
+    &:not(.hidden)
+      opacity: 1
+    &.hidden
+      opacity: 0
+
+    .row
+      +glob_m.ani(normal)
+      margin: $v_mar 0
+      width: max-content
+      position: relative
+      &:not(.hidden)
+        opacity: 1
+        top: 0
+      &.hidden
+        opacity: 0
+        top: $row_offset
+
+  .question
+    +glob_m.ani(normal)
+    z-index: 10
+    position: absolute
+    &:not(.hidden)
+      opacity: 1
+    &.hidden
+      opacity: 0
+
+      .btn
+        +glob_m.ani(normal)
+        box-sizing: border-box
+        border: glob_c.$border_width solid glob_c.$main_clr
+        &:hover
+          border-width: glob_c.$border_width + 5px

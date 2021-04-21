@@ -31,19 +31,19 @@ public class Limit extends AuditModel {
      * Low bound of the variable state.
      * If it set variable's state must be more then its value.
      */
-    private int min;
+    private Integer min;
 
     /**
      * High bound of the variable state.
      * If it set variable's state must be less then its value.
      */
-    private int max;
+    private Integer max;
 
     /**
      * Low bound of the variable state.
      * If it set variable's state must be equal its value.
      */
-    private int equal;
+    private Integer equal;
 
     /**
      * Defines, what variable will be bounded.
@@ -71,27 +71,27 @@ public class Limit extends AuditModel {
     @JsonIgnore
     private Branch branch;
 
-    public int getMin() {
+    public Integer getMin() {
         return min;
     }
 
-    public void setMin(int min) {
+    public void setMin(Integer min) {
         this.min = min;
     }
 
-    public int getMax() {
+    public Integer getMax() {
         return max;
     }
 
-    public void setMax(int max) {
+    public void setMax(Integer max) {
         this.max = max;
     }
 
-    public int getEqual() {
+    public Integer getEqual() {
         return equal;
     }
 
-    public void setEqual(int is) {
+    public void setEqual(Integer is) {
         this.equal = is;
     }
 

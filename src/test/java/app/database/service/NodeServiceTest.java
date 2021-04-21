@@ -6,6 +6,8 @@ import app.database.model.node.types.LinkedNode.LinkedNode;
 import app.database.util.modelFactory.types.BranchFactory;
 import app.database.util.modelFactory.types.node.NodeFactory;
 import app.database.util.modelFactory.types.node.types.ForkFactory;
+import org.hibernate.Hibernate;
+import org.hibernate.proxy.HibernateProxy;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -63,16 +65,23 @@ class NodeServiceTest {
     }
 
     @Test
+    @Transactional
     void checkTypeDefinition() {
-        LinkedNode linkedNode = new LinkedNode();
-        try {
-            Node fork = new Fork();
-            linkedNode.setNextNode(fork);
-            nodeService.add(linkedNode);
-            Node node = linkedNode.getNextNode();
-            assert Fork.class == node.getClass();
-        } finally {
-            nodeService.delete(linkedNode);
-        }
+        Node lndNode = nodeService.getById(6L);
+        System.out.println(lndNode);
+        System.out.println(lndNode.getClass());
+        System.out.println(((LinkedNode) lndNode).getNextNode() instanceof HibernateProxy);
+        Node nextNode = (Node) Hibernate.unproxy(((LinkedNode) lndNode).getNextNode());
+        System.out.println(nextNode.getClass());
+//        LinkedNode linkedNode = new LinkedNode();
+//        try {
+//            Node fork = new Fork();
+//            linkedNode.setNextNode(fork);
+//            nodeService.add(linkedNode);
+//            Node node = linkedNode.getNextNode();
+//            assert Fork.class == node.getClass();
+//        } finally {
+//            nodeService.delete(linkedNode);
+//        }
     }
 }

@@ -52,7 +52,7 @@ public class Message extends LinkedNode {
 
     @Override
     public String toString() {
-        return "InMsg{" +
+        return "Message{" +
                 "delay=" + delay +
                 ", msg=" + text +
                 '}';

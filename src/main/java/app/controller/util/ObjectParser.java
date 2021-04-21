@@ -9,6 +9,7 @@ import java.util.Set;
 /**
  * Translates Java object into a JavaScript object in the text representation.
  */
+@Deprecated
 public abstract class ObjectParser {
 
     /**

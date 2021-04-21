@@ -9,20 +9,19 @@ import app.controller.oauth.util.constant.ReqParam;
 import app.controller.oauth.util.constant.SecureParam;
 import app.controller.oauth.util.request.UrlBuilder;
 import app.controller.util.CookieUtil;
-import app.controller.util.ObjectParser;
 import app.controller.util.constant.Period;
 import app.controller.util.constant.Status;
 import app.controller.util.exception.missedToken.MissedTokenException;
 import app.controller.util.exception.missedToken.types.MissedRefreshException;
 import app.controller.util.json.auth.JsonAnswer;
 import app.controller.util.json.auth.JsonForm;
-import app.database.model.Setting;
+import app.database.model.*;
 import app.database.model.node.types.LinkedNode.LinkedNode;
 import app.database.service.NodeService;
+import app.database.service.VarService;
 import app.database.util.enums.Role;
 import app.security.util.tokenUtil.JwtUtil;
 import app.security.util.tokenUtil.RefreshUtil;
-import app.database.model.Refresh;
 import app.database.model.user.User;
 import app.database.model.user.types.MailUser;
 import app.database.model.user.types.OauthUser;
@@ -39,9 +38,8 @@ import app.util.LoggerFactory;
 import app.util.constant.LogType;
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -68,7 +66,7 @@ import java.util.Properties;
  * </ul>
  * Either it sends parsed url to oauth buttons.
  */
-@RestController
+@Controller
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -118,6 +116,8 @@ public class AuthController {
      */
     private final NodeService nodeService;
 
+    private final VarService varService;
+
     /**
      * Contains properties for each oauth service
      * [provider name]: [Properties]
@@ -132,14 +132,16 @@ public class AuthController {
      * @param userService    injects all users service
      * @param refreshService injects refresh token service
      * @param nodeService    injects nodes service
+     * @param varService
      * @throws IOException if props file doesn't exist
      */
-    public AuthController(MailUserService mailService, OauthUserService oauthService, UserService userService, RefreshService refreshService, NodeService nodeService) throws IOException {
+    public AuthController(MailUserService mailService, OauthUserService oauthService, UserService userService, RefreshService refreshService, NodeService nodeService, VarService varService) throws IOException {
         this.mailService = mailService;
         this.oauthService = oauthService;
         this.userService = userService;
         this.refreshService = refreshService;
         this.nodeService = nodeService;
+        this.varService = varService;
         this.propsMap = new HashMap<>();
         for (Object providerObj : AbstractConstant.getValues(Provider.class)) {
             String provider = (String) providerObj;
@@ -158,7 +160,8 @@ public class AuthController {
      * @param response response to attach JWT and Refresh tokens
      * @return json answer, containing if login is confirmed and the message
      */
-    @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
+    @ResponseBody
+    @PostMapping(path = "/login", consumes = MimeTypeUtils.APPLICATION_JSON_VALUE, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
     public String login(@RequestBody JsonForm jsonForm, HttpServletResponse response) {
         JsonAnswer jsonAnswer = new JsonAnswer();
         MailUser user = mailService.getByMail(jsonForm.getMail().toLowerCase());
@@ -183,7 +186,8 @@ public class AuthController {
      * @param response response to attach JWT and Refresh tokens
      * @return json answer, containing if register is confirmed and the message
      */
-    @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
+    @ResponseBody
+    @PostMapping(path = "/register", consumes = MimeTypeUtils.APPLICATION_JSON_VALUE, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
     public String register(@RequestBody JsonForm jsonForm, HttpServletResponse response) {
         JsonAnswer jsonAnswer = new JsonAnswer();
         MailUser user = mailService.getByMail(jsonForm.getMail().toLowerCase());
@@ -194,7 +198,7 @@ public class AuthController {
         } else if (!ValidatorUtil.psw(jsonForm.getPsw())) {
             jsonAnswer.setMsg(Status.BAD_PSW);
         } else {
-            user = (MailUser) getUserTemplate();
+            user = wrapUserTemplate(new MailUser());
             user.setMail(jsonForm.getMail());
             user.setPsw(Hash.crypt(jsonForm.getPsw()));
             user.setToken(tokenFactory.create());
@@ -206,9 +210,9 @@ public class AuthController {
         return gson.toJson(jsonAnswer, jsonAnswer.getClass());
     }
 
-
-    @PostMapping(path = "/logout", produces = "application/json")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
+    @ResponseBody
+    @PostMapping(path = "/logout", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+    public JsonAnswer logout(HttpServletRequest request, HttpServletResponse response) {
         JsonAnswer jsonAnswer = null;
         try {
             jsonAnswer = new JsonAnswer();
@@ -226,7 +230,7 @@ public class AuthController {
         }
         CookieUtil.remove(response, SecureParam.JWT);
         CookieUtil.remove(response, SecureParam.REFRESH);
-        return gson.toJson(jsonAnswer, jsonAnswer.getClass());
+        return jsonAnswer;
     }
 
     /**
@@ -238,11 +242,11 @@ public class AuthController {
      * @return redirect to the home page
      */
     @GetMapping("/oauth")
-    public ResponseEntity<Object> oauth(HttpServletRequest request, HttpServletResponse response) {
+    public String oauth(HttpServletRequest request, HttpServletResponse response) {
         String oauthId = (String) request.getAttribute(SecureParam.OAUTH_ID);
         OauthUser user = oauthService.getByOauthId(oauthId);
         if (user == null) {
-            user = (OauthUser) getUserTemplate();
+            user = wrapUserTemplate(new OauthUser());
             user.setOauthId(oauthId);
             oauthService.add(user);
             oauthLogger.info("User with id:" + oauthId + " was created");
@@ -250,7 +254,8 @@ public class AuthController {
             oauthLogger.info("User with id:" + oauthId + " was in the database");
         }
         attachTokens(response, user);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        return "redirect:/";
     }
 
     /**
@@ -265,8 +270,9 @@ public class AuthController {
      * @return json map with link for each provider
      * @throws IOException if an input or output error occurs
      */
-    @PostMapping(path = "/url", produces = "application/json")
-    public String getBtnUrl(HttpServletResponse response) throws IOException {
+    @ResponseBody
+    @PostMapping(path = "/url", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+    public HashMap<String, String> getBtnUrl(HttpServletResponse response) throws IOException {
         String state = stateFactory.create();
         CookieUtil.add(response, SecureParam.STATE, state, Period.YEAR);
         HashMap<String, String> urlMap = new HashMap<>();
@@ -284,7 +290,7 @@ public class AuthController {
                     .addParam(ReqParam.SCOPE, props.getProperty(PropName.SCOPE));
             urlMap.put(provider, urlBuilder.build());
         }
-        return ObjectParser.parse(urlMap);
+        return urlMap;
     }
 
     /**
@@ -306,11 +312,16 @@ public class AuthController {
         JwtUtil.attach(response, user);
     }
 
-    private User getUserTemplate() {
-        User user = new User();
+    private <T extends User> T wrapUserTemplate(T user) {
         user.setSetting(new Setting());
-        user.setLastNode((LinkedNode) nodeService.getFirst());
+        user.addHistory(new History(user, (LinkedNode) nodeService.getFirst()));
         user.setRole(Role.BASIC);
+        for (Var var: varService.getAll()) {
+            State state = new State();
+            state.setVar(var);
+            state.setVal(0);
+            user.addState(state);
+        }
         return user;
     }
 }

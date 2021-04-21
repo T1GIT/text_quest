@@ -2,9 +2,11 @@ package app.database.util.modelFactory.types;
 
 import app.database.model.History;
 import app.database.model.node.Node;
+import app.database.model.node.types.LinkedNode.LinkedNode;
 import app.database.model.user.User;
 import app.database.util.modelFactory.AbstractModelFactory;
 import app.database.util.modelFactory.types.node.NodeFactory;
+import app.database.util.modelFactory.types.node.types.LinkedNode.LinkedNodeFactory;
 
 
 /**
@@ -12,9 +14,9 @@ import app.database.util.modelFactory.types.node.NodeFactory;
  */
 public class HistoryFactory extends AbstractModelFactory<History> {
 
-    private final static NodeFactory nodeFactory = new NodeFactory();
+    private final static LinkedNodeFactory nodeFactory = new LinkedNodeFactory();
     private final static UserFactory userFactory = new UserFactory();
-    private final Node node = nodeFactory.create();
+    private final LinkedNode node = nodeFactory.create();
     private final User user = userFactory.create();
 
 

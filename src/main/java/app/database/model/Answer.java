@@ -95,12 +95,10 @@ public class Answer extends AuditModel {// TODO: May be add "aborted"(link to ne
 
     public void addUser(User user) {
         this.users.add(user);
-        user.addAnswer(this);
     }
 
     public void removeUser(User user) {
         this.users.remove(user);
-        user.removeAnswer(this);
     }
 
     @Override

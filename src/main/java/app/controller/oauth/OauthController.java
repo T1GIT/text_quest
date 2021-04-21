@@ -143,7 +143,6 @@ public abstract class OauthController { // TODO: 06.03.2021 Add Steam and Telegr
         String stateCookie = CookieUtil.get(request, ReqParam.STATE);
         if (stateCookie == null)
             throw new MissedStateCookieException();
-        CookieUtil.remove(response, ReqParam.STATE);
         if (!state.equals(stateCookie))
             throw new InvalidStateException(state, stateCookie);
     }

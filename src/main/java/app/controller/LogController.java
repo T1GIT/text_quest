@@ -2,6 +2,7 @@ package app.controller;
 
 
 import app.database.model.user.User;
+import app.database.service.userService.UserService;
 import app.database.util.enums.Role;
 import app.security.auth.Auth;
 import app.util.LoggerFactory;
@@ -17,7 +18,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashSet;
 
 /**
  * Controller for getting logs.
@@ -38,13 +38,17 @@ public class LogController {
      */
     private final Auth auth;
 
+    private final UserService userService;
+
     /**
      * Class constructor specified an auth context
      *
      * @param auth for getting administrator
+     * @param userService
      */
-    public LogController(Auth auth) {
+    public LogController(Auth auth, UserService userService) {
         this.auth = auth;
+        this.userService = userService;
     }
 
     /**
@@ -57,7 +61,7 @@ public class LogController {
     @GetMapping("/{name}")
     @ResponseBody
     public String log(@PathVariable String name) {
-        User user = auth.getUser();
+        User user = userService.getById(auth.getUser().getId());
         if (user.getRole() != Role.ADMIN)
             return "You are not an administrator";
         adminLogger.info(String.format("admin id: %5d name: %s.log",
