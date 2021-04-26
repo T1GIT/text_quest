@@ -24,7 +24,7 @@ import java.net.MalformedURLException;
 @EnableJpaAuditing
 public class TextQuestApplication {
 
-    private static final String rootUrl = "http://localhost:8080"; // PROD: Change
+    private static final String rootUrl = "http://localhost:8080"; // DEPLOY: Change
 
     /**
      * Allows getting root url.
