@@ -1,4 +1,4 @@
-package app.controller.util;
+package app.controller.config;
 
 import app.controller.filter.SecurityFilter;
 import app.database.service.RefreshService;

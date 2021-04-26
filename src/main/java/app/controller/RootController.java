@@ -2,23 +2,14 @@ package app.controller;
 
 
 import app.controller.oauth.util.constant.ReqParam;
-import app.controller.oauth.util.constant.SecureParam;
-import app.controller.oauth.util.exception.types.MissedStateCookieException;
 import app.controller.util.CookieUtil;
-import app.controller.util.ObjectParser;
 import app.controller.util.constant.Period;
 import app.security.auth.Auth;
-import app.security.util.secretFactory.types.StateFactory;
-import app.util.LoggerFactory;
-import app.util.constant.LogType;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -65,8 +56,8 @@ public class RootController {
     public String root(Model model, HttpServletRequest request, HttpServletResponse response) {
         String errorCookie = CookieUtil.get(request, ReqParam.ERROR);
         CookieUtil.add(response, ReqParam.ERROR, null, Period.YEAR);
-        model.addAttribute("isAuthorised", ObjectParser.parse(auth.isAuthenticated()));
-        model.addAttribute("error", ObjectParser.parse(errorCookie));
+        model.addAttribute("isAuthorised", auth.isAuthenticated());
+        model.addAttribute("error", errorCookie);
         return "index.min";
     }
 

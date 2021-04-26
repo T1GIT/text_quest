@@ -3,6 +3,7 @@ import style from "./root.sass";
 import AuthPage from "./auth-page/auth-page";
 import Game from "./game/game";
 import Component from "../util/component";
+import axios from "axios";
 
 class Root extends Component {
 
@@ -15,6 +16,7 @@ class Root extends Component {
     afterRender() {
         window.login = this.login
         window.logout = this.logout
+        window.onbeforeunload = this.nodes.game.stop
         if (window.isAuthorised) {
             this.nodes.auth_page.hide()
         } else {
@@ -38,6 +40,7 @@ class Root extends Component {
         auth_page.hide()
         auth_page.reset()
         window.isAuthorised = true
+        game.start()
     }
 
     logout = () => {
@@ -45,6 +48,7 @@ class Root extends Component {
         auth_page.show()
         game.hide()
         game.reset()
+        this.nodes.game.stop()
         window.isAuthorised = false
     }
 

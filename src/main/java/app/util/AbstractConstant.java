@@ -30,10 +30,9 @@ public abstract class AbstractConstant {
      * Makes an array of all constants names.
      *
      * @param constantClass source of constants
-     * @param <T>           type of the class
      * @return array of constants names
      */
-    public static <T> String[] getNames(Class<T> constantClass) {
+    public static String[] getNames(Class<? extends AbstractConstant> constantClass) {
         Field[] fields = constantClass.getFields();
         String[] names = new String[fields.length];
         for (int i = 0; i < fields.length; i++) {
@@ -46,10 +45,9 @@ public abstract class AbstractConstant {
      * Makes an array of all constants values.
      *
      * @param constantClass source of constants
-     * @param <T>           type of the class
      * @return array of constants values
      */
-    public static <T> Object[] getValues(Class<T> constantClass) {
+    public static Object[] getValues(Class<? extends AbstractConstant> constantClass) {
         Field[] fields = constantClass.getFields();
         Object[] values = new Object[fields.length];
         for (int i = 0; i < fields.length; i++) {
@@ -65,10 +63,9 @@ public abstract class AbstractConstant {
      * Makes a map of all constants.
      *
      * @param constantClass source of constants
-     * @param <T>           type of the class
      * @return map of constants
      */
-    public static <T> HashMap<String, Object> getMap(Class<T> constantClass) {
+    public static HashMap<String, Object> getMap(Class<? extends AbstractConstant> constantClass) {
         Field[] fields = constantClass.getFields();
         HashMap<String, Object> map = new HashMap<>();
         for (Field field : fields) {
@@ -85,10 +82,9 @@ public abstract class AbstractConstant {
      *
      * @param constantClass source of constants
      * @param name          for searching
-     * @param <T>           type of the class
      * @return value of the field or null if field with given name not exist
      */
-    public static <T> Object getByName(Class<T> constantClass, String name) {
+    public static Object getByName(Class<? extends AbstractConstant> constantClass, String name) {
         try {
             return constantClass.getField(name);
         } catch (NoSuchFieldException e) {

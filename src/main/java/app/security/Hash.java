@@ -1,7 +1,7 @@
 package app.security;
 
+import app.security.secretFactory.types.SaltFactory;
 import app.security.util.HexConvertor;
-import app.security.util.secretFactory.types.SaltFactory;
 import org.apache.log4j.Logger;
 
 import javax.crypto.SecretKeyFactory;

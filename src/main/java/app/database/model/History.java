@@ -1,6 +1,7 @@
 package app.database.model;
 
 import app.database.model.node.Node;
+import app.database.model.node.types.LinkedNode.LinkedNode;
 import app.database.model.user.User;
 import app.database.util.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,14 +28,13 @@ public class History extends AuditModel {
      * <p>
      * <b>Constraints:</b>
      * <ul>
-     * <li> required
      * <li> constant
      * </ul>
      */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "msg_id", nullable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "node_id", updatable = false)
     @JsonIgnore
-    private Node node;
+    private LinkedNode node;
 
     /**
      * User, who got this message
@@ -50,11 +50,11 @@ public class History extends AuditModel {
     @JsonIgnore
     private User user;
 
-    public Node getNode() {
+    public LinkedNode getNode() {
         return node;
     }
 
-    public void setNode(Node node) {
+    public void setNode(LinkedNode node) {
         this.node = node;
     }
 
@@ -64,6 +64,14 @@ public class History extends AuditModel {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public History() {
+    }
+
+    public History(User user, LinkedNode node) {
+        this.user = user;
+        this.node = node;
     }
 
     @Override

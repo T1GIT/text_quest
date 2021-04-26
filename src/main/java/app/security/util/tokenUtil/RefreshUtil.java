@@ -1,10 +1,10 @@
-package app.controller.util.token;
+package app.security.util.tokenUtil;
 
 import app.controller.oauth.util.constant.SecureParam;
 import app.controller.util.CookieUtil;
 import app.controller.util.constant.Period;
 import app.database.model.Refresh;
-import app.security.util.secretFactory.types.RefreshFactory;
+import app.security.secretFactory.types.RefreshFactory;
 
 import javax.servlet.http.HttpServletResponse;
 

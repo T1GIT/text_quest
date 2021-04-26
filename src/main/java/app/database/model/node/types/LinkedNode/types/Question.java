@@ -7,10 +7,7 @@ import app.database.model.Var;
 import app.database.model.node.types.LinkedNode.LinkedNode;
 import app.database.model.user.User;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class Question extends LinkedNode {
     /**
      * Collection of the possible answers
      */
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<Answer> answers = new ArrayList<>();
 
     public List<Answer> getAnswers() {
@@ -52,7 +49,7 @@ public class Question extends LinkedNode {
 
     @Override
     public String toString() {
-        return "OutMsg{" +
+        return "Question{" +
                 "answers=" + answers +
                 '}';
     }

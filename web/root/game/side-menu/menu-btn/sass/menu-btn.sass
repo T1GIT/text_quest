@@ -3,14 +3,18 @@
 @import "config"
 
 .menu_btn
-  +glob_m.ani(normal)
-  z-index: 2
+  +glob_m.ani(2s)
+  z-index: 11
   position: absolute
   top: $offset
   right: $offset
   width: $btn_size
   height: $btn_size
   margin: $btn_mar
+  opacity: 1
+
+  &.hidden
+    opacity: 0
 
   div
     +glob_m.ani(normal)

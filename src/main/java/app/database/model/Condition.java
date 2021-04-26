@@ -17,33 +17,33 @@ import javax.persistence.*;
  * <p>
  * <b>Logic:</b>
  * When {@link User user}  reaches {@link Fork fork} game can choice the right next
- * {@link Node node} depend on {@link Limit limits}: required {@link State state}  of
+ * {@link Node node} depend on {@link Condition limits}: required {@link State state}  of
  * {@link Var variables}.
  * <p>
- * Variable state must be more then {@link Limit#min} if it set,
- * equal to {@link Limit#equal} if it set and less then {@link Limit#max} if it set.
+ * Variable state must be more then {@link Condition#min} if it set,
+ * equal to {@link Condition#equal} if it set and less then {@link Condition#max} if it set.
  */
 @Entity
-@Table(name = "limits")
-public class Limit extends AuditModel {
+@Table(name = "conditions")
+public class Condition extends AuditModel {
 
     /**
      * Low bound of the variable state.
      * If it set variable's state must be more then its value.
      */
-    private int min;
+    private Integer min;
 
     /**
      * High bound of the variable state.
      * If it set variable's state must be less then its value.
      */
-    private int max;
+    private Integer max;
 
     /**
      * Low bound of the variable state.
      * If it set variable's state must be equal its value.
      */
-    private int equal;
+    private Integer equal;
 
     /**
      * Defines, what variable will be bounded.
@@ -53,7 +53,7 @@ public class Limit extends AuditModel {
      * <li> required
      * </ul>
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "var_id", nullable = false)
     @JsonIgnore
     private Var var;
@@ -71,27 +71,27 @@ public class Limit extends AuditModel {
     @JsonIgnore
     private Branch branch;
 
-    public int getMin() {
+    public Integer getMin() {
         return min;
     }
 
-    public void setMin(int min) {
+    public void setMin(Integer min) {
         this.min = min;
     }
 
-    public int getMax() {
+    public Integer getMax() {
         return max;
     }
 
-    public void setMax(int max) {
+    public void setMax(Integer max) {
         this.max = max;
     }
 
-    public int getEqual() {
+    public Integer getEqual() {
         return equal;
     }
 
-    public void setEqual(int is) {
+    public void setEqual(Integer is) {
         this.equal = is;
     }
 

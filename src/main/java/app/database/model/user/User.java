@@ -1,15 +1,14 @@
 package app.database.model.user;
 
-import app.database.model.History;
-import app.database.model.Refresh;
-import app.database.model.Setting;
-import app.database.model.State;
+import app.database.model.*;
 import app.database.util.AuditModel;
+import app.database.util.enums.Role;
 import app.security.util.constants.SecretLength;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -22,13 +21,19 @@ import java.util.List;
  * Users information
  * <p>
  * <b>Logic:</b>
- * The base {@link User} class, linked with: {@link Setting}, {@link Refresh}, {@link State}, {@link History}.
+ * The base {@link User} class, linked with: {@link Setting}, {@link Refresh}, {@link State}.
  * Contains user's name.
  */
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User extends AuditModel {
+
+    /**
+     * User's name.
+     */
+    @Column(length = 50)
+    private String name = null;
 
     /**
      * Id to subscribe in the socket url
@@ -40,6 +45,18 @@ public class User extends AuditModel {
      */
     @Column(unique = true, length = SecretLength.SOCKET_ID)
     private String socketId;
+
+    /**
+     * Role, specifying user's rights
+     * <p>
+     * <b>Constraints:</b>
+     * <ul>
+     * <li> required
+     * </ul>
+     */
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 
     /**
      * Refresh tokens of the user
@@ -63,6 +80,7 @@ public class User extends AuditModel {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<State> states = new ArrayList<>();
+
     /**
      * Messages received by this user
      * <p>
@@ -74,11 +92,7 @@ public class User extends AuditModel {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<History> histories = new ArrayList<>();
-    /**
-     * User's name.
-     */
-    @Column(length = 50)
-    private String name;
+
     /**
      * Settings of the game, belong to user
      * <p>
@@ -91,8 +105,23 @@ public class User extends AuditModel {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = false, fetch = FetchType.LAZY)
     private Setting setting;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_answer",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "answer_id"))
+    private final List<Answer> answers = new LinkedList<>();
+
     public String getName() {
         return name;
+    }
+
+    public String getSocketId() {
+        return socketId;
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     public Setting getSetting() {
@@ -115,12 +144,17 @@ public class User extends AuditModel {
         this.name = name;
     }
 
-    public User() {
-        super();
+    public void setSocketId(String socketId) {
+        this.socketId = socketId;
     }
 
-    public User(long id) {
-        super(id);
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public void setSetting(Setting setting) {
+        this.setting = setting;
+        setting.setUser(this);
     }
 
     public void addToken(Refresh refresh) {
@@ -133,11 +167,6 @@ public class User extends AuditModel {
         refresh.setUser(null);
     }
 
-    public void setSetting(Setting setting) {
-        setting.setUser(this);
-        this.setting = setting;
-    }
-
     public void addHistory(History history) {
         this.histories.add(history);
         history.setUser(this);
@@ -148,13 +177,30 @@ public class User extends AuditModel {
         history.setUser(null);
     }
 
+    public void addState(State state) {
+        this.states.add(state);
+        state.setUser(this);
+    }
+
+    public void removeState(State state) {
+        this.states.remove(state);
+        state.setUser(null);
+    }
+
+    public void addAnswer(Answer answer) {
+        this.answers.add(answer);
+    }
+
+    public void removeAnswer(Answer answer) {
+        this.answers.remove(answer);
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
                 ", setting=" + setting +
                 ", states=" + states +
-                ", histories=" + histories +
                 '}';
     }
 }

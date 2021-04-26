@@ -48,8 +48,12 @@ class Component extends React.Component {
         this.afterRender()
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        for (let node in this.nodes) this.nodes[node] = React.createRef()
+        for (let elem in this.elems) this.elems[elem] = React.createRef()
+    }
+
     reset() {
-        console.log(this)
         for (let node in this.nodes) {
             this.nodes[node].reset()
         }

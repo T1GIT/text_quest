@@ -23,4 +23,12 @@ public class JsonAnswer {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
+    }
 }

@@ -19,7 +19,7 @@ import java.util.List;
  * <p>
  * <b>Logic:</b>
  * When {@link User user} came to the {@link Fork fork}, game checks
- * all available {@link Branch branches} with their {@link Limit limitations} and
+ * all available {@link Branch branches} with their {@link Condition limitations} and
  * takes suitable.
  */
 @Entity
@@ -29,8 +29,8 @@ public class Branch extends AuditModel {
     /**
      * All required limits
      */
-    @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<Limit> limits = new ArrayList<>();
+    @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private final List<Condition> conditions = new ArrayList<>();
 
     /**
      * Owner fork
@@ -58,8 +58,8 @@ public class Branch extends AuditModel {
     @JsonIgnore
     private Node nextNode;
 
-    public List<Limit> getLimits() {
-        return limits;
+    public List<Condition> getLimits() {
+        return conditions;
     }
 
     public Fork getFork() {
@@ -78,22 +78,20 @@ public class Branch extends AuditModel {
         this.nextNode = nextNode;
     }
 
-    public void addLimit(Limit limit) {
-        this.limits.add(limit);
-        limit.setBranch(this);
+    public void addLimit(Condition condition) {
+        this.conditions.add(condition);
+        condition.setBranch(this);
     }
 
-    public void removeLimit(Limit limit) {
-        this.limits.remove(limit);
-        limit.setBranch(null);
+    public void removeLimit(Condition condition) {
+        this.conditions.remove(condition);
+        condition.setBranch(null);
     }
 
     @Override
     public String toString() {
         return "Branch{" +
-                "limits=" + limits +
-                ", fork=" + fork +
-                ", nextNode=" + nextNode +
+                "limits=" + conditions +
                 '}';
     }
 }

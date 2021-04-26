@@ -18,7 +18,6 @@ import javax.annotation.Resource;
 class VarServiceTest {
 
     private final static VarFactory varFactory = new VarFactory();
-    @Resource
     @Autowired
     private VarService varService;
 

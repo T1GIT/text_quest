@@ -35,7 +35,7 @@ public class State extends AuditModel {
      * <li> length {@literal <} 31
      * </ul>
      */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "var_id", nullable = false, updatable = false)
     @JsonIgnore
     private Var var;
