@@ -1,0 +1,26 @@
+@use 'web/sass' as glob_m
+@import "config"
+
+.wrap
+  position: absolute
+  top: 0
+  right: 0
+  height: 100%
+  width: min-content
+
+  .side_menu
+    z-index: 10
+    background: rgba($bg, $opacity)
+    padding-top: $pad_top
+    height: 100%
+    width: min-content
+    position: absolute
+    &:not(.hidden)
+      +glob_m.ani(normal, ease-out)
+      right: 0
+      opacity: 1
+    &.hidden
+      +glob_m.ani(normal, ease-in)
+      right: -$hide_offset
+      opacity: 0
+

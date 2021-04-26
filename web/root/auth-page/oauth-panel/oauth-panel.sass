@@ -1,0 +1,12 @@
+@use "web/sass/mixin" as glob_m
+@use "web/sass/config" as glob_c
+
+.panel
+  +glob_m.flex_dir(column)
+  width: min-content
+  align-items: start
+
+@media (max-width: glob_c.$rotate_oauth)
+  .panel
+    margin-top: 40px
+    flex-direction: row
