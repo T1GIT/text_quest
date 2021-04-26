@@ -20,14 +20,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class FilterConfig implements WebMvcConfigurer {
-// PROD: uncomment
-//    @Bean
-//    public FilterRegistrationBean<LoggingFilter> loggingFilter(){
-//        FilterRegistrationBean<LoggingFilter> regBean = new FilterRegistrationBean<>();
-//        regBean.setFilter(new LoggingFilter());
-//        regBean.setOrder(1);
-//        return regBean;
-//    }
+    @Bean
+    public FilterRegistrationBean<LoggingFilter> loggingFilter(){
+        FilterRegistrationBean<LoggingFilter> regBean = new FilterRegistrationBean<>();
+        regBean.setFilter(new LoggingFilter());
+        regBean.setOrder(1);
+        return regBean;
+    }
 
     @Bean
     public FilterRegistrationBean<SecurityFilter> securityFilter(Auth auth, RefreshService refreshService){
