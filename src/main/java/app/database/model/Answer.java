@@ -58,7 +58,7 @@ public class Answer extends AuditModel {// TODO: May be add "aborted"(link to ne
 
     @ManyToMany
     @JoinTable(
-            name = "student_answers",
+            name = "user_answer",
             joinColumns = @JoinColumn(name = "answer_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;

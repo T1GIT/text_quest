@@ -1,8 +1,6 @@
 package app.database.model.user;
 
 import app.database.model.*;
-import app.database.model.node.Node;
-import app.database.model.node.types.LinkedNode.LinkedNode;
 import app.database.util.AuditModel;
 import app.database.util.enums.Role;
 import app.security.util.constants.SecretLength;
@@ -109,7 +107,7 @@ public class User extends AuditModel {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "student_answers",
+            name = "user_answer",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "answer_id"))
     private final List<Answer> answers = new LinkedList<>();

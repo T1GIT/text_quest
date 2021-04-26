@@ -1,11 +1,11 @@
-package app.controller.util;
+package app.core;
 
 import app.controller.util.exception.game.types.FinishException;
 import app.controller.util.exception.game.types.GoingThrowQuestionWIithoutAnswerException;
 import app.controller.util.exception.game.types.ModelNotFoundException;
 import app.controller.util.exception.game.types.NodeTypeException;
 import app.database.model.Branch;
-import app.database.model.Limit;
+import app.database.model.Condition;
 import app.database.model.State;
 import app.database.model.node.Node;
 import app.database.model.node.types.Fork;
@@ -36,10 +36,7 @@ public class Tree {
         if (node == null) {
             throw new FinishException();
         } else if (node.getClass() == Fork.class) {
-            List<State> stateList = new LinkedList<>();
-            stateService.getByUser(user)
-                    .forEach(state -> stateList.add((State) Hibernate.unproxy(state)));
-            Branch branch = chooseBranch(((Fork) node).getBranches(), stateList);
+            Branch branch = chooseBranch(((Fork) node).getBranches(), user);
             nextNode = branch.getNextNode();
         } else if (node instanceof LinkedNode) {
             nextNode = ((LinkedNode) node).getNextNode();
@@ -53,25 +50,24 @@ public class Tree {
         return (LinkedNode) nextNode;
     }
 
-    private static Branch chooseBranch(List<Branch> branchList, List<State> stateList) {
-        System.out.println(branchList);
-        System.out.println(stateList);
-        Branch branch1 = branchList.parallelStream()
+    private Branch chooseBranch(List<Branch> branchList, User user) {
+        List<State> stateList = new LinkedList<>();
+        stateService.getByUser(user)
+                .forEach(state -> stateList.add((State) Hibernate.unproxy(state)));
+        return branchList.parallelStream()
                 .filter(branch -> checkLimits(stateList, branch.getLimits()))
                 .findAny().orElseThrow(ModelNotFoundException::new);
-        System.out.println(branch1);
-        return branch1;
     }
 
-    private static boolean checkLimits(List<State> stateList, List<Limit> limitList) {
-        for (Limit limit : limitList) {
+    private boolean checkLimits(List<State> stateList, List<Condition> conditionList) {
+        for (Condition condition : conditionList) {
             State state = stateList.parallelStream()
-                    .filter(stateItem -> limit.getVar().getId() == stateItem.getVar().getId())
+                    .filter(stateItem -> condition.getVar().getId() == stateItem.getVar().getId())
                     .findAny().orElseThrow(ModelNotFoundException::new);
             int val = state.getVal();
-            if (limit.getMin() != null && limit.getMin() > val) return false;
-            if (limit.getMax() != null && limit.getMax() < val) return false;
-            if (limit.getEqual() != null && limit.getEqual() != val) return false;
+            if (condition.getMin() != null && condition.getMin() > val) return false;
+            if (condition.getMax() != null && condition.getMax() < val) return false;
+            if (condition.getEqual() != null && condition.getEqual() != val) return false;
         }
         return true;
     }

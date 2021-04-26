@@ -17,15 +17,15 @@ import javax.persistence.*;
  * <p>
  * <b>Logic:</b>
  * When {@link User user}  reaches {@link Fork fork} game can choice the right next
- * {@link Node node} depend on {@link Limit limits}: required {@link State state}  of
+ * {@link Node node} depend on {@link Condition limits}: required {@link State state}  of
  * {@link Var variables}.
  * <p>
- * Variable state must be more then {@link Limit#min} if it set,
- * equal to {@link Limit#equal} if it set and less then {@link Limit#max} if it set.
+ * Variable state must be more then {@link Condition#min} if it set,
+ * equal to {@link Condition#equal} if it set and less then {@link Condition#max} if it set.
  */
 @Entity
-@Table(name = "limits")
-public class Limit extends AuditModel {
+@Table(name = "conditions")
+public class Condition extends AuditModel {
 
     /**
      * Low bound of the variable state.

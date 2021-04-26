@@ -17,6 +17,7 @@ class SideMenu extends Component {
     afterRender() {
         this.nodes.toggler.setIcon("menu")
         $(this.elems.menu).addClass(style.hidden)
+        $(document).on("click", () => {if (this.opened) this.onClickBtn(null)})
     }
 
     hide = () => super.hide(style.hidden)
@@ -61,7 +62,7 @@ class SideMenu extends Component {
     }
 
     render() {
-        return <div ref={this.self} className={style.wrap}>
+        return <div ref={this.self} className={style.wrap} onClick = {(ev) => ev.stopPropagation()}>
             <MenuBtn
                 ref={this.nodes.toggler}
                 onClick={this.onClickBtn}

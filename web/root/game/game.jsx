@@ -13,6 +13,7 @@ class Game extends Component {
         super(props);
         this.nodes.game = React.createRef()
         this.nodes.menu = React.createRef()
+        this.elems.wrap = React.createRef()
         this.client = undefined
         this.lastMessage = undefined
     }
@@ -26,7 +27,7 @@ class Game extends Component {
         this.client = client
         client.brokerURL = `ws://${window.location.host}/game/connect`
         client.onConnect = this.onConnect
-        client.onDisconnect = this.onDisconnect
+        client.onDisconnect = ev => console.error(ev)
         client.onStompError = client.onWebSocketError = receipt => console.error(receipt)
         client.activate()
     }
@@ -39,7 +40,6 @@ class Game extends Component {
         .get("/game/start")
         .then(response => {
             const {socketId, lastNode} = (response.data)
-            console.log(lastNode)
             if ("delay" in lastNode) {
                 this.showMessage(lastNode)
             } else {
@@ -82,8 +82,7 @@ class Game extends Component {
         let items = text.split("\n").reverse()
         let el = document.createElement("div")
         el.classList.add(style.message)
-        this.setNewNode(el)
-        this.self.append(el)
+        this.elems.wrap.append(el)
         let recursRecord = (items, msg) => {
             let row = document.createElement("p")
             row.classList.add(style.hidden, style.row)
@@ -101,24 +100,44 @@ class Game extends Component {
 
     showQuestion = node => {
         const {answers} = node;
+        console.log(node)
         console.log(answers)
         let questionNode = document.createElement("div")
         questionNode.classList.add(style.question)
-        this.setNewNode(questionNode)
-        this.self.append(questionNode)
+        this.elems.wrap.append(questionNode)
         for (let k in answers) {
             let btnNode = document.createElement("p")
             btnNode.classList.add(style.btn)
             btnNode.innerText = answers[k].text
-            btnNode.onclick = () => axios.post("/game/answer", answers[k])
+            btnNode.onclick = () => {
+                let questionEl = $(questionNode)
+                questionEl.css({pointerEvents: "none"})
+                let btnEl = $(btnNode)
+                btnEl.addClass(style.active)
+                btnEl.animate({width: "max-width"}, 200)
+                axios.post("/game/answer", answers[k])
+            }
             questionNode.append(btnNode)
         }
+    }
+
+    stop = () => {
+        axios.post("/game/stop")
+        this.client.deactivate()
+    }
+
+    reset() {
+        this.elems.wrap.innerHTML = ""
+        super.reset();
     }
 
     render() {
         return <div ref={this.self} className={style.game}>
             <Background ref={this.nodes.game} left="#44A08D" right="#093637"/>
             <SideMenu ref={this.nodes.menu}/>
+            <div ref={this.elems.wrap} className={style.wrap}>
+
+            </div>
         </div>
     }
 }

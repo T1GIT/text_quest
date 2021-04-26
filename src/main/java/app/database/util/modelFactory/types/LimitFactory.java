@@ -1,7 +1,7 @@
 package app.database.util.modelFactory.types;
 
 import app.database.model.Branch;
-import app.database.model.Limit;
+import app.database.model.Condition;
 import app.database.model.Var;
 import app.database.util.modelFactory.AbstractModelFactory;
 
@@ -9,7 +9,7 @@ import app.database.util.modelFactory.AbstractModelFactory;
 /**
  * @see app.database.util.modelFactory.AbstractModelFactory
  */
-public class LimitFactory extends AbstractModelFactory<Limit> {
+public class LimitFactory extends AbstractModelFactory<Condition> {
 
     private final static VarFactory varFactory = new VarFactory();
     private final static BranchFactory branchFactory = new BranchFactory();
@@ -19,14 +19,14 @@ public class LimitFactory extends AbstractModelFactory<Limit> {
     private final int equal = 50;
     private final int min = 10;
 
-    public Limit create() {
-        Limit limit = new Limit();
-        limit.setBranch(branchFactory.create());
-        limit.setMax(this.max);
-        limit.setEqual(this.equal);
-        limit.setMin(this.min);
-        limit.setVar(varFactory.create());
-        return limit;
+    public Condition create() {
+        Condition condition = new Condition();
+        condition.setBranch(branchFactory.create());
+        condition.setMax(this.max);
+        condition.setEqual(this.equal);
+        condition.setMin(this.min);
+        condition.setVar(varFactory.create());
+        return condition;
     }
 
     public Var getVar() {

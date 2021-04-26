@@ -1,7 +1,9 @@
-package app.controller.util;
+package app.core;
 
 import app.controller.util.constant.CurrentNodeType;
 import app.controller.util.constant.Period;
+import app.controller.util.exception.game.types.FinishException;
+import app.controller.util.exception.game.types.GoingThrowQuestionWIithoutAnswerException;
 import app.controller.util.exception.game.types.NodeTypeException;
 import app.database.model.History;
 import app.database.model.node.Node;
@@ -11,26 +13,26 @@ import app.database.model.node.types.LinkedNode.types.Question;
 import app.database.model.user.User;
 import app.database.service.HistoryService;
 import app.database.service.NodeService;
-import app.database.service.StateService;
-import app.database.service.userService.UserService;
 import org.hibernate.Hibernate;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class NotifyTimer extends TimerTask {
 
+    private static final Map<String, Timer> timers = new HashMap<>();
+
     private final User user;
-    private final String socketId;
     private final SimpMessagingTemplate template;
     private final Tree tree;
     private final NodeService nodeService;
     private final HistoryService historyService;
 
-    public NotifyTimer(String socketId, User user, SimpMessagingTemplate template, Tree tree, NodeService nodeService, HistoryService historyService) {
-        this.socketId = socketId;
+    public NotifyTimer(User user, SimpMessagingTemplate template, Tree tree, NodeService nodeService, HistoryService historyService) {
         this.user = user;
         this.template = template;
         this.tree = tree;
@@ -43,11 +45,15 @@ public class NotifyTimer extends TimerTask {
     public void run() {
         LinkedNode lastNode = historyService.getLast(user).getNode();
         if (lastNode.getClass() != Question.class) {
-            LinkedNode nextNode = tree.nextNode(
-                    Hibernate.unproxy(lastNode, LinkedNode.class),
-                    user);
-            historyService.add(new History(user, nextNode));
-            push(nextNode);
+            try {
+                LinkedNode nextNode = tree.nextNode(
+                        Hibernate.unproxy(lastNode, LinkedNode.class),
+                        user);
+                historyService.add(new History(user, nextNode));
+                push(nextNode);
+            } catch (FinishException e) {
+                historyService.add(new History(user, null));
+            }
         }
     }
 
@@ -57,11 +63,26 @@ public class NotifyTimer extends TimerTask {
             payload = CurrentNodeType.QUESTION;
         } else if (nextNode.getClass() == Message.class) {
             payload = CurrentNodeType.MESSAGE;
-            TimerTask task = new NotifyTimer(socketId, user, template, tree, nodeService, historyService);
-            new Timer().schedule(task, Period.getMillis(((Message) nextNode).getDelay()));
+            NotifyTimer.start(user, template, tree, nodeService, historyService);
         } else {
             throw new NodeTypeException(nextNode.getClass());
         }
-        template.convertAndSendToUser(socketId, "/next_node", payload);
+        template.convertAndSendToUser(user.getSocketId(), "/next_node", payload);
+    }
+
+    public static void start(User user, SimpMessagingTemplate template, Tree tree, NodeService nodeService, HistoryService historyService) {
+        Timer timer = new Timer();
+        TimerTask task = new NotifyTimer(user, template, tree, nodeService, historyService);
+        Node node = historyService.getLast(user).getNode();
+        if (node.getClass() == Message.class) {
+            timer.schedule(task, Period.getMillis((((Message) node).getDelay())));
+        } else {
+            timer.schedule(task, Period.getMillis(1));
+        }
+        timers.put(user.getSocketId(), timer);
+    }
+
+    public static void stop(User user) {
+        timers.get(user.getSocketId()).cancel();
     }
 }

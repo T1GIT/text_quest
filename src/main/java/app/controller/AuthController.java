@@ -320,6 +320,7 @@ public class AuthController {
             State state = new State();
             state.setVar(var);
             state.setVal(0);
+            System.out.println(state);
             user.addState(state);
         }
         return user;

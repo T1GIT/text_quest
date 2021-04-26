@@ -19,7 +19,7 @@
 
 <script id="initialScript">
     let isAuthorised = [(${isAuthorised})]
-    let error = [(${error})]
+    let error = "[(${error})]"
     document.querySelector("noscript").remove()
     document.getElementById("initialScript").remove()
 </script>

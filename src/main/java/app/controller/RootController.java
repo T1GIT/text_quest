@@ -57,8 +57,8 @@ public class RootController {
     public String root(Model model, HttpServletRequest request, HttpServletResponse response) {
         String errorCookie = CookieUtil.get(request, ReqParam.ERROR);
         CookieUtil.add(response, ReqParam.ERROR, null, Period.YEAR);
-        model.addAttribute("isAuthorised", ObjectParser.parse(auth.isAuthenticated()));
-        model.addAttribute("error", ObjectParser.parse(errorCookie));
+        model.addAttribute("isAuthorised", auth.isAuthenticated());
+        model.addAttribute("error", errorCookie);
         return "index.min";
     }
 
