@@ -4,9 +4,8 @@ package app.controller;
 import app.controller.util.exception.game.types.FinishException;
 import app.core.NotifyTimer;
 import app.core.Tree;
-import app.controller.util.constant.Period;
 import app.controller.util.exception.game.types.ModelNotFoundException;
-import app.controller.util.json.game.InitialResponse;
+import app.controller.util.json.game.JsonInitialResponse;
 import app.database.model.*;
 import app.database.model.node.types.LinkedNode.LinkedNode;
 import app.database.model.node.types.LinkedNode.types.Message;
@@ -14,7 +13,6 @@ import app.database.model.node.types.LinkedNode.types.Question;
 import app.database.model.user.User;
 import app.database.service.HistoryService;
 import app.database.service.NodeService;
-import app.database.service.StateService;
 import app.database.service.userService.UserService;
 import app.security.auth.Auth;
 import app.security.secretFactory.types.SocketIdFactory;
@@ -58,8 +56,8 @@ public class GameController {
     }
 
     @GetMapping(value = "/start", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-    public InitialResponse start() {
-        InitialResponse response = new InitialResponse();
+    public JsonInitialResponse start() {
+        JsonInitialResponse response = new JsonInitialResponse();
         String socketId = socketIdFactory.create();
         User user = userService.getById(auth.getUser().getId());
         user.setSocketId(socketId);

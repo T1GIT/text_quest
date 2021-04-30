@@ -4,7 +4,7 @@ import app.database.model.node.types.LinkedNode.LinkedNode;
 
 import java.io.Serializable;
 
-public class InitialResponse implements Serializable {
+public class JsonInitialResponse implements Serializable {
 
     private String socketId;
     private LinkedNode lastNode;

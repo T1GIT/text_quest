@@ -44,7 +44,7 @@ public class LogController {
      * Class constructor specified an auth context
      *
      * @param auth for getting administrator
-     * @param userService
+     * @param userService service for getting user
      */
     public LogController(Auth auth, UserService userService) {
         this.auth = auth;

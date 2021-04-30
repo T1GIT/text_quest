@@ -36,5 +36,4 @@ public interface Auth {
      * @param user to set
      */
     void setUser(User user);
-
 }
