@@ -24,4 +24,5 @@ public class AuthImpl implements Auth {
     public void setUser(User user) {
         AuthImpl.threadLocalUser.set(user);
     }
+
 }
