@@ -66,10 +66,10 @@ public abstract class CookieUtil {
      * @param value     of the cookie
      * @param expiresIn life time of the cookie in seconds
      */
-    public static void add(HttpServletResponse response, String name, Object value, int expiresIn) {
+    public static void add(HttpServletResponse response, String name, Object value, long expiresIn) {
         Cookie cookie = new Cookie(name, URLEncoder.encode(String.valueOf(value), StandardCharsets.UTF_8));
         cookie.setHttpOnly(true);
-        cookie.setMaxAge(expiresIn);
+        cookie.setMaxAge((int) expiresIn);
         cookie.setPath("/");
         response.addCookie(cookie);
     }

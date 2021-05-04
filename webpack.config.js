@@ -143,7 +143,7 @@ module.exports = {
     optimization: {
         minimize: mode === modes.prod,
         minimizer: [
-            new UglifyJsPlugin({sourceMap: false}),
+            // new UglifyJsPlugin({sourceMap: false}),
             new CssnanoPlugin({
                 sourceMap: false,
                 cssnanoOptions: {

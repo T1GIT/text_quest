@@ -3,7 +3,7 @@ package app.database.model.user;
 import app.database.model.*;
 import app.database.util.AuditModel;
 import app.database.util.enums.Role;
-import app.security.util.constants.SecretLength;
+import app.security.util.constant.SecretLength;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

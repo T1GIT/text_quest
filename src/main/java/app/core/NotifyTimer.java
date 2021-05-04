@@ -1,9 +1,8 @@
 package app.core;
 
-import app.controller.util.constant.CurrentNodeType;
+import app.controller.util.constant.NodeType;
 import app.controller.util.constant.Period;
 import app.controller.util.exception.game.types.FinishException;
-import app.controller.util.exception.game.types.GoingThrowQuestionWIithoutAnswerException;
 import app.controller.util.exception.game.types.NodeTypeException;
 import app.database.model.History;
 import app.database.model.node.Node;
@@ -60,9 +59,9 @@ public class NotifyTimer extends TimerTask {
     private void push(Node nextNode) {
         String payload;
         if (nextNode.getClass() == Question.class) {
-            payload = CurrentNodeType.QUESTION;
+            payload = NodeType.QUESTION;
         } else if (nextNode.getClass() == Message.class) {
-            payload = CurrentNodeType.MESSAGE;
+            payload = NodeType.MESSAGE;
             NotifyTimer.start(user, template, tree, nodeService, historyService);
         } else {
             throw new NodeTypeException(nextNode.getClass());

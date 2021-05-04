@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 /**
- * Used for redirecting to home page when gets errors
+ * Config class for filters
  */
 @Configuration
 public class FilterConfig implements WebMvcConfigurer {

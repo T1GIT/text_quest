@@ -28,8 +28,8 @@ class OauthBtn extends Component {
 
     openWindow = () => {
         let params = "" +
-            "width=500," +
-            "height=600," +
+            "width=800," +
+            "height=800," +
             "top=0," +
             "left=0," +
             "menubar=false," +

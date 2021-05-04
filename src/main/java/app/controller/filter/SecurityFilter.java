@@ -49,7 +49,7 @@ public class SecurityFilter implements Filter {
      * Checks if JWT cookie exists, in this case validates it, if it's valid, then parses user and fill auth context.
      * If JWT cookie doesn't exist or JWT is invalid, then checks refresh token.
      * If refresh token cookie exists and the same token is found in the database, parses JWT and attaches it to the
-     * cookie. Otherwise cleans tokens in the cookie and answers with error code 401.
+     * cookie. Otherwise cleans tokens in the cookie and answers with error code 403.
      *
      * @param request  contains cookie
      * @param response for attaching tokens and returning error
@@ -71,7 +71,7 @@ public class SecurityFilter implements Filter {
             if (req.getRequestURI().equals("/")) {
                 chain.doFilter(request, response);
             } else {
-                res.sendError(401, "Non authorised access");
+                res.sendError(403, "Non authorised access");
             }
         }
     }
