@@ -22,7 +22,7 @@ public abstract class RefreshUtil {
     /**
      * Expire period of the refresh token cookie
      */
-    private final static int PERIOD = Period.YEAR;
+    private final static long PERIOD = Period.YEAR;
 
     /**
      * Creates refresh token using {@link RefreshFactory}

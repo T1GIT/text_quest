@@ -29,7 +29,7 @@ public abstract class AbstractSecretFactory<T> {
     /**
      * Logger for recording exceptions
      */
-    private static final Logger errLoger = Logger.getLogger("errorLogger");
+    private static final Logger errLogger = Logger.getLogger("errorLogger");
 
     /**
      * The name of the used algorithm
@@ -60,7 +60,7 @@ public abstract class AbstractSecretFactory<T> {
         try {
             this.secureRandom = SecureRandom.getInstance(ALGORITHM);
         } catch (NoSuchAlgorithmException e) {
-            errLoger.error(e.getMessage(), e);
+            errLogger.error(e.getMessage(), e);
         }
     }
 

@@ -23,7 +23,7 @@ public class ErrorController {
                 "Page not found");
     }
 
-    @GetMapping("/unauthorised")
+    @GetMapping("/forbidden")
     public String unauthorised(HttpServletResponse response) {
         return redirectError(response,
                 "Unauthorised access");

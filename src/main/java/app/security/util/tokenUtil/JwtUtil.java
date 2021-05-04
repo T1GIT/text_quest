@@ -2,8 +2,7 @@ package app.security.util.tokenUtil;
 
 import app.controller.oauth.util.constant.SecureParam;
 import app.controller.util.CookieUtil;
-import app.database.util.enums.Role;
-import app.security.util.constants.JwtClaims;
+import app.security.util.constant.JwtClaims;
 import app.controller.util.constant.Period;
 import app.database.model.user.User;
 import app.security.secretFactory.types.JwtKeyFactory;
@@ -32,7 +31,7 @@ public abstract class JwtUtil {
     /**
      * Expires period of the JWT cookie
      */
-    private final static int PERIOD = Period.HOUR;
+    private final static long PERIOD = Period.HOUR;
 
     /**
      * Hmac SHA key, parsed from the key, produce by the {@link JwtKeyFactory}

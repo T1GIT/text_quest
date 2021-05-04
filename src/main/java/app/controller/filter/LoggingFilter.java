@@ -16,6 +16,10 @@ import java.util.Date;
 
 /**
  * Filter for logging requests
+ *
+ * Parses and records log string from the request in the template:
+ * <p>
+ * [metadata...] [status code] [method] [url] [executing time]
  */
 public class LoggingFilter implements Filter {
 
@@ -46,7 +50,7 @@ public class LoggingFilter implements Filter {
             case 404 -> "not found:redirect:" + TextQuestApplication.getRootUrl();
             default -> res.getContentType();
         };
-        requestLogger.info(String.format("%3d %-6s %-30s %4d ms   %s",
+        requestLogger.info(String.format("%d %-6s %-30s %4d ms   %s",
                 res.getStatus(),
                 req.getMethod(),
                 req.getRequestURI(),

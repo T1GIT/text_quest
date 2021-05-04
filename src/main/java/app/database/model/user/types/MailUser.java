@@ -1,7 +1,7 @@
 package app.database.model.user.types;
 
 import app.database.model.user.User;
-import app.security.util.constants.SecretLength;
+import app.security.util.constant.SecretLength;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 /**
- * Used for redirecting to home page when gets errors
+ * Config class for redirecting to home page when gets errors
  */
 @Configuration
 public class ErrorRedirectConfig implements WebMvcConfigurer {
@@ -22,7 +22,7 @@ public class ErrorRedirectConfig implements WebMvcConfigurer {
     @Bean
     public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> containerCustomizer() {
         return container -> {
-            container.addErrorPages(new ErrorPage(HttpStatus.UNAUTHORIZED, "/error/unauthorised"));
+            container.addErrorPages(new ErrorPage(HttpStatus.FORBIDDEN, "/error/forbidden"));
             container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error/not_found"));
         };
     }
